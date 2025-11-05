@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "icons";
+  src: url( "../iconfont/icons.eot" );
+  src: url( "../iconfont/icons.eot?#iefix" ) format( "eot" ),
+       url( "../iconfont/icons.woff" ) format( "woff" ),
+       url( "../iconfont/icons.ttf" ) format( "truetype" ),
+       url( "../iconfont/icons.svg#icons" ) format( "svg" );
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  speak: none;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-close:before { content: "\EA01" !important}
+.icon-type-bug:before { content: "\EA02" !important}
+.icon-type-dark:before { content: "\EA03" !important}
+.icon-type-dragon:before { content: "\EA04" !important}
+.icon-type-electric:before { content: "\EA05" !important}
+.icon-type-fairy:before { content: "\EA06" !important}
+.icon-type-fighting:before { content: "\EA07" !important}
+.icon-type-fire:before { content: "\EA08" !important}
+.icon-type-flying:before { content: "\EA09" !important}
+.icon-type-ghost:before { content: "\EA0A" !important}
+.icon-type-grass:before { content: "\EA0B" !important}
+.icon-type-ground:before { content: "\EA0C" !important}
+.icon-type-ice:before { content: "\EA0D" !important}
+.icon-type-normal:before { content: "\EA0E" !important}
+.icon-type-poison:before { content: "\EA0F" !important}
+.icon-type-psychic:before { content: "\EA10" !important}
+.icon-type-rock:before { content: "\EA11" !important}
+.icon-type-steel:before { content: "\EA12" !important}
+.icon-type-water:before { content: "\EA13" !important}
+

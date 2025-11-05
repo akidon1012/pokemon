@@ -1,0 +1,71 @@
+.header {
+  border-bottom: 4px solid $color-red;
+  &-inner {
+    width: 1200px;
+    max-width: calc(100% - 60px);
+    margin: 0 auto;
+    position: relative;
+  }
+  &-title {
+    padding: 30px 0 10px;
+    img {
+      width: 400px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  &-left {
+    position: absolute;
+    top: 0;
+    left: -30px;
+    img {
+      width: 240px;
+    }
+  }
+  &-right {
+    position: absolute;
+    top: 10px;
+    right: -30px;
+    img {
+      width: 240px;
+    }
+  }
+  @include mq() {
+    &-inner {
+      width: auto;
+      max-width: calc(100% - 20px);
+    }
+    &-title {
+      padding: 20px 0 5px;
+      img {
+        width: 60vw;
+      }
+    }
+    &-left {
+      bottom: -24px;
+      left: 0;
+      img {
+        width: 10vw;
+      }
+    }
+    &-right {
+      bottom: -16px;
+      right: -10px;
+      img {
+        width: 16vw;
+      }
+    }
+  }
+  @include mq(sm) {
+    &-left {
+      img {
+        width: 14vw;
+      }
+    }
+    &-right {
+      img {
+        width: 20vw;
+      }
+    }
+  }
+}

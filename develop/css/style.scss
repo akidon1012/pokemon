@@ -1,0 +1,442 @@
+@charset "UTF-8";
+
+@import '_iconfont.scss';
+@import '_reset.scss';
+@import '_variables.scss';
+@import '_mixin.scss';
+
+@import '_common.scss';
+@import '_header.scss';
+@import '_footer.scss';
+
+.type-checker {
+  width: 960px;
+  max-width: calc(100% - 60px);
+  margin: 0 auto;
+  .pokemon-select {
+    &-tabs {
+      border-bottom: 1px solid #DDD;
+      display: flex;
+      &-item {
+        width: 300px;
+        margin-right: 10px;
+        a {
+          display: block;
+          color: $color-text;
+          background: #f0f0f0;
+          border: 1px solid #DDD;
+          border-bottom: none;
+          border-radius: 5px 5px 0 0;
+          text-decoration: none;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
+          padding: 10px 0;
+        }
+        &.is_active {
+          margin-bottom: -1px;
+          a {
+            color: #FFF;
+            background: $color-red;
+            border-color: $color-red;
+            padding-bottom: 11px;
+          }
+        }
+      }
+    }
+    &-tab {
+      &-contents {
+        padding: 30px 0;
+        &-item {
+          display: none;
+          &.is_active {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  .pokemon-search {
+    width: 300px;
+    position: relative;
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    &-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 5px;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-family: $font-yugothic;
+      border: 1px solid #DDD;
+      border-radius: 5px;
+      &:focus {
+        outline: none;
+      }
+      &-wrapper {
+        position: relative;
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 12px;
+          right: 10px;
+          width: 6px;
+          height: 6px;
+          border-right: 2px solid #DDD;
+          border-bottom: 2px solid #DDD;
+          transform: rotate(45deg);
+          pointer-events: none;
+        }
+      }
+    }
+    &-list {
+      &-wrapper {
+        position: absolute;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        max-height: 300px;
+        height: 0;
+        overflow: hidden;
+        border: 1px solid #DDD;
+        border-top: none;
+        border-bottom: none;
+        background: #FFF;
+        z-index: 100;
+      }
+      li {
+        a {
+          display: block;
+          background: #FFF;
+          color: $color-text;
+          font-size: 16px;
+          line-height: 24px;
+          text-decoration: none;
+          padding: 5px;
+          &:hover {
+            background: #f0f0f0;
+          }
+        }
+      }
+    }
+    &-reset {
+      margin-left: 15px;
+      a {
+        display: block;
+        color: $color-text;
+        font-size: 16px;
+        text-decoration: none;
+        position: relative;
+        margin-left: 18px;
+        border-bottom: 1px solid transparent;
+        font-weight: normal;
+        .icon {
+          position: absolute;
+          top: 2px;
+          left: -18px;
+          font-size: 12px;
+          margin-right: 5px;
+        }
+        &:hover {
+          border-bottom: 1px solid $color-text;
+        }
+      }
+    }
+    &.is_active {
+      .pokemon-search {
+        &-input {
+          &-wrapper {
+            &::after {
+              top: 15px;
+              transform: rotate(225deg);
+            }
+          }
+        }
+        &-list {
+          &-wrapper {
+            height: auto;
+            overflow-y: auto;
+            border-bottom: 1px solid #DDD;
+          }
+        }
+      }
+    }
+  }
+  .pokemon-type {
+    position: relative;
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      li {
+        width: 140px;
+        margin: 0 15px 15px 0;
+        input[type="checkbox"] {
+          display: none;
+          & + label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            padding: 3px 3px 3px 12px;
+            background: #FFF;
+            border: 2px solid #DDD;
+            border-radius: 18px;
+            text-align: center;
+            position: relative;
+            .icon {
+              position: absolute;
+              top: 5px;
+              left: 4px;
+              font-size: 22px;
+            }
+          }
+          &:checked {
+            & + label {
+              border: 3px solid $color-red;
+              padding: 2px 2px 2px 11px;
+              box-shadow: 0 0 10px rgba($color-red, 0.3);
+              .icon {
+                top: 4px;
+                left: 3px;
+              }
+            }
+          }
+        }
+      }
+    }
+    &-error {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f0f0f0;
+      padding: 20px;
+      border: 1px solid #DDD;
+      font-size: 14px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+  }
+  .result {
+    margin-bottom: 60px;
+    &-table {
+      width: calc(100% - 20px);
+      border-collapse: collapse;
+      th {
+        width: 160px;
+        border: 1px solid #DDD;
+        font-size: 14px;
+        line-height: 28px;
+        padding: 10px;
+        text-align: left;
+        em {
+          font-size: 16px;
+        }
+      }
+      td {
+        border: 1px solid #DDD;
+        font-size: 14px;
+        padding: 10px;
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          li {
+            font-size: 16px;
+            line-height: 20px;
+            margin: 0 15px 10px 0;
+            a {
+              display: inline-block;
+              color: $color-text;
+              border-bottom: 1px solid transparent;
+              text-decoration: none;
+              position: relative;
+              &:hover {
+                border-bottom: 1px solid $color-text;
+              }
+            }
+            .icon {
+              position: absolute;
+              top: 3px;
+              left: 0;
+              font-size: 18px;
+              margin-right: 3px;
+              position: relative;
+            }
+          }
+        }
+      }
+      tr {
+        &:nth-child(1) {
+          th {
+            background: #f9b2b2;
+          }
+        }
+      }
+      tr {
+        &:nth-child(2) {
+          th {
+            background: #fcd9d9;
+          }
+        }
+      }
+      tr {
+        &:nth-child(3) {
+          th {
+            background: #f0f0f0;
+          }
+        }
+      }
+      tr {
+        &:nth-child(4) {
+          th {
+            background: #d9eafc;
+          }
+        }
+      }
+      tr {
+        &:nth-child(5) {
+          th {
+            background: #b2d5f9;
+          }
+        }
+      }
+    }
+  }
+  @include mq() {
+    width: auto;
+    max-width: 100%;
+    .pokemon-select {
+      &-tabs {
+        justify-content: space-between;
+        padding: 0 10px;
+        &-item {
+          width: calc(50% - 5px);
+          margin: 0;
+          a {
+            padding: 10px 0;
+          }
+        }
+      }
+      &-tab {
+        &-contents {
+          padding: 20px 0 30px;
+          margin: 0 10px;
+        }
+      }
+    }
+    .pokemon-search {
+      width: 100%;
+      &-wrapper {
+        margin-bottom: 20px;
+      }
+      &-list {
+        li {
+          a {
+            font-size: 16px;
+            line-height: 24px;
+            padding: 5px;
+          }
+        }
+      }
+    }
+    .pokemon-type {
+      &-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      &-list {
+        margin-right: -10px;
+        li {
+          width: calc(20% - 10px);
+          margin: 0 10px 10px 0;
+          input[type="checkbox"] {
+            & + label {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              font-size: 11px;
+              line-height: 14px;
+              padding: 3px 0;
+              border-radius: 8px;
+              white-space: nowrap;
+              .icon {
+                position: relative;
+                top: 0;
+                left: auto;
+                font-size: 28px;
+                margin-bottom: 3px;
+              }
+            }
+            &:checked {
+              & + label {
+                padding: 2px 0;
+                .icon {
+                  top: 0;
+                  left: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .result {
+      &-table {
+        margin: 0 10px;
+        th {
+          width: 90px;
+          font-size: 12px;
+          line-height: 24px;
+          padding: 10px 5px;
+          white-space: nowrap;
+          em {
+            font-size: 14px;
+          }
+        }
+        td {
+          font-size: 12px;
+        }
+        tr {
+          &:nth-child(1) {
+            th {
+              background: #f9b2b2;
+            }
+          }
+        }
+        tr {
+          &:nth-child(2) {
+            th {
+              background: #fcd9d9;
+            }
+          }
+        }
+        tr {
+          &:nth-child(3) {
+            th {
+              background: #f0f0f0;
+            }
+          }
+        }
+        tr {
+          &:nth-child(4) {
+            th {
+              background: #d9eafc;
+            }
+          }
+        }
+        tr {
+          &:nth-child(5) {
+            th {
+              background: #b2d5f9;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "typechecker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "autoprefixer": "^9.7.1",
+    "browser-sync": "^2.26.7",
+    "css-declaration-sorter": "^4.0.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-combine-media-queries": "^0.2.0",
+    "gulp-ejs": "^4.1.2",
+    "gulp-imagemin": "^6.1.1",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-uglify": "^3.0.2",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-pngquant": "^8.0.0",
+    "sass": "^1.43.5"
+  },
+  "devDependencies": {
+    "css-mqpacker": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-cached": "^1.1.1",
+    "gulp-changed": "^4.0.2",
+    "gulp-consolidate": "^0.2.0",
+    "gulp-cssimport": "^7.0.0",
+    "gulp-data": "^1.3.1",
+    "gulp-google-webfonts": "^2.1.0",
+    "gulp-iconfont": "^10.0.3",
+    "gulp-sourcemaps": "^2.6.5",
+    "lodash": "^4.17.15",
+    "xlsx": "^0.15.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

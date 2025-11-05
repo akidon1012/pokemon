@@ -1,0 +1,115 @@
+body {
+  color: $color-text;
+  font-family: $font-yugothic;
+  font-weight: 500;
+  background: #f9f9f9;
+}
+.show-pc {
+  @include mq() {
+    display: none;
+  }
+}
+.show-sp {
+  display: none;
+  @include mq {
+    display: block;
+  }
+}
+.icon {
+  &-type {
+    &-normal {
+      color: $color-type-normal;
+    }
+    &-fire {
+      color: $color-type-fire;
+    }
+    &-water {
+      color: $color-type-water;
+    }
+    &-grass {
+      color: $color-type-grass;
+    }
+    &-electric {
+      color: $color-type-electric;
+    }
+    &-ice {
+      color: $color-type-ice;
+    }
+    &-fighting {
+      color: $color-type-fighting;
+    }
+    &-poison {
+      color: $color-type-poison;
+    }
+    &-ground {
+      color: $color-type-ground;
+    }
+    &-flying {
+      color: $color-type-flying;
+    }
+    &-psychic {
+      color: $color-type-psychic;
+    }
+    &-bug {
+      color: $color-type-bug;
+    }
+    &-rock {
+      color: $color-type-rock;
+    }
+    &-ghost {
+      color: $color-type-ghost;
+    }
+    &-dragon {
+      color: $color-type-dragon;
+    }
+    &-dark {
+      color: $color-type-dark;
+    }
+    &-steel {
+      color: $color-type-steel;
+    }
+    &-fairy {
+      color: $color-type-fairy;
+    }
+  }
+}
+.container {
+}
+.contents {
+  padding-top: 100px;
+}
+.page-header {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 40px;
+  padding-left: 48px;
+  margin-bottom: 60px;
+  background: url("../images/pokeball.svg") no-repeat;
+  background-size: contain;
+}
+
+.section-header {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+@include mq() {
+  .contents {
+    padding-top: 40px;
+  }
+  .page-header {
+    font-size: 24px;
+    line-height: 30px;
+    padding-left: 36px;
+    margin: 0 10px 30px;
+  }
+
+  .section-header {
+    font-size: 18px;
+    margin: 0 10px 10px;
+  }
+}
+
