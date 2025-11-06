@@ -28,10 +28,13 @@
             <div class="pokemon-select-tabs-wrapper">
               <ul class="pokemon-select-tabs">
                 <li class="pokemon-select-tabs-item js_pokemon-select-tab is_active">
-                  <a href="javascript:void(0);">ポケモン名で探す</a>
+                  <a href="javascript:void(0);">ポケモン名で<br class="show-sp">探す</a>
                 </li>
                 <li class="pokemon-select-tabs-item js_pokemon-select-tab">
-                  <a href="javascript:void(0);">タイプで探す</a>
+                  <a href="javascript:void(0);">タイプで<br class="show-sp">探す</a>
+                </li>
+                <li class="pokemon-select-tabs-item js_pokemon-select-tab">
+                  <a href="javascript:void(0);">対策おすすめ</a>
                 </li>
               </ul>
               <div class="pokemon-select-tab-contents">
@@ -40,15 +43,27 @@
                     <div class="pokemon-search js_pokemon-search">
                       <div class="pokemon-search-input-wrapper">
                         <input type="text" name="pokemon-search-input" class="pokemon-search-input js_pokemon-search-input">
+                        <a href="javascript:void(0);" class="pokemon-search-input-clear js_reset js_search-clear" style="display: none;"></a>
                       </div>
                       <div class="pokemon-search-list-wrapper">
-                        <ul class="pokemon-search-list js_pokemon-list"></ul>
+                        <ul class="pokemon-search-list js_pokemon-search-list"></ul>
+                      </div>
+                      <div class="pokemon-search-result js_pokemon-search-result">
+                        <!-- <div class="pokemon-info-wrapper">
+                          <div class="pokemon-info-img">
+                            <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="">
+                          </div>
+                          <div class="pokemon-info-type">
+                            <span class="icon icon-type-water"></span>
+                            <span class="icon icon-type-grass"></span>
+                          </div>
+                          <div class="pokemon-info-name">ハスボー</div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
+                <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
                   <div class="pokemon-type">
                     <ul class="pokemon-type-list js_pokemon-type-list">
                       <li>
@@ -67,7 +82,7 @@
                         <input type="checkbox" name="pokemon-type" id="type-electric" value="electric"><label for="type-electric"><span class="icon icon-type-electric"></span>でんき</label >
                       </li>
                       <li>
-                        <input type="checkbox" name="pokemon-type" id="type-ice" value="ice"><label for="type-electric"><span class="icon icon-type-ice"></span>こおり</label >
+                        <input type="checkbox" name="pokemon-type" id="type-ice" value="ice"><label for="type-ice"><span class="icon icon-type-ice"></span>こおり</label >
                       </li>
                       <li>
                         <input type="checkbox" name="pokemon-type" id="type-fighting" value="fighting"><label for="type-fighting"><span class="icon icon-type-fighting"></span>かくとう</label>
@@ -111,6 +126,29 @@
                     </div>
                   </div>
                 </div>
+                <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
+                  <div class="pokemon-recommend">
+                    <ul class="pokemon-list">
+                      <li class="pokemon-list-item js_toggle-wrapper">
+                        <div class="pokemon-list-item-info">
+                          <div class="pokemon-list-item-img">
+                            <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="">
+                          </div>
+                          <div class="pokemon-list-item-type">
+                            <span class="icon icon-type-water"></span>
+                            <span class="icon icon-type-grass"></span>
+                          </div>
+                          <div class="pokemon-list-item-name">ハスボー</div>
+                          <a href="" class="js_toggle-trigger"></a>
+                        </div>
+                        <div class="pokemon-list-item-atack js_toggle-content">
+                          <div class="pokemon-list-item-atack-normal"><span class="icon icon-type-water"></span>みずでっぽう</div>
+                          <div class="pokemon-list-item-atack-special"><span class="icon icon-type-water"></span>ハイドロポンプ</div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -149,24 +187,24 @@
               </tr>
             </table>
             <div class="js_result-data">
-              <input type="hidden" name="effect-normal" value="0" />
-              <input type="hidden" name="effect-fire" value="0" />
-              <input type="hidden" name="effect-water" value="0" />
-              <input type="hidden" name="effect-grass" value="0" />
-              <input type="hidden" name="effect-electric" value="0" />
-              <input type="hidden" name="effect-ice" value="0" />
-              <input type="hidden" name="effect-fighting" value="0" />
-              <input type="hidden" name="effect-poison" value="0" />
-              <input type="hidden" name="effect-ground" value="0" />
-              <input type="hidden" name="effect-flying" value="0" />
-              <input type="hidden" name="effect-psychic" value="0" />
-              <input type="hidden" name="effect-bug" value="0" />
-              <input type="hidden" name="effect-rock" value="0" />
-              <input type="hidden" name="effect-ghost" value="0" />
-              <input type="hidden" name="effect-dragon" value="0" />
-              <input type="hidden" name="effect-dark" value="0" />
-              <input type="hidden" name="effect-steel" value="0" />
-              <input type="hidden" name="effect-fairy" value="0" />
+              <input type="hidden" name="effect-normal" value="1">
+              <input type="hidden" name="effect-fire" value="1">
+              <input type="hidden" name="effect-water" value="1">
+              <input type="hidden" name="effect-grass" value="1">
+              <input type="hidden" name="effect-electric" value="1">
+              <input type="hidden" name="effect-ice" value="1">
+              <input type="hidden" name="effect-fighting" value="1">
+              <input type="hidden" name="effect-poison" value="1">
+              <input type="hidden" name="effect-ground" value="1">
+              <input type="hidden" name="effect-flying" value="1">
+              <input type="hidden" name="effect-psychic" value="1">
+              <input type="hidden" name="effect-bug" value="1">
+              <input type="hidden" name="effect-rock" value="1">
+              <input type="hidden" name="effect-ghost" value="1">
+              <input type="hidden" name="effect-dragon" value="1">
+              <input type="hidden" name="effect-dark" value="1">
+              <input type="hidden" name="effect-steel" value="1">
+              <input type="hidden" name="effect-fairy" value="1">
             </div>
           </section>
         </div>
@@ -174,6 +212,7 @@
       <footer class="footer"></footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../../js/utilities.js?t=20251104" defer></script>
     <script src="../../js/typechecker.js?t=20251104" defer></script>
   </body>
 </html>

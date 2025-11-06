@@ -21,6 +21,24 @@ const tabs = {
     content.eq(num).addClass(tabs.isActiveClassName);
   }
 }
+const TYPE_MULT = {
+  main : { '-2': 0.0,    '-1': 2.0,   '0': 1.0,  '1': 0.5  },
+  go   : { '-2': 0.390625, '-1': 1.6, '0': 1.0,  '1': 0.625 }
+};
+const MULT = { dbl: 1.6, half: 0.625, zero: 0.39 }; // 単タイプ時の係数
+const EPS = 0.01;
+const bucket = function(mult) {
+  if (Math.abs(mult - (MULT.dbl * MULT.dbl)) < EPS) return 'x2win';     // 2.56
+  if (Math.abs(mult - MULT.dbl) < EPS)               return 'x1win';     // 1.6
+  if (Math.abs(mult - 1.0) < EPS)                    return 'even';      // 1.0
+  if (Math.abs(mult - MULT.half) < EPS)              return 'x1lose';    // 0.625
+  if (Math.abs(mult - MULT.zero) < EPS)              return 'x2lose';    // 0.39
+  // 端数（複合タイプの 1.6×0.625=1.0 以外 etc.）は近い方へ寄せる
+  if (mult > 1.3)  return 'x1win';
+  if (mult < 0.5)  return 'x2lose';
+  if (mult < 0.9)  return 'x1lose';
+  return 'even';
+}
 const getType = {
   checkbox : '[name="pokemon-type"]',
   effect : '.js_effect',
@@ -52,80 +70,127 @@ const getType = {
   ], 
   errMsg : '.js_error-msg',
   ini : function(data) {
+    getType._chart = getType.buildTypeChart(data); // ←保持
+    getType._mode  = 'go'; // 'main' に切替も可（UIトグルは後で）
     const checkType = $(getType.checkbox);
-    checkType.on('click', function() {
+    $(document).off('change.pokemonType');
+    $(document).on('change.pokemonType', getType.checkbox, function(e) {
       const _this = $(this);
+      console.log('[pokemon-type change]', _this.val(), _this.prop('checked')); // デバッグ
       getType.check(data, _this);
     });
   },
-  check : function(data, btn) {
-    const typeName = getType.typeName;
-    let typeArry = [];
-    for (let i=0; i<typeName.length; i++ ) {
-      typeArry[typeName[i]] = Number($('[name="effect-' + typeName[i] + '"]').val());
-    }
-    const effect = $(getType.effect);
-    const effect5 = $(getType.effect5);
-    const effect4 = $(getType.effect4);
-    const effect3 = $(getType.effect3);
-    const effect2 = $(getType.effect2);
-    const effect1 = $(getType.effect1);
-    const checkType = $(getType.checkbox);
-    let cnt = 0;
-    checkType.each(function() {
-      if ( $(this).prop('checked') == true ) {
-        cnt ++;
+  buildTypeChart : function(list) {
+    const chart = {};
+    for (const row of list) {
+      const atk = row.type;
+      chart[atk] = chart[atk] || {};
+      for (const ef of row.effect) {
+        chart[atk][ef.type] = ef.value; // -2..1
       }
-    });
-    if ( cnt == 0 ) {
+    }
+    return chart;
+  },
+  effectivenessMultiplier : function(attackType, defenderTypes, chart, mode) {
+    const map = TYPE_MULT[mode || 'go'];
+    let m = 1.0;
+    for (const def of defenderTypes) {
+      const v = String(chart?.[attackType]?.[def] ?? 0);
+      m *= (map[v] ?? 1.0);
+    }
+    return m;
+  },
+  bucketByMultiplier : function(m, mode) {
+    if ((mode || 'go') === 'go') {
+      if (m >= 2.56) return 5;                    // 二重ばつぐん
+      if (m >= 1.6)  return 4;                    // ばつぐん
+      if (m > 0.99 && m < 1.01) return 3;         // 等倍
+      if (m <= 0.390625 + 1e-6) return 1;         // 強耐性(こうかなし相当)
+      return 2;                                   // いまひとつ
+    } else {
+      if (m >= 4.0) return 5;
+      if (m >= 2.0) return 4;
+      if (m === 1.0) return 3;
+      if (m === 0.0) return 1;
+      return 2;
+    }
+  },
+  bestOfTwo : function(attackTypes, defenderTypes, chart, mode) {
+    let best = 0;
+    for (const atk of attackTypes) {
+      const m = effectivenessMultiplier(atk, defenderTypes, chart, mode);
+      if (m > best) best = m;
+    }
+    return best || 1.0;
+  },
+  check : function(typeData, btn) {
+    const effectWrap  = $(getType.effect);
+    const effect5 = $(getType.effect5);   // こうかばつぐん×2（2.56）
+    const effect4 = $(getType.effect4);   // こうかばつぐん（1.6）
+    const effect3 = $(getType.effect3);   // こうかふつう（1.0）
+    const effect2 = $(getType.effect2);   // こうかいまひとつ（0.625）
+    const effect1 = $(getType.effect1);   // こうかいまひとつ×2（0.39）
+
+    // 現在選択中の“受ける側タイプ”（0〜2）
+    const checked = $(getType.checkbox).filter(':checked').map(function(){ return $(this).val(); }).get();
+
+    // 0個 → クリア
+    if (checked.length === 0) {
       getType.clear();
-    } else if ( cnt > 2 ) {
+      return;
+    }
+    // 3個以上はガード（UI側でも止めてるが念のため）
+    if (checked.length > 2) {
       getType.error();
       btn.prop('checked', false);
-    } else {
-      effect.empty();
-      const type = btn.val();
-      for ( let i=0; i<data.length; i++) {
-        if ( data[i].type == type ) {
-          for ( let j=0; j<data[i].effect.length; j++ ) {
-            const typeName = data[i].effect[j].type;
-            const typeNameJa = data[i].effect[j].typeJa;
-            const num = Number(data[i].effect[j].value);
-            const sum = Number($('[name="effect-' + typeName + '"]').val());
-            let result = 0;
-            if ( btn.prop('checked') == true ) {
-              result = sum + num;
-            } else {
-              result = sum - num;
-            }
-            $('[name="effect-' + typeName + '"]').val(result);
-            const resultHtml = '<li><a href="javascript:void(0);" data-type="' + typeName + '"><span class="icon icon-type-' + typeName + '"></span>' + typeNameJa + '</a></li>\n';
-            if ( result > 1 ) {
-              effect5.append(resultHtml);
-            } else if ( result == 1 ) {
-              effect4.append(resultHtml);
-              } else if ( result == 0 ) {
-              effect3.append(resultHtml);
-            } else if ( result == -1 ) {
-              effect2.append(resultHtml);
-            } else {
-              effect1.append(resultHtml);
-            }
-          }
-        }
-      }
-      searchPokemon.clear(data);
-      const searchWrapper = $(searchPokemon.wrapper);
-      const pokemonList = searchWrapper.find(searchPokemon.pokemonList);
-      pokemonList.html($('.js_list-html').html());
+      return;
     }
+
+    // 描画リセット
+    effectWrap.empty();
+
+    // まず全攻撃タイプを 1.0 で初期化
+    const attackTypes = getType.typeName.slice();
+    const multMap = {};
+    attackTypes.forEach(t => { multMap[t] = 1.0; });
+
+    // 防御視点データ（type.json）から、選択タイプぶん乗算
+    // typeData は [{type:'fire', effect:[{type:'grass', mult:1.6}, ...]}] の構造
+    checked.forEach(defType => {
+      const row = typeData.find(x => x.type === defType);
+      if (!row) return;
+      row.effect.forEach(e => {
+        if (multMap[e.type] != null) multMap[e.type] *= e.mult;
+      });
+    });
+
+    // バケットごとに出力
+    attackTypes.forEach(t => {
+      const mult = Number(multMap[t].toFixed(3));
+      const ja   = translate.EtoJ(t);
+      const html = '<li><a href="javascript:void(0);" data-type="' + t + '"><span class="icon icon-type-' + t + '"></span>' + ja + ' ×' + mult + '</a></li>\n';
+      switch (bucket(mult)) {
+        case 'x2win':  effect5.append(html); break; // 2.56
+        case 'x1win':  effect4.append(html); break; // 1.6
+        case 'x1lose': effect2.append(html); break; // 0.625
+        case 'x2lose': effect1.append(html); break; // 0.39
+        default:       effect3.append(html); break; // 1.0
+      }
+    });
+
+    // 検索リストは従来のまま再構築
+    searchPokemon.clear(window.__pokemonListData || []);
+    const searchWrapper = $(searchPokemon.wrapper);
+    const pokemonList = searchWrapper.find(searchPokemon.pokemonList);
+    if ($('.js_list-html').length) pokemonList.html($('.js_list-html').html());
+    // ★ 追加：選択タイプに応じてリストを絞り込み
+    searchPokemon.filterListByTypes( searchPokemon.getSelectedTypesJa() );
+
   },
   clear : function() {
     const effect = $(getType.effect);
     const resultData = $(getType.resultData).find('input[type="hidden"]');
-    resultData.each(function() {
-      $(this).val('0');
-    });
+    resultData.each(function() { $(this).val('1'); });
     effect.empty();
   },
   error : function() {
@@ -138,12 +203,13 @@ const getType = {
 }
 const searchPokemon = {
   wrapper : '.js_pokemon-search',
-  pokemonList : '.js_pokemon-list',
+  pokemonList : '.js_pokemon-search-list',
   typeList : '.js_pokemon-type-list',
   textbox : '.js_pokemon-search-input',
   checkbox : '[name="pokemon-type"]',
   isActiveClassName : 'is_active',
   resetBtn : '.js_reset',
+  clearBtn : '.js_search-clear',
   typeName : [
     'normal', 
     'fire', 
@@ -192,6 +258,7 @@ const searchPokemon = {
     const pokemonList = wrapper.find(searchPokemon.pokemonList);
     const checkbox    = $(getType.checkbox);
     const resetBtn    = $(searchPokemon.resetBtn);
+    const clearBtn    = $(searchPokemon.clearBtn);
 
     // 初回キャッシュ作成
     if ($('.js_list-html').length === 0) {
@@ -238,6 +305,7 @@ const searchPokemon = {
         pokemonList.find('li').show();
         getType.clear();
         checkbox.each(function(){ $(this).prop('checked', false); });
+        clearBtn.hide();
         return;
       }
 
@@ -245,25 +313,39 @@ const searchPokemon = {
         const text = $(this).text();
         $(this).toggle(text.indexOf(keyword) > -1);
       });
+      clearBtn.show();
     });
 
     // ====== リスト選択（mousedownでblurより先に処理） ======
     $(document)
       .off('pointerdown.pokemonList mousedown.pokemonList')
-      .on('pointerdown.pokemonList mousedown.pokemonList', '.js_pokemon-list a', function(e) {
+      .on('pointerdown.pokemonList mousedown.pokemonList', '.js_pokemon-search-list a', function(e) {
         e.preventDefault();
         const $a = $(this);
-        const typesStr = $a.data('types');
+
+        const nameJa   = $a.text();
+        const typesStr = $a.data('types'); // 'みず,くさ' など
+        const typesJa  = String(typesStr || '').split(',').filter(Boolean);
+        const no       = $a.data('no');
+        const image    = pokemonUtil.getImageUrlByNo(no);;
+
+        const resultArea = $('.js_pokemon-search-result'); // 表示先
+        pokemonCard.render({
+          name: nameJa,
+          types: typesJa,
+          image: image
+        }, resultArea);
+        console.log('no', no);
+        console.log('image', image);
+        // if (typesStr) {
+        //   const typeArry = String(typesStr).split(',');
+        //   searchPokemon.select(typeArry);
+        // } else {
+        //   getType.clear();
+        //   $(getType.checkbox).each(function(){ $(this).prop('checked', false); });
+        // }
+
         const textbox     = $(searchPokemon.wrapper).find(searchPokemon.textbox);
-
-        if (typesStr) {
-          const typeArry = String(typesStr).split(',');
-          searchPokemon.select(typeArry);
-        } else {
-          getType.clear();
-          $(getType.checkbox).each(function(){ $(this).prop('checked', false); });
-        }
-
         textbox.val($a.text());
         textbox.trigger('keyup'); // 絞り込み再実行
         $(searchPokemon.wrapper).removeClass(searchPokemon.isActiveClassName);
@@ -277,6 +359,8 @@ const searchPokemon = {
       getType.clear();
       checkbox.each(function(){ $(this).prop('checked', false); });
       textbox.trigger('focus');
+      searchPokemon.filterListByTypes([]); // 全件表示
+      clearBtn.hide();
     });
   },
   select : function(arry) {
@@ -310,6 +394,41 @@ const searchPokemon = {
       }
     }
   },
+  // 追加：選択中タイプ（日本語）を配列で取得
+  getSelectedTypesJa : function() {
+    const checked = $(getType.checkbox).filter(':checked'); // valueは英語
+    const ja = [];
+    checked.each(function() {
+      const en = $(this).val();
+      ja.push( translate.EtoJ(en) ); // 日本語に変換（例: fire -> ほのお）
+    });
+    return ja;
+  },
+  // 追加：タイプで .js_pokemon-list を絞り込み（AND）
+  filterListByTypes : function(selectedJa) {
+    const wrapper     = $(searchPokemon.wrapper);
+    const pokemonList = wrapper.find(searchPokemon.pokemonList);
+
+    // キャッシュから毎回全件復元してから絞る
+    if ($('.js_list-html').length) {
+      pokemonList.html($('.js_list-html').html());
+    }
+
+    if (!selectedJa || selectedJa.length === 0) {
+      // タイプ未選択なら全件表示
+      pokemonList.find('li').show();
+      return;
+    }
+
+    // data-types は「くさ,どく」のような日本語配列文字列
+    pokemonList.find('li').each(function() {
+      const typesStr = String($(this).find('a').data('types') || '');
+      const typesJa = typesStr.split(','); // 日本語のまま
+      // AND 条件：選択されたすべてのタイプを含むか
+      const hit = selectedJa.every(t => typesJa.includes(t));
+      $(this).toggle(hit);
+    });
+  },
   clear : function(data) {
     const wrapper = $(searchPokemon.wrapper);
     const textbox = wrapper.find(searchPokemon.textbox);
@@ -319,9 +438,10 @@ const searchPokemon = {
       if ( data[i].form != '' ) {
         pokemonName += '（' + data[i].form + '）';
       }
+      const no = data[i].no;
       const types = data[i].types;
       if ( pokemonName ) {
-        pokemonList.append('<li><a href="javascript:void(0);" data-types="' + types + '">' + pokemonName + '</a></li>')
+        pokemonList.append(`<li><a href="javascript:void(0);" data-no="${no}" data-types="${types.join(',')}">${pokemonName}</a></li>`)
       }
     }
     textbox.val('');

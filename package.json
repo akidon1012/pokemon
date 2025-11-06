@@ -1,10 +1,10 @@
 {
   "name": "typechecker",
   "version": "1.0.0",
-  "description": "",
   "main": "gulpfile.js",
   "dependencies": {
     "autoprefixer": "^9.7.1",
+    "axios": "^1.13.2",
     "browser-sync": "^2.26.7",
     "css-declaration-sorter": "^4.0.1",
     "gulp-clean": "^0.4.0",
@@ -37,6 +37,7 @@
     "gulp-iconfont": "^10.0.3",
     "gulp-sourcemaps": "^2.6.5",
     "lodash": "^4.17.15",
+    "node-fetch": "^3.3.2",
     "xlsx": "^0.15.3"
   },
   "scripts": {
@@ -47,5 +48,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }

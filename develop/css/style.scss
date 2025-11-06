@@ -21,7 +21,9 @@
         width: 300px;
         margin-right: 10px;
         a {
-          display: block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           color: $color-text;
           background: #f0f0f0;
           border: 1px solid #DDD;
@@ -31,7 +33,10 @@
           text-align: center;
           font-size: 16px;
           font-weight: 600;
+          line-height: 1.2;
           padding: 10px 0;
+          height: 100%;
+          box-sizing: border-box;
         }
         &.is_active {
           margin-bottom: -1px;
@@ -92,6 +97,29 @@
           pointer-events: none;
         }
       }
+      &-clear {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 30px;
+        width: 36px;
+        height: 36px;
+        &::before, &:after {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 16px;
+          border-top: 1px solid #666;
+        }
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
     }
     &-list {
       &-wrapper {
@@ -146,6 +174,9 @@
         }
       }
     }
+    &-result {
+      margin-top: 20px;
+    }
     &.is_active {
       .pokemon-search {
         &-input {
@@ -164,6 +195,32 @@
           }
         }
       }
+    }
+  }
+  .pokemon-info {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 1px solid #DDD;
+      background: #FFF;
+    }
+    &-img {
+      width: 60px;
+      flex-shrink: 0;
+      margin-right: 10px;
+      img {
+        width: 100%;
+      }
+    }
+    &-type {
+      margin-right: 10px;
+      .icon {
+        font-size: 28px;
+      }
+    }
+    &-name {
+      font-size: 24px;
     }
   }
   .pokemon-type {
@@ -315,7 +372,7 @@
         justify-content: space-between;
         padding: 0 10px;
         &-item {
-          width: calc(50% - 5px);
+          width: calc(33.3% - 5px);
           margin: 0;
           a {
             padding: 10px 0;
