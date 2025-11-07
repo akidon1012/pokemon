@@ -1,84 +1,119 @@
+/*
+raw data
+https://pokeminers.com/ からDL
+*/
+
+// tools/build_type_json_defense.mjs
 import fs from 'fs';
 import path from 'path';
-import axios from 'axios';
-import { fileURLToPath } from 'url';
+import url from 'url';
 
-// ===== 位置計算（ESMで__dirnameを作る） =====
-const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+// === 入出力パス ===
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const INPUT  = path.resolve(__dirname, '../develop/data/raw/game_master.json');
+const OUTPUT = path.resolve(__dirname, '../develop/data/type_defense.json');
 
-// ===== 設定 =====
-const OUTPUT_PATH = path.resolve(__dirname, '../develop/data/type.json');
-const POKEAPI_BASE = 'https://pokeapi.co/api/v2/type/';
-
-// ポケモンGO想定の倍率
-const MULT = {
-  double: 1.6,    // こうかばつぐん
-  half  : 0.625,  // こうかいまひとつ
-  zero  : 0.39    // 免疫（GO流に調整）
-};
-
-// 使う18タイプのみ（unknown/shadowは除外）
+// === 対応する18タイプ（GO準拠・和名表） ===
+// ※ GOの倍率: 1.6(ばつぐん) / 1.0(等倍) / 0.625(いまひとつ) / 0(効果なし)
 const TYPES = [
-  'normal','fire','water','grass','electric','ice','fighting','poison','ground',
-  'flying','psychic','bug','rock','ghost','dragon','dark','steel','fairy'
+  ['NORMAL','ノーマル'],
+  ['FIRE','ほのお'],
+  ['WATER','みず'],
+  ['GRASS','くさ'],
+  ['ELECTRIC','でんき'],
+  ['ICE','こおり'],
+  ['FIGHTING','かくとう'],
+  ['POISON','どく'],
+  ['GROUND','じめん'],
+  ['FLYING','ひこう'],
+  ['PSYCHIC','エスパー'],
+  ['BUG','むし'],
+  ['ROCK','いわ'],
+  ['GHOST','ゴースト'],
+  ['DRAGON','ドラゴン'],
+  ['DARK','あく'],
+  ['STEEL','はがね'],
+  ['FAIRY','フェアリー']
 ];
 
-const JA = {
-  normal:'ノーマル', fire:'ほのお', water:'みず', grass:'くさ', electric:'でんき', ice:'こおり',
-  fighting:'かくとう', poison:'どく', ground:'じめん', flying:'ひこう', psychic:'エスパー',
-  bug:'むし', rock:'いわ', ghost:'ゴースト', dragon:'ドラゴン', dark:'あく', steel:'はがね', fairy:'フェアリー'
-};
+// GAME_MASTER のキー文字列
+const toGM = t => `POKEMON_TYPE_${t}`;
 
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+// 和名辞書
+const jaByEn = Object.fromEntries(TYPES.map(([en,ja]) => [en.toLowerCase(), ja]));
 
-async function fetchType(enType) {
-  const url = `${POKEAPI_BASE}${enType}`;
-  const res = await axios.get(url, { timeout: 20000 });
-  await sleep(120); // 429対策で軽くウェイト
-  return res.data;
+// 初期化（防御→攻撃の表: Map<defJa, Map<atkJa, multiplier>>）
+const table = new Map();
+TYPES.forEach(([defEn, defJa]) => {
+  table.set(defJa, new Map(TYPES.map(([atkEn, atkJa]) => [jaByEn[atkEn.toLowerCase()], 1.0])));
+});
+
+function loadGM(file) {
+  const txt = fs.readFileSync(file, 'utf8');
+  return JSON.parse(txt);
 }
 
-// 防御視点テーブル作成：「defType」で受けるとき各攻撃タイプの倍率
-function buildDefenseRow(defTypeData) {
-  const table = {};
-  TYPES.forEach(t => { table[t] = 1.0; });
+function build() {
+  console.log('Reading:', INPUT);
+  const gm = loadGM(INPUT);
 
-  const rel = defTypeData.damage_relations;
-  rel.half_damage_from.forEach(({ name }) => { if (table[name] != null) table[name] *= MULT.half;   });
-  rel.double_damage_from.forEach(({ name }) => { if (table[name] != null) table[name] *= MULT.double; });
-  rel.no_damage_from.forEach(   ({ name }) => { if (table[name] != null) table[name] *= MULT.zero;   });
-
-  return table;
-}
-
-(async () => {
-  try {
-    console.log('Fetching type charts from PokeAPI (defense view)…');
-
-    const out = [];
-    for (const defType of TYPES) {
-      const data  = await fetchType(defType);
-      const mults = buildDefenseRow(data);
-
-      const effect = TYPES.map(atk => ({
-        type: atk,
-        typeJa: JA[atk],
-        mult: Number(mults[atk].toFixed(3))
-      }));
-
-      out.push({ type: defType, typeJa: JA[defType], effect });
-      console.log(`  built: ${defType}`);
-    }
-
-    // 出力
-    const dir = path.dirname(OUTPUT_PATH);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(out, null, 2), 'utf8');
-
-    console.log(`\n✅ Wrote ${OUTPUT_PATH}`);
-  } catch (err) {
-    console.error('❌ Failed:', err.message);
-    process.exit(1);
+  // COMBAT_TYPE_EFFECTIVENESS の配列を抽出
+  // 形はだいたい:
+  // { templateId: 'COMBAT_TYPE_EFFECTIVENESS', data: { combatTypeEffectiveness: { attackType:'POKEMON_TYPE_FIRE', defenseType:'POKEMON_TYPE_GRASS', multiplier:1.6 } } }
+  const nodes = [];
+  for (const entry of gm || []) {
+    const eff = entry?.data?.combatTypeEffectiveness;
+    if (!eff) continue;
+    nodes.push(eff);
   }
-})();
+  if (nodes.length === 0) {
+    console.warn('No COMBAT_TYPE_EFFECTIVENESS entries found.');
+  }
+
+  // 表に流し込み（防御視点）
+  nodes.forEach(eff => {
+    const atkEn = String(eff.attackType || '').replace('POKEMON_TYPE_', '');
+    const defEn = String(eff.defenseType || '').replace('POKEMON_TYPE_', '');
+    const mul   = Number(eff.multiplier ?? 1);
+
+    // 18タイプ以外（SHADOW, STELLAR, UNKNOWN 等）は無視
+    if (!jaByEn[atkEn.toLowerCase()] || !jaByEn[defEn.toLowerCase()]) return;
+
+    const atkJa = jaByEn[atkEn.toLowerCase()];
+    const defJa = jaByEn[defEn.toLowerCase()];
+
+    const row = table.get(defJa);
+    if (row) row.set(atkJa, mul);
+  });
+
+  // JSON 形に整形
+  const out = TYPES.map(([defEn, defJa]) => {
+    const row = table.get(jaByEn[defEn.toLowerCase()]);
+    const effects = TYPES.map(([atkEn, atkJa]) => {
+      const atkJaName = jaByEn[atkEn.toLowerCase()];
+      const mul = Number(row?.get(atkJaName) ?? 1);
+      return {
+        type: atkEn.toLowerCase(),
+        typeJa: atkJaName,
+        multiplier: mul
+      };
+    });
+    return {
+      type: defEn.toLowerCase(),
+      typeJa: defJa,
+      effect: effects
+    };
+  });
+
+  // 出力
+  fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
+  fs.writeFileSync(OUTPUT, JSON.stringify(out, null, 2), 'utf8');
+  console.log('Wrote:', OUTPUT, `(rows=${out.length})`);
+}
+
+try {
+  build();
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}

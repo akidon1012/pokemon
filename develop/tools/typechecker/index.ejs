@@ -49,16 +49,6 @@
                         <ul class="pokemon-search-list js_pokemon-search-list"></ul>
                       </div>
                       <div class="pokemon-search-result js_pokemon-search-result">
-                        <!-- <div class="pokemon-info-wrapper">
-                          <div class="pokemon-info-img">
-                            <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="">
-                          </div>
-                          <div class="pokemon-info-type">
-                            <span class="icon icon-type-water"></span>
-                            <span class="icon icon-type-grass"></span>
-                          </div>
-                          <div class="pokemon-info-name">ハスボー</div>
-                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -128,22 +118,24 @@
                 </div>
                 <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
                   <div class="pokemon-recommend">
-                    <ul class="pokemon-list">
-                      <li class="pokemon-list-item js_toggle-wrapper">
-                        <div class="pokemon-list-item-info">
-                          <div class="pokemon-list-item-img">
-                            <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="">
+                    <ul class="pokemon-recommend-list js_pokemon-recommend-list">
+                      <li class="pokemon-recommend-list-item js_toggle-wrapper">
+                        <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
+                          <div class="pokemon-info-wrapper">
+                            <div class="pokemon-info-img">
+                              <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="ハスボー">
+                            </div>
+                            <div class="pokemon-info-name">ハスボー</div>
+                            <div class="pokemon-info-type">
+                              <div class="badge"><span class="icon icon-type-water"></span>みず</div>
+                              <div class="badge"><span class="icon icon-type-grass"></span>くさ</div>
+                            </div>
                           </div>
-                          <div class="pokemon-list-item-type">
-                            <span class="icon icon-type-water"></span>
-                            <span class="icon icon-type-grass"></span>
-                          </div>
-                          <div class="pokemon-list-item-name">ハスボー</div>
                           <a href="" class="js_toggle-trigger"></a>
                         </div>
-                        <div class="pokemon-list-item-atack js_toggle-content">
-                          <div class="pokemon-list-item-atack-normal"><span class="icon icon-type-water"></span>みずでっぽう</div>
-                          <div class="pokemon-list-item-atack-special"><span class="icon icon-type-water"></span>ハイドロポンプ</div>
+                        <div class="pokemon-recommend-list-item-atack js_toggle-content">
+                          <div class="pokemon-recommend-list-item-atack-normal"><span class="icon icon-type-water"></span>みずでっぽう</div>
+                          <div class="pokemon-recommend-list-item-atack-special"><span class="icon icon-type-water"></span>ハイドロポンプ</div>
                         </div>
                       </li>
                     </ul>
@@ -213,6 +205,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../js/utilities.js?t=20251104" defer></script>
+    <script src="../../js/data-loader.js?t=20251104" defer></script>
     <script src="../../js/typechecker.js?t=20251104" defer></script>
   </body>
 </html>
