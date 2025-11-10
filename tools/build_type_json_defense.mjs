@@ -85,6 +85,7 @@ function build() {
     const row = table.get(defJa);
     if (row) row.set(atkJa, mul);
   });
+  console.log('SAMPLE eff:', nodes[0]);
 
   // JSON 形に整形
   const out = TYPES.map(([defEn, defJa]) => {

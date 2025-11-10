@@ -1,0 +1,2054 @@
+[
+  {
+    "type": "normal",
+    "typeJa": "????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "fire",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 0.625,
+        "value": -1
+      }
+    ]
+  },
+  {
+    "type": "water",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "grass",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "electric",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "ice",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "fighting",
+    "typeJa": "????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1.6,
+        "value": 1
+      }
+    ]
+  },
+  {
+    "type": "poison",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 0.625,
+        "value": -1
+      }
+    ]
+  },
+  {
+    "type": "ground",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "flying",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "psychic",
+    "typeJa": "????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "bug",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "rock",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "ghost",
+    "typeJa": "????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  },
+  {
+    "type": "dragon",
+    "typeJa": "????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1.6,
+        "value": 1
+      }
+    ]
+  },
+  {
+    "type": "dark",
+    "typeJa": "??",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1.6,
+        "value": 1
+      }
+    ]
+  },
+  {
+    "type": "steel",
+    "typeJa": "???",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 0.625,
+        "value": -1
+      }
+    ]
+  },
+  {
+    "type": "fairy",
+    "typeJa": "?????",
+    "effect": [
+      {
+        "type": "normal",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fire",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "water",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "grass",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "electric",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ice",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "fighting",
+        "typeJa": "????",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "poison",
+        "typeJa": "??",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "ground",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "flying",
+        "typeJa": "???",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "psychic",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "bug",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "rock",
+        "typeJa": "??",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "ghost",
+        "typeJa": "????",
+        "multiplier": 1,
+        "value": 0
+      },
+      {
+        "type": "dragon",
+        "typeJa": "????",
+        "multiplier": 0.39,
+        "value": -2
+      },
+      {
+        "type": "dark",
+        "typeJa": "??",
+        "multiplier": 0.625,
+        "value": -1
+      },
+      {
+        "type": "steel",
+        "typeJa": "???",
+        "multiplier": 1.6,
+        "value": 1
+      },
+      {
+        "type": "fairy",
+        "typeJa": "?????",
+        "multiplier": 1,
+        "value": 0
+      }
+    ]
+  }
+]
