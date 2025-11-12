@@ -50,4 +50,5 @@ const p4 = $.getJSON('../../data/moves_master_localized.json')
 // すべて読み込み完了してから初期化を知らせる
 $.when(p1, p2, p3, p4).done(function(){
   $(document).trigger('pokemon:data-ready');
+  console.log('lotad', pokemonUtil.getPokemonData('lotad'));
 });

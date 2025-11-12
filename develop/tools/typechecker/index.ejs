@@ -133,22 +133,40 @@
                           </div>
                           <a href="" class="js_toggle-trigger"></a>
                         </div>
-                        <div class="pokemon-recommend-list-item-atack-wrapper js_toggle-content">
-                          <dl class="pokemon-recommend-list-item-atack">
-                            <dt class="pokemon-recommend-list-item-atack-label">ノーマル</dt>
-                            <dd class="pokemon-recommend-list-item-atack-name">
-                              <span class="icon icon-type-water"></span>みずでっぽう
-                            </dd>
+                        <div class="js_toggle-content">
+                          <dl class="pokemon-recommend-info-score">
+                            <dt class="pokemon-recommend-info-score-label">種族値</dt>
+                            <dl class="pokemon-recommend-info-score-value">
+                              <ul class="pokemon-recommend-info-score-list">
+                                <li class="pokemon-recommend-info-score-list-item">
+                                  こうげき <span class="num">100</span>
+                                </li>
+                                <li class="pokemon-recommend-info-score-list-item">
+                                  ぼうぎょ <span class="num">100</span>
+                                </li>
+                                <li class="pokemon-recommend-info-score-list-item">
+                                  HP <span class="num">100</span>
+                                </li>
+                              </ul>
+                            </dl>
                           </dl>
-                          <dl class="pokemon-recommend-list-item-atack">
-                            <dt class="pokemon-recommend-list-item-atack-label">スペシャル</dt>
-                            <dd class="pokemon-recommend-list-item-atack-name">
-                              <span class="icon icon-type-water"></span>ハイドロポンプ
-                            </dd>
-                            <dd class="pokemon-recommend-list-item-atack-name">
-                              <span class="icon icon-type-ice"></span>ふぶき
-                            </dd>
-                          </dl>
+                          <div class="pokemon-recommend-list-item-atack-wrapper">
+                            <dl class="pokemon-recommend-list-item-atack">
+                              <dt class="pokemon-recommend-list-item-atack-label">ノーマル</dt>
+                              <dd class="pokemon-recommend-list-item-atack-name">
+                                <span class="icon icon-type-water"></span>みずでっぽう
+                              </dd>
+                            </dl>
+                            <dl class="pokemon-recommend-list-item-atack">
+                              <dt class="pokemon-recommend-list-item-atack-label">スペシャル</dt>
+                              <dd class="pokemon-recommend-list-item-atack-name">
+                                <span class="icon icon-type-water"></span>ハイドロポンプ
+                              </dd>
+                              <dd class="pokemon-recommend-list-item-atack-name">
+                                <span class="icon icon-type-ice"></span>ふぶき
+                              </dd>
+                            </dl>
+                          </div>
                         </div>
                       </li>
                     </ul>
@@ -218,7 +236,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../js/utilities.js?t=20251104" defer></script>
-    <script src="../../js/data-loader.js?t=20251104" defer></script>
     <script src="../../js/typechecker.js?t=20251104" defer></script>
   </body>
 </html>

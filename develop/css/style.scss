@@ -380,7 +380,36 @@
     }
   }
   .pokemon-recommend {
-    background: #FDD;
+    &-info {
+      &-score {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        padding: 5px;
+        border-top: 1px solid #DDD;
+        &-label {
+          font-size: 14px;
+          font-weight: 600;
+          &::after {
+            content: "：";
+          }
+        }
+        &-list {
+          display: flex;
+          justify-content: center;
+          align-items: baseline;
+          &-item {
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 10px;
+            .num {
+              font-size: 16px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
     &-list {
       &-item {
         border: 1px solid #DDD;
