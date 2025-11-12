@@ -1,0 +1,1797 @@
+{
+  "THUNDER_SHOCK": {
+    "resourceId": "move_name_0205",
+    "en": "Thunder Shock",
+    "ja": "でんきショック"
+  },
+  "QUICK_ATTACK": {
+    "resourceId": "move_name_0219",
+    "en": "Quick Attack",
+    "ja": "でんこうせっか"
+  },
+  "SCRATCH": {
+    "resourceId": "move_name_0220",
+    "en": "Scratch",
+    "ja": "ひっかく"
+  },
+  "EMBER": {
+    "resourceId": "move_name_0209",
+    "en": "Ember",
+    "ja": "ひのこ"
+  },
+  "VINE_WHIP": {
+    "resourceId": "move_name_0214",
+    "en": "Vine Whip",
+    "ja": "つるのムチ"
+  },
+  "TACKLE": {
+    "resourceId": "move_name_0221",
+    "en": "Tackle",
+    "ja": "たいあたり"
+  },
+  "RAZOR_LEAF": {
+    "resourceId": "move_name_0215",
+    "en": "Razor Leaf",
+    "ja": "はっぱカッター"
+  },
+  "TAKE_DOWN": {
+    "resourceId": "move_name_0282",
+    "en": "Take Down",
+    "ja": "とっしん"
+  },
+  "WATER_GUN": {
+    "resourceId": "move_name_0232",
+    "en": "Water Gun",
+    "ja": "みずでっぽう"
+  },
+  "BITE": {
+    "resourceId": "move_name_0202",
+    "en": "Bite",
+    "ja": "かみつく"
+  },
+  "POUND": {
+    "resourceId": "move_name_0222",
+    "en": "Pound",
+    "ja": "はたく"
+  },
+  "DOUBLE_SLAP": {
+    "resourceId": "move_name_0012",
+    "en": "Double Slap",
+    "ja": "おうふくビンタ"
+  },
+  "WRAP": {
+    "resourceId": "move_name_0137",
+    "en": "Wrap",
+    "ja": "まきつく"
+  },
+  "HYPER_BEAM": {
+    "resourceId": "move_name_0014",
+    "en": "Hyper Beam",
+    "ja": "はかいこうせん"
+  },
+  "LICK": {
+    "resourceId": "move_name_0212",
+    "en": "Lick",
+    "ja": "したでなめる"
+  },
+  "DARK_PULSE": {
+    "resourceId": "move_name_0016",
+    "en": "Dark Pulse",
+    "ja": "あくのはどう"
+  },
+  "SMOG": {
+    "resourceId": "move_name_0017",
+    "en": "Smog",
+    "ja": "スモッグ"
+  },
+  "SLUDGE": {
+    "resourceId": "move_name_0018",
+    "en": "Sludge",
+    "ja": "ヘドロこうげき"
+  },
+  "METAL_CLAW": {
+    "resourceId": "move_name_0228",
+    "en": "Metal Claw",
+    "ja": "メタルクロー"
+  },
+  "VISE_GRIP": {
+    "resourceId": "move_name_0020",
+    "en": "Vise Grip",
+    "ja": "はさむ"
+  },
+  "FLAME_WHEEL": {
+    "resourceId": "move_name_0021",
+    "en": "Flame Wheel",
+    "ja": "かえんぐるま"
+  },
+  "MEGAHORN": {
+    "resourceId": "move_name_0022",
+    "en": "Megahorn",
+    "ja": "メガホーン"
+  },
+  "WING_ATTACK": {
+    "resourceId": "move_name_0210",
+    "en": "Wing Attack",
+    "ja": "つばさでうつ"
+  },
+  "FLAMETHROWER": {
+    "resourceId": "move_name_0024",
+    "en": "Flamethrower",
+    "ja": "かえんほうしゃ"
+  },
+  "SUCKER_PUNCH": {
+    "resourceId": "move_name_0203",
+    "en": "Sucker Punch",
+    "ja": "ふいうち"
+  },
+  "DIG": {
+    "resourceId": "move_name_0026",
+    "en": "Dig",
+    "ja": "あなをほる"
+  },
+  "LOW_KICK": {
+    "resourceId": "move_name_0207",
+    "en": "Low Kick",
+    "ja": "けたぐり"
+  },
+  "CROSS_CHOP": {
+    "resourceId": "move_name_0028",
+    "en": "Cross Chop",
+    "ja": "クロスチョップ"
+  },
+  "PSYCHO_CUT": {
+    "resourceId": "move_name_0226",
+    "en": "Psycho Cut",
+    "ja": "サイコカッター"
+  },
+  "PSYBEAM": {
+    "resourceId": "move_name_0030",
+    "en": "Psybeam",
+    "ja": "サイケこうせん"
+  },
+  "EARTHQUAKE": {
+    "resourceId": "move_name_0031",
+    "en": "Earthquake",
+    "ja": "じしん"
+  },
+  "STONE_EDGE": {
+    "resourceId": "move_name_0032",
+    "en": "Stone Edge",
+    "ja": "ストーンエッジ"
+  },
+  "ICE_PUNCH": {
+    "resourceId": "move_name_0033",
+    "en": "Ice Punch",
+    "ja": "れいとうパンチ"
+  },
+  "HEART_STAMP": {
+    "resourceId": "move_name_0034",
+    "en": "Heart Stamp",
+    "ja": "ハートスタンプ"
+  },
+  "DISCHARGE": {
+    "resourceId": "move_name_0035",
+    "en": "Discharge",
+    "ja": "ほうでん"
+  },
+  "FLASH_CANNON": {
+    "resourceId": "move_name_0036",
+    "en": "Flash Cannon",
+    "ja": "ラスターカノン"
+  },
+  "PECK": {
+    "resourceId": "move_name_0211",
+    "en": "Peck",
+    "ja": "つつく"
+  },
+  "DRILL_PECK": {
+    "resourceId": "move_name_0038",
+    "en": "Drill Peck",
+    "ja": "ドリルくちばし"
+  },
+  "ICE_BEAM": {
+    "resourceId": "move_name_0039",
+    "en": "Ice Beam",
+    "ja": "れいとうビーム"
+  },
+  "BLIZZARD": {
+    "resourceId": "move_name_0040",
+    "en": "Blizzard",
+    "ja": "ふぶき"
+  },
+  "AIR_SLASH": {
+    "resourceId": "move_name_0255",
+    "en": "Air Slash",
+    "ja": "エアスラッシュ"
+  },
+  "HEAT_WAVE": {
+    "resourceId": "move_name_0042",
+    "en": "Heat Wave",
+    "ja": "ねっぷう"
+  },
+  "TWINEEDLE": {
+    "resourceId": "move_name_0043",
+    "en": "Twineedle",
+    "ja": "ダブルニードル"
+  },
+  "POISON_JAB": {
+    "resourceId": "move_name_0224",
+    "en": "Poison Jab",
+    "ja": "どくづき"
+  },
+  "AERIAL_ACE": {
+    "resourceId": "move_name_0045",
+    "en": "Aerial Ace",
+    "ja": "つばめがえし"
+  },
+  "DRILL_RUN": {
+    "resourceId": "move_name_0046",
+    "en": "Drill Run",
+    "ja": "ドリルライナー"
+  },
+  "PETAL_BLIZZARD": {
+    "resourceId": "move_name_0047",
+    "en": "Petal Blizzard",
+    "ja": "はなふぶき"
+  },
+  "MEGA_DRAIN": {
+    "resourceId": "move_name_0048",
+    "en": "Mega Drain",
+    "ja": "メガドレイン"
+  },
+  "BUG_BUZZ": {
+    "resourceId": "move_name_0049",
+    "en": "Bug Buzz",
+    "ja": "むしのさざめき"
+  },
+  "POISON_FANG": {
+    "resourceId": "move_name_0050",
+    "en": "Poison Fang",
+    "ja": "どくどくのキバ"
+  },
+  "NIGHT_SLASH": {
+    "resourceId": "move_name_0051",
+    "en": "Night Slash",
+    "ja": "つじぎり"
+  },
+  "SLASH": {
+    "resourceId": "move_name_0052",
+    "en": "Slash",
+    "ja": "きりさく"
+  },
+  "BUBBLE_BEAM": {
+    "resourceId": "move_name_0053",
+    "en": "Bubble Beam",
+    "ja": "バブルこうせん"
+  },
+  "SUBMISSION": {
+    "resourceId": "move_name_0054",
+    "en": "Submission",
+    "ja": "じごくぐるま"
+  },
+  "KARATE_CHOP": {
+    "resourceId": "move_name_0208",
+    "en": "Karate Chop",
+    "ja": "からてチョップ"
+  },
+  "LOW_SWEEP": {
+    "resourceId": "move_name_0056",
+    "en": "Low Sweep",
+    "ja": "ローキック"
+  },
+  "AQUA_JET": {
+    "resourceId": "move_name_0057",
+    "en": "Aqua Jet",
+    "ja": "アクアジェット"
+  },
+  "AQUA_TAIL": {
+    "resourceId": "move_name_0058",
+    "en": "Aqua Tail",
+    "ja": "アクアテール"
+  },
+  "SEED_BOMB": {
+    "resourceId": "move_name_0059",
+    "en": "Seed Bomb",
+    "ja": "タネばくだん"
+  },
+  "PSYSHOCK": {
+    "resourceId": "move_name_0060",
+    "en": "Psyshock",
+    "ja": "サイコショック"
+  },
+  "ROCK_THROW": {
+    "resourceId": "move_name_0227",
+    "en": "Rock Throw",
+    "ja": "いわおとし"
+  },
+  "ANCIENT_POWER": {
+    "resourceId": "move_name_0062",
+    "en": "Ancient Power",
+    "ja": "げんしのちから"
+  },
+  "ROCK_TOMB": {
+    "resourceId": "move_name_0063",
+    "en": "Rock Tomb",
+    "ja": "がんせきふうじ"
+  },
+  "ROCK_SLIDE": {
+    "resourceId": "move_name_0064",
+    "en": "Rock Slide",
+    "ja": "いわなだれ"
+  },
+  "POWER_GEM": {
+    "resourceId": "move_name_0065",
+    "en": "Power Gem",
+    "ja": "パワージェム"
+  },
+  "SHADOW_SNEAK": {
+    "resourceId": "move_name_0066",
+    "en": "Shadow Sneak",
+    "ja": "かげうち"
+  },
+  "SHADOW_PUNCH": {
+    "resourceId": "move_name_0067",
+    "en": "Shadow Punch",
+    "ja": "シャドーパンチ"
+  },
+  "SHADOW_CLAW": {
+    "resourceId": "move_name_0213",
+    "en": "Shadow Claw",
+    "ja": "シャドークロー"
+  },
+  "OMINOUS_WIND": {
+    "resourceId": "move_name_0069",
+    "en": "Ominous Wind",
+    "ja": "あやしいかぜ"
+  },
+  "SHADOW_BALL": {
+    "resourceId": "move_name_0070",
+    "en": "Shadow Ball",
+    "ja": "シャドーボール"
+  },
+  "BULLET_PUNCH": {
+    "resourceId": "move_name_0229",
+    "en": "Bullet Punch",
+    "ja": "バレットパンチ"
+  },
+  "MAGNET_BOMB": {
+    "resourceId": "move_name_0072",
+    "en": "Magnet Bomb",
+    "ja": "マグネットボム"
+  },
+  "STEEL_WING": {
+    "resourceId": "move_name_0239",
+    "en": "Steel Wing",
+    "ja": "はがねのつばさ"
+  },
+  "IRON_HEAD": {
+    "resourceId": "move_name_0074",
+    "en": "Iron Head",
+    "ja": "アイアンヘッド"
+  },
+  "PARABOLIC_CHARGE": {
+    "resourceId": "move_name_0075",
+    "en": "Parabolic Charge",
+    "ja": "パラボラチャージ"
+  },
+  "SPARK": {
+    "resourceId": "move_name_0206",
+    "en": "Spark",
+    "ja": "スパーク"
+  },
+  "THUNDER_PUNCH": {
+    "resourceId": "move_name_0077",
+    "en": "Thunder Punch",
+    "ja": "かみなりパンチ"
+  },
+  "THUNDER": {
+    "resourceId": "move_name_0078",
+    "en": "Thunder",
+    "ja": "かみなり"
+  },
+  "THUNDERBOLT": {
+    "resourceId": "move_name_0079",
+    "en": "Thunderbolt",
+    "ja": "１０まんボルト"
+  },
+  "TWISTER": {
+    "resourceId": "move_name_0080",
+    "en": "Twister",
+    "ja": "たつまき"
+  },
+  "DRAGON_BREATH": {
+    "resourceId": "move_name_0204",
+    "en": "Dragon Breath",
+    "ja": "りゅうのいぶき"
+  },
+  "DRAGON_PULSE": {
+    "resourceId": "move_name_0082",
+    "en": "Dragon Pulse",
+    "ja": "りゅうのはどう"
+  },
+  "DRAGON_CLAW": {
+    "resourceId": "move_name_0083",
+    "en": "Dragon Claw",
+    "ja": "ドラゴンクロー"
+  },
+  "DISARMING_VOICE": {
+    "resourceId": "move_name_0084",
+    "en": "Disarming Voice",
+    "ja": "チャームボイス"
+  },
+  "DRAINING_KISS": {
+    "resourceId": "move_name_0085",
+    "en": "Draining Kiss",
+    "ja": "ドレインキッス"
+  },
+  "DAZZLING_GLEAM": {
+    "resourceId": "move_name_0086",
+    "en": "Dazzling Gleam",
+    "ja": "マジカルシャイン"
+  },
+  "MOONBLAST": {
+    "resourceId": "move_name_0087",
+    "en": "Moonblast",
+    "ja": "ムーンフォース"
+  },
+  "PLAY_ROUGH": {
+    "resourceId": "move_name_0088",
+    "en": "Play Rough",
+    "ja": "じゃれつく"
+  },
+  "CROSS_POISON": {
+    "resourceId": "move_name_0089",
+    "en": "Cross Poison",
+    "ja": "クロスポイズン"
+  },
+  "SLUDGE_BOMB": {
+    "resourceId": "move_name_0090",
+    "en": "Sludge Bomb",
+    "ja": "ヘドロばくだん"
+  },
+  "SLUDGE_WAVE": {
+    "resourceId": "move_name_0091",
+    "en": "Sludge Wave",
+    "ja": "ヘドロウェーブ"
+  },
+  "GUNK_SHOT": {
+    "resourceId": "move_name_0092",
+    "en": "Gunk Shot",
+    "ja": "ダストシュート"
+  },
+  "MUD_SHOT": {
+    "resourceId": "move_name_0216",
+    "en": "Mud Shot",
+    "ja": "マッドショット"
+  },
+  "BONE_CLUB": {
+    "resourceId": "move_name_0094",
+    "en": "Bone Club",
+    "ja": "ホネこんぼう"
+  },
+  "BULLDOZE": {
+    "resourceId": "move_name_0095",
+    "en": "Bulldoze",
+    "ja": "じならし"
+  },
+  "MUD_BOMB": {
+    "resourceId": "move_name_0096",
+    "en": "Mud Bomb",
+    "ja": "どろばくだん"
+  },
+  "FURY_CUTTER": {
+    "resourceId": "move_name_0200",
+    "en": "Fury Cutter",
+    "ja": "れんぞくぎり"
+  },
+  "BUG_BITE": {
+    "resourceId": "move_name_0201",
+    "en": "Bug Bite",
+    "ja": "むしくい"
+  },
+  "SIGNAL_BEAM": {
+    "resourceId": "move_name_0099",
+    "en": "Signal Beam",
+    "ja": "シグナルビーム"
+  },
+  "X_SCISSOR": {
+    "resourceId": "move_name_0100",
+    "en": "X-Scissor",
+    "ja": "シザークロス"
+  },
+  "FLAME_CHARGE": {
+    "resourceId": "move_name_0101",
+    "en": "Flame Charge",
+    "ja": "ニトロチャージ"
+  },
+  "FLAME_BURST": {
+    "resourceId": "move_name_0102",
+    "en": "Flame Burst",
+    "ja": "はじけるほのお"
+  },
+  "FIRE_BLAST": {
+    "resourceId": "move_name_0103",
+    "en": "Fire Blast",
+    "ja": "だいもんじ"
+  },
+  "BRINE": {
+    "resourceId": "move_name_0104",
+    "en": "Brine",
+    "ja": "しおみず"
+  },
+  "WATER_PULSE": {
+    "resourceId": "move_name_0105",
+    "en": "Water Pulse",
+    "ja": "みずのはどう"
+  },
+  "SCALD": {
+    "resourceId": "move_name_0134",
+    "en": "Scald",
+    "ja": "ねっとう"
+  },
+  "HYDRO_PUMP": {
+    "resourceId": "move_name_0135",
+    "en": "Hydro Pump",
+    "ja": "ハイドロポンプ"
+  },
+  "PSYCHIC": {
+    "resourceId": "move_name_0108",
+    "en": "Psychic",
+    "ja": "サイコキネシス"
+  },
+  "PSYSTRIKE": {
+    "resourceId": "move_name_0109",
+    "en": "Psystrike",
+    "ja": "サイコブレイク"
+  },
+  "ICE_SHARD": {
+    "resourceId": "move_name_0217",
+    "en": "Ice Shard",
+    "ja": "こおりのつぶて"
+  },
+  "ICY_WIND": {
+    "resourceId": "move_name_0111",
+    "en": "Icy Wind",
+    "ja": "こごえるかぜ"
+  },
+  "FROST_BREATH": {
+    "resourceId": "move_name_0218",
+    "en": "Frost Breath",
+    "ja": "こおりのいぶき"
+  },
+  "ABSORB": {
+    "resourceId": "move_name_0113",
+    "en": "Absorb",
+    "ja": "すいとる"
+  },
+  "GIGA_DRAIN": {
+    "resourceId": "move_name_0114",
+    "en": "Giga Drain",
+    "ja": "ギガドレイン"
+  },
+  "FIRE_PUNCH": {
+    "resourceId": "move_name_0115",
+    "en": "Fire Punch",
+    "ja": "ほのおのパンチ"
+  },
+  "SOLAR_BEAM": {
+    "resourceId": "move_name_0116",
+    "en": "Solar Beam",
+    "ja": "ソーラービーム"
+  },
+  "LEAF_BLADE": {
+    "resourceId": "move_name_0117",
+    "en": "Leaf Blade",
+    "ja": "リーフブレード"
+  },
+  "POWER_WHIP": {
+    "resourceId": "move_name_0118",
+    "en": "Power Whip",
+    "ja": "パワーウィップ"
+  },
+  "SPLASH": {
+    "resourceId": "move_name_0231",
+    "en": "Splash",
+    "ja": "はねる"
+  },
+  "ACID": {
+    "resourceId": "move_name_0225",
+    "en": "Acid",
+    "ja": "ようかいえき"
+  },
+  "AIR_CUTTER": {
+    "resourceId": "move_name_0121",
+    "en": "Air Cutter",
+    "ja": "エアカッター"
+  },
+  "HURRICANE": {
+    "resourceId": "move_name_0122",
+    "en": "Hurricane",
+    "ja": "ぼうふう"
+  },
+  "BRICK_BREAK": {
+    "resourceId": "move_name_0123",
+    "en": "Brick Break",
+    "ja": "かわらわり"
+  },
+  "CUT": {
+    "resourceId": "move_name_0223",
+    "en": "Cut",
+    "ja": "いあいぎり"
+  },
+  "SWIFT": {
+    "resourceId": "move_name_0125",
+    "en": "Swift",
+    "ja": "スピードスター"
+  },
+  "HORN_ATTACK": {
+    "resourceId": "move_name_0126",
+    "en": "Horn Attack",
+    "ja": "つのでつく"
+  },
+  "STOMP": {
+    "resourceId": "move_name_0127",
+    "en": "Stomp",
+    "ja": "ふみつけ"
+  },
+  "HEADBUTT": {
+    "resourceId": "move_name_0128",
+    "en": "Headbutt",
+    "ja": "ずつき"
+  },
+  "HYPER_FANG": {
+    "resourceId": "move_name_0129",
+    "en": "Hyper Fang",
+    "ja": "ひっさつまえば"
+  },
+  "SLAM": {
+    "resourceId": "move_name_0130",
+    "en": "Slam",
+    "ja": "たたきつける"
+  },
+  "BODY_SLAM": {
+    "resourceId": "move_name_0131",
+    "en": "Body Slam",
+    "ja": "のしかかり"
+  },
+  "REST": {
+    "resourceId": "move_name_0132",
+    "en": "Rest",
+    "ja": "ねむる"
+  },
+  "STRUGGLE": {
+    "resourceId": "move_name_0133",
+    "en": "Struggle",
+    "ja": "わるあがき"
+  },
+  "MUD_SLAP": {
+    "resourceId": "move_name_0233",
+    "en": "Mud-Slap",
+    "ja": "どろかけ"
+  },
+  "ZEN_HEADBUTT": {
+    "resourceId": "move_name_0234",
+    "en": "Zen Headbutt",
+    "ja": "しねんのずつき"
+  },
+  "CONFUSION": {
+    "resourceId": "move_name_0235",
+    "en": "Confusion",
+    "ja": "ねんりき"
+  },
+  "POISON_STING": {
+    "resourceId": "move_name_0236",
+    "en": "Poison Sting",
+    "ja": "どくばり"
+  },
+  "BUBBLE": {
+    "resourceId": "move_name_0237",
+    "en": "Bubble",
+    "ja": "あわ"
+  },
+  "FEINT_ATTACK": {
+    "resourceId": "move_name_0238",
+    "en": "Feint Attack",
+    "ja": "だましうち"
+  },
+  "FIRE_FANG": {
+    "resourceId": "move_name_0240",
+    "en": "Fire Fang",
+    "ja": "ほのおのキバ"
+  },
+  "ROCK_SMASH": {
+    "resourceId": "move_name_0241",
+    "en": "Rock Smash",
+    "ja": "いわくだき"
+  },
+  "TRANSFORM": {
+    "resourceId": "move_name_0242",
+    "en": "Transform",
+    "ja": "へんしん"
+  },
+  "COUNTER": {
+    "resourceId": "move_name_0243",
+    "en": "Counter",
+    "ja": "カウンター"
+  },
+  "POWDER_SNOW": {
+    "resourceId": "move_name_0244",
+    "en": "Powder Snow",
+    "ja": "こなゆき"
+  },
+  "CLOSE_COMBAT": {
+    "resourceId": "move_name_0245",
+    "en": "Close Combat",
+    "ja": "インファイト"
+  },
+  "DYNAMIC_PUNCH": {
+    "resourceId": "move_name_0246",
+    "en": "Dynamic Punch",
+    "ja": "ばくれつパンチ"
+  },
+  "FOCUS_BLAST": {
+    "resourceId": "move_name_0247",
+    "en": "Focus Blast",
+    "ja": "きあいだま"
+  },
+  "AURORA_BEAM": {
+    "resourceId": "move_name_0248",
+    "en": "Aurora Beam",
+    "ja": "オーロラビーム"
+  },
+  "CHARGE_BEAM": {
+    "resourceId": "move_name_0249",
+    "en": "Charge Beam",
+    "ja": "チャージビーム"
+  },
+  "VOLT_SWITCH": {
+    "resourceId": "move_name_0250",
+    "en": "Volt Switch",
+    "ja": "ボルトチェンジ"
+  },
+  "WILD_CHARGE": {
+    "resourceId": "move_name_0251",
+    "en": "Wild Charge",
+    "ja": "ワイルドボルト"
+  },
+  "ZAP_CANNON": {
+    "resourceId": "move_name_0252",
+    "en": "Zap Cannon",
+    "ja": "でんじほう"
+  },
+  "DRAGON_TAIL": {
+    "resourceId": "move_name_0253",
+    "en": "Dragon Tail",
+    "ja": "ドラゴンテール"
+  },
+  "AVALANCHE": {
+    "resourceId": "move_name_0254",
+    "en": "Avalanche",
+    "ja": "ゆきなだれ"
+  },
+  "BRAVE_BIRD": {
+    "resourceId": "move_name_0256",
+    "en": "Brave Bird",
+    "ja": "ブレイブバード"
+  },
+  "SKY_ATTACK": {
+    "resourceId": "move_name_0257",
+    "en": "Sky Attack",
+    "ja": "ゴッドバード"
+  },
+  "SAND_TOMB": {
+    "resourceId": "move_name_0258",
+    "en": "Sand Tomb",
+    "ja": "すなじごく"
+  },
+  "ROCK_BLAST": {
+    "resourceId": "move_name_0259",
+    "en": "Rock Blast",
+    "ja": "ロックブラスト"
+  },
+  "INFESTATION": {
+    "resourceId": "move_name_0260",
+    "en": "Infestation",
+    "ja": "まとわりつく"
+  },
+  "STRUGGLE_BUG": {
+    "resourceId": "move_name_0261",
+    "en": "Struggle Bug",
+    "ja": "むしのていこう"
+  },
+  "SILVER_WIND": {
+    "resourceId": "move_name_0262",
+    "en": "Silver Wind",
+    "ja": "ぎんいろのかぜ"
+  },
+  "ASTONISH": {
+    "resourceId": "move_name_0263",
+    "en": "Astonish",
+    "ja": "おどろかす"
+  },
+  "HEX": {
+    "resourceId": "move_name_0264",
+    "en": "Hex",
+    "ja": "たたりめ"
+  },
+  "NIGHT_SHADE": {
+    "resourceId": "move_name_0265",
+    "en": "Night Shade",
+    "ja": "ナイトヘッド"
+  },
+  "IRON_TAIL": {
+    "resourceId": "move_name_0266",
+    "en": "Iron Tail",
+    "ja": "アイアンテール"
+  },
+  "GYRO_BALL": {
+    "resourceId": "move_name_0267",
+    "en": "Gyro Ball",
+    "ja": "ジャイロボール"
+  },
+  "HEAVY_SLAM": {
+    "resourceId": "move_name_0268",
+    "en": "Heavy Slam",
+    "ja": "ヘビーボンバー"
+  },
+  "FIRE_SPIN": {
+    "resourceId": "move_name_0269",
+    "en": "Fire Spin",
+    "ja": "ほのおのうず"
+  },
+  "OVERHEAT": {
+    "resourceId": "move_name_0270",
+    "en": "Overheat",
+    "ja": "オーバーヒート"
+  },
+  "BULLET_SEED": {
+    "resourceId": "move_name_0271",
+    "en": "Bullet Seed",
+    "ja": "タネマシンガン"
+  },
+  "GRASS_KNOT": {
+    "resourceId": "move_name_0272",
+    "en": "Grass Knot",
+    "ja": "くさむすび"
+  },
+  "ENERGY_BALL": {
+    "resourceId": "move_name_0273",
+    "en": "Energy Ball",
+    "ja": "エナジーボール"
+  },
+  "EXTRASENSORY": {
+    "resourceId": "move_name_0274",
+    "en": "Extrasensory",
+    "ja": "じんつうりき"
+  },
+  "FUTURE_SIGHT": {
+    "resourceId": "move_name_0275",
+    "en": "Future Sight",
+    "ja": "みらいよち"
+  },
+  "MIRROR_COAT": {
+    "resourceId": "move_name_0276",
+    "en": "Mirror Coat",
+    "ja": "ミラーコート"
+  },
+  "OUTRAGE": {
+    "resourceId": "move_name_0277",
+    "en": "Outrage",
+    "ja": "げきりん"
+  },
+  "SNARL": {
+    "resourceId": "move_name_0278",
+    "en": "Snarl",
+    "ja": "バークアウト"
+  },
+  "CRUNCH": {
+    "resourceId": "move_name_0279",
+    "en": "Crunch",
+    "ja": "かみくだく"
+  },
+  "FOUL_PLAY": {
+    "resourceId": "move_name_0280",
+    "en": "Foul Play",
+    "ja": "イカサマ"
+  },
+  "HIDDEN_POWER": {
+    "resourceId": "move_name_0281",
+    "en": "Hidden Power",
+    "ja": "めざめるパワー"
+  },
+  "WATERFALL": {
+    "resourceId": "move_name_0283",
+    "en": "Waterfall",
+    "ja": "たきのぼり"
+  },
+  "SURF": {
+    "resourceId": "move_name_0284",
+    "en": "Surf",
+    "ja": "なみのり"
+  },
+  "DRACO_METEOR": {
+    "resourceId": "move_name_0285",
+    "en": "Draco Meteor",
+    "ja": "りゅうせいぐん"
+  },
+  "DOOM_DESIRE": {
+    "resourceId": "move_name_0286",
+    "en": "Doom Desire",
+    "ja": "はめつのねがい"
+  },
+  "YAWN": {
+    "resourceId": "move_name_0287",
+    "en": "Yawn",
+    "ja": "あくび"
+  },
+  "PSYCHO_BOOST": {
+    "resourceId": "move_name_0288",
+    "en": "Psycho Boost",
+    "ja": "サイコブースト"
+  },
+  "ORIGIN_PULSE": {
+    "resourceId": "move_name_0289",
+    "en": "Origin Pulse",
+    "ja": "こんげんのはどう"
+  },
+  "PRECIPICE_BLADES": {
+    "resourceId": "move_name_0290",
+    "en": "Precipice Blades",
+    "ja": "だんがいのつるぎ"
+  },
+  "PRESENT": {
+    "resourceId": "move_name_0291",
+    "en": "Present",
+    "ja": "プレゼント"
+  },
+  "WEATHER_BALL": {
+    "resourceId": "move_name_0352",
+    "en": "Weather Ball",
+    "ja": "ウェザーボール"
+  },
+  "FRENZY_PLANT": {
+    "resourceId": "move_name_0296",
+    "en": "Frenzy Plant",
+    "ja": "ハードプラント"
+  },
+  "SMACK_DOWN": {
+    "resourceId": "move_name_0297",
+    "en": "Smack Down",
+    "ja": "うちおとす"
+  },
+  "BLAST_BURN": {
+    "resourceId": "move_name_0298",
+    "en": "Blast Burn",
+    "ja": "ブラストバーン"
+  },
+  "HYDRO_CANNON": {
+    "resourceId": "move_name_0299",
+    "en": "Hydro Cannon",
+    "ja": "ハイドロカノン"
+  },
+  "LAST_RESORT": {
+    "resourceId": "move_name_0300",
+    "en": "Last Resort",
+    "ja": "とっておき"
+  },
+  "METEOR_MASH": {
+    "resourceId": "move_name_0301",
+    "en": "Meteor Mash",
+    "ja": "コメットパンチ"
+  },
+  "SKULL_BASH": {
+    "resourceId": "move_name_0302",
+    "en": "Skull Bash",
+    "ja": "ロケットずつき"
+  },
+  "ACID_SPRAY": {
+    "resourceId": "move_name_0303",
+    "en": "Acid Spray",
+    "ja": "アシッドボム"
+  },
+  "EARTH_POWER": {
+    "resourceId": "move_name_0304",
+    "en": "Earth Power",
+    "ja": "だいちのちから"
+  },
+  "CRABHAMMER": {
+    "resourceId": "move_name_0305",
+    "en": "Crabhammer",
+    "ja": "クラブハンマー"
+  },
+  "LUNGE": {
+    "resourceId": "move_name_0306",
+    "en": "Lunge",
+    "ja": "とびかかる"
+  },
+  "CRUSH_CLAW": {
+    "resourceId": "move_name_0307",
+    "en": "Crush Claw",
+    "ja": "ブレイククロー"
+  },
+  "OCTAZOOKA": {
+    "resourceId": "move_name_0308",
+    "en": "Octazooka",
+    "ja": "オクタンほう"
+  },
+  "MIRROR_SHOT": {
+    "resourceId": "move_name_0309",
+    "en": "Mirror Shot",
+    "ja": "ミラーショット"
+  },
+  "SUPERPOWER": {
+    "resourceId": "move_name_0310",
+    "en": "Superpower",
+    "ja": "ばかぢから"
+  },
+  "FELL_STINGER": {
+    "resourceId": "move_name_0311",
+    "en": "Fell Stinger",
+    "ja": "とどめばり"
+  },
+  "LEAF_TORNADO": {
+    "resourceId": "move_name_0312",
+    "en": "Leaf Tornado",
+    "ja": "グラスミキサー"
+  },
+  "LEECH_LIFE": {
+    "resourceId": "move_name_0313",
+    "en": "Leech Life",
+    "ja": "きゅうけつ"
+  },
+  "DRAIN_PUNCH": {
+    "resourceId": "move_name_0314",
+    "en": "Drain Punch",
+    "ja": "ドレインパンチ"
+  },
+  "SHADOW_BONE": {
+    "resourceId": "move_name_0315",
+    "en": "Shadow Bone",
+    "ja": "シャドーボーン"
+  },
+  "MUDDY_WATER": {
+    "resourceId": "move_name_0316",
+    "en": "Muddy Water",
+    "ja": "だくりゅう"
+  },
+  "BLAZE_KICK": {
+    "resourceId": "move_name_0317",
+    "en": "Blaze Kick",
+    "ja": "ブレイズキック"
+  },
+  "RAZOR_SHELL": {
+    "resourceId": "move_name_0318",
+    "en": "Razor Shell",
+    "ja": "シェルブレード"
+  },
+  "POWER_UP_PUNCH": {
+    "resourceId": "move_name_0319",
+    "en": "Power-Up Punch",
+    "ja": "グロウパンチ"
+  },
+  "CHARM": {
+    "resourceId": "move_name_0320",
+    "en": "Charm",
+    "ja": "あまえる"
+  },
+  "GIGA_IMPACT": {
+    "resourceId": "move_name_0321",
+    "en": "Giga Impact",
+    "ja": "ギガインパクト"
+  },
+  "FRUSTRATION": {
+    "resourceId": "move_name_0322",
+    "en": "Frustration",
+    "ja": "やつあたり"
+  },
+  "RETURN": {
+    "resourceId": "move_name_0323",
+    "en": "Return",
+    "ja": "おんがえし"
+  },
+  "SYNCHRONOISE": {
+    "resourceId": "move_name_0324",
+    "en": "Synchronoise",
+    "ja": "シンクロノイズ"
+  },
+  "LOCK_ON": {
+    "resourceId": "move_name_0325",
+    "en": "Lock-On",
+    "ja": "ロックオン"
+  },
+  "THUNDER_FANG": {
+    "resourceId": "move_name_0326",
+    "en": "Thunder Fang",
+    "ja": "かみなりのキバ"
+  },
+  "ICE_FANG": {
+    "resourceId": "move_name_0327",
+    "en": "Ice Fang",
+    "ja": "こおりのキバ"
+  },
+  "HORN_DRILL": {
+    "resourceId": "move_name_0328",
+    "en": "Horn Drill",
+    "ja": "つのドリル"
+  },
+  "FISSURE": {
+    "resourceId": "move_name_0329",
+    "en": "Fissure",
+    "ja": "じわれ"
+  },
+  "SACRED_SWORD": {
+    "resourceId": "move_name_0330",
+    "en": "Sacred Sword",
+    "ja": "せいなるつるぎ"
+  },
+  "FLYING_PRESS": {
+    "resourceId": "move_name_0331",
+    "en": "Flying Press",
+    "ja": "フライングプレス"
+  },
+  "AURA_SPHERE": {
+    "resourceId": "move_name_0332",
+    "en": "Aura Sphere",
+    "ja": "はどうだん"
+  },
+  "PAYBACK": {
+    "resourceId": "move_name_0333",
+    "en": "Payback",
+    "ja": "しっぺがえし"
+  },
+  "ROCK_WRECKER": {
+    "resourceId": "move_name_0334",
+    "en": "Rock Wrecker",
+    "ja": "がんせきほう"
+  },
+  "AEROBLAST": {
+    "resourceId": "move_name_0361",
+    "en": "Aeroblast++",
+    "ja": "エアロブラスト++"
+  },
+  "TECHNO_BLAST": {
+    "resourceId": "move_name_0340",
+    "en": "Techno Blast",
+    "ja": "テクノバスター"
+  },
+  "FLY": {
+    "resourceId": "move_name_0341",
+    "en": "Fly",
+    "ja": "そらをとぶ"
+  },
+  "V_CREATE": {
+    "resourceId": "move_name_0342",
+    "en": "V-create",
+    "ja": "Ｖジェネレート"
+  },
+  "LEAF_STORM": {
+    "resourceId": "move_name_0343",
+    "en": "Leaf Storm",
+    "ja": "リーフストーム"
+  },
+  "TRI_ATTACK": {
+    "resourceId": "move_name_0344",
+    "en": "Tri Attack",
+    "ja": "トライアタック"
+  },
+  "GUST": {
+    "resourceId": "move_name_0345",
+    "en": "Gust",
+    "ja": "かぜおこし"
+  },
+  "INCINERATE": {
+    "resourceId": "move_name_0346",
+    "en": "Incinerate",
+    "ja": "やきつくす"
+  },
+  "FEATHER_DANCE": {
+    "resourceId": "move_name_0348",
+    "en": "Feather Dance",
+    "ja": "フェザーダンス"
+  },
+  "FAIRY_WIND": {
+    "resourceId": "move_name_0350",
+    "en": "Fairy Wind",
+    "ja": "ようせいのかぜ"
+  },
+  "PSYCHIC_FANGS": {
+    "resourceId": "move_name_0353",
+    "en": "Psychic Fangs",
+    "ja": "サイコファング"
+  },
+  "HYPERSPACE_FURY": {
+    "resourceId": "move_name_0354",
+    "en": "Hyperspace Fury",
+    "ja": "いじげんラッシュ"
+  },
+  "HYPERSPACE_HOLE": {
+    "resourceId": "move_name_0355",
+    "en": "Hyperspace Hole",
+    "ja": "いじげんホール"
+  },
+  "DOUBLE_KICK": {
+    "resourceId": "move_name_0356",
+    "en": "Double Kick",
+    "ja": "にどげり"
+  },
+  "MAGICAL_LEAF": {
+    "resourceId": "move_name_0357",
+    "en": "Magical Leaf",
+    "ja": "マジカルリーフ"
+  },
+  "SACRED_FIRE": {
+    "resourceId": "move_name_0363",
+    "en": "Sacred Fire++",
+    "ja": "せいなるほのお++"
+  },
+  "ICICLE_SPEAR": {
+    "resourceId": "move_name_0359",
+    "en": "Icicle Spear",
+    "ja": "つららばり"
+  },
+  "ACROBATICS": {
+    "resourceId": "move_name_0364",
+    "en": "Acrobatics",
+    "ja": "アクロバット"
+  },
+  "LUSTER_PURGE": {
+    "resourceId": "move_name_0365",
+    "en": "Luster Purge",
+    "ja": "ラスターパージ"
+  },
+  "MIST_BALL": {
+    "resourceId": "move_name_0366",
+    "en": "Mist Ball",
+    "ja": "ミストボール"
+  },
+  "BRUTAL_SWING": {
+    "resourceId": "move_name_0367",
+    "en": "Brutal Swing",
+    "ja": "ぶんまわす"
+  },
+  "ROLLOUT": {
+    "resourceId": "move_name_0368",
+    "en": "Rollout",
+    "ja": "ころがる"
+  },
+  "SEED_FLARE": {
+    "resourceId": "move_name_0369",
+    "en": "Seed Flare",
+    "ja": "シードフレア"
+  },
+  "OBSTRUCT": {
+    "resourceId": "move_name_0370",
+    "en": "Obstruct",
+    "ja": "ブロッキング"
+  },
+  "SHADOW_FORCE": {
+    "resourceId": "move_name_0371",
+    "en": "Shadow Force",
+    "ja": "シャドーダイブ"
+  },
+  "METEOR_BEAM": {
+    "resourceId": "move_name_0372",
+    "en": "Meteor Beam",
+    "ja": "メテオビーム"
+  },
+  "WATER_SHURIKEN": {
+    "resourceId": "move_name_0373",
+    "en": "Water Shuriken",
+    "ja": "みずしゅりけん"
+  },
+  "FUSION_BOLT": {
+    "resourceId": "move_name_0374",
+    "en": "Fusion Bolt",
+    "ja": "クロスサンダー"
+  },
+  "FUSION_FLARE": {
+    "resourceId": "move_name_0375",
+    "en": "Fusion Flare",
+    "ja": "クロスフレイム"
+  },
+  "POLTERGEIST": {
+    "resourceId": "move_name_0376",
+    "en": "Poltergeist",
+    "ja": "ポルターガイスト"
+  },
+  "HIGH_HORSEPOWER": {
+    "resourceId": "move_name_0377",
+    "en": "High Horsepower",
+    "ja": "１０まんばりき"
+  },
+  "GLACIATE": {
+    "resourceId": "move_name_0378",
+    "en": "Glaciate",
+    "ja": "こごえるせかい"
+  },
+  "BREAKING_SWIPE": {
+    "resourceId": "move_name_0379",
+    "en": "Breaking Swipe",
+    "ja": "ワイドブレイカー"
+  },
+  "BOOMBURST": {
+    "resourceId": "move_name_0380",
+    "en": "Boomburst",
+    "ja": "ばくおんぱ"
+  },
+  "DOUBLE_IRON_BASH": {
+    "resourceId": "move_name_0381",
+    "en": "Double Iron Bash",
+    "ja": "ダブルパンツァー"
+  },
+  "MYSTICAL_FIRE": {
+    "resourceId": "move_name_0382",
+    "en": "Mystical Fire",
+    "ja": "マジカルフレイム"
+  },
+  "LIQUIDATION": {
+    "resourceId": "move_name_0383",
+    "en": "Liquidation",
+    "ja": "アクアブレイク"
+  },
+  "DRAGON_ASCENT": {
+    "resourceId": "move_name_0384",
+    "en": "Dragon Ascent",
+    "ja": "ガリョウテンセイ"
+  },
+  "LEAFAGE": {
+    "resourceId": "move_name_0385",
+    "en": "Leafage",
+    "ja": "このは"
+  },
+  "MAGMA_STORM": {
+    "resourceId": "move_name_0386",
+    "en": "Magma Storm",
+    "ja": "マグマストーム"
+  },
+  "GEOMANCY": {
+    "resourceId": "move_name_0387",
+    "en": "Geomancy",
+    "ja": "ジオコントロール"
+  },
+  "SPACIAL_REND": {
+    "resourceId": "move_name_0388",
+    "en": "Spacial Rend",
+    "ja": "あくうせつだん"
+  },
+  "OBLIVION_WING": {
+    "resourceId": "move_name_0389",
+    "en": "Oblivion Wing",
+    "ja": "デスウイング"
+  },
+  "NATURE_S_MADNESS": {
+    "resourceId": "move_name_0390",
+    "en": "Nature’s Madness",
+    "ja": "しぜんのいかり"
+  },
+  "TRIPLE_AXEL": {
+    "resourceId": "move_name_0391",
+    "en": "Triple Axel",
+    "ja": "トリプルアクセル"
+  },
+  "TRAILBLAZE": {
+    "resourceId": "move_name_0392",
+    "en": "Trailblaze",
+    "ja": "くさわけ"
+  },
+  "SCORCHING_SANDS": {
+    "resourceId": "move_name_0393",
+    "en": "Scorching Sands",
+    "ja": "ねっさのだいち"
+  },
+  "ROAR_OF_TIME": {
+    "resourceId": "move_name_0394",
+    "en": "Roar of Time",
+    "ja": "ときのほうこう"
+  },
+  "BLEAKWIND_STORM": {
+    "resourceId": "move_name_0395",
+    "en": "Bleakwind Storm",
+    "ja": "こがらしあらし"
+  },
+  "SANDSEAR_STORM": {
+    "resourceId": "move_name_0396",
+    "en": "Sandsear Storm",
+    "ja": "ねっさのあらし"
+  },
+  "WILDBOLT_STORM": {
+    "resourceId": "move_name_0397",
+    "en": "Wildbolt Storm",
+    "ja": "かみなりあらし"
+  },
+  "SPIRIT_SHACKLE": {
+    "resourceId": "move_name_0398",
+    "en": "Spirit Shackle",
+    "ja": "かげぬい"
+  },
+  "VOLT_TACKLE": {
+    "resourceId": "move_name_0399",
+    "en": "Volt Tackle",
+    "ja": "ボルテッカー"
+  },
+  "DARKEST_LARIAT": {
+    "resourceId": "move_name_0400",
+    "en": "Darkest Lariat",
+    "ja": "ＤＤラリアット"
+  },
+  "PSYWAVE": {
+    "resourceId": "move_name_0401",
+    "en": "Psywave",
+    "ja": "サイコウェーブ"
+  },
+  "METAL_SOUND": {
+    "resourceId": "move_name_0402",
+    "en": "Metal Sound",
+    "ja": "きんぞくおん"
+  },
+  "SAND_ATTACK": {
+    "resourceId": "move_name_0403",
+    "en": "Sand Attack",
+    "ja": "すなかけ"
+  },
+  "SUNSTEEL_STRIKE": {
+    "resourceId": "move_name_0404",
+    "en": "Sunsteel Strike",
+    "ja": "メテオドライブ"
+  },
+  "MOONGEIST_BEAM": {
+    "resourceId": "move_name_0405",
+    "en": "Moongeist Beam",
+    "ja": "シャドーレイ"
+  },
+  "AURA_WHEEL": {
+    "resourceId": "move_name_0407",
+    "en": "Aura Wheel",
+    "ja": "オーラぐるま"
+  },
+  "HIGH_JUMP_KICK": {
+    "resourceId": "move_name_0408",
+    "en": "High Jump Kick",
+    "ja": "とびひざげり"
+  },
+  "MAX_FLARE": {
+    "resourceId": "move_name_0409",
+    "en": "Max Flare",
+    "ja": "ダイバーン"
+  },
+  "MAX_FLUTTERBY": {
+    "resourceId": "move_name_0410",
+    "en": "Max Flutterby",
+    "ja": "ダイワーム"
+  },
+  "MAX_LIGHTNING": {
+    "resourceId": "move_name_0411",
+    "en": "Max Lightning",
+    "ja": "ダイサンダー"
+  },
+  "MAX_STRIKE": {
+    "resourceId": "move_name_0412",
+    "en": "Max Strike",
+    "ja": "ダイアタック"
+  },
+  "MAX_KNUCKLE": {
+    "resourceId": "move_name_0413",
+    "en": "Max Knuckle",
+    "ja": "ダイナックル"
+  },
+  "MAX_PHANTASM": {
+    "resourceId": "move_name_0414",
+    "en": "Max Phantasm",
+    "ja": "ダイホロウ"
+  },
+  "MAX_HAILSTORM": {
+    "resourceId": "move_name_0415",
+    "en": "Max Hailstorm",
+    "ja": "ダイアイス"
+  },
+  "MAX_OOZE": {
+    "resourceId": "move_name_0416",
+    "en": "Max Ooze",
+    "ja": "ダイアシッド"
+  },
+  "MAX_GEYSER": {
+    "resourceId": "move_name_0417",
+    "en": "Max Geyser",
+    "ja": "ダイストリーム"
+  },
+  "MAX_AIRSTREAM": {
+    "resourceId": "move_name_0418",
+    "en": "Max Airstream",
+    "ja": "ダイジェット"
+  },
+  "MAX_STARFALL": {
+    "resourceId": "move_name_0419",
+    "en": "Max Starfall",
+    "ja": "ダイフェアリー"
+  },
+  "MAX_WYRMWIND": {
+    "resourceId": "move_name_0420",
+    "en": "Max Wyrmwind",
+    "ja": "ダイドラグーン"
+  },
+  "MAX_MINDSTORM": {
+    "resourceId": "move_name_0421",
+    "en": "Max Mindstorm",
+    "ja": "ダイサイコ"
+  },
+  "MAX_ROCKFALL": {
+    "resourceId": "move_name_0422",
+    "en": "Max Rockfall",
+    "ja": "ダイロック"
+  },
+  "MAX_QUAKE": {
+    "resourceId": "move_name_0423",
+    "en": "Max Quake",
+    "ja": "ダイアース"
+  },
+  "MAX_DARKNESS": {
+    "resourceId": "move_name_0424",
+    "en": "Max Darkness",
+    "ja": "ダイアーク"
+  },
+  "MAX_OVERGROWTH": {
+    "resourceId": "move_name_0425",
+    "en": "Max Overgrowth",
+    "ja": "ダイソウゲン"
+  },
+  "MAX_STEELSPIKE": {
+    "resourceId": "move_name_0426",
+    "en": "Max Steelspike",
+    "ja": "ダイスチル"
+  },
+  "G_MAX_WILDFIRE": {
+    "resourceId": "move_name_0427",
+    "en": "G-Max Wildfire",
+    "ja": "キョダイゴクエン"
+  },
+  "G_MAX_BEFUDDLE": {
+    "resourceId": "move_name_0428",
+    "en": "G-Max Befuddle",
+    "ja": "キョダイコワク"
+  },
+  "G_MAX_VOLT_CRASH": {
+    "resourceId": "move_name_0429",
+    "en": "G-Max Volt Crash",
+    "ja": "キョダイバンライ"
+  },
+  "G_MAX_GOLD_RUSH": {
+    "resourceId": "move_name_0430",
+    "en": "G-Max Gold Rush",
+    "ja": "キョダイコバン"
+  },
+  "G_MAX_CHI_STRIKE": {
+    "resourceId": "move_name_0431",
+    "en": "G-Max Chi Strike",
+    "ja": "キョダイシンゲキ"
+  },
+  "G_MAX_TERROR": {
+    "resourceId": "move_name_0432",
+    "en": "G-Max Terror",
+    "ja": "キョダイゲンエイ"
+  },
+  "G_MAX_FOAM_BURST": {
+    "resourceId": "move_name_0433",
+    "en": "G-Max Foam Burst",
+    "ja": "キョダイホウマツ"
+  },
+  "G_MAX_RESONANCE": {
+    "resourceId": "move_name_0434",
+    "en": "G-Max Resonance",
+    "ja": "キョダイセンリツ"
+  },
+  "G_MAX_CUDDLE": {
+    "resourceId": "move_name_0435",
+    "en": "G-Max Cuddle",
+    "ja": "キョダイホーヨー"
+  },
+  "G_MAX_REPLENISH": {
+    "resourceId": "move_name_0436",
+    "en": "G-Max Replenish",
+    "ja": "キョダイサイセイ"
+  },
+  "G_MAX_MALODOR": {
+    "resourceId": "move_name_0437",
+    "en": "G-Max Malodor",
+    "ja": "キョダイシュウキ"
+  },
+  "G_MAX_MELTDOWN": {
+    "resourceId": "move_name_0438",
+    "en": "G-Max Meltdown",
+    "ja": "キョダイユウゲキ"
+  },
+  "G_MAX_WIND_RAGE": {
+    "resourceId": "move_name_0439",
+    "en": "G-Max Wind Rage",
+    "ja": "キョダイフウゲキ"
+  },
+  "G_MAX_GRAVITAS": {
+    "resourceId": "move_name_0440",
+    "en": "G-Max Gravitas",
+    "ja": "キョダイテンドウ"
+  },
+  "G_MAX_STONESURGE": {
+    "resourceId": "move_name_0441",
+    "en": "G-Max Stonesurge",
+    "ja": "キョダイガンジン"
+  },
+  "G_MAX_VOLCALITH": {
+    "resourceId": "move_name_0442",
+    "en": "G-Max Volcalith",
+    "ja": "キョダイフンセキ"
+  },
+  "G_MAX_TARTNESS": {
+    "resourceId": "move_name_0443",
+    "en": "G-Max Tartness",
+    "ja": "キョダイサンゲキ"
+  },
+  "G_MAX_SWEETNESS": {
+    "resourceId": "move_name_0444",
+    "en": "G-Max Sweetness",
+    "ja": "キョダイカンロ"
+  },
+  "G_MAX_SANDBLAST": {
+    "resourceId": "move_name_0445",
+    "en": "G-Max Sandblast",
+    "ja": "キョダイサジン"
+  },
+  "G_MAX_STUN_SHOCK": {
+    "resourceId": "move_name_0446",
+    "en": "G-Max Stun Shock",
+    "ja": "キョダイカンデン"
+  },
+  "G_MAX_CENTIFERNO": {
+    "resourceId": "move_name_0447",
+    "en": "G-Max Centiferno",
+    "ja": "キョダイヒャッカ"
+  },
+  "G_MAX_SMITE": {
+    "resourceId": "move_name_0448",
+    "en": "G-Max Smite",
+    "ja": "キョダイテンバツ"
+  },
+  "G_MAX_SNOOZE": {
+    "resourceId": "move_name_0449",
+    "en": "G-Max Snooze",
+    "ja": "キョダイスイマ"
+  },
+  "G_MAX_FINALE": {
+    "resourceId": "move_name_0450",
+    "en": "G-Max Finale",
+    "ja": "キョダイダンエン"
+  },
+  "G_MAX_STEELSURGE": {
+    "resourceId": "move_name_0451",
+    "en": "G-Max Steelsurge",
+    "ja": "キョダイコウジン"
+  },
+  "G_MAX_DEPLETION": {
+    "resourceId": "move_name_0452",
+    "en": "G-Max Depletion",
+    "ja": "キョダイゲンスイ"
+  },
+  "G_MAX_VINE_LASH": {
+    "resourceId": "move_name_0453",
+    "en": "G-Max Vine Lash",
+    "ja": "キョダイベンタツ"
+  },
+  "G_MAX_CANNONADE": {
+    "resourceId": "move_name_0454",
+    "en": "G-Max Cannonade",
+    "ja": "キョダイホウゲキ"
+  },
+  "G_MAX_DRUM_SOLO": {
+    "resourceId": "move_name_0455",
+    "en": "G-Max Drum Solo",
+    "ja": "キョダイコランダ"
+  },
+  "G_MAX_FIREBALL": {
+    "resourceId": "move_name_0456",
+    "en": "G-Max Fireball",
+    "ja": "キョダイカキュウ"
+  },
+  "G_MAX_HYDROSNIPE": {
+    "resourceId": "move_name_0457",
+    "en": "G-Max Hydrosnipe",
+    "ja": "キョダイソゲキ"
+  },
+  "G_MAX_ONE_BLOW": {
+    "resourceId": "move_name_0458",
+    "en": "G-Max One Blow",
+    "ja": "キョダイイチゲキ"
+  },
+  "G_MAX_RAPID_FLOW": {
+    "resourceId": "move_name_0459",
+    "en": "G-Max Rapid Flow",
+    "ja": "キョダイレンゲキ"
+  },
+  "FORCE_PALM": {
+    "resourceId": "move_name_0462",
+    "en": "Force Palm",
+    "ja": "はっけい"
+  },
+  "SPARKLING_ARIA": {
+    "resourceId": "move_name_0463",
+    "en": "Sparkling Aria",
+    "ja": "うたかたのアリア"
+  },
+  "RAGE_FIST": {
+    "resourceId": "move_name_0464",
+    "en": "Rage Fist",
+    "ja": "ふんどのこぶし"
+  },
+  "FLOWER_TRICK": {
+    "resourceId": "move_name_0465",
+    "en": "Flower Trick",
+    "ja": "トリックフラワー"
+  },
+  "FREEZE_SHOCK": {
+    "resourceId": "move_name_0466",
+    "en": "Freeze Shock",
+    "ja": "フリーズボルト"
+  },
+  "ICE_BURN": {
+    "resourceId": "move_name_0467",
+    "en": "Ice Burn",
+    "ja": "コールドフレア"
+  },
+  "TORCH_SONG": {
+    "resourceId": "move_name_0468",
+    "en": "Torch Song",
+    "ja": "フレアソング"
+  },
+  "BEHEMOTH_BLADE": {
+    "resourceId": "move_name_0479",
+    "en": "Behemoth Blade",
+    "ja": "きょじゅうざん"
+  },
+  "BEHEMOTH_BASH": {
+    "resourceId": "move_name_0480",
+    "en": "Behemoth Bash",
+    "ja": "きょじゅうだん"
+  },
+  "UPPER_HAND": {
+    "resourceId": "move_name_0471",
+    "en": "Upper Hand",
+    "ja": "はやてがえし"
+  },
+  "THUNDER_CAGE": {
+    "resourceId": "move_name_0472",
+    "en": "Thunder Cage",
+    "ja": "サンダープリズン"
+  },
+  "GUARD": {
+    "resourceId": "move_name_0477",
+    "en": "Guard",
+    "ja": "ウォール"
+  },
+  "SPIRIT": {
+    "resourceId": "move_name_0478",
+    "en": "Spirit",
+    "ja": "リカバリー"
+  },
+  "DYNAMAX_CANNON": {
+    "resourceId": "move_name_0483",
+    "en": "Dynamax Cannon",
+    "ja": "ダイマックスほう"
+  },
+  "CLANGING_SCALES": {
+    "resourceId": "move_name_0484",
+    "en": "Clanging Scales",
+    "ja": "スケイルノイズ"
+  },
+  "CRUSH_GRIP": {
+    "resourceId": "move_name_0485",
+    "en": "Crush Grip",
+    "ja": "にぎりつぶす"
+  },
+  "DRAGON_ENERGY": {
+    "resourceId": "move_name_0486",
+    "en": "Dragon Energy",
+    "ja": "ドラゴンエナジー"
+  },
+  "AQUA_STEP": {
+    "resourceId": "move_name_0487",
+    "en": "Aqua Step",
+    "ja": "アクアステップ"
+  }
+}

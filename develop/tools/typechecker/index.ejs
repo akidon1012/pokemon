@@ -42,7 +42,7 @@
                   <div class="pokemon-search-wrapper">
                     <div class="pokemon-search js_pokemon-search">
                       <div class="pokemon-search-input-wrapper">
-                        <input type="text" name="pokemon-search-input" class="pokemon-search-input js_pokemon-search-input">
+                        <input type="text" name="pokemon-search-input" class="pokemon-search-input js_pokemon-search-input" placeholder="ポケモンを選択">
                         <a href="javascript:void(0);" class="pokemon-search-input-clear js_reset js_search-clear" style="display: none;"></a>
                       </div>
                       <div class="pokemon-search-list-wrapper">
@@ -133,9 +133,22 @@
                           </div>
                           <a href="" class="js_toggle-trigger"></a>
                         </div>
-                        <div class="pokemon-recommend-list-item-atack js_toggle-content">
-                          <div class="pokemon-recommend-list-item-atack-normal"><span class="icon icon-type-water"></span>みずでっぽう</div>
-                          <div class="pokemon-recommend-list-item-atack-special"><span class="icon icon-type-water"></span>ハイドロポンプ</div>
+                        <div class="pokemon-recommend-list-item-atack-wrapper js_toggle-content">
+                          <dl class="pokemon-recommend-list-item-atack">
+                            <dt class="pokemon-recommend-list-item-atack-label">ノーマル</dt>
+                            <dd class="pokemon-recommend-list-item-atack-name">
+                              <span class="icon icon-type-water"></span>みずでっぽう
+                            </dd>
+                          </dl>
+                          <dl class="pokemon-recommend-list-item-atack">
+                            <dt class="pokemon-recommend-list-item-atack-label">スペシャル</dt>
+                            <dd class="pokemon-recommend-list-item-atack-name">
+                              <span class="icon icon-type-water"></span>ハイドロポンプ
+                            </dd>
+                            <dd class="pokemon-recommend-list-item-atack-name">
+                              <span class="icon icon-type-ice"></span>ふぶき
+                            </dd>
+                          </dl>
                         </div>
                       </li>
                     </ul>
@@ -148,31 +161,31 @@
             <h2 class="section-header">わざのタイプとこうか</h2>
             <table class="result-table">
               <tr>
-                <th>こうかばつぐん<em>×2</em></th>
+                <th>ばつぐん<em>×2</em></th>
                 <td>
                   <ul class="js_effect js_effect5"></ul>
                 </td>
               </tr>
               <tr>
-                <th>こうかばつぐん</th>
+                <th>ばつぐん</th>
                 <td>
                   <ul class="js_effect js_effect4"></ul>
                 </td>
               </tr>
               <tr>
-                <th>こうかふつう</th>
+                <th>ふつう</th>
                 <td>
                   <ul class="js_effect js_effect3"></ul>
                 </td>
               </tr>
               <tr>
-                <th>こうかいまひとつ</th>
+                <th>いまひとつ</th>
                 <td>
                   <ul class="js_effect js_effect2"></ul>
                 </td>
               </tr>
               <tr>
-                <th>こうかいまひとつ<em>×2</em></th>
+                <th>いまひとつ<em>×2</em></th>
                 <td>
                   <ul class="js_effect js_effect1"></ul>
                 </td>

@@ -240,80 +240,131 @@ const pokemonUtil = {
     return result; // Set<EN type>
   },
 
-  /**
-   * 対策ポケモン抽出（防御側タイプからこうかばつぐんを取れるもの）
-   */
-  recommendCounters: function(options) {
-    const {
-      defenderTypesJa = [],
-      pokemonDataset = [],
-      defenseChart = [],
-      limit = 5
-    } = options || {};
+  // ==== こうか倍率計算（技タイプ vs 防御タイプ配列） =========================
+  effectMultiplierForTypes : function(atkTypeEn, defenderTypesJa, typeDefenseTable) {
+    if (!atkTypeEn) return 1.0;
+    if (!Array.isArray(defenderTypesJa) || defenderTypesJa.length === 0) return 1.0;
 
-    const atkTypesEN = pokemonUtil.pickCounterAttackTypes(defenderTypesJa, defenseChart);
-    if (!atkTypesEN.size) return [];
+    const TABLE = Array.isArray(typeDefenseTable) ? typeDefenseTable : [];
+    let mult = 1.0;
 
-    const list = (pokemonDataset || [])
-      .filter(function(p){ return !p.isMegaEvolution; })
-      .map(function(p) {
-        const typesJa = pokemonUtil.normalizeTypesJa(p);
-        const typesEN = pokemonUtil.translateTypes.toEnTypes(typesJa);
-        const hits = typesEN.some(function(t){ return atkTypesEN.has(t); });
-        return Object.assign({}, p, {
-          _typesEN: typesEN,
-          _typesJa: typesJa,
-          _total: pokemonUtil.totalBase(p),
-          _hits: hits
-        });
-      })
-      .filter(function(p){ return p._hits; })
-      .sort(function(a,b){ return b._total - a._total; })
-      .slice(0, limit);
+    defenderTypesJa.forEach(function(defJa) {
+      const row = TABLE.find(function(r){ return r.typeJa === defJa; });
+      if (!row || !Array.isArray(row.effect)) return;
 
-    return list;
+      const eff = row.effect.find(function(e){
+        // type は英名（例: 'water'）
+        return e.type === atkTypeEn;
+      });
+
+      const m = pokemonUtil.normalizeMultiplier(e); // 既存の normalizeMultiplier を再利用
+      mult *= m;
+    });
+
+    return mult;
+  },
+
+  // ==== STAB（タイプ一致）補正 ==========================================
+  isStab : function(moveTypeEn, attackerTypesEn) {
+    if (!moveTypeEn) return false;
+    if (!Array.isArray(attackerTypesEn)) return false;
+    return attackerTypesEn.includes(moveTypeEn);
+  },
+
+  // ==== 技1つぶんのスコア計算 ===========================================
+  scoreMove: function(move, defenderTypesJa, attackerTypesEn, typeDefenseTable) {
+    if (!move) return 0;
+    const atkTypeEn = move.type;                    // 'water' など
+    const power = Number(move.power || 0);
+
+    const eff  = pokemonUtil.effectMultiplierForTypes(atkTypeEn, defenderTypesJa, typeDefenseTable);
+    const stab = pokemonUtil.isStab(atkTypeEn, attackerTypesEn) ? 1.2 : 1.0; // STAB係数（ざっくり1.2）
+
+    return power * eff * stab;
+  },
+
+  // ==== 技マスタの初期化（ページ読み込み時に一度だけ呼ぶ） ===============
+  initMoves : function(movesList) {
+    const list = Array.isArray(movesList)
+      ? movesList
+      : (window.__MOVES_MASTER_LOCALIZED__ || window.__MOVES_MASTER__ || []);
+
+    const index = new Map();
+    list.forEach(function(m){
+      if (!m || !m.id) return;
+      index.set(String(m.id), m);
+    });
+
+    pokemonUtil._moveIndex = index;
+  },
+
+  // ID から技情報を取る
+  getMoveById : function(id) {
+    if (!pokemonUtil._moveIndex) return null;
+    return pokemonUtil._moveIndex.get(String(id)) || null;
   },
 
   /**
-   * 対策ポケモン描画（カードUIに合わせてヘッダーだけ作る）
-   * - .js_pokemon-recommend-list 内に li を生成
-   * - 技部分は .pokemon-recommend-list-item-atack に後から追加想定
-   */
-  renderRecommendations: function($listArea, recs) {
-    const $area = ($listArea instanceof jQuery) ? $listArea : $($listArea);
-    if (!$area.length) return;
+ * 対象ポケモン1体分のおすすめ技を抽出
+ * @param {Object} opts
+ *  - defenderTypesJa : 防御側タイプ（日本語配列）
+ *  - attackerTypesJa : 攻撃側ポケモンのタイプ（日本語配列）
+ *  - goMoves         : { quick: [...], cinematic: [...] } 形式の技ID群
+ *  - typeDefense     : type_defense.json の配列
+ *  - topN            : 上位何件まで出すか（デフォ3）
+ */
+  pickBestMovesForPokemon : function(opts) {
+    const defenderTypesJa = opts?.defenderTypesJa || [];
+    const attackerTypesJa = opts?.attackerTypesJa || [];
+    const goMoves         = opts?.goMoves || {};
+    const typeDefense     = opts?.typeDefense || (window.__TYPE_DEFENSE_TABLE__ || []);
+    const topN            = Number(opts?.topN || 3);
 
-    $area.empty();
-
-    if (!Array.isArray(recs) || recs.length === 0) {
-      $area.append('<li class="pokemon-recommend-list-item">該当なし</li>');
-      return;
+    if (!pokemonUtil._moveIndex) {
+      pokemonUtil.initMoves(); // 念のため遅延初期化
     }
 
-    recs.forEach(function(p){
-      const id       = p.id || p.no || p.pokedex || null;
-      const typesJa  = pokemonUtil.normalizeTypesJa(p);
-      const display  = pokemonUtil.getDisplayName(p);
-      const imageUrl = pokemonUtil.getImageUrlByNo(id);
+    // 攻撃側タイプ（英名）に変換
+    const attackerTypesEn = attackerTypesJa
+      .map(function(tJa){ return pokemonUtil.translate.JtoE(tJa); })
+      .filter(Boolean)
+      .map(function(s){ return s.toLowerCase(); });
 
-      const cardHtml = (typeof pokemonCard !== 'undefined' && pokemonCard && typeof pokemonCard.build === 'function')
-        ? pokemonCard.build({
-            name  : display,
-            image : imageUrl,
-            types : typesJa
-          })
-        : '<div class="pokemon-info-wrapper">' + display + '</div>';
+    const quickIds     = Array.isArray(goMoves.quick)     ? goMoves.quick     : [];
+    const cinematicIds = Array.isArray(goMoves.cinematic) ? goMoves.cinematic : [];
 
-      const liHtml =
-        '<li class="pokemon-recommend-list-item js_toggle-wrapper">' +
-          '<div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">' +
-            cardHtml +
-            '<a href="" class="js_toggle-trigger"></a>' +
-          '</div>' +
-          '<div class="pokemon-recommend-list-item-atack js_toggle-content"></div>' +
-        '</li>';
+    // 共通のスコアリング関数
+    const scoreOne = function(moveId) {
+      const move = pokemonUtil.getMoveById(moveId);
+      if (!move) return null;
+      const score = pokemonUtil.scoreMove(move, defenderTypesJa, attackerTypesEn, typeDefense);
+      return {
+        id: move.id,
+        nameJa: move.nameJa || move.nameEn,
+        typeEn: move.type,
+        typeJa: move.typeJa || pokemonUtil.translate.EtoJ(move.type),
+        power: move.power || 0,
+        category: move.category,
+        score: score
+      };
+    };
 
-      $area.append(liHtml);
-    });
-  }
+    const scoredQuick = quickIds
+      .map(scoreOne)
+      .filter(Boolean)
+      .sort(function(a,b){ return b.score - a.score; })
+      .slice(0, topN);
+
+    const scoredCinematic = cinematicIds
+      .map(scoreOne)
+      .filter(Boolean)
+      .sort(function(a,b){ return b.score - a.score; })
+      .slice(0, topN);
+
+    return {
+      normal:  scoredQuick,      // ノーマル技（fast）
+      special: scoredCinematic   // スペシャル技（charge）
+    };
+  },
+
 };

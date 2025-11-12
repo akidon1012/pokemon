@@ -334,6 +334,11 @@
               margin-right: 3px;
               position: relative;
             }
+            .multiplier {
+              font-size: 12px;
+              position: relative;
+              left: -5px;
+            }
           }
         }
       }
@@ -373,6 +378,40 @@
         }
       }
     }
+  }
+  .pokemon-recommend {
+    background: #FDD;
+    &-list {
+      &-item {
+        border: 1px solid #DDD;
+        background: #FFF;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        &-header {
+          padding-right: 30px;
+          .pokemon-info-wrapper {
+            border: none;
+          }
+        }
+        &-atack {
+          line-height: 1.6;
+          &-wrapper {
+            padding: 5px;
+            border-top: 1px solid #DDD;
+          }
+          &-label {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+          &-name {
+            padding-left: 1em;
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
   }
   @include mq() {
     width: auto;
