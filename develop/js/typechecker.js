@@ -160,7 +160,12 @@ const typeChecker = {
                     const counter = pokemonUtil.getCounterTypes(selected, DEF_NOW) || [];
                     const recs    = pokemonUtil.pickPokemonByTypes(counter, { dataset: POK_NOW, limit: 20 }) || [];
                     const json    = pokemonUtil.getPokemonData(recs) || [];
-                    typeChecker.recommend.renderRecommendations($wrap, json);
+                    typeChecker.recommend.renderRecommendations($wrap, {
+                      defenderTypesJa: selected, 
+                      pokemonDataset: pokemonUtil?.data?.get('POKEMON_DATA') || window.__POKEMON_DATA__,
+                      defenseChart:  pokemonUtil?.data?.get('TYPE_DEFENSE') || window.__TYPE_DEFENSE_TABLE__,
+                      limit: 20
+                    });
                     console.log('recommend', json);
                 });
 
@@ -680,210 +685,579 @@ const typeChecker = {
   },
 
   recommend : {
-    recommendCounters: function(options) {
-      if (typeChecker.recommend.recommendCounters._running) return [];
-      typeChecker.recommend.recommendCounters._running = true;
+    // 攻撃タイプ(英) × 防御側タイプ(和)配列 → 倍率（複合は乗算）
+    getMultiplierVsDefenders : function(atkTypeEn, defenderTypesJa, defenseChart){
+      const atk = pokemonUtil.toEnTypeLower(atkTypeEn);
+      if (!atk || !Array.isArray(defenderTypesJa) || defenderTypesJa.length === 0) return 1.0;
 
-      try {
-        const defenderTypesJa = Array.isArray(options?.defenderTypesJa) ? options.defenderTypesJa : [];
+      const table = Array.isArray(defenseChart) ? defenseChart
+                  : (Array.isArray(window.__TYPE_DEFENSE_TABLE__) ? window.__TYPE_DEFENSE_TABLE__ : []);
+      if (!table.length) return 1.0;
 
-        const pokemonDataset =
-          Array.isArray(options?.pokemonDataset)
-            ? options.pokemonDataset
-            : ((pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__ || []);
+      // 防御1タイプごとに table の該当行を拾い倍率を掛け合わせ
+      let total = 1.0;
+      for (const defJa of defenderTypesJa) {
+        const defEn = pokemonUtil.translateTypes?.toEnType?.(defJa);
+        if (!defEn) continue;
+        const row = table.find(r => (r.type || '').toLowerCase() === defEn.toLowerCase());
+        if (!row || !Array.isArray(row.effect)) continue;
 
-        const defenseChart =
-          Array.isArray(options?.defenseChart)
-            ? options.defenseChart
-            : ((pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || []);
-
-        const limit = Number(options?.limit || 5);
-        if (!defenderTypesJa.length) return [];
-
-        const EPS = 1e-6;
-
-        const findDefenseRow = function(defJa) {
-          const defEn = pokemonUtil.translateTypes.toEnType(defJa);
-          if (!defEn) return null;
-          const defEnLower = defEn.toLowerCase();
-          return defenseChart.find(r => (r.type || '').toLowerCase() === defEnLower) || null;
-        };
-
-        const multMap = new Map();
-        defenderTypesJa.forEach(defJa => {
-          const row = findDefenseRow(defJa);
-          if (!row || !Array.isArray(row.effect)) return;
-          row.effect.forEach(e => {
-            const atkJa = pokemonUtil.translateTypes.toJaType(e.type);
-            if (!atkJa) return;
-            const m   = pokemonUtil.normalizeMultiplier(e);
-            const cur = multMap.get(atkJa) ?? 1.0;
-            multMap.set(atkJa, cur * m);
-          });
-        });
-
-        const counterTypesJa = Array.from(multMap.entries())
-          .filter(([, v]) => v > (1.0 + EPS))
-          .sort((a, b) => b[1] - a[1])
-          .map(([k]) => k);
-
-        if (!counterTypesJa.length) return [];
-
-        const list = pokemonDataset
-          .filter(p => !p.isMegaEvolution)
-          .map(p => {
-            const typesJa = pokemonUtil.normalizeTypesJa(p);
-            const hit     = counterTypesJa.some(t => typesJa.includes(t));
-            const total   = pokemonUtil.totalBase(p);
-            return Object.assign({}, p, { _typesJa: typesJa, _hits: hit, _total: total });
-          })
-          .filter(p => p._hits)
-          .sort((a, b) => b._total - a._total)
-          .slice(0, limit);
-
-        return list;
-      } finally {
-        typeChecker.recommend.recommendCounters._running = false;
+        // row.effect は攻撃タイプごとの倍率を持つ
+        const hit = row.effect.find(e => pokemonUtil.toEnTypeLower(e.type) === atk);
+        const m = pokemonUtil.normalizeMultiplier(hit || {}); // '160%' / 1.6 / {value:2.56} など全部OK
+        total *= (Number.isFinite(m) && m > 0) ? m : 1.0;
       }
+      return total;
     },
 
-    renderRecommendations : function($wrap, json) {
-      if (!$wrap || !$wrap.length) {
-        console.warn('[recommend.renderRecommendations] wrapper not found:', $wrap);
+    filterSuperEffectiveMoves : function(moves, defenderTypesJa, defenseChart){
+      if (!Array.isArray(moves) || moves.length === 0) return [];
+      const out = [];
+      for (let i = 0; i < moves.length; i++) {
+        const m = moves[i] || {};
+        // typeEn をできるだけ確実に解決
+        let tEn =
+          m.typeEn ||
+          m.type ||
+          (m.id ? pokemonUtil.getMoveType?.(m.id) : '') ||
+          (m.typeJa ? pokemonUtil.translateTypes?.toEnType?.(m.typeJa) : '');
+        tEn = pokemonUtil.toEnTypeLower(tEn); // 'POKEMON_TYPE_FIRE' → 'fire'
+
+        const mult = typeChecker.recommend.getMultiplierVsDefenders(tEn, defenderTypesJa, defenseChart);
+
+        console.log(
+          '[filterSE]', (m.nameJa || m.nameEn || '(no name)'),
+          'typeEn:', tEn,
+          'def:', defenderTypesJa,
+          '→ mult:', mult
+        );
+
+        if (mult > 1.0 + 1e-6) {
+          out.push(Object.assign({}, m, { _multVsDef: mult, typeEn: tEn }));
+        }
+      }
+      return out;
+    },
+
+recommendCounters : function (optsOrDefTypes, maybeOpts) {
+  // ============================
+  // 1. 引数正規化（旧仕様互換）
+  // ============================
+  var options = {};
+
+  if (Array.isArray(optsOrDefTypes) || typeof optsOrDefTypes === 'string') {
+    var defJa = Array.isArray(optsOrDefTypes) ? optsOrDefTypes : [optsOrDefTypes];
+    options = $.extend(true, {}, maybeOpts, {
+      defenderTypesJa: defJa
+    });
+  } else if (optsOrDefTypes && typeof optsOrDefTypes === 'object') {
+    options = optsOrDefTypes;
+  }
+
+  options = options || {};
+
+  // ============================
+  // 2. デフォルトと前処理
+  // ============================
+  var rawDataset = options.pokemonDataset || window.__POKEMON_DATA__ || [];
+  var limit = typeof options.limit === 'number' ? options.limit : 20;
+
+  var defenderTypesJa = (options.defenderTypesJa || []).filter(Boolean);
+  var defenderTypesEn = defenderTypesJa.map(function (tJa) {
+    var tEn = pokemonUtil.translateTypes.toEnType(tJa) || '';
+    return String(tEn).toLowerCase();
+  });
+
+  if (!defenderTypesEn.length) {
+    console.log('[rc] no defenderTypesEn, return []');
+    return [];
+  }
+
+  // ★ ここで一括正規化：ID配列 → フルデータ配列
+  var pokemonDataset;
+  if (Array.isArray(rawDataset)) {
+    pokemonDataset = pokemonUtil.getPokemonData(rawDataset) || rawDataset;
+  } else {
+    pokemonDataset = rawDataset;
+  }
+
+  if (!pokemonDataset || !pokemonDataset.length) {
+    console.log('[rc] empty pokemonDataset');
+    return [];
+  }
+
+  // ★ 相性表：配列形式(type_defense.json) → 攻撃タイプ→防御タイプのマップに変換
+  var defenseChart = (function () {
+    var src = options.defenseChart || window.__TYPE_DEFENSE_TABLE__ || [];
+    if (!src) return {};
+    if (!Array.isArray(src)) return src; // すでにマップならそのまま
+
+    var chart = {};
+
+    src.forEach(function (row) {
+      if (!row) return;
+
+      // row.type は「防御側タイプ」
+      var defType = (row.type || row.defenseType || '').toString().toLowerCase();
+      var effects = row.effect || row.effects || [];
+
+      if (!defType || !Array.isArray(effects)) return;
+
+      effects.forEach(function (eff) {
+        if (!eff) return;
+
+        // eff.type は「攻撃側タイプ」
+        var atkType = (eff.type || eff.attackType || '').toString().toLowerCase();
+        if (!atkType) return;
+
+        if (!chart[atkType]) {
+          chart[atkType] = {};
+        }
+
+        // 倍率を取得（multiplier 優先、なければ value から計算）
+        var mult = 1.0;
+        if (typeof eff.multiplier === 'number') {
+          mult = eff.multiplier;
+        } else if (typeof eff.value === 'number') {
+          // value が 1, 0, -1, -2 みたいな場合は、必要ならここで変換してもOK
+          mult = pokemonUtil.normalizeMultiplier(eff.value) || 1.0;
+        }
+
+        chart[atkType][defType] = mult;
+      });
+    });
+
+    return chart;
+  })();
+
+  var chartKeys = defenseChart ? Object.keys(defenseChart).length : 0;
+  console.log('[rc] start defJa=', defenderTypesJa,
+              'defEn=', defenderTypesEn,
+              'dataset=', pokemonDataset.length,
+              'chartKeys=', chartKeys);
+
+  var chartKeys = defenseChart ? Object.keys(defenseChart).length : 0;
+
+  console.log('[rc] start defJa=', defenderTypesJa,
+              'defEn=', defenderTypesEn,
+              'dataset=', pokemonDataset.length,
+              'chartKeys=', chartKeys);
+
+  // ============================
+  // 3. 内部ヘルパー
+  // ============================
+  var multCache = new Map();
+
+  function getMultVsDefenders(atkTypeEn) {
+    if (!atkTypeEn) return 1.0;
+
+    atkTypeEn = String(atkTypeEn).toLowerCase();
+
+    var cacheKey = atkTypeEn + '>' + defenderTypesEn.join(',');
+    if (multCache.has(cacheKey)) {
+      return multCache.get(cacheKey);
+    }
+
+    var mult = 1.0;
+
+    defenderTypesEn.forEach(function (defTypeEn) {
+      if (!defTypeEn) return;
+      defTypeEn = String(defTypeEn).toLowerCase();
+
+      var raw = 1.0;
+
+      if (defenseChart &&
+          defenseChart[atkTypeEn] &&
+          defenseChart[atkTypeEn][defTypeEn] != null) {
+        raw = defenseChart[atkTypeEn][defTypeEn];
+      }
+
+      var v = pokemonUtil.normalizeMultiplier(raw) || 1.0;
+      mult *= v;
+    });
+
+    multCache.set(cacheKey, mult);
+    return mult;
+  }
+
+  function filterSEMoves(moves) {
+    if (!Array.isArray(moves)) return [];
+
+    return moves.reduce(function (acc, m) {
+      if (!m || !m.typeEn) return acc;
+
+      var atkTypeEn = String(m.typeEn).toLowerCase();
+      var mult = getMultVsDefenders(atkTypeEn);
+
+      // 必要ならコメントアウト外す
+      console.log('[SE check]', m.nameJa, atkTypeEn, '→', mult);
+
+      m._multVsDef = mult;
+
+      if (mult > 1.01) {
+        acc.push(m);
+      }
+      return acc;
+    }, []);
+  }
+
+  function calcMoveScore(m) {
+    if (!m) return 0;
+    var power = m.power || m.basePower || 0;
+    var mult = m._multVsDef || 1.0;
+    return power * mult;
+  }
+
+  function getAttackStat(data) {
+    if (!data) return 0;
+    if (data.goStats && data.goStats.attack) return data.goStats.attack;
+    if (data.baseStats && data.baseStats.attack) return data.baseStats.attack;
+    return 0;
+  }
+
+  function getBST(data) {
+    if (!data) return 0;
+    return pokemonUtil.totalBase(data);
+  }
+
+  // ============================
+  // 4. メインループ
+  // ============================
+  var results = [];
+  var debugSeen = 0;
+
+  for (var i = 0; i < pokemonDataset.length; i++) {
+    var data = pokemonDataset[i];
+    if (!data) continue;
+
+    var movesObj = data.moves || {};
+    var normalAll = movesObj.normal || [];
+    var specialAll = movesObj.special || [];
+
+    if (debugSeen < 5) {
+      console.log('[rc] data', data.id || data.no || ('idx_' + i),
+                  data.nameJa, 'nm=', normalAll.length, 'sp=', specialAll.length);
+      debugSeen++;
+    }
+
+    var seNormal = filterSEMoves(normalAll);
+    var seSpecial = filterSEMoves(specialAll);
+
+    if (!seNormal.length && !seSpecial.length) {
+      continue;
+    }
+
+    var bestMoveScore = 0;
+    var bestMoves = [];
+    var candMoves = seNormal.concat(seSpecial);
+
+    for (var j = 0; j < candMoves.length; j++) {
+      var mv = candMoves[j];
+      var score = calcMoveScore(mv);
+
+      if (score > bestMoveScore) {
+        bestMoveScore = score;
+        bestMoves = [mv];
+      } else if (Math.abs(score - bestMoveScore) < 0.0001) {
+        bestMoves.push(mv);
+      }
+    }
+
+    if (!bestMoveScore) continue;
+
+    var atk = getAttackStat(data);
+    if (!atk) continue;
+
+    var pokemonScore = bestMoveScore * atk;
+    var bst = getBST(data);
+
+    results.push({
+      id: data.id,
+      no: data.no,
+      nameJa: data.nameJa,
+      nameEn: data.nameEn,
+      typesJa: data.typesJa,
+      typesEn: data.typesEn,
+      goStats: data.goStats,
+      baseStats: data.baseStats,
+      moves: {
+        normal: seNormal,
+        special: seSpecial
+      },
+      score: pokemonScore,
+      attack: atk,
+      bst: bst
+    });
+  }
+
+  console.log('[rc] loop done: results=', results.length);
+
+  // ============================
+  // 5. 並び替え＆limit
+  // ============================
+  results.sort(function (a, b) {
+    if (b.score !== a.score) return b.score - a.score;
+    if (b.attack !== a.attack) return b.attack - a.attack;
+    return (b.bst || 0) - (a.bst || 0);
+  });
+
+  if (limit > 0 && results.length > limit) {
+    results.length = limit;
+  }
+
+  console.log('[rc] return', results.length);
+  return results;
+},
+    
+    renderRecommendations: function($wrap, jsonOrOptions){
+      // jQuery 判定はややこしいので、素直に $() に通す
+      const $w = $($wrap);
+      console.log('[renderRecommendations] wrap length =', $w.length, 'arg =', jsonOrOptions);
+      if (!$w.length) return;
+
+      // ============================
+      // 1. 第2引数を判定
+      // ============================
+      let list = [];
+
+      if (Array.isArray(jsonOrOptions)) {
+        // 旧仕様：すでに配列が渡されている場合はそのまま使う
+        list = jsonOrOptions;
+      } else if (jsonOrOptions && typeof jsonOrOptions === 'object') {
+        // 新仕様：options を渡された場合はここで recommendCounters を実行
+        list = typeChecker.recommend.recommendCounters(jsonOrOptions) || [];
+        console.log('[renderRecommendations] list length =', list.length);
+      }
+
+      if (!Array.isArray(list) || list.length === 0) {
+        $w.empty();
         return;
       }
-      if (!Array.isArray(json)) json = [];
-      let html = '';
-      for (let i = 0; i < json.length; i++) {
-        const d = json[i] || {};
-        console.log(d);
-        const img = pokemonUtil.getImageUrlByNo(d.id);
-        const typesJa = d.typesJa;
-        const typesEn = d.typesEn;
-        let typeHtml = '';
-        for (let j=0; j<typesJa.length; j++) {
-          typeHtml = `
-            <div class="badge"><span class="icon icon-type-${typesEn[j]}"></span>${typesJa[j]}</div>
-          `
-        }
-        const normalAttacks = d.moves.normal;
-        let normalAttacksHtml = `
-          <dl class="pokemon-recommend-list-item-atack">
-            <dt class="pokemon-recommend-list-item-atack-label">${normalAttacks[j].typeJa}</dt>
-        `;
-        for ( let j=0; j<normalAttacks.length; j++ ) {
-          normalAttacksHtml += `
-            <dd class="pokemon-recommend-list-item-atack-name">
-              <span class="icon icon-type-${normalAttacks[j].typeEn}"></span>${normalAttacks[j].nameJa}
-            </dd>
-          `
-        }
-        normalAttacksHtml += `</dl>`;
 
-        const specialAttacks = d.moves.special;
-        let specialAttacksHtml = `
-          <dl class="pokemon-recommend-list-item-atack">
-            <dt class="pokemon-recommend-list-item-atack-label">${specialAttacks[j].typeJa}</dt>
-        `;
-        for ( let j=0; j<specialAttacks.length; j++ ) {
-          specialAttacksHtml += `
-            <dd class="pokemon-recommend-list-item-atack-name">
-              <span class="icon icon-type-${specialAttacks[j].typeEn}"></span>${specialAttacks[j].nameJa}
-            </dd>
-          `
+      // ============================
+      // 2. 描画
+      // ============================
+      let html = '';
+
+      for (let i = 0; i < list.length; i++) {
+        const d = list[i] || {};
+        const img = pokemonUtil.getImageUrlByNo(d.id);
+        const typesJa = Array.isArray(d.typesJa) ? d.typesJa : [];
+        const typesEn = Array.isArray(d.typesEn) ? d.typesEn : [];
+
+        // タイプバッジ（複数タイプを“加算”して並べる）
+        let typeHtml = '';
+        for (let j = 0; j < Math.max(typesJa.length, typesEn.length); j++) {
+          const ja = typesJa[j] || '';
+          const en = (typesEn[j] || '').toString().toLowerCase();
+          if (!ja) continue;
+          typeHtml += `
+            <div class="badge">
+              <span class="icon icon-type-${en}"></span>${ja}
+            </div>`;
         }
-        specialAttacksHtml += `</dl>`;
+
+        // 技リスト（こうかばつぐんのみが入っている想定）
+        const buildMoveDL = (label, moves) => {
+          if (!Array.isArray(moves) || moves.length === 0) return '';
+          const items = moves.map(m => {
+            const typeEn = (m.typeEn || '').toString().toLowerCase();
+            return `
+              <dd class="pokemon-recommend-list-item-atack-name">
+                <span class="icon icon-type-${typeEn}"></span>${m.nameJa || m.nameEn || '-'}</span>
+              </dd>`;
+          }).join('');
+          return `
+            <dl class="pokemon-recommend-list-item-atack">
+              <dt class="pokemon-recommend-list-item-atack-label">${label}</dt>
+              ${items}
+            </dl>`;
+        };
+
+        // ゲージ画像（暫定）
+        const gaugeImg = (function(){
+          const bars = Number(d.gaugeBars || 0);
+          const src = (bars >= 3) ? 'img/gauge_3.png'
+                  : (bars === 2) ? 'img/gauge_2.png'
+                  : (bars === 1) ? 'img/gauge_1.png'
+                  : 'img/gauge_0.png';
+          return `<img class="pokemon-recommend-gauge" src="${src}" alt="effect gauge" decoding="async" loading="lazy">`;
+        })();
 
         html += `
           <li class="pokemon-recommend-list-item js_toggle-wrapper">
             <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
               <div class="pokemon-info-wrapper">
                 <div class="pokemon-info-img">
-                  <img src="${img}" decoding="async" loading="lazy" alt="${d.nameJa}">
+                  <img src="${img}" decoding="async" loading="lazy" alt="${d.nameJa || '-'}">
                 </div>
-                <div class="pokemon-info-name">${d.nameJa}</div>
-                <div class="pokemon-info-type">
-                  ${typeHtml}
-                </div>
+                <div class="pokemon-info-name">${d.nameJa || '-'}</div>
+                <div class="pokemon-info-type">${typeHtml}</div>
+                <div class="pokemon-info-gauge">${gaugeImg}</div>
               </div>
               <a href="" class="js_toggle-trigger"></a>
             </div>
             <div class="js_toggle-content">
               <dl class="pokemon-recommend-info-score">
-                <dt class="pokemon-recommend-info-score-label">種族値</dt>
-                <dl class="pokemon-recommend-info-score-value">
+                <dt class="pokemon-recommend-info-score-label">種族値(GO)</dt>
+                <dd class="pokemon-recommend-info-score-value">
                   <ul class="pokemon-recommend-info-score-list">
                     <li class="pokemon-recommend-info-score-list-item">
-                      こうげき <span class="num">${d.goStats.attack}</span>
+                      こうげき <span class="num">${d.goStats?.attack ?? '-'}</span>
                     </li>
                     <li class="pokemon-recommend-info-score-list-item">
-                      ぼうぎょ <span class="num">${d.goStats.defense}</span>
+                      ぼうぎょ <span class="num">${d.goStats?.defense ?? '-'}</span>
                     </li>
                     <li class="pokemon-recommend-info-score-list-item">
-                      HP <span class="num">${d.goStats.stamina}</span>
+                      HP <span class="num">${d.goStats?.stamina ?? '-'}</span>
                     </li>
                   </ul>
-                </dl>
+                </dd>
               </dl>
               <div class="pokemon-recommend-list-item-atack-wrapper">
-                ${normalAttacksHtml}
-                ${specialAttacksHtml}
+                ${buildMoveDL('ノーマル',  d.moves?.normal  || [])}
+                ${buildMoveDL('スペシャル', d.moves?.special || [])}
               </div>
             </div>
-          </li>
-        `
-        // html += '<li class="pokemon-recommend-item">';
-        // html +=   '<div class="pokemon-head">';
-        // html +=     '<span class="pokemon-name">' + (d.nameJa || d.nameEn || '-') + '</span>';
-        // html +=     '<span class="pokemon-types">' + (Array.isArray(d.typesJa) && d.typesJa.length ? d.typesJa.join(' / ') : '-') + '</span>';
-        // html +=     '<span class="pokemon-total">BST: ' + (d.baseTotal ?? '-') + '</span>';
-        // html +=   '</div>';
-
-        // html +=   '<div class="pokemon-moves pokemon-moves-normal"><ul>';
-        // (d.moves?.normal || []).forEach(m => {
-        //   html += '<li class="move move-normal">';
-        //   html +=   '<span class="move-name">' + (m.nameJa || m.nameEn || '-') + '</span>';
-        //   html +=   '<span class="move-type">[' + (m.typeJa || m.typeEn || '-') + ']</span>';
-        //   if (m.power != null)  html += '<span class="move-power"> P:' + m.power + '</span>';
-        //   if (m.turns != null)  html += '<span class="move-turns"> T:' + m.turns + '</span>';
-        //   html += '</li>';
-        // });
-        // html +=   '</ul></div>';
-
-        // html +=   '<div class="pokemon-moves pokemon-moves-special"><ul>';
-        // (d.moves?.special || []).forEach(m => {
-        //   html += '<li class="move move-special">';
-        //   html +=   '<span class="move-name">' + (m.nameJa || m.nameEn || '-') + '</span>';
-        //   html +=   '<span class="move-type">[' + (m.typeJa || m.typeEn || '-') + ']</span>';
-        //   if (m.power  != null) html += '<span class="move-power"> P:' + m.power + '</span>';
-        //   if (m.energy != null) html += '<span class="move-energy"> E:' + m.energy + '</span>';
-        //   html += '</li>';
-        // });
-        // html +=   '</ul></div>';
-
-        // html += '</li>';
+          </li>`;
       }
-      $wrap.html(html);
+
+      // ループの外で一気に反映
+      $w.html(html);
+      console.log('[renderRecommendations] html length =', html.length);
+    },
+
+    // ===== 内部ユーティリティ =====
+    _findDefenseRow: function(defJa, defenseChart){
+      const chart = Array.isArray(defenseChart) ? defenseChart : (window.__TYPE_DEFENSE_TABLE__ || []);
+      const defEn = pokemonUtil.translateTypes.toEnType(defJa);
+      if (!defEn) return null;
+      const key = defEn.toLowerCase();
+      return chart.find(r => (r.type || '').toLowerCase() === key) || null;
+    },
+
+    _normalizeMultiplier: function(e){
+      // e.value / e.mult / e.multiplier のどれでもOKにする
+      if (pokemonUtil && typeof pokemonUtil.normalizeMultiplier === 'function') {
+        return pokemonUtil.normalizeMultiplier(e);
+      }
+      // フォールバック（-2..1 or 0/0.5/1/1.6/2.56系にも耐える）
+      if (e == null) return 1.0;
+      if (e.value != null) {
+        // value: -2,-1,0,1 を GO係数にマップする最低限のフォールバック
+        const map = { '-2': 0.390625, '-1': 0.625, '0': 1.0, '1': 1.6 };
+        const v = String(e.value);
+        return map[v] ?? 1.0;
+      }
+      if (e.mult != null) {
+        const x = Number(String(e.mult).replace(/[^\d.]/g, ''));
+        return Number.isFinite(x) && x > 0 ? x : 1.0;
+      }
+      if (e.multiplier != null) {
+        const y = Number(e.multiplier);
+        return Number.isFinite(y) && y > 0 ? y : 1.0;
+      }
+      return 1.0;
+    },
+
+    _multFor: function(typeEn, defenderTypesJa, defenseChart){
+      // 可能なら pokemonUtil.multFor を使用（単一の正準ルート）
+      if (pokemonUtil && typeof pokemonUtil.multFor === 'function') {
+        return pokemonUtil.multFor(String(typeEn).toLowerCase(), defenderTypesJa, defenseChart);
+      }
+      // フォールバック（ローカル実装）
+      const chart = Array.isArray(defenseChart) ? defenseChart : (window.__TYPE_DEFENSE_TABLE__ || []);
+      const atk = String(typeEn || '').toLowerCase();
+      if (!atk) return 1.0;
+
+      let mult = 1.0, EPS = 1e-9;
+      defenderTypesJa.forEach(defJa => {
+        const row = typeChecker.recommend._findDefenseRow(defJa, chart);
+        if (!row || !Array.isArray(row.effect)) return;
+        const ef = row.effect.find(e => (e.type || '').toLowerCase() === atk);
+        if (!ef) return;
+        const m = typeChecker.recommend._normalizeMultiplier(ef);
+        mult *= (Number.isFinite(m) && m > EPS) ? m : 1.0;
+      });
+      return mult;
+    },
+
+    _getMetaForPokemon: function(p){
+      // window.__POKEMON_GO_META__ から p の no / pokemonId / speciesId で拾う想定
+      const META = window.__POKEMON_GO_META__ || [];
+      const no = p.no ?? p.id ?? p.dex ?? p.pokedex_id ?? null;
+      const sp = (p.speciesId || p.pokemonId || p.pokemon_id || '').toString().toUpperCase();
+      if (no != null) {
+        const hit = META.find(x => Number(x.no) === Number(no));
+        if (hit) return hit;
+      }
+      if (sp) {
+        const hit = META.find(x => String(x.pokemonId).toUpperCase() === sp);
+        if (hit) return hit;
+      }
+      return null;
+    },
+
+    _getMovesForPokemon: function(id, meta){
+      // meta.moves か moves_master_localized から名前解決して {normal:[], special:[]} で返す
+      const mm = window.__MOVES_MASTER_LOCALIZED__ || [];
+      const resolve = (moveId) => {
+        const m = mm.find(x => x.id === moveId) || {};
+        return {
+          id: moveId,
+          nameJa: m.nameJa || m.name || '',
+          nameEn: m.nameEn || '',
+          typeEn: (m.type || m.pokemonType || '').toString().toLowerCase(),
+          power:  m.power ?? m.powerPvP ?? null,
+          energy: m.energyDelta ?? m.energy ?? null,
+          turns:  m.turns ?? null
+        };
+      };
+
+      // meta が無いときは空で返す（呼び出し側で除外される）
+      const fast    = (meta?.moves?.quick     || meta?.fastMoves     || []).map(resolve);
+      const charged = (meta?.moves?.cinematic || meta?.chargedMoves  || []).map(resolve);
+      return { normal: fast, special: charged };
+    },
+
+    _pickGoStats: function(meta, p){
+      // GOがなければ本家から近似（fallback）
+      if (meta && meta.stats) {
+        return {
+          stamina: meta.stats.stamina ?? meta.stats.hp ?? null,
+          attack:  meta.stats.attack  ?? meta.stats.atk ?? null,
+          defense: meta.stats.defence ?? meta.stats.defense ?? meta.stats.def ?? null
+        };
+      }
+      const s = p?.stats || p?.baseStats || {};
+      return {
+        stamina: s.hp ?? null,
+        attack:  (s.attack ?? s.atk ?? null),
+        defense: (s.defence ?? s.defense ?? s.def ?? null)
+      };
+    },
+
+    // === ヘルパー: 並び替え用スコア ===
+    // ・基本は「(技威力 × 倍率) の最大値 × 攻撃種族値」
+    // ・威力が無ければ倍率のみ、攻撃種族値が無ければ 1 を掛ける
+    calcScore : function(poke, defenderTypesJa, defenseChart){
+      const atk = (poke.goStats && poke.goStats.attack) || (poke.baseStats && poke.baseStats.atk) || 1;
+      const movesAll = [
+        ...((poke.moves && Array.isArray(poke.moves.normal))  ? poke.moves.normal  : []),
+        ...((poke.moves && Array.isArray(poke.moves.special)) ? poke.moves.special : [])
+      ];
+      let best = 0;
+      movesAll.forEach(m => {
+        const tEn  = m.typeEn || m.type || '';
+        const pow  = Number(m.power ?? m.powerPvP ?? 0);
+        const mult = typeChecker.recommend.getMultiplierVsDefenders(tEn, defenderTypesJa, defenseChart);
+        const s = (pow > 0 ? pow : 1) * mult;   // 威力が無いデータは倍率のみ評価
+        if (s > best) best = s;
+      });
+      return best * atk;
     },
 
   },
-
-
-  createRecommendHtml : function(wrapper, pokemon) {
-    const pokemonData = getPokemonData(pokemon);
-    for ( let i=0; i<pokemonData.length; i++ ) {
-      const data = pokemonData[i];
-      const id = pokemonData[i]['id'];
-      const normalMoves = pokemonData[i]['moves']['normal'];
-      const specialMoves = pokemonData[i]['moves']['normal'];
-      for (let j=0; j<normalMoves.length; j++) {
-        /* HTMLを生成 */
-      }
-      /* HTMLを生成 */
-    }
-    wrapper.append(html);
-  }
-
 }
 
 $(function() {

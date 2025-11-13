@@ -6,7 +6,7 @@ const pokemonCard = {
 
     const typeBadges = types.map(function(t) {
       const en = pokemonUtil.translate.JtoE(t);
-      ${pokemonCard.badges(props.types || data.types || [])}
+      return pokemonCard.badges(props.types || data.types || []);
     }).join('');
 
     return `
@@ -235,29 +235,49 @@ const pokemonUtil = {
     });
   },
 
-  // 倍率正規化（NaN を出さない核） -------------------------------
-  normalizeMultiplier : function(e){
-    if (!e) return 1.0;
+  normalizeMultiplier: function (e) {
+    const ONE = 1.0;
+    if (e == null) return ONE;
 
-    // multiplier があれば最優先（数値/文字列どちらでもOK）
-    if (e.multiplier != null) {
-      var m1 = Number(String(e.multiplier).replace(/[^\d.]/g, ''));
-      if (Number.isFinite(m1) && m1 > 0) return m1;
-    }
+    const coerce = v => {
+      if (v == null) return null;
+      if (typeof v === 'number') return (isFinite(v) && v > 0) ? v : null;
+      if (typeof v === 'string') {
+        const s = v.trim();
+        const mPct = s.match(/^([0-9]+(?:\.[0-9]+)?)\s*%$/);
+        if (mPct) return parseFloat(mPct[1]) / 100;
+        const mNum = s.match(/^[×x]?\s*([0-9]+(?:\.[0-9]+)?)$/i);
+        if (mNum) return parseFloat(mNum[1]);
+        const n = parseFloat(s.replace(/[^\d.]/g, ''));
+        return isFinite(n) ? n : null;
+      }
+      return null;
+    };
 
-    // 旧 value 方式 (+2〜-2)
-    if (e.value != null) {
-      var v = Number(e.value);
-      if (Number.isFinite(v)) {
-        if (v >= 2)  return 2.56;   // x4
-        if (v === 1) return 1.60;   // x2
-        if (v === 0) return 1.00;
-        if (v === -1) return 0.625; // x0.5
-        if (v <= -2) return 0.39;   // x0.25
+    // 直接の数値/文字列
+    const direct = coerce(e);
+    if (direct != null) return direct;
+
+    // オブジェクト形式
+    if (typeof e === 'object') {
+      if ('value' in e) {
+        const v = coerce(e.value);
+        if (v != null) {
+          if (v === -2) return 0.390625;
+          if (v === -1) return 0.625;
+          if (v ===  0) return 1.0;
+          if (v ===  1) return 1.6;
+          if (v > 0)   return v;      // 2.56 等
+        }
+      }
+      const raw = e.mult ?? e.multiplier ?? e.m ?? e.x;
+      let m = coerce(raw);
+      if (m != null) {
+        if (typeof raw === 'number' && m > 3 && m <= 300) m = m / 100; // 160 → 1.6 保険
+        return m;
       }
     }
-
-    return 1.0;
+    return ONE;
   },
 
   /**
@@ -808,4 +828,39 @@ const pokemonUtil = {
 
     return scored;
   },
+  multFor(moveTypeEn, defenderTypesJa, defenseChart){
+    if (!moveTypeEn || !Array.isArray(defenderTypesJa) || !defenderTypesJa.length) return 1.0;
+    const tEn = String(moveTypeEn).toLowerCase();
+    let m = 1.0;
+    defenderTypesJa.forEach(defJa => {
+      const defEn = pokemonUtil.translateTypes.toEnType(defJa);
+      if (!defEn) return;
+      const row = defenseChart.find(r => (r.type || '').toLowerCase() === String(defEn).toLowerCase());
+      if (!row || !Array.isArray(row.effect)) return;
+      const ef  = row.effect.find(x => (x.type || '').toLowerCase() === tEn);
+      const mv  = pokemonUtil.normalizeMultiplier(ef ? { value: ef.value, mult: ef.mult } : {});
+      m *= (Number.isFinite(mv) && mv > 0) ? mv : 1.0;
+    });
+    return m;
+  },
+  filterSuperEffectiveMoves: function(moves, defenderTypesJa, defenseChart){
+    if (!Array.isArray(moves)) return [];
+    const chart = Array.isArray(defenseChart) ? defenseChart : (window.__TYPE_DEFENSE_TABLE__ || []);
+    const EPS = 1e-6;
+
+    return moves.filter(m => {
+      const tEn =
+        (m.typeEn || m.type || m.type_en || '').toString().toLowerCase();
+      if (!tEn) return false; // 型不明は除外
+      const mult = pokemonUtil.multFor(tEn, defenderTypesJa, chart);
+      return mult > 1.0 + EPS; // こうかばつぐんのみ
+    });
+  },
+  toEnTypeLower : function(t){
+    if (!t) return '';
+    let s = String(t);
+    s = s.replace(/^POKEMON_TYPE_/i, ''); // POGOのプリフィックス除去
+    return s.trim().toLowerCase();        // ex) 'WATER' → 'water'
+  },
+
 };
