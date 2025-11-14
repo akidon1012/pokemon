@@ -1,24 +1,29 @@
 const pokemonCard = {
-  build: function(poke) {
+  build: function(poke) { 
     const name  = poke?.name  || '';
     const img   = poke?.image || 'https://placehold.jp/300x300.png';
     const types = Array.isArray(poke?.types) ? poke.types : [];
 
-    const typeBadges = types.map(function(t) {
-      const en = pokemonUtil.translate.JtoE(t);
-      return pokemonCard.badges(props.types || data.types || []);
+    // ★ 修正ここから ★
+    const typeBadges = types.map(function(tJa) {
+      const tEn = (pokemonUtil.translate.JtoE(tJa) || '').toLowerCase();
+      return `
+        <div class="badge">
+          <span class="icon icon-type-${tEn}"></span>${tJa}
+        </div>`;
     }).join('');
+    // ★ 修正ここまで ★
 
     return `
-<div class="pokemon-info-wrapper">
-  <div class="pokemon-info-img">
-    <img src="${img}" decoding="async" loading="lazy" alt="${name}">
-  </div>
-  <div class="pokemon-info-name">${name}</div>
-  <div class="pokemon-info-type">
-    ${typeBadges}
-  </div>
-</div>`;
+  <div class="pokemon-info-wrapper">
+    <div class="pokemon-info-img">
+      <img src="${img}" decoding="async" loading="lazy" alt="${name}">
+    </div>
+    <div class="pokemon-info-name">${name}</div>
+    <div class="pokemon-info-type">
+      ${typeBadges}
+    </div>
+  </div>`;
   },
 
   render: function(poke, area) {
