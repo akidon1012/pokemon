@@ -54,7 +54,7 @@ const pokemonCard = {
 }
 const pokemonUtil = {
   data : {
-    state: { POKEMON_DATA: [], TYPE_DEFENSE: [], MOVES: [], GO_META: [] },
+    state: { POKEMON_DATA: [], TYPE_DEFENSE: [], MOVES: [], GO_META: [], GO_META_OVERRIDE: {} },
     _dfd: null,
 
     loadAll() {
@@ -73,6 +73,9 @@ const pokemonUtil = {
         }),
         $.getJSON('../../data/pokemon_go_meta.json').done(d => {
           this.state.GO_META = d || [];
+        }),
+        $.getJSON('../../data/pokemon_go_meta_override.json').done(d => {
+          this.state.GO_META_OVERRIDE = d || {};
         })
       ];
 
@@ -82,6 +85,7 @@ const pokemonUtil = {
         window.__POKEMON_DATA__         = this.state.POKEMON_DATA;
         window.__MOVES_MASTER_LOCALIZED__ = this.state.MOVES;
         window.__POKEMON_GO_META__      = this.state.GO_META;
+        window.__POKEMON_GO_META_OVERRIDE__ = this.state.GO_META_OVERRIDE;
 
         $(document).trigger('pokemon:data-ready', [this.state]);
         dfd.resolve(this.state);
@@ -94,6 +98,180 @@ const pokemonUtil = {
     onReady(fn) { return this.loadAll().done(fn); },
     get(key)    { return this.state[key]; }
   },
+
+// 図鑑番号ベースで GO ステータス＋ゲンシ／メガ override を当てる版
+attachGoStats : (function(){
+  let _metaById  = null; // pokemonId → meta
+  let _metaByNo  = null; // no        → meta
+  let _ovByBase  = null; // basePokemonId → [override,...]
+  let _ovByNo    = null; // dex no         → [override,...]
+
+  function buildIndexes() {
+    if (_metaById && _metaByNo && _ovByBase && _ovByNo) return;
+
+    const metaList = pokemonUtil.data.get('GO_META') || [];
+    const ovRaw    = pokemonUtil.data.get('GO_META_OVERRIDE') || {};
+
+    _metaById = {};
+    _metaByNo = {};
+    metaList.forEach(function(m){
+      if (!m) return;
+      const pid = m.pokemonId;
+      const no  = Number(m.no);
+      if (pid) _metaById[pid] = m;
+      if (Number.isFinite(no)) _metaByNo[no] = m;
+    });
+
+    _ovByBase = {};
+    _ovByNo   = {};
+
+    Object.keys(ovRaw || {}).forEach(function(key){
+      const ov = ovRaw[key];
+      if (!ov) return;
+
+      const baseId = ov.basePokemonId || key.split('_')[0]; // 'KYOGRE' など
+      if (!baseId) return;
+
+      const tempId = ov.tempId || key.split('_').slice(1).join('_'); // 'TEMP_EVOLUTION_PRIMAL' 等
+      const stats  = ov.stats || {};
+
+      // basePokemonId → list
+      if (!_ovByBase[baseId]) _ovByBase[baseId] = [];
+      _ovByBase[baseId].push({
+        key,
+        basePokemonId: baseId,
+        tempId,
+        stats
+      });
+
+      // 図鑑番号でも引けるように no を求める
+      const meta = _metaById[baseId];
+      const no   = meta ? Number(meta.no) : NaN;
+      if (Number.isFinite(no)) {
+        if (!_ovByNo[no]) _ovByNo[no] = [];
+        _ovByNo[no].push({
+          key,
+          basePokemonId: baseId,
+          tempId,
+          stats
+        });
+      }
+    });
+
+    console.log(
+      '[attachGoStats] metaById=', Object.keys(_metaById).length,
+      'metaByNo=', Object.keys(_metaByNo).length,
+      'overrideBases=', Object.keys(_ovByBase).length,
+      'overrideNos=', Object.keys(_ovByNo).length
+    );
+  }
+
+  // ゲンシ／メガっぽい名前かどうか
+  function detectFlags(pd) {
+    const flags = [];
+
+    [
+      pd.formKey,
+      pd.form,
+      pd.formId,
+      pd.tempEvoId,
+      pd.nameEn,
+      pd.nameJa
+    ].forEach(function(v){
+      if (v == null) return;
+      flags.push(String(v).toUpperCase());
+    });
+
+    const isPrimal = flags.some(function(s){
+      return s.indexOf('ゲンシ') >= 0 || s.indexOf('PRIMAL') >= 0;
+    });
+
+    const isMega = flags.some(function(s){
+      return s.indexOf('メガ') >= 0 || s.indexOf('MEGA') >= 0;
+    });
+
+    return { isPrimal, isMega };
+  }
+
+  // override リストから、PRIMAL / MEGA を見て 1つ選ぶ
+  function chooseOverride(list, flags) {
+    if (!list || !list.length) return null;
+    const { isPrimal, isMega } = flags;
+    let candidate = null;
+
+    list.forEach(function(ov){
+      const tid = String(ov.tempId || '').toUpperCase();
+      if (!tid) return;
+
+      if (isPrimal && tid.indexOf('PRIMAL') >= 0) {
+        candidate = ov;
+      } else if (isMega && tid.indexOf('MEGA') >= 0) {
+        candidate = ov;
+      }
+    });
+
+    return candidate;
+  }
+
+  return function attachGoStats(pd) {
+    if (!pd) return pd;
+
+    buildIndexes();
+
+    // 図鑑番号（no）を優先して見る
+    let dexNo = null;
+    if (pd.no != null && Number.isFinite(Number(pd.no))) {
+      dexNo = Number(pd.no);
+    } else if (pd.id != null && Number.isFinite(Number(pd.id))) {
+      dexNo = Number(pd.id);
+    }
+
+    // ベースとなる meta（通常フォーム）
+    let baseMeta = null;
+
+    if (dexNo != null && _metaByNo[dexNo]) {
+      baseMeta = _metaByNo[dexNo];
+    } else {
+      // no が取れない場合のフォールバック：pokemonId ベース
+      const rawId  = pd.pokemonId || pd.id;
+      const baseId = rawId ? String(rawId).split('_')[0] : null;
+      if (baseId && _metaById[baseId]) {
+        baseMeta = _metaById[baseId];
+      }
+    }
+
+    if (baseMeta && baseMeta.stats) {
+      const s = baseMeta.stats;
+      pd.goStats = pd.goStats || {};
+      pd.goStats.attack  = s.attack;
+      pd.goStats.defense = s.defence;
+      pd.goStats.stamina = s.stamina;
+    }
+
+    // === ここからゲンシ／メガ override ===
+    const flags = detectFlags(pd);
+
+    let ovList = null;
+
+    if (dexNo != null && _ovByNo[dexNo]) {
+      ovList = _ovByNo[dexNo];
+    } else if (baseMeta && baseMeta.pokemonId && _ovByBase[baseMeta.pokemonId]) {
+      ovList = _ovByBase[baseMeta.pokemonId];
+    }
+
+    const ov = chooseOverride(ovList, flags);
+    if (ov && ov.stats) {
+      const s = ov.stats;
+      pd.goStats = pd.goStats || {};
+      if (s.attack  != null) pd.goStats.attack  = s.attack;
+      if (s.defence != null) pd.goStats.defense = s.defence;
+      if (s.stamina != null) pd.goStats.stamina = s.stamina;
+      console.log('[attachGoStats] override applied:', dexNo, pd.nameJa || pd.nameEn, ov.key, pd.goStats);
+    }
+
+    return pd;
+  };
+})(),
 
   // 画像URL関連 ---------------------------------------------------
   getImageUrlByNo : function(no) {
@@ -422,8 +600,15 @@ const pokemonUtil = {
       .filter(Boolean)
       .map(function(s){ return s.toLowerCase(); });
 
-    const quickIds     = Array.isArray(goMoves.quick)     ? goMoves.quick     : [];
-    const cinematicIds = Array.isArray(goMoves.cinematic) ? goMoves.cinematic : [];
+    // 通常技（quick + eliteQuick）
+    const quickIds = []
+      .concat(Array.isArray(goMoves.quick) ? goMoves.quick : [])
+      .concat(Array.isArray(goMoves.eliteQuick) ? goMoves.eliteQuick : []);
+
+    // スペシャル技（cinematic + eliteCinematic）
+    const cinematicIds = []
+      .concat(Array.isArray(goMoves.cinematic) ? goMoves.cinematic : [])
+      .concat(Array.isArray(goMoves.eliteCinematic) ? goMoves.eliteCinematic : []);
 
     // 共通のスコアリング関数
     const scoreOne = function(moveId) {
@@ -683,7 +868,15 @@ const pokemonUtil = {
 
     return arr.map(key => {
       const p = resolveFromBase(key);
-      if (!p) return { id: null, nameJa: String(key), typesJa: [], typesEn: [], moves: { normal: [], special: [] } };
+      if (!p) {
+        return {
+          id: null,
+          nameJa: String(key),
+          typesJa: [],
+          typesEn: [],
+          moves: { normal: [], special: [] }
+        };
+      }
 
       const id = normalizeId(p);
       const { typesJa, typesEn } = normalizeTypes(p);
@@ -691,19 +884,26 @@ const pokemonUtil = {
       // ★ 強化: あらゆるキーで GO を引く
       const meta = pokemonUtil._resolveGoMeta(p) || {};
 
-      // ★ 技ID: quick / cinematic に対応
-      const fastIds = (
-        meta.fastMoves             ||
-        meta.quickMoves            ||
-        (meta.moves && (meta.moves.fast || meta.moves.quick)) ||
-        []
-      );
-      const chargedIds = (
-        meta.chargedMoves          ||
-        meta.cinematicMoves        ||
-        (meta.moves && (meta.moves.charged || meta.moves.cinematic)) ||
-        []
-      );
+      // ★ 技ID: quick / cinematic 系 + elite 系も拾う
+      const mMoves = meta.moves || {};
+
+      // 通常技（fast / quick / moves.fast / moves.quick / moves.eliteQuick などを全部マージ）
+      const fastIds = []
+        .concat(Array.isArray(meta.fastMoves)      ? meta.fastMoves      : [])
+        .concat(Array.isArray(meta.quickMoves)     ? meta.quickMoves     : [])
+        .concat(Array.isArray(mMoves.fast)         ? mMoves.fast         : [])
+        .concat(Array.isArray(mMoves.quick)        ? mMoves.quick        : [])
+        .concat(Array.isArray(mMoves.eliteQuick)   ? mMoves.eliteQuick   : [])
+        .concat(Array.isArray(meta.eliteQuickMoves)? meta.eliteQuickMoves: []);
+
+      // スペシャル技（charged / cinematic / moves.charged / moves.cinematic / moves.eliteCinematic など全部）
+      const chargedIds = []
+        .concat(Array.isArray(meta.chargedMoves)        ? meta.chargedMoves        : [])
+        .concat(Array.isArray(meta.cinematicMoves)      ? meta.cinematicMoves      : [])
+        .concat(Array.isArray(mMoves.charged)           ? mMoves.charged           : [])
+        .concat(Array.isArray(mMoves.cinematic)         ? mMoves.cinematic         : [])
+        .concat(Array.isArray(mMoves.eliteCinematic)    ? mMoves.eliteCinematic    : [])
+        .concat(Array.isArray(meta.eliteCinematicMoves) ? meta.eliteCinematicMoves : []);
 
       // 原作ステータス（6種）
       const baseStats = {
@@ -732,9 +932,9 @@ const pokemonUtil = {
         typesEn,
         baseStats,
         baseTotal,
-        goStats, // ← ここが null にならないはず
+        goStats,
         moves: {
-          normal : Array.isArray(fastIds)    ? fastIds.map(m => normMove(m, 'normal'))  : [],
+          normal : Array.isArray(fastIds)    ? fastIds.map(m => normMove(m, 'normal'))   : [],
           special: Array.isArray(chargedIds) ? chargedIds.map(m => normMove(m, 'special')) : []
         },
         _raw: p

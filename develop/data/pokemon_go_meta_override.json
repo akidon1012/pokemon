@@ -1,0 +1,434 @@
+{
+  "VENUSAUR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "VENUSAUR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 241,
+      "defence": 246
+    }
+  },
+  "CHARIZARD_TEMP_EVOLUTION_MEGA_X": {
+    "basePokemonId": "CHARIZARD",
+    "tempId": "TEMP_EVOLUTION_MEGA_X",
+    "stats": {
+      "stamina": 186,
+      "attack": 273,
+      "defence": 213
+    }
+  },
+  "CHARIZARD_TEMP_EVOLUTION_MEGA_Y": {
+    "basePokemonId": "CHARIZARD",
+    "tempId": "TEMP_EVOLUTION_MEGA_Y",
+    "stats": {
+      "stamina": 186,
+      "attack": 319,
+      "defence": 212
+    }
+  },
+  "BLASTOISE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "BLASTOISE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 188,
+      "attack": 264,
+      "defence": 237
+    }
+  },
+  "BEEDRILL_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "BEEDRILL",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 303,
+      "defence": 148
+    }
+  },
+  "PIDGEOT_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "PIDGEOT",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 195,
+      "attack": 280,
+      "defence": 175
+    }
+  },
+  "ALAKAZAM_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "ALAKAZAM",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 146,
+      "attack": 367,
+      "defence": 207
+    }
+  },
+  "SLOWBRO_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SLOWBRO",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 216,
+      "attack": 224,
+      "defence": 259
+    }
+  },
+  "GENGAR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GENGAR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 155,
+      "attack": 349,
+      "defence": 199
+    }
+  },
+  "KANGASKHAN_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "KANGASKHAN",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 233,
+      "attack": 246,
+      "defence": 210
+    }
+  },
+  "PINSIR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "PINSIR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 305,
+      "defence": 231
+    }
+  },
+  "GYARADOS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GYARADOS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 216,
+      "attack": 292,
+      "defence": 247
+    }
+  },
+  "AERODACTYL_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "AERODACTYL",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 292,
+      "defence": 210
+    }
+  },
+  "AMPHAROS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "AMPHAROS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 207,
+      "attack": 294,
+      "defence": 203
+    }
+  },
+  "STEELIX_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "STEELIX",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 181,
+      "attack": 212,
+      "defence": 327
+    }
+  },
+  "SCIZOR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SCIZOR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 279,
+      "defence": 250
+    }
+  },
+  "HERACROSS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "HERACROSS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 334,
+      "defence": 223
+    }
+  },
+  "HOUNDOOM_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "HOUNDOOM",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 181,
+      "attack": 289,
+      "defence": 194
+    }
+  },
+  "TYRANITAR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "TYRANITAR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 225,
+      "attack": 309,
+      "defence": 276
+    }
+  },
+  "SCEPTILE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SCEPTILE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 320,
+      "defence": 186
+    }
+  },
+  "BLAZIKEN_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "BLAZIKEN",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 329,
+      "defence": 168
+    }
+  },
+  "SWAMPERT_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SWAMPERT",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 225,
+      "attack": 283,
+      "defence": 218
+    }
+  },
+  "GARDEVOIR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GARDEVOIR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 169,
+      "attack": 326,
+      "defence": 229
+    }
+  },
+  "SABLEYE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SABLEYE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 137,
+      "attack": 151,
+      "defence": 216
+    }
+  },
+  "MAWILE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "MAWILE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 137,
+      "attack": 188,
+      "defence": 217
+    }
+  },
+  "AGGRON_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "AGGRON",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 247,
+      "defence": 331
+    }
+  },
+  "MEDICHAM_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "MEDICHAM",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 155,
+      "attack": 205,
+      "defence": 179
+    }
+  },
+  "MANECTRIC_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "MANECTRIC",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 286,
+      "defence": 179
+    }
+  },
+  "SHARPEDO_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SHARPEDO",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 289,
+      "defence": 144
+    }
+  },
+  "CAMERUPT_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "CAMERUPT",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 253,
+      "defence": 183
+    }
+  },
+  "ALTARIA_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "ALTARIA",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 181,
+      "attack": 222,
+      "defence": 218
+    }
+  },
+  "BANETTE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "BANETTE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 162,
+      "attack": 312,
+      "defence": 160
+    }
+  },
+  "ABSOL_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "ABSOL",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 314,
+      "defence": 130
+    }
+  },
+  "GLALIE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GLALIE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 252,
+      "defence": 168
+    }
+  },
+  "SALAMENCE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SALAMENCE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 216,
+      "attack": 310,
+      "defence": 251
+    }
+  },
+  "METAGROSS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "METAGROSS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 300,
+      "defence": 289
+    }
+  },
+  "LATIAS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "LATIAS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 289,
+      "defence": 297
+    }
+  },
+  "LATIOS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "LATIOS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 335,
+      "defence": 241
+    }
+  },
+  "KYOGRE_TEMP_EVOLUTION_PRIMAL": {
+    "basePokemonId": "KYOGRE",
+    "tempId": "TEMP_EVOLUTION_PRIMAL",
+    "stats": {
+      "stamina": 218,
+      "attack": 353,
+      "defence": 268
+    }
+  },
+  "GROUDON_TEMP_EVOLUTION_PRIMAL": {
+    "basePokemonId": "GROUDON",
+    "tempId": "TEMP_EVOLUTION_PRIMAL",
+    "stats": {
+      "stamina": 218,
+      "attack": 353,
+      "defence": 268
+    }
+  },
+  "RAYQUAZA_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "RAYQUAZA",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 227,
+      "attack": 377,
+      "defence": 210
+    }
+  },
+  "LOPUNNY_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "LOPUNNY",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 282,
+      "defence": 214
+    }
+  },
+  "GARCHOMP_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GARCHOMP",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 239,
+      "attack": 339,
+      "defence": 222
+    }
+  },
+  "LUCARIO_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "LUCARIO",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 172,
+      "attack": 310,
+      "defence": 175
+    }
+  },
+  "ABOMASNOW_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "ABOMASNOW",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 207,
+      "attack": 240,
+      "defence": 191
+    }
+  },
+  "GALLADE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GALLADE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 169,
+      "attack": 326,
+      "defence": 230
+    }
+  },
+  "AUDINO_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "AUDINO",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 230,
+      "attack": 147,
+      "defence": 239
+    }
+  },
+  "DIANCIE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "DIANCIE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 137,
+      "attack": 342,
+      "defence": 235
+    }
+  }
+}

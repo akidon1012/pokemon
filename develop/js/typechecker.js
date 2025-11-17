@@ -29,6 +29,42 @@ const tabs = {
     }
   }
 }
+const toggle = {
+  wrapper : '.js_toggle-wrapper',
+  trigger : '.js_toggle-trigger',
+  content : '.js_toggle-content',
+  isOpenedClassName : 'is_toggle-opened',
+
+  ini : function() {
+    // 既存のクリックイベントを一旦解除
+    $(document).off('click.toggle');
+
+    // document にイベント委譲する（どんな動的HTMLでも反応する）
+    $(document).on('click.toggle', toggle.trigger, function(e){
+      e.preventDefault();
+
+      const $btn = $(this);
+      const $wrapper = $btn.closest(toggle.wrapper);
+      const $content = $wrapper.find(toggle.content);
+
+      if ($content.length === 0) return;
+
+      toggle.toggle($btn, $content);
+    });
+  },
+
+  toggle : function($btn, $target) {
+    if ($btn.hasClass(toggle.isOpenedClassName)) {
+      // close
+      $btn.removeClass(toggle.isOpenedClassName);
+      $target.slideUp().removeClass(toggle.isOpenedClassName);
+    } else {
+      // open
+      $btn.addClass(toggle.isOpenedClassName);
+      $target.slideDown().addClass(toggle.isOpenedClassName);
+    }
+  }
+};
 
 const typeChecker = {
   MULT : { dbl: 1.6, half: 0.625, zero: 0.39 }, // 単タイプ時の係数
@@ -120,53 +156,33 @@ const typeChecker = {
       'fairy'
     ], 
     errMsg : '.js_error-msg',
-    ini: function() {
-      const sel = typeChecker.getType.checkbox || '[name="pokemon-type"]';
+    ini : function(typeData) {
+      console.log('[getType.ini] called', arguments);
+      // ★ 相性テーブルをここで必ず決定して保持する
+      const TABLE = Array.isArray(typeData)
+        ? typeData
+        : ((pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || []);
 
-      // ★ データ準備待ち（pokemonUtil.data を優先）
-      const POK = (pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__;
-      const DEF = (pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__;
-      const ready = Array.isArray(POK) && Array.isArray(DEF);
-      if (!ready) {
-        console.warn('[getType.ini] data not ready -> wait pokemon:data-ready');
-        $(document).off('pokemon:data-ready.getTypeIni')
-                  .on('pokemon:data-ready.getTypeIni', () => typeChecker.getType.ini());
-        return;
-      }
+      typeChecker.getType._chart = TABLE;   // ← これが undefined にならないようにする
+      typeChecker.getType._mode  = 'go';    // 一応モードも保持（今まで通り）
 
-      // ★ インデックスは一度だけ構築
-      if (!typeChecker.getType._index) typeChecker.getType._buildIndex();
+      const checkType = $(typeChecker.getType.checkbox);
 
-      // --- A) 一覧描画（既存の check を呼ぶ） ---
-      $(document).off('change.pokemonType.core')
-                .on('change.pokemonType.core', sel, function() {
-                    const DEF_NOW = (pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || [];
-                    typeChecker.getType.check(DEF_NOW, $(this));
-                });
+      // ここから下は「元々動いてた頃」のままに戻す
+      $(document).off('change.pokemonType');
+      $(document).on(
+        'change.pokemonType',
+        typeChecker.getType.checkbox,
+        function(e) {
+          const _this = $(this);
+          console.log('[pokemon-type change]', _this.val(), _this.prop('checked')); // デバッグ
 
-      // --- B) おすすめ（別名前空間） ---
-      $(document).off('change.pokemonType.recommend')
-                .on('change.pokemonType.recommend', sel, function() {
-                    const selected =
-                      (typeChecker.searchPokemon?.getSelectedTypesJa?.() || [])
-                      .map(v => pokemonUtil.translateTypes?.toJaType?.(v) || v);
+          // ★ check 側では引数をそのまま渡しておく（中で TABLE を再決定してるならそのまま）
+          typeChecker.getType.check(typeData, _this);
 
-                    const $wrap = $('.js_pokemon-recommend-list');
-                    if (!selected.length) { $wrap.empty(); return; }
-
-                    const DEF_NOW = (pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || [];
-                    const POK_NOW = (pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__ || [];
-
-                    const counter = pokemonUtil.getCounterTypes(selected, DEF_NOW) || [];
-                    const recs    = pokemonUtil.pickPokemonByTypes(counter, { dataset: POK_NOW, limit: 20 }) || [];
-                    const json    = pokemonUtil.getPokemonData(recs) || [];
-                    typeChecker.recommend.renderRecommendations($wrap, json);
-                    console.log('recommend', json);
-                });
-
-      // 初期反映
-      const first = document.querySelector(sel + ':checked');
-      if (first) $(first).trigger('change');
+          console.log('defenderTypesJa:', typeChecker.searchPokemon.getSelectedTypesJa());
+        }
+      );
     },
     check : function(typeData, btn) {
       const effectWrap = $(typeChecker.getType.effect);
@@ -186,11 +202,12 @@ const typeChecker = {
         .map(function(){ return $(this).val(); })
         .get();
 
-      // 0個 → クリア
+      // 0個 → 全クリア（相性表示・リスト・おすすめ）
       if (checked.length === 0) {
-        typeChecker.getType.clear();
+        typeChecker.getType.clear(); // ★ ここでおすすめリストも空にしている想定
         return;
       }
+
       // 3個以上はガード
       if (checked.length > 2) {
         typeChecker.getType.error();
@@ -198,18 +215,15 @@ const typeChecker = {
         return;
       }
 
-      // 描画リセット
+      // --- 相性表の描画 --------------------
       effectWrap.empty();
       effect1.empty(); effect2.empty(); effect3.empty(); effect4.empty(); effect5.empty();
 
-      // 全攻撃タイプを 1.0 で初期化
       const attackTypes = typeChecker.getType.typeName.slice();   // ['normal','fire',...]
       const multMap = {};
       attackTypes.forEach(function(t){ multMap[t] = 1.0; });
 
-      // 防御タイプごとに、防御相性テーブルから倍率を乗算
       checked.forEach(function(defTypeEn){
-        // row.type が EN、row.typeJa が JA のどちらでも拾えるように
         const defJa = pokemonUtil.translate.EtoJ(defTypeEn);
         const row =
           TABLE.find(function(r){ return r.type === defTypeEn; }) ||
@@ -221,27 +235,24 @@ const typeChecker = {
           const atkEn = e.type;  // 攻撃タイプ EN
           if (!attackTypes.includes(atkEn)) return;
 
-          // ★ここが一番大事：必ず normalizeMultiplier を通す
-          var m = 1.0;
+          let m = 1.0;
           if (pokemonUtil && typeof pokemonUtil.normalizeMultiplier === 'function') {
             m = pokemonUtil.normalizeMultiplier(e);
           } else if (e.mult != null) {
-            // 念のため旧形式にも対応
-            var tmp = Number(String(e.mult).replace(/[^\d.]/g, ''));
+            const tmp = Number(String(e.mult).replace(/[^\d.]/g, ''));
             m = (Number.isFinite(tmp) && tmp > 0) ? tmp : 1.0;
           }
 
-          var cur = multMap[atkEn];
+          let cur = multMap[atkEn];
           if (!Number.isFinite(cur)) cur = 1.0;
           multMap[atkEn] = cur * m;
         });
       });
 
-      // バケットごとに出力
       attackTypes.forEach(function(t){
-        var raw = multMap[t];
-        if (!Number.isFinite(raw) || raw <= 0) raw = 1.0;  // NaN/0 を等倍に潰す
-        const mult = Number(raw.toFixed(2));               // 表示用に丸め
+        let raw = multMap[t];
+        if (!Number.isFinite(raw) || raw <= 0) raw = 1.0;
+        const mult = Number(raw.toFixed(2));
         const ja   = pokemonUtil.translate.EtoJ(t);
 
         const html =
@@ -249,9 +260,8 @@ const typeChecker = {
           <li><a href="javascript:void(0);" data-type="${t}">
             <span class="icon icon-type-${t}"></span>${ja} <span class="multiplier">×${mult}</span>
           </a></li>
-          `
+          `;
 
-        // bucket() は既存のグローバル想定（NaNはもう来ない）
         switch (typeChecker.bucket(mult)) {
           case 'x2win':  effect5.append(html); break; // 2.56
           case 'x1win':  effect4.append(html); break; // 1.6
@@ -261,7 +271,7 @@ const typeChecker = {
         }
       });
 
-      // 検索リストは従来どおり再構築
+      // --- ポケモン一覧のフィルタ（今まで通り） --------------------
       typeChecker.searchPokemon.clear(window.__pokemonListData || []);
       const searchWrapper = $(typeChecker.searchPokemon.wrapper);
       const pokemonList   = searchWrapper.find(typeChecker.searchPokemon.pokemonList);
@@ -271,10 +281,55 @@ const typeChecker = {
       const selectedJa = (typeof typeChecker.searchPokemon.getSelectedTypesJa === 'function')
         ? typeChecker.searchPokemon.getSelectedTypesJa()
         : [];
+
+      // リストの絞り込みだけ rAF で（ここは元の挙動をキープ）
       requestAnimationFrame(() => {
         typeChecker.getType._filterListByTypesJa(selectedJa);
       });
+
+      // --- ★ 対策おすすめリストの更新（ここだけでやる） --------------------
+      try {
+        // 受ける側タイプ（英）→ 日本語
+        const defenderTypesJa = checked
+          .map(function(en){ return pokemonUtil.translate.EtoJ(en); })
+          .filter(Boolean);
+
+        console.log('[recommend] defenderTypesJa =', defenderTypesJa);
+
+        const $wrapRecommend = $('.js_pokemon-recommend-list');
+
+        if (!defenderTypesJa.length) {
+          // 0個ならおすすめはクリア
+          $wrapRecommend.empty();
+          console.log('[recommend] no defender types, clear list');
+          return;
+        }
+
+        const POK_NOW =
+          (pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__ || [];
+
+        const DEF_NOW = Array.isArray(TABLE)
+          ? TABLE
+          : ((pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || []);
+
+        const recList = typeChecker.recommend.recommendCounters({
+          defenderTypesJa: defenderTypesJa,
+          pokemonDataset : POK_NOW,
+          defenseChart   : DEF_NOW,
+          limit          : 20
+        }) || [];
+
+        console.log('[recommend] recList length =', recList.length);
+        if (recList.length) {
+          console.log('[recommend] first =', recList[0]);
+        }
+
+        typeChecker.recommend.renderRecommendations($wrapRecommend, recList);
+      } catch (err) {
+        // console.error('[getType.check] recommend error:', err);
+      }
     },
+
     clear : function() {
       const effect = $(typeChecker.getType.effect);
       const resultData = $(typeChecker.getType.resultData).find('input[type="hidden"]');
@@ -367,6 +422,7 @@ const typeChecker = {
     typeList : '.js_pokemon-type-list',
     textbox : '.js_pokemon-search-input',
     checkbox : '[name="pokemon-type"]',
+    recommendList : ('.js_pokemon-recommend-list'),
     isActiveClassName : 'is_active',
     resetBtn : '.js_reset',
     clearBtn : '.js_search-clear',
@@ -413,6 +469,7 @@ const typeChecker = {
 
     clearSelected : function(){
       $(this.selectedArea).empty();
+      $(typeChecker.searchPokemon.recommendList).empty();
     },
 
     // ========== リスト項目 → pokeオブジェクトの正規化 ==========
@@ -480,6 +537,7 @@ const typeChecker = {
       const wrapper     = $(typeChecker.searchPokemon.wrapper);
       const pokemonList = wrapper.find(typeChecker.searchPokemon.pokemonList);
       const checkbox    = $(typeChecker.getType.checkbox);
+      const recommendList = $(typeChecker.getType.checkbox);
       const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
       const data        = typeChecker.searchPokemon.cacheData;
 
@@ -680,196 +738,480 @@ const typeChecker = {
   },
 
   recommend : {
-    recommendCounters: function(options) {
-      if (typeChecker.recommend.recommendCounters._running) return [];
-      typeChecker.recommend.recommendCounters._running = true;
-
+    updateByDefenderTypes: function(checkedEn, defenseTable){
       try {
-        const defenderTypesJa = Array.isArray(options?.defenderTypesJa) ? options.defenderTypesJa : [];
+        console.log('[recommend.updateByDefenderTypes] checkedEn =', checkedEn);
 
-        const pokemonDataset =
-          Array.isArray(options?.pokemonDataset)
-            ? options.pokemonDataset
-            : ((pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__ || []);
+        const $wrap = $('.js_pokemon-recommend-list');
 
-        const defenseChart =
-          Array.isArray(options?.defenseChart)
-            ? options.defenseChart
-            : ((pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || []);
+        // 受ける側タイプ（英）→ 日本語に変換
+        const defenderTypesJa = (Array.isArray(checkedEn) ? checkedEn : [])
+          .map(function(en){ return pokemonUtil.translate.EtoJ(en); })
+          .filter(Boolean);
 
-        const limit = Number(options?.limit || 5);
-        if (!defenderTypesJa.length) return [];
+        if (!defenderTypesJa.length) {
+          // チェックが0個のときはおすすめをクリア
+          $wrap.empty();
+          console.log('[recommend.updateByDefenderTypes] no defender types, clear list');
+          return;
+        }
 
-        const EPS = 1e-6;
+        const DEF_NOW = Array.isArray(defenseTable)
+          ? defenseTable
+          : ((pokemonUtil?.data?.get('TYPE_DEFENSE')) || window.__TYPE_DEFENSE_TABLE__ || []);
 
-        const findDefenseRow = function(defJa) {
-          const defEn = pokemonUtil.translateTypes.toEnType(defJa);
-          if (!defEn) return null;
-          const defEnLower = defEn.toLowerCase();
-          return defenseChart.find(r => (r.type || '').toLowerCase() === defEnLower) || null;
-        };
+        const POK_NOW =
+          (pokemonUtil?.data?.get('POKEMON_DATA')) || window.__POKEMON_DATA__ || [];
 
-        const multMap = new Map();
-        defenderTypesJa.forEach(defJa => {
-          const row = findDefenseRow(defJa);
-          if (!row || !Array.isArray(row.effect)) return;
-          row.effect.forEach(e => {
-            const atkJa = pokemonUtil.translateTypes.toJaType(e.type);
-            if (!atkJa) return;
-            const m   = pokemonUtil.normalizeMultiplier(e);
-            const cur = multMap.get(atkJa) ?? 1.0;
-            multMap.set(atkJa, cur * m);
-          });
-        });
+        const recList = typeChecker.recommend.recommendCounters({
+          defenderTypesJa: defenderTypesJa,
+          pokemonDataset : POK_NOW,
+          defenseChart   : DEF_NOW,
+          limit          : 20
+        }) || [];
 
-        const counterTypesJa = Array.from(multMap.entries())
-          .filter(([, v]) => v > (1.0 + EPS))
-          .sort((a, b) => b[1] - a[1])
-          .map(([k]) => k);
-
-        if (!counterTypesJa.length) return [];
-
-        const list = pokemonDataset
-          .filter(p => !p.isMegaEvolution)
-          .map(p => {
-            const typesJa = pokemonUtil.normalizeTypesJa(p);
-            const hit     = counterTypesJa.some(t => typesJa.includes(t));
-            const total   = pokemonUtil.totalBase(p);
-            return Object.assign({}, p, { _typesJa: typesJa, _hits: hit, _total: total });
-          })
-          .filter(p => p._hits)
-          .sort((a, b) => b._total - a._total)
-          .slice(0, limit);
-
-        return list;
-      } finally {
-        typeChecker.recommend.recommendCounters._running = false;
+        console.log('[recommend.updateByDefenderTypes] results =', recList.length);
+        typeChecker.recommend.renderRecommendations($wrap, recList);
+      } catch (err) {
+        console.error('[recommend.updateByDefenderTypes] error:', err);
       }
     },
 
-    renderRecommendations : function($wrap, json) {
-      if (!$wrap || !$wrap.length) {
-        console.warn('[recommend.renderRecommendations] wrapper not found:', $wrap);
+    // 対策おすすめを計算して返す
+    recommendCounters : function(options) {
+      const defenderTypesJa = options?.defenderTypesJa || [];
+      const pokemonDataset  = options?.pokemonDataset  || [];
+      const defenseChart    = options?.defenseChart    ||
+        (pokemonUtil?.data?.get('TYPE_DEFENSE') || window.__TYPE_DEFENSE_TABLE__ || []);
+      const limit           = Number(options?.limit || 20);
+
+      console.log('[recommendCounters] start defJa=', defenderTypesJa, 'dataset=', Array.isArray(pokemonDataset) ? pokemonDataset.length : 0);
+
+      if (!defenderTypesJa.length || !Array.isArray(defenseChart)) {
+        return [];
+      }
+
+      // 攻撃タイプ × 防御タイプ構成 → 倍率をメモ化
+      const multCache = new Map();
+      const keyOf = function(atkEn) {
+        return atkEn + '|' + defenderTypesJa.join('+');
+      };
+
+      const getMultVsDefenders = function(atkEnRaw) {
+        const atkEn = (atkEnRaw || '').toString().toLowerCase();
+        if (!atkEn) return 1.0;
+
+        const k = keyOf(atkEn);
+        if (multCache.has(k)) return multCache.get(k);
+
+        let total = 1.0;
+
+        defenderTypesJa.forEach(function(defJa){
+          if (!defJa) return;
+
+          const defEn = pokemonUtil.translate.JtoE(defJa);
+          const row =
+            defenseChart.find(function(r){ return r.typeJa === defJa; }) ||
+            defenseChart.find(function(r){ return r.type === defEn; });
+
+          if (!row || !Array.isArray(row.effect)) return;
+
+          const eff = row.effect.find(function(e){
+            return (e.type || '').toString().toLowerCase() === atkEn;
+          });
+          if (!eff) return;
+
+          let m = 1.0;
+          if (pokemonUtil && typeof pokemonUtil.normalizeMultiplier === 'function') {
+            m = pokemonUtil.normalizeMultiplier(eff);
+          } else if (eff.multiplier != null) {
+            const tmp = Number(eff.multiplier);
+            if (Number.isFinite(tmp) && tmp > 0) m = tmp;
+          }
+          total *= m;
+        });
+
+        if (!Number.isFinite(total) || total <= 0) total = 1.0;
+        multCache.set(k, total);
+        return total;
+      };
+
+      const results = [];
+      const eps = 1e-3;
+      const isSE = function(mult) { return mult >= (1.6 - eps); }; // こうかばつぐんのみ
+
+      const arr = Array.isArray(pokemonDataset) ? pokemonDataset : [pokemonDataset];
+
+      arr.forEach(function(p) {
+        const pdArr = pokemonUtil.getPokemonData(p);
+        let pd      = Array.isArray(pdArr) ? pdArr[0] : pdArr;
+        if (!pd || !pd.id) return;
+
+        // ★ ここでステータスだけ上書き（なければ何もしない）
+        if (pokemonUtil.attachGoStats) {
+          pd = pokemonUtil.attachGoStats(pd) || pd;
+        }
+
+        const normalMoves  = (pd.moves && pd.moves.normal)  || [];
+        const specialMoves = (pd.moves && pd.moves.special) || [];
+
+        // 攻撃側タイプ（STAB 判定用）
+        const attackerTypesEn = (pd.typesEn || [])
+          .map(function(t){ return (t || '').toString().toLowerCase(); })
+          .filter(Boolean);
+
+        const seNormal  = [];
+        const seSpecial = [];
+        let bestMoveScore = 0;
+
+        const pushMove = function(m, category) {
+          if (!m) return;
+          const typeEn = (m.typeEn || '').toString().toLowerCase();
+          if (!typeEn) return;
+
+          const mult = getMultVsDefenders(typeEn);
+          if (!isSE(mult)) return; // こうかばつぐん以外は候補外
+
+          const power = Number(m.power || 0);
+          if (!power) return;
+
+          // STAB 判定
+          const hasStab = attackerTypesEn.includes(typeEn);
+          const stab    = hasStab ? 1.2 : 1.0;
+
+          // ワザ単体スコア（威力 × 相性倍率 × STAB）
+          const moveScore = power * mult * stab;
+
+          const move = $.extend({}, m, {
+            mult:      mult,
+            stab:      stab,
+            moveScore: moveScore,
+            category:  category
+          });
+
+          if (category === 'normal') {
+            seNormal.push(move);
+          } else {
+            seSpecial.push(move);
+          }
+
+          if (moveScore > bestMoveScore) bestMoveScore = moveScore;
+        };
+
+        normalMoves.forEach(function(m){ pushMove(m, 'normal'); });
+        specialMoves.forEach(function(m){ pushMove(m, 'special'); });
+
+        // SE 技が1つもなければ候補外
+        if (!seNormal.length && !seSpecial.length) return;
+
+        // ===== ポケモン側の総合スコア =====
+        const atkStat = pd.goStats?.attack  || 0;
+        const defStat = pd.goStats?.defense || pd.goStats?.defence || 0;
+        const staStat = pd.goStats?.stamina || 0;
+
+        const MAX_ATK    = 300;
+        const MAX_DEFSTA = 600;
+
+        const atkNorm  = atkStat / MAX_ATK;
+        const bulkNorm = (defStat + staStat) / MAX_DEFSTA;
+
+        const statWeight = (atkNorm * 0.7) + (bulkNorm * 0.3);
+
+        const monScore = bestMoveScore * (statWeight || 1);
+
+        results.push({
+          id:        pd.id,
+          nameJa:    pd.nameJa,
+          nameEn:    pd.nameEn,
+          typesJa:   pd.typesJa || [],
+          typesEn:   pd.typesEn || [],
+          moves: {
+            normal:  seNormal,
+            special: seSpecial
+          },
+          goStats:   pd.goStats || {},
+          baseTotal: pd.baseTotal || 0,
+          score:     monScore
+        });
+      });
+
+      // スコア順に並べる（同点は攻撃種族値 → BST）
+      results.sort(function(a, b){
+        if (b.score !== a.score) return b.score - a.score;
+        const atkA = a.goStats?.attack || 0;
+        const atkB = b.goStats?.attack || 0;
+        if (atkB !== atkA) return atkB - atkA;
+        return (b.baseTotal || 0) - (a.baseTotal || 0);
+      });
+
+      const sliced = results.slice(0, limit);
+      console.log('[recommendCounters] done, candidates =', sliced.length);
+      if (sliced[0]) console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
+
+      return sliced;
+    },
+
+    renderRecommendations: function($wrap, json) {
+      const $w = ($wrap instanceof jQuery) ? $wrap : $($wrap);
+      if (!$w.length) return;
+
+      const list = Array.isArray(json) ? json.slice() : [];
+      if (!list.length) {
+        $w.empty();
         return;
       }
-      if (!Array.isArray(json)) json = [];
-      let html = '';
-      for (let i = 0; i < json.length; i++) {
-        const d = json[i] || {};
-        console.log(d);
-        const img = pokemonUtil.getImageUrlByNo(d.id);
-        const typesJa = d.typesJa;
-        const typesEn = d.typesEn;
-        let typeHtml = '';
-        for (let j=0; j<typesJa.length; j++) {
-          typeHtml = `
-            <div class="badge"><span class="icon icon-type-${typesEn[j]}"></span>${typesJa[j]}</div>
-          `
-        }
-        const normalAttacks = d.moves.normal;
-        const normalLabel   = normalAttacks[0]?.typeJa || 'ノーマル';  // ★追加
-        let normalAttacksHtml = `
-          <dl class="pokemon-recommend-list-item-atack">
-            <dt class="pokemon-recommend-list-item-atack-label">${normalLabel}</dt>
-        `;
-        for ( let j=0; j<normalAttacks.length; j++ ) {
-          normalAttacksHtml += `
-            <dd class="pokemon-recommend-list-item-atack-name">
-              <span class="icon icon-type-${normalAttacks[j].typeEn}"></span>${normalAttacks[j].nameJa}
-            </dd>
-          `
-        }
-        normalAttacksHtml += `</dl>`;
 
-        const specialAttacks = d.moves.special;
-        const specialLabel   = specialAttacks[0]?.typeJa || 'スペシャル'; // ★追加
-        let specialAttacksHtml = `
-          <dl class="pokemon-recommend-list-item-atack">
-            <dt class="pokemon-recommend-list-item-atack-label">${specialLabel}</dt>
-        `;
-        for ( let j=0; j<specialAttacks.length; j++ ) {
-          specialAttacksHtml += `
-            <dd class="pokemon-recommend-list-item-atack-name">
-              <span class="icon icon-type-${specialAttacks[j].typeEn}"></span>${specialAttacks[j].nameJa}
-            </dd>
-          `
+      const EPS = 1e-6;
+
+      if (!list.length) {
+        $w.empty();
+        return;
+      }
+
+      // === ここから：スコア計算＆ソート（既存の _score 計算＋ sort をこのブロックに差し替え） ===
+
+      // 技1発の評価：威力 × STAB
+      function scoreBestSpecialForPokemon(d) {
+        if (!d || !d.moves) return 0;
+
+        const specials = Array.isArray(d.moves.special) ? d.moves.special : [];
+        if (!specials.length) return 0;
+
+        // ポケモンのタイプ（英）
+        const typesEn = Array.isArray(d.typesEn)
+          ? d.typesEn.map(t => (t || '').toString().toLowerCase())
+          : [];
+
+        let bestScore = 0;
+
+        for (let i = 0; i < specials.length; i++) {
+          const m = specials[i] || {};
+          const power = Number(m.power) || 0;
+          if (!power) continue;
+
+          const typeEn = (m.typeEn || m.type || '').toString().toLowerCase();
+          if (!typeEn) continue;
+
+          // STAB（タイプ一致なら 1.2 倍）
+          const hasStab = typesEn.includes(typeEn);
+          const stab = hasStab ? 1.2 : 1.0;
+
+          const val = power * stab;  // 1発の強さ
+          if (val > bestScore) bestScore = val;
         }
-        specialAttacksHtml += `</dl>`;
+
+        return bestScore;
+      }
+
+      list.forEach(d => {
+        // GO攻撃種族値（なければ原作攻撃、なければ0）
+        const atk =
+          (d.goStats && d.goStats.attack != null)
+            ? d.goStats.attack
+            : (d.baseStats && d.baseStats.attack != null
+                ? d.baseStats.attack
+                : 0);
+
+        const bestSpecialScore = scoreBestSpecialForPokemon(d);
+
+        d._bestSpecialScore = bestSpecialScore;
+        d._score = atk * bestSpecialScore; // ★最終スコア
+      });
+
+      list.sort((a, b) => {
+        const sa = (a && a._score != null) ? a._score : 0;
+        const sb = (b && b._score != null) ? b._score : 0;
+        if (sb !== sa) return sb - sa; // スコア降順
+
+        const atkA =
+          (a && a.goStats && a.goStats.attack != null) ? a.goStats.attack :
+          (a && a.baseStats && a.baseStats.attack != null) ? a.baseStats.attack : 0;
+        const atkB =
+          (b && b.goStats && b.goStats.attack != null) ? b.goStats.attack :
+          (b && b.baseStats && b.baseStats.attack != null) ? b.baseStats.attack : 0;
+        if (atkB !== atkA) return atkB - atkA; // 攻撃値降順
+
+        const bstA = (a && a.baseTotal != null) ? a.baseTotal : 0;
+        const bstB = (b && b.baseTotal != null) ? b.baseTotal : 0;
+        return bstB - bstA; // BST降順
+      });
+      // === スコア計算＆ソートここまで ===
+      // === HTML組み立て ===
+
+      // タイプバッジ
+      const buildTypeBadges = function(typesJa, typesEn) {
+        const jaArr = Array.isArray(typesJa) ? typesJa : [];
+        const enArr = Array.isArray(typesEn) ? typesEn : [];
+        let html = '';
+        for (let i = 0; i < Math.max(jaArr.length, enArr.length); i++) {
+          const ja = jaArr[i] || '';
+          const en = (enArr[i] || '').toString().toLowerCase();
+          if (!ja) continue;
+          html += `
+            <div class="badge">
+              <span class="icon icon-type-${en}"></span>${ja}
+            </div>`;
+        }
+        return html;
+      };
+
+      // わざブロック生成
+      const buildMovesHtml = function(label, moves, opts) {
+        const list = Array.isArray(moves) ? moves.slice() : [];
+        if (!list.length) return '';
+
+        const bestTypeEn   = (opts && opts.bestTypeEn)   || '';
+        const bestMoveId   = (opts && opts.bestMoveId)   || '';
+        const isSpecial    = (label === 'スペシャル');
+
+        let filtered = list;
+
+        // 通常技：スペシャルと同タイプのものを優先
+        if (!isSpecial && bestTypeEn) {
+          const sameType = list.filter(function(m) {
+            return (m.typeEn || '').toString().toLowerCase() === bestTypeEn;
+          });
+          if (sameType.length) {
+            filtered = sameType;
+          }
+        }
+
+        // スペシャル：bestSpecial を先頭に並べる
+        if (isSpecial && bestMoveId) {
+          filtered.sort(function(a, b) {
+            const idA = a && a.id;
+            const idB = b && b.id;
+            if (idA === bestMoveId && idB !== bestMoveId) return -1;
+            if (idB === bestMoveId && idA !== bestMoveId) return 1;
+            const pA = Number(a.power) || 0;
+            const pB = Number(b.power) || 0;
+            return pB - pA;
+          });
+        }
+
+        let block = `
+          <div class="pokemon-recommend-list-item-attack-wrapper">
+            <dl class="pokemon-recommend-list-item-attack">
+              <dt class="pokemon-recommend-list-item-attack-label">${label}</dt>`;
+
+        for (let j = 0; j < filtered.length; j++) {
+          const m = filtered[j] || {};
+          const typeEn = (m.typeEn || '').toString().toLowerCase();
+          const name   = m.nameJa || m.nameEn || '-';
+          const power  = (m.power != null) ? m.power : '-';
+
+          // ゲージ本数（スペシャルのみ）
+          let gaugeNum = null;
+          if (isSpecial) {
+            let bars = m.gaugeBars;
+            if (!bars) {
+              const e = Math.abs(Number(m.energy) || 0);
+              if (e > 0) {
+                if (e <= 35)      bars = 3;
+                else if (e <=55)  bars = 2;
+                else              bars = 1;
+              } else {
+                bars = 1;
+              }
+            }
+            gaugeNum = Math.max(1, Math.min(3, bars));
+          }
+
+          block += `
+              <dd class="pokemon-recommend-list-item-attack-info is_${typeEn}">
+                <div class="pokemon-recommend-list-item-attack-name">
+                  <span class="icon icon-type-${typeEn}"></span>${name}
+                </div>`;
+
+          if (isSpecial) {
+            block += `
+                <div class="pokemon-recommend-list-item-attack-gauge">
+                  <svg class="gauge" aria-hidden="true"><use href="#gauge${gaugeNum}"></use></svg>
+                </div>`;
+          }
+
+          block += `
+                <div class="pokemon-recommend-list-item-attack-power">${power}</div>
+              </dd>`;
+        }
+
+        block += `
+            </dl>
+          </div>`;
+
+        return block;
+      };
+
+      let html = '';
+
+      for (let i = 0; i < list.length; i++) {
+        const d = list[i] || {};
+        const img = pokemonUtil.getImageUrlByNo(d.id);
+        const typesJa = d.typesJa || [];
+        const typesEn = d.typesEn || [];
+
+        const typeHtml = buildTypeBadges(typesJa, typesEn);
+
+        const normalMoves  = Array.isArray(d.moves?.normal)  ? d.moves.normal  : [];
+        const specialMoves = Array.isArray(d.moves?.special) ? d.moves.special : [];
+
+        const bestSpecial  = d._bestSpecial || null;
+        const bestTypeEn   = d._bestTypeEn || '';
+        const bestMoveId   = bestSpecial ? bestSpecial.id : '';
+
+        const normalHtml  = buildMovesHtml('ノーマル',  normalMoves,  { bestTypeEn });
+        const specialHtml = buildMovesHtml('スペシャル', specialMoves, { bestTypeEn, bestMoveId });
+
+        const goAtk  = d.goStats?.attack  ?? '-';
+        const goDef  = d.goStats?.defense ?? '-';
+        const goStam = d.goStats?.stamina ?? '-';
 
         html += `
           <li class="pokemon-recommend-list-item js_toggle-wrapper">
             <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
               <div class="pokemon-info-wrapper">
                 <div class="pokemon-info-img">
-                  <img src="${img}" decoding="async" loading="lazy" alt="${d.nameJa}">
+                  <img src="${img}" decoding="async" loading="lazy" alt="${d.nameJa || '-'}">
                 </div>
-                <div class="pokemon-info-name">${d.nameJa}</div>
+                <div class="pokemon-info-name">${d.nameJa || '-'}</div>
                 <div class="pokemon-info-type">
                   ${typeHtml}
                 </div>
               </div>
-              <a href="" class="js_toggle-trigger"></a>
+              <a href="javascript:void(0);" class="js_toggle-trigger"></a>
             </div>
             <div class="js_toggle-content">
               <dl class="pokemon-recommend-info-score">
-                <dt class="pokemon-recommend-info-score-label">種族値</dt>
+                <dt class="pokemon-recommend-info-score-label">種族値(GO)</dt>
                 <dl class="pokemon-recommend-info-score-value">
                   <ul class="pokemon-recommend-info-score-list">
                     <li class="pokemon-recommend-info-score-list-item">
-                      こうげき <span class="num">${d.goStats.attack}</span>
+                      こうげき <span class="num">${goAtk}</span>
                     </li>
                     <li class="pokemon-recommend-info-score-list-item">
-                      ぼうぎょ <span class="num">${d.goStats.defense}</span>
+                      ぼうぎょ <span class="num">${goDef}</span>
                     </li>
                     <li class="pokemon-recommend-info-score-list-item">
-                      HP <span class="num">${d.goStats.stamina}</span>
+                      HP <span class="num">${goStam}</span>
                     </li>
                   </ul>
                 </dl>
               </dl>
-              <div class="pokemon-recommend-list-item-atack-wrapper">
-                ${normalAttacksHtml}
-                ${specialAttacksHtml}
+              <div class="pokemon-recommend-list-item-attack-wrapper">
+                ${normalHtml}
+                ${specialHtml}
               </div>
             </div>
-          </li>
-        `
-        // html += '<li class="pokemon-recommend-item">';
-        // html +=   '<div class="pokemon-head">';
-        // html +=     '<span class="pokemon-name">' + (d.nameJa || d.nameEn || '-') + '</span>';
-        // html +=     '<span class="pokemon-types">' + (Array.isArray(d.typesJa) && d.typesJa.length ? d.typesJa.join(' / ') : '-') + '</span>';
-        // html +=     '<span class="pokemon-total">BST: ' + (d.baseTotal ?? '-') + '</span>';
-        // html +=   '</div>';
-
-        // html +=   '<div class="pokemon-moves pokemon-moves-normal"><ul>';
-        // (d.moves?.normal || []).forEach(m => {
-        //   html += '<li class="move move-normal">';
-        //   html +=   '<span class="move-name">' + (m.nameJa || m.nameEn || '-') + '</span>';
-        //   html +=   '<span class="move-type">[' + (m.typeJa || m.typeEn || '-') + ']</span>';
-        //   if (m.power != null)  html += '<span class="move-power"> P:' + m.power + '</span>';
-        //   if (m.turns != null)  html += '<span class="move-turns"> T:' + m.turns + '</span>';
-        //   html += '</li>';
-        // });
-        // html +=   '</ul></div>';
-
-        // html +=   '<div class="pokemon-moves pokemon-moves-special"><ul>';
-        // (d.moves?.special || []).forEach(m => {
-        //   html += '<li class="move move-special">';
-        //   html +=   '<span class="move-name">' + (m.nameJa || m.nameEn || '-') + '</span>';
-        //   html +=   '<span class="move-type">[' + (m.typeJa || m.typeEn || '-') + ']</span>';
-        //   if (m.power  != null) html += '<span class="move-power"> P:' + m.power + '</span>';
-        //   if (m.energy != null) html += '<span class="move-energy"> E:' + m.energy + '</span>';
-        //   html += '</li>';
-        // });
-        // html +=   '</ul></div>';
-
-        // html += '</li>';
+          </li>`;
       }
-      $wrap.html(html);
+
+      $w.html(html);
+      if (window.toggle && typeof window.toggle.ini === 'function') {
+        toggle.ini();
+      }
     },
 
   },
-
 
   createRecommendHtml : function(wrapper, pokemon) {
     const pokemonData = getPokemonData(pokemon);
@@ -890,6 +1232,7 @@ const typeChecker = {
 
 $(function() {
   tabs.ini();
+  toggle.ini();
 
   pokemonUtil.data.onReady(state => {
     typeChecker.searchPokemon.ini(state.POKEMON_DATA);
