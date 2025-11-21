@@ -44,3 +44,6 @@ export function toTypeJa(raw) {
   if (!en) return null;
   return TYPE_JA_MAP[en] || en;
 }
+
+// JSONデータ自動生成
+// npm run build:data:all

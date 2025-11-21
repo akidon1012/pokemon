@@ -41,8 +41,17 @@
     "xlsx": "^0.15.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:data:moves_master": "node tools/build_moves_master.mjs",
+    "build:data:moves_localized": "node tools/build_moves_localized.mjs",
+    "build:data:move_dict": "node tools/build_move_name_dict_ja.mjs",
+    "build:data:type_defense": "node tools/build_type_json_defense.mjs",
+    "build:data:pokemon_list": "node tools/build_pokemon_list_from_gm.mjs",
+    "build:data:go_meta": "node tools/build_pokemon_go_meta.mjs",
+    "build:data:go_meta_override": "node tools/build_pokemon_go_meta_override.mjs",
+    "build:data:all": "npm run build:data:moves_master && npm run build:data:moves_localized && npm run build:data:move_dict && npm run build:data:type_defense && npm run build:data:go_meta && npm run build:data:go_meta_override"
   },
+
   "repository": {
     "type": "git"
   },

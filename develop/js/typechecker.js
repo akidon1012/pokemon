@@ -692,9 +692,9 @@ const typeChecker = {
           pokemonName += '（' + data[i].form + '）';
         }
         const no = data[i].no;
-        const types = data[i].types;
+        const typesJa = data[i].typesJa;
         if ( pokemonName ) {
-          pokemonList.append(`<li><a href="javascript:void(0);" data-no="${no}" data-types-ja="${types.join(',')}">${pokemonName}</a></li>`);
+          pokemonList.append(`<li><a href="javascript:void(0);" data-no="${no}" data-types-ja="${typesJa.join(',')}">${pokemonName}</a></li>`);
         }
       }
       textbox.val('');
@@ -721,7 +721,7 @@ const typeChecker = {
         const totalAttack = attack + spAttack;
         const totaldefense = defense + spdefense;
         const total = hp + totalAttack + totaldefense;
-        const types = data[i].types;
+        const types = data[i].typesJa;
         let flag = 0;
         for ( let j=0; j<types.length; j++ ) {
           if ( pokemonUtil.translate.JtoE(types[j]) == type ) {
