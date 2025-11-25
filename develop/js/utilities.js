@@ -1,10 +1,16 @@
+// 例外的に `_00` 以外のアイコンを使うポケモン: dexNo -> suffix
+// 必要になったらここに追加していく
+const POKEMON_ICON_SUFFIX_BY_NO = {
+  // 865: '31', // ネギガナイト: pokemon_icon_865_31.png
+  // ほかにも見つかったらここへ追記
+};
+
 const pokemonCard = {
   build: function(poke) { 
     const name  = poke?.name  || '';
     const img   = poke?.image || 'https://placehold.jp/300x300.png';
     const types = Array.isArray(poke?.types) ? poke.types : [];
 
-    // ★ 修正ここから ★
     const typeBadges = types.map(function(tJa) {
       const tEn = (pokemonUtil.translate.JtoE(tJa) || '').toLowerCase();
       return `
@@ -12,12 +18,17 @@ const pokemonCard = {
           <span class="icon icon-type-${tEn}"></span>${tJa}
         </div>`;
     }).join('');
-    // ★ 修正ここまで ★
 
     return `
   <div class="pokemon-info-wrapper">
     <div class="pokemon-info-img">
-      <img src="${img}" decoding="async" loading="lazy" alt="${name}">
+      <img
+        src="${img}"
+        decoding="async"
+        loading="lazy"
+        alt="${name}"
+        onerror="pokemonUtil.handleImageError(this)"
+      >
     </div>
     <div class="pokemon-info-name">${name}</div>
     <div class="pokemon-info-type">
@@ -274,13 +285,104 @@ attachGoStats : (function(){
 })(),
 
   // 画像URL関連 ---------------------------------------------------
-  getImageUrlByNo : function(no) {
-    const id = parseInt(no, 10);
-    if (!id || isNaN(id)) {
-      console.warn('Invalid Pokémon ID:', no);
-      return 'https://placehold.jp/300x300.png';
+  getImageUrl : function(p) {
+    if (!p || !p.no) return '';
+
+    const no4 = String(p.no).padStart(4, '0');
+    const id  = String(p.pokemonId || '').toUpperCase();
+    let suffix = '00';
+
+    const kind = p.formKind;    // 'base' | 'mega' | 'primal' | 'region'
+    const region = p.region;    // 'alola' | 'galar' | null
+
+    if (kind === 'mega') {
+      let sub = 'mega';
+      if (/_MEGA_X$/i.test(p.form)) sub = 'mega_x';
+      if (/_MEGA_Y$/i.test(p.form)) sub = 'mega_y';
+
+      const mapKey = `${id}|${sub}`;
+      suffix = pokemonSpecialIconMap[mapKey] ?? '00';
+
+    } else if (kind === 'primal') {
+      suffix = pokemonSpecialIconMap[`${id}|primal`] ?? '00';
+
+    } else if (kind === 'region' && region) {
+      suffix = pokemonSpecialIconMap[`${id}|${region}`] ?? '00';
     }
-    return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png';
+
+    return `/images/pokemon/pokemon_icon_${no4}_${suffix}.png`;
+  },
+
+  getImageUrlByNo : function(no) {
+    if (!no && no !== 0) return '/images/no_img.svg';
+
+    const n3 = String(no).padStart(3, '0');
+
+    // 1. まずは通常フォーム用の _00 を優先
+    if (pokemonUtil.imageSuffixExists(no, '00')) {
+      return '/images/pokemon/pokemon_icon_' + n3 + '_00.png';
+    }
+
+    // 2. _00 が無ければ、その No の suffix 一覧を取得して先頭を使う
+    const suffixList = pokemonUtil.listAvailableFormSuffix(no);
+    if (suffixList.length > 0) {
+      const suffix = suffixList[0]; // ここは必要に応じてソートルールを変えてもOK
+      return '/images/pokemon/pokemon_icon_' + n3 + '_' + suffix + '.png';
+    }
+
+    // 3. それでもなければ no image（onerror＋no_img.svg でも最終保険あり）
+    return '/images/no_img.svg';
+  },
+
+  handleImageError : function(img) {
+    // wrapper に no_img クラスをつける
+    const wrapper = img.closest('.pokemon-info-img');
+    if (wrapper) wrapper.classList.add('no_img');
+
+    // 差し替え画像
+    img.src = '/images/no_img.svg';
+
+    // 無限ループ防止
+    img.onerror = null;
+  },
+
+  // 画像ファイル一覧を返すヘルパー
+  getImageFileList : function() {
+    return Array.isArray(window.POKEMON_IMAGE_FILE_LIST)
+      ? window.POKEMON_IMAGE_FILE_LIST
+      : [];
+  },
+
+  // 指定 No の suffix 一覧を取得（例: no=865 → ['31']）
+  listAvailableFormSuffix : function(no) {
+    if (!no && no !== 0) return [];
+
+    const files = pokemonUtil.getImageFileList();
+    const n3    = String(no).padStart(3, '0'); // 001, 154, 865
+
+    const prefix = 'pokemon_icon_' + n3 + '_';
+    const suffixes = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      if (!f.startsWith(prefix)) continue;
+      // pokemon_icon_001_00.png → 00
+      const m = f.match(/^pokemon_icon_\d+_(\d+)\.png$/i);
+      if (m && m[1]) {
+        suffixes.push(m[1]);
+      }
+    }
+
+    return suffixes;
+  },
+
+  // 指定 No + suffix のファイルが存在するかどうか
+  imageSuffixExists : function(no, suffix) {
+    if (!suffix) return false;
+    const files = pokemonUtil.getImageFileList();
+    const n3    = String(no).padStart(3, '0');
+    const name  = 'pokemon_icon_' + n3 + '_' + suffix + '.png';
+    return files.includes(name);
   },
 
   getFallbackImageUrl : function(no) {

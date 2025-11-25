@@ -506,8 +506,15 @@ const typeChecker = {
       const nameJa   = $a.text();
       const typesStr = $a.data('types-ja') ?? $a.attr('data-types-ja');
       const typesJa  = String(typesStr || '').split(',').filter(Boolean);
-      const no       = $a.data('no');
-      const image    = pokemonUtil.getImageUrlByNo(no);
+
+      // ★ data-no / attr('data-no') 両方を見て fallback
+      const noRaw = $a.data('no') ?? $a.attr('data-no');
+      const no    = (noRaw != null && noRaw !== '') ? Number(noRaw) : null;
+
+      let image = '';
+      if (no != null && !Number.isNaN(no)) {
+        image = pokemonUtil.getImageUrlByNo(no);
+      }
 
       // カード描画
       const resultArea = $('.js_pokemon-search-result');
@@ -517,7 +524,7 @@ const typeChecker = {
         image: image
       }, resultArea);
 
-      // ★ここを追加：タイプ選択チェックボックス反映
+      // ★タイプ選択チェックボックス反映
       if (typesJa.length) {
         typeChecker.searchPokemon.select(typesJa);
       } else {
@@ -553,12 +560,226 @@ const typeChecker = {
       typeChecker.searchPokemon.clearSelected();
     },
 
+    classifyForm : function(p) {
+      const formRaw = String(p.form || '');
+      const f       = formRaw.toUpperCase();
+
+      // ★ 図鑑Noベースのキー
+      const no = (p.no != null) ? p.no
+                : (p.dex != null) ? p.dex
+                : (p.pokedex_id != null) ? p.pokedex_id
+                : null;
+      // no がなければ pokemonId などで代用
+      const speciesKey = (no != null) ? String(no)
+                        : (p.speciesId || p.pokemonId || p.id || '').toString();
+
+      // メガ / ゲンシ判定
+      const isMega =
+        p.isMegaEvolution === true ||
+        /TEMP_EVOLUTION_MEGA/.test(f) ||
+        /_MEGA(_[A-Z]+)?$/.test(f);
+
+      const isPrimal = /PRIMAL/.test(f);
+
+      // リージョンフォーム判定
+      let region = null;
+      if (/ALOLA|ALOLAN/.test(f)) {
+        region = 'alola';
+      } else if (/HISUI|HISUIAN/.test(f)) {
+        region = 'hisui';
+      } else if (/GALAR|GALARIAN/.test(f)) {
+        region = 'galar';
+      } else if (/PALDEA|PALDEAN/.test(f)) {
+        region = 'paldea';
+      }
+
+      // 通常フォーム（空 or *_NORMAL or pokemonId と同名）
+      const isBase =
+        !formRaw ||
+        /_NORMAL$/.test(f) ||
+        f === String(p.pokemonId || '').toUpperCase();
+
+      if (isMega) {
+        // メガはフォームごとに別扱い
+        return { kind: 'mega',   key: speciesKey + '|mega|'   + f, region: null };
+      }
+      if (isPrimal) {
+        // ゲンシもフォームごと
+        return { kind: 'primal', key: speciesKey + '|primal|' + f, region: null };
+      }
+      if (region) {
+        // リージョンは地方ごとに1件
+        return { kind: 'region', key: speciesKey + '|region|' + region, region: region };
+      }
+      if (isBase) {
+        // 通常フォームは図鑑Noごとに1件
+        return { kind: 'base',   key: speciesKey + '|base',   region: null };
+      }
+
+      // それ以外（コスチュームなど）は除外対象
+      return { kind: 'other', key: speciesKey + '|other|' + f, region: null };
+    },
+
+    // ======== 追加：セレクト用リストを構築 ========
+    buildSelectableList : function(data) {
+      const src  = Array.isArray(data) ? data : [];
+      const seen = new Set();
+      const out  = [];
+      const self = typeChecker.searchPokemon;
+
+      const REGION_LABEL_JA = {
+        alola : 'アローラ',
+        galar : 'ガラル',
+        hisui : 'ヒスイ',
+        paldea: 'パルデア'
+      };
+
+      // ==== 図鑑Noごとの「ベース種族名」を先に集めておく ====
+      const baseNameJaByNo = {};
+      src.forEach(function(p) {
+        if (!p || p.no == null) return;
+        const c = self.classifyForm(p);
+        if (c.kind !== 'base') return;
+        if (!baseNameJaByNo[p.no]) {
+          baseNameJaByNo[p.no] = p.nameJa || p.name || '';
+        }
+      });
+
+      src.forEach(function(p) {
+        if (!p) return;
+
+        const c = self.classifyForm(p);
+        if (c.kind === 'other') return; // コスチューム等は除外
+
+        if (seen.has(c.key)) return;
+        seen.add(c.key);
+
+        // 元データを壊さないようにコピー
+        const q = Object.assign({}, p);
+        q.formKind = c.kind;
+        q.region   = c.region;
+
+        // ---- ベース名（まずは元の nameJa ベース） ----
+        let baseJa = q.nameJa || q.name || '';
+
+        // リージョン prefix 「アローラキュウコン」→「キュウコン」
+        Object.values(REGION_LABEL_JA).forEach(function(regionName) {
+          if (baseJa.indexOf(regionName) === 0) {
+            baseJa = baseJa.slice(regionName.length);
+          }
+        });
+
+        // 末尾の「（メガ〜）」「（ゲンシ〜）」が付いてたら削る
+        baseJa = baseJa
+          .replace(/（メガ[^）]*）$/u, '')
+          .replace(/（ゲンシ[^）]*）$/u, '')
+          .trim();
+
+        // 図鑑Noから「本来の種族名」が取れるならそれを優先
+        // メガニウム / メガヤンマ みたいに "メガ" が名前に含まれても安全
+        const speciesJa = (p.no != null && baseNameJaByNo[p.no])
+          ? baseNameJaByNo[p.no]
+          : baseJa;
+
+        // ---- 表示名を作る ----
+        let labelJa = speciesJa;
+
+        // ① リージョン：「〇〇（アローラ）」形式
+        if (c.kind === 'region' && c.region) {
+          const regionName = REGION_LABEL_JA[c.region];
+          if (regionName) {
+            labelJa = speciesJa + '（' + regionName + '）';
+          }
+        }
+
+        // ② メガ：「メガ〇〇」「メガ〇〇X」「メガ〇〇Y」
+        if (c.kind === 'mega') {
+          let suffix = '';
+          const m = String(q.form || '').match(/_MEGA_([A-Z]+)$/);
+          if (m) {
+            suffix = m[1]; // X / Y など
+          }
+          labelJa = 'メガ' + speciesJa + suffix;
+        }
+
+        // ③ ゲンシ：「ゲンシ〇〇」
+        if (c.kind === 'primal') {
+          labelJa = 'ゲンシ' + speciesJa;
+        }
+
+        q.labelJa = labelJa;
+        q.nameJa  = labelJa;
+        q.name    = labelJa;
+
+        out.push(q);
+      });
+
+      // ---- ソート：通常 → リージョン → メガ → ゲンシ ----
+      const kindOrder = { base: 0, region: 1, mega: 2, primal: 3, other: 9 };
+
+      out.sort(function(a, b) {
+        if (a.no !== b.no) return a.no - b.no;
+
+        const ka = kindOrder[a.formKind] ?? 5;
+        const kb = kindOrder[b.formKind] ?? 5;
+        if (ka !== kb) return ka - kb;
+
+        return String(a.labelJa || '').localeCompare(String(b.labelJa || ''));
+      });
+
+      return out;
+    },
+
+    // ======== 追加：表示ラベル整形 ========
+    formatPokemonLabel : function(p) {
+      const name = p.nameJa || p.name || p.nameEn || '???';
+      const c    = typeChecker.searchPokemon.classifyForm(p);
+
+      const REGION_JA = {
+        alola : 'アローラ',
+        galar : 'ガラル',
+        hisui : 'ヒスイ',
+        paldea: 'パルデア'
+      };
+
+      if (c.kind === 'base') {
+        return name;
+      }
+
+      if (c.kind === 'mega') {
+        const f = String(p.form || '').toUpperCase();
+        if (/_MEGA_X$/.test(f)) return name + '（メガX）';
+        if (/_MEGA_Y$/.test(f)) return name + '（メガY）';
+        return name + '（メガ）';
+      }
+
+      if (c.kind === 'primal') {
+        return name + '（ゲンシ）';
+      }
+
+      if (c.kind === 'region' && c.region && REGION_JA[c.region]) {
+        return name + '（' + REGION_JA[c.region] + '）';
+      }
+
+      // それ以外（保険）
+      if (p.form) {
+        return name + '（' + p.form + '）';
+      }
+      return name;
+    },
     // ========== 既存：初期化 ==========
     ini : function(data) {
-      // データ保持（リセットで再構築に使用）
-      this.cacheData = Array.isArray(data) ? data : [];
+      const srcArray =
+        Array.isArray(data) ? data
+        : (data && Array.isArray(data.list)) ? data.list
+        : [];
 
-      typeChecker.searchPokemon.clear(data);
+      const filtered = typeChecker.searchPokemon.buildSelectableList(data);
+      this.cacheData = filtered;
+
+      // ★ ポケモン一覧の再構築は filtered を元に 1 回だけ行う
+      typeChecker.searchPokemon.clear(filtered);
+      // typeChecker.searchPokemon.clear(data); // ← これは不要なので削除 or コメントアウト
 
       const wrapper     = $(typeChecker.searchPokemon.wrapper);
       const textbox     = wrapper.find(typeChecker.searchPokemon.textbox);
@@ -682,23 +903,28 @@ const typeChecker = {
       return arr;
     },
 
-    clear : function(data) {
-      const wrapper = $(typeChecker.searchPokemon.wrapper);
-      const textbox = wrapper.find(typeChecker.searchPokemon.textbox);
-      const pokemonList = wrapper.find(typeChecker.searchPokemon.pokemonList);
-      for ( let i=0; i<data.length; i++ ) {
-        let pokemonName = data[i].name;
-        if ( data[i].form != '' ) {
-          pokemonName += '（' + data[i].form + '）';
+    clear : function(list) {
+      const pokemonList = $(typeChecker.searchPokemon.pokemonList);
+      pokemonList.empty();
+
+      (list || []).forEach(function(p) {
+        const $li = $('<li>');
+        const $a  = $('<a href="javascript:void(0);"></a>');
+
+        const label = p.labelJa || p.nameJa || p.name || '';
+
+        $a.text(label);
+
+        // ★ ここを必ず入れる
+        $a.attr('data-no', p.no);
+        if (Array.isArray(p.typesJa)) {
+          $a.attr('data-types-ja', p.typesJa.join(','));
         }
-        const no = data[i].no;
-        const typesJa = data[i].typesJa;
-        if ( pokemonName ) {
-          pokemonList.append(`<li><a href="javascript:void(0);" data-no="${no}" data-types-ja="${typesJa.join(',')}">${pokemonName}</a></li>`);
-        }
-      }
-      textbox.val('');
-    }
+
+        $li.append($a);
+        pokemonList.append($li);
+      });
+    },
   },
   applicable : {
     ini : function(data) {
@@ -1171,7 +1397,13 @@ const typeChecker = {
             <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
               <div class="pokemon-info-wrapper">
                 <div class="pokemon-info-img">
-                  <img src="${img}" decoding="async" loading="lazy" alt="${d.nameJa || '-'}">
+                  <img
+                    src="${img}"
+                    decoding="async"
+                    loading="lazy"
+                    alt="${d.nameJa || '-'}"
+                    onerror="pokemonUtil.handleImageError(this)"
+                  >
                 </div>
                 <div class="pokemon-info-name">${d.nameJa || '-'}</div>
                 <div class="pokemon-info-type">
