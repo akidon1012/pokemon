@@ -943,9 +943,56 @@ attachGoStats : (function(){
       );
     };
 
-    const normalizeTypes = p => {
-      const typesJa = Array.isArray(p?.types) ? p.types.slice() : [];
-      const typesEn = typesJa.map(t => pokemonUtil.translateTypes?.toEnType?.(t) || '');
+    // ★ meta を受け取るようにする
+    const normalizeTypes = (p, meta) => {
+      let typesJa = [];
+      let typesEn = [];
+
+      // ---- 1. まず GOメタの情報を優先 ----
+      if (Array.isArray(meta?.typesEn) && meta.typesEn.length) {
+        typesEn = meta.typesEn.slice();
+      }
+      if (Array.isArray(meta?.typesJa) && meta.typesJa.length) {
+        typesJa = meta.typesJa.slice();
+      }
+
+      // ---- 2. 片側しか無い場合は、meta 側から相互変換 ----
+      if (!typesJa.length && typesEn.length) {
+        typesJa = typesEn.map(t => pokemonUtil.translateTypes?.toJaType?.(t) || '');
+      }
+      if (!typesEn.length && typesJa.length) {
+        typesEn = typesJa.map(t => pokemonUtil.translateTypes?.toEnType?.(t) || '');
+      }
+
+      // ---- 3. それでも両方スカスカなら BASE から補完 ----
+      if (!typesJa.length && !typesEn.length) {
+        if (Array.isArray(p?.typesJa) && p.typesJa.length) {
+          typesJa = p.typesJa.slice();
+        } else if (Array.isArray(p?.types) && p.types.length) {
+          // ここは「くさ / エスパー」など日本語想定
+          typesJa = p.types.slice();
+        }
+        if (Array.isArray(p?.typesEn) && p.typesEn.length) {
+          typesEn = p.typesEn.slice();
+        }
+
+        // 片側だけ埋まった場合はここでも変換
+        if (!typesJa.length && typesEn.length) {
+          typesJa = typesEn.map(t => pokemonUtil.translateTypes?.toJaType?.(t) || '');
+        }
+        if (!typesEn.length && typesJa.length) {
+          typesEn = typesJa.map(t => pokemonUtil.translateTypes?.toEnType?.(t) || '');
+        }
+      }
+
+      // ---- 4. 正規化＆重複除去 ----
+      typesJa = Array.from(new Set(
+        typesJa.map(t => (t || '').toString()).filter(Boolean)
+      ));
+      typesEn = Array.from(new Set(
+        typesEn.map(t => (t || '').toString().toLowerCase()).filter(Boolean)
+      ));
+
       return { typesJa, typesEn };
     };
 
@@ -980,13 +1027,11 @@ attachGoStats : (function(){
         };
       }
 
-      const id = normalizeId(p);
-      const { typesJa, typesEn } = normalizeTypes(p);
-
-      // ★ 強化: あらゆるキーで GO を引く
       const meta = pokemonUtil._resolveGoMeta(p) || {};
 
-      // ★ 技ID: quick / cinematic 系 + elite 系も拾う
+      const id = normalizeId(p);
+      const { typesJa, typesEn } = normalizeTypes(p, meta);
+
       const mMoves = meta.moves || {};
 
       // 通常技（fast / quick / moves.fast / moves.quick / moves.eliteQuick などを全部マージ）
@@ -1039,6 +1084,12 @@ attachGoStats : (function(){
           normal : Array.isArray(fastIds)    ? fastIds.map(m => normMove(m, 'normal'))   : [],
           special: Array.isArray(chargedIds) ? chargedIds.map(m => normMove(m, 'special')) : []
         },
+
+        // ★ ここを追加
+        form: meta.form || p.form || '',
+        pokemonId: meta.pokemonId || p.pokemonId || '',
+        templateId: meta.templateId || meta.template_id || '',
+
         _raw: p
       };
     });

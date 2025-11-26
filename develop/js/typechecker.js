@@ -65,6 +65,34 @@ const toggle = {
     }
   }
 };
+// ★ フォームごとのタイプ上書きテーブルを GO メタから自動生成
+// === フォームごとのタイプ上書きテーブルを GO メタから自動生成 ===
+// === フォームごとのタイプ上書きテーブル（手動定義） ===
+const TYPE_OVERRIDE_BY_FORM = {
+  // ガラル三鳥
+  'ARTICUNO_GALARIAN': {
+    typesEn: ['psychic', 'flying'],
+    typesJa: ['エスパー', 'ひこう']
+  },
+  'ZAPDOS_GALARIAN': {
+    typesEn: ['fighting', 'flying'],
+    typesJa: ['かくとう', 'ひこう']
+  },
+  'MOLTRES_GALARIAN': {
+    typesEn: ['dark', 'flying'],
+    typesJa: ['あく', 'ひこう']
+  },
+
+  // アローラナッシー
+  'EXEGGUTOR_ALOLA': {
+    typesEn: ['grass', 'dragon'],
+    typesJa: ['くさ', 'ドラゴン']
+  },
+
+  // 必要に応じてここに追加:
+  // 'RAICHU_ALOLA': { ... },
+  // 'MAROWAK_ALOLA': { ... },
+};
 
 const typeChecker = {
   MULT : { dbl: 1.6, half: 0.625, zero: 0.39 }, // 単タイプ時の係数
@@ -1003,7 +1031,6 @@ const typeChecker = {
       }
     },
 
-    // 対策おすすめを計算して返す
     recommendCounters : function(options) {
       const defenderTypesJa = options?.defenderTypesJa || [];
       const pokemonDataset  = options?.pokemonDataset  || [];
@@ -1011,13 +1038,18 @@ const typeChecker = {
         (pokemonUtil?.data?.get('TYPE_DEFENSE') || window.__TYPE_DEFENSE_TABLE__ || []);
       const limit           = Number(options?.limit || 20);
 
-      console.log('[recommendCounters] start defJa=', defenderTypesJa, 'dataset=', Array.isArray(pokemonDataset) ? pokemonDataset.length : 0);
+      console.log(
+        '[recommendCounters] start defJa=',
+        defenderTypesJa,
+        'dataset=',
+        Array.isArray(pokemonDataset) ? pokemonDataset.length : 0
+      );
 
       if (!defenderTypesJa.length || !Array.isArray(defenseChart)) {
         return [];
       }
 
-      // 攻撃タイプ × 防御タイプ構成 → 倍率をメモ化
+      // ==== 攻撃 → ボス こうかばつぐん判定用（こちらのわざがボスへ） ====
       const multCache = new Map();
       const keyOf = function(atkEn) {
         return atkEn + '|' + defenderTypesJa.join('+');
@@ -1062,6 +1094,52 @@ const typeChecker = {
         return total;
       };
 
+      // ==== ステップ1: ボス → こちら（被ダメ倍率）計算用 ====
+
+      // ボス側タイプ（英語）
+      const bossTypesEn = defenderTypesJa
+        .map(function(t){ return pokemonUtil.translate.JtoE(t); })
+        .map(function(t){ return (t || '').toString().toLowerCase(); })
+        .filter(Boolean);
+
+      const calcBossDamage = function(defTypesEn) {
+        if (!Array.isArray(defTypesEn) || !defTypesEn.length) return 1.0;
+        if (!bossTypesEn.length) return 1.0;
+
+        let total = 1.0;
+
+        defTypesEn.forEach(function(defEnRaw){
+          const defEn = (defEnRaw || '').toString().toLowerCase();
+          if (!defEn) return;
+
+          const row = defenseChart.find(function(r){
+            return (r.type || '').toString().toLowerCase() === defEn;
+          });
+          if (!row || !Array.isArray(row.effect)) return;
+
+          bossTypesEn.forEach(function(atkEn){
+            const eff = row.effect.find(function(e){
+              return (e.type || '').toString().toLowerCase() === atkEn;
+            });
+            if (!eff) return;
+
+            let m = 1.0;
+            if (pokemonUtil && typeof pokemonUtil.normalizeMultiplier === 'function') {
+              m = pokemonUtil.normalizeMultiplier(eff);
+            } else if (eff.multiplier != null) {
+              const tmp = Number(eff.multiplier);
+              if (Number.isFinite(tmp) && tmp > 0) m = tmp;
+            }
+            total *= m;
+          });
+        });
+
+        if (!Number.isFinite(total) || total <= 0) total = 1.0;
+        return total;
+      };
+
+      // ==== メイン処理 ====
+
       const results = [];
       const eps = 1e-3;
       const isSE = function(mult) { return mult >= (1.6 - eps); }; // こうかばつぐんのみ
@@ -1073,7 +1151,7 @@ const typeChecker = {
         let pd      = Array.isArray(pdArr) ? pdArr[0] : pdArr;
         if (!pd || !pd.id) return;
 
-        // ★ ここでステータスだけ上書き（なければ何もしない）
+        // GOステータスを上書き（あれば）
         if (pokemonUtil.attachGoStats) {
           pd = pokemonUtil.attachGoStats(pd) || pd;
         }
@@ -1081,8 +1159,18 @@ const typeChecker = {
         const normalMoves  = (pd.moves && pd.moves.normal)  || [];
         const specialMoves = (pd.moves && pd.moves.special) || [];
 
-        // 攻撃側タイプ（STAB 判定用）
-        const attackerTypesEn = (pd.typesEn || [])
+        // ★ フォームからタイプ上書き（ガラル/アローラ等）
+        const formKey      = pd.form || (pd._raw && pd._raw.form) || '';
+        const formOverride = TYPE_OVERRIDE_BY_FORM && TYPE_OVERRIDE_BY_FORM[formKey]
+          ? TYPE_OVERRIDE_BY_FORM[formKey]
+          : null;
+
+        // ★ 攻撃側タイプ（STAB判定用）
+        const attackerTypesEnBase = formOverride
+          ? formOverride.typesEn
+          : (pd.typesEn || []);
+
+        const attackerTypesEn = (attackerTypesEnBase || [])
           .map(function(t){ return (t || '').toString().toLowerCase(); })
           .filter(Boolean);
 
@@ -1145,12 +1233,20 @@ const typeChecker = {
 
         const monScore = bestMoveScore * (statWeight || 1);
 
+        // 表示用タイプ（日本語）は、上書きがあればそちら優先
+        const typesJa = formOverride && Array.isArray(formOverride.typesJa) && formOverride.typesJa.length
+          ? formOverride.typesJa.slice()
+          : (Array.isArray(pd.typesJa) ? pd.typesJa.slice() : []);
+
+        const typesEnForDef = attackerTypesEn.slice(); // 被ダメ計算にも使う
+
         results.push({
           id:        pd.id,
           nameJa:    pd.nameJa,
           nameEn:    pd.nameEn,
-          typesJa:   pd.typesJa || [],
-          typesEn:   pd.typesEn || [],
+          form:      formKey,
+          typesJa:   typesJa,
+          typesEn:   typesEnForDef,
           moves: {
             normal:  seNormal,
             special: seSpecial
@@ -1161,8 +1257,33 @@ const typeChecker = {
         });
       });
 
+      // === ステップ1：ボスから「こうかばつぐん」を取られるポケモンを除外 ===
+      const baseList  = results.slice();
+      const DAMAGE_SE = 1.6 - eps;
+
+      const safeList = baseList.filter(function(r, idx) {
+        const typesEn = Array.isArray(r.typesEn) ? r.typesEn : [];
+        const dmg = calcBossDamage(typesEn); // ボス → このポケモン への倍率
+
+        if (idx < 10) {
+          console.log('[defensive filter]', r.nameJa, 'typesEn=', typesEn, 'dmg=', dmg);
+        }
+
+        // dmg が 1.6 以上（こうかばつぐん以上）なら候補から外す
+        return dmg < DAMAGE_SE;
+      });
+
+      console.log(
+        '[recommendCounters] defensive filter: before=',
+        baseList.length,
+        'after=',
+        safeList.length
+      );
+
+      const finalList = safeList.length ? safeList : baseList;
+
       // スコア順に並べる（同点は攻撃種族値 → BST）
-      results.sort(function(a, b){
+      finalList.sort(function(a, b){
         if (b.score !== a.score) return b.score - a.score;
         const atkA = a.goStats?.attack || 0;
         const atkB = b.goStats?.attack || 0;
@@ -1170,9 +1291,15 @@ const typeChecker = {
         return (b.baseTotal || 0) - (a.baseTotal || 0);
       });
 
-      const sliced = results.slice(0, limit);
-      console.log('[recommendCounters] done, candidates =', sliced.length);
-      if (sliced[0]) console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
+      const sliced = finalList.slice(0, limit);
+
+      console.log(
+        '[recommendCounters final]',
+        sliced.map(function(r){ return r.nameJa + ' / ' + (r.form || ''); })
+      );
+      if (sliced[0]) {
+        console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
+      }
 
       return sliced;
     },
