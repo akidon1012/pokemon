@@ -11,6 +11,8 @@
   "CHARIZARD_TEMP_EVOLUTION_MEGA_X": {
     "basePokemonId": "CHARIZARD",
     "tempId": "TEMP_EVOLUTION_MEGA_X",
+    "typesEn": ["fire", "dragon"],
+    "typesJa": ["ほのお", "ドラゴン"],
     "stats": {
       "stamina": 186,
       "attack": 273,
@@ -20,6 +22,8 @@
   "CHARIZARD_TEMP_EVOLUTION_MEGA_Y": {
     "basePokemonId": "CHARIZARD",
     "tempId": "TEMP_EVOLUTION_MEGA_Y",
+    "typesEn": ["fire", "flying"],
+    "typesJa": ["ほのお", "ひこう"],
     "stats": {
       "stamina": 186,
       "attack": 319,
@@ -353,6 +357,8 @@
   "GROUDON_TEMP_EVOLUTION_PRIMAL": {
     "basePokemonId": "GROUDON",
     "tempId": "TEMP_EVOLUTION_PRIMAL",
+    "typesEn": ["ground", "fire"],
+    "typesJa": ["じめん", "ほのお"],
     "stats": {
       "stamina": 218,
       "attack": 353,

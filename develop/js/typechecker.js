@@ -68,7 +68,7 @@ const toggle = {
 // ★ フォームごとのタイプ上書きテーブルを GO メタから自動生成
 // === フォームごとのタイプ上書きテーブルを GO メタから自動生成 ===
 // === フォームごとのタイプ上書きテーブル（手動定義） ===
-const TYPE_OVERRIDE_BY_FORM = {
+var TYPE_OVERRIDE_BY_FORM = {
   // ガラル三鳥
   'ARTICUNO_GALARIAN': {
     typesEn: ['psychic', 'flying'],
@@ -92,6 +92,25 @@ const TYPE_OVERRIDE_BY_FORM = {
   // 必要に応じてここに追加:
   // 'RAICHU_ALOLA': { ... },
   // 'MAROWAK_ALOLA': { ... },
+};
+// === フォーム名変換
+var FORM_LABEL_MAP = {
+  'ZAPDOS_GALARIAN': 'ガラル',
+  'ARTICUNO_GALARIAN':'ガラル',
+  'MOLTRES_GALARIAN':'ガラル',
+
+  'EXEGGUTOR_ALOLA':'アローラ',
+  'RAICHU_ALOLA':'アローラ',
+  'MAROWAK_ALOLA':'アローラ',
+
+  // メガ進化
+  'CHARIZARD_MEGA_X':'メガX',
+  'CHARIZARD_MEGA_Y':'メガY',
+  'VENUSAUR_TEMP_EVOLUTION_MEGA':'メガ',
+  'BLASTOISE_TEMP_EVOLUTION_MEGA':'メガ',
+
+  // 必要なら今後ここへ追加🔽
+  // 'GROUDON_PRIMAL':'ゲンシ' ...
 };
 
 const typeChecker = {
@@ -1161,6 +1180,7 @@ const typeChecker = {
 
         // ★ フォームからタイプ上書き（ガラル/アローラ等）
         const formKey      = pd.form || (pd._raw && pd._raw.form) || '';
+        const formLabel = FORM_LABEL_MAP[formKey] || '';
         const formOverride = TYPE_OVERRIDE_BY_FORM && TYPE_OVERRIDE_BY_FORM[formKey]
           ? TYPE_OVERRIDE_BY_FORM[formKey]
           : null;
@@ -1239,14 +1259,18 @@ const typeChecker = {
           : (Array.isArray(pd.typesJa) ? pd.typesJa.slice() : []);
 
         const typesEnForDef = attackerTypesEn.slice(); // 被ダメ計算にも使う
-
         results.push({
           id:        pd.id,
           nameJa:    pd.nameJa,
           nameEn:    pd.nameEn,
-          form:      formKey,
-          typesJa:   typesJa,
-          typesEn:   typesEnForDef,
+          typesJa:   pd.typesJa || [],
+          typesEn:   pd.typesEn || [],
+
+          // ★★★ ここを追加 ★★★
+          form:       pd.form || '',
+          pokemonId:  pd.pokemonId || '',
+          templateId: pd.templateId || '',
+
           moves: {
             normal:  seNormal,
             special: seSpecial
@@ -1304,9 +1328,76 @@ const typeChecker = {
       return sliced;
     },
 
+    // renderRecommendations: function($wrap, json) {
+    //   console.log(
+    //     '[renderRecommendations DEBUG] start',
+    //     'jsonLen=', Array.isArray(json) ? json.length : json,
+    //     '$wrap=', $wrap
+    //   );
+
+    //   var $w = ($wrap instanceof jQuery) ? $wrap : $($wrap);
+    //   if (!$w.length) {
+    //     console.warn('[renderRecommendations DEBUG] $w.length = 0');
+    //     return;
+    //   }
+
+    //   var list = Array.isArray(json) ? json.slice() : [];
+    //   console.log('[renderRecommendations DEBUG] list.length =', list.length);
+
+    //   if (!list.length) {
+    //     $w.empty();
+    //     return;
+    //   }
+
+    //   try {
+    //     var html = '';
+
+    //     for (var i = 0; i < list.length; i++) {
+    //       var d = list[i] || {};
+
+    //       var displayName;
+    //       if (pokemonUtil && typeof pokemonUtil.buildRecommendDisplayName === 'function') {
+    //         displayName = pokemonUtil.buildRecommendDisplayName(d);
+    //       } else {
+    //         displayName = d.nameJa || d.nameEn || '-';
+    //       }
+
+    //       html +=
+    //         '<li class="pokemon-recommend-list-item">' +
+    //           '<div class="pokemon-info-name">' + displayName + '</div>' +
+    //         '</li>';
+    //     }
+
+    //     console.log(
+    //       '[renderRecommendations DEBUG] html.length =',
+    //       html.length,
+    //       'preview=',
+    //       html.slice(0, 200)
+    //     );
+
+    //     $w.html(html);
+    //     console.log(
+    //       '[renderRecommendations DEBUG] applied. innerHTML.length =',
+    //       $w.html().length
+    //     );
+    //   } catch (e) {
+    //     console.error('[renderRecommendations DEBUG] ERROR', e);
+    //   }
+    // }
+    
     renderRecommendations: function($wrap, json) {
+      console.log(
+        '[renderRecommendations] called',
+        'jsonLen=',
+        Array.isArray(json) ? json.length : json,
+        '$wrap=', $wrap
+      );
+
       const $w = ($wrap instanceof jQuery) ? $wrap : $($wrap);
-      if (!$w.length) return;
+      if (!$w.length) {
+        console.warn('[renderRecommendations] $w.length = 0');
+        return;
+      }
 
       const list = Array.isArray(json) ? json.slice() : [];
       if (!list.length) {
@@ -1316,12 +1407,7 @@ const typeChecker = {
 
       const EPS = 1e-6;
 
-      if (!list.length) {
-        $w.empty();
-        return;
-      }
-
-      // === ここから：スコア計算＆ソート（既存の _score 計算＋ sort をこのブロックに差し替え） ===
+      // ==== スコア計算（以前のまま：UI側で _score を決める） ====
 
       // 技1発の評価：威力 × STAB
       function scoreBestSpecialForPokemon(d) {
@@ -1330,7 +1416,6 @@ const typeChecker = {
         const specials = Array.isArray(d.moves.special) ? d.moves.special : [];
         if (!specials.length) return 0;
 
-        // ポケモンのタイプ（英）
         const typesEn = Array.isArray(d.typesEn)
           ? d.typesEn.map(t => (t || '').toString().toLowerCase())
           : [];
@@ -1345,11 +1430,10 @@ const typeChecker = {
           const typeEn = (m.typeEn || m.type || '').toString().toLowerCase();
           if (!typeEn) continue;
 
-          // STAB（タイプ一致なら 1.2 倍）
           const hasStab = typesEn.includes(typeEn);
-          const stab = hasStab ? 1.2 : 1.0;
+          const stab    = hasStab ? 1.2 : 1.0;
 
-          const val = power * stab;  // 1発の強さ
+          const val = power * stab;
           if (val > bestScore) bestScore = val;
         }
 
@@ -1357,7 +1441,8 @@ const typeChecker = {
       }
 
       list.forEach(d => {
-        // GO攻撃種族値（なければ原作攻撃、なければ0）
+        if (!d) return;
+
         const atk =
           (d.goStats && d.goStats.attack != null)
             ? d.goStats.attack
@@ -1368,13 +1453,13 @@ const typeChecker = {
         const bestSpecialScore = scoreBestSpecialForPokemon(d);
 
         d._bestSpecialScore = bestSpecialScore;
-        d._score = atk * bestSpecialScore; // ★最終スコア
+        d._score = atk * bestSpecialScore;
       });
 
       list.sort((a, b) => {
         const sa = (a && a._score != null) ? a._score : 0;
         const sb = (b && b._score != null) ? b._score : 0;
-        if (sb !== sa) return sb - sa; // スコア降順
+        if (sb !== sa) return sb - sa;
 
         const atkA =
           (a && a.goStats && a.goStats.attack != null) ? a.goStats.attack :
@@ -1382,20 +1467,20 @@ const typeChecker = {
         const atkB =
           (b && b.goStats && b.goStats.attack != null) ? b.goStats.attack :
           (b && b.baseStats && b.baseStats.attack != null) ? b.baseStats.attack : 0;
-        if (atkB !== atkA) return atkB - atkA; // 攻撃値降順
+        if (atkB !== atkA) return atkB - atkA;
 
         const bstA = (a && a.baseTotal != null) ? a.baseTotal : 0;
         const bstB = (b && b.baseTotal != null) ? b.baseTotal : 0;
-        return bstB - bstA; // BST降順
+        return bstB - bstA;
       });
-      // === スコア計算＆ソートここまで ===
-      // === HTML組み立て ===
 
-      // タイプバッジ
+      // ==== HTMLパーツ生成 ====
+
       const buildTypeBadges = function(typesJa, typesEn) {
         const jaArr = Array.isArray(typesJa) ? typesJa : [];
         const enArr = Array.isArray(typesEn) ? typesEn : [];
         let html = '';
+
         for (let i = 0; i < Math.max(jaArr.length, enArr.length); i++) {
           const ja = jaArr[i] || '';
           const en = (enArr[i] || '').toString().toLowerCase();
@@ -1408,30 +1493,29 @@ const typeChecker = {
         return html;
       };
 
-      // わざブロック生成
       const buildMovesHtml = function(label, moves, opts) {
-        const list = Array.isArray(moves) ? moves.slice() : [];
-        if (!list.length) return '';
+        const src = Array.isArray(moves) ? moves : [];
+        if (!src.length) return '';
 
-        const bestTypeEn   = (opts && opts.bestTypeEn)   || '';
-        const bestMoveId   = (opts && opts.bestMoveId)   || '';
-        const isSpecial    = (label === 'スペシャル');
+        const bestTypeEn = (opts && opts.bestTypeEn) || '';
+        const bestMoveId = (opts && opts.bestMoveId) || '';
+        const isSpecial  = (label === 'スペシャル');
 
-        let filtered = list;
+        let list = src.slice();
 
-        // 通常技：スペシャルと同タイプのものを優先
+        // ノーマル：スペシャルと同タイプを優先
         if (!isSpecial && bestTypeEn) {
-          const sameType = list.filter(function(m) {
-            return (m.typeEn || '').toString().toLowerCase() === bestTypeEn;
+          const sameType = list.filter(m => {
+            return (m.typeEn || m.type || '').toString().toLowerCase() === bestTypeEn;
           });
           if (sameType.length) {
-            filtered = sameType;
+            list = sameType;
           }
         }
 
-        // スペシャル：bestSpecial を先頭に並べる
+        // スペシャル：一番強い技を先頭へ
         if (isSpecial && bestMoveId) {
-          filtered.sort(function(a, b) {
+          list.sort((a, b) => {
             const idA = a && a.id;
             const idB = b && b.id;
             if (idA === bestMoveId && idB !== bestMoveId) return -1;
@@ -1442,18 +1526,22 @@ const typeChecker = {
           });
         }
 
+        // ノーマル技は最低1つは出す
+        if (!list.length && src.length) {
+          list = [src[0]];
+        }
+
         let block = `
           <div class="pokemon-recommend-list-item-attack-wrapper">
             <dl class="pokemon-recommend-list-item-attack">
               <dt class="pokemon-recommend-list-item-attack-label">${label}</dt>`;
 
-        for (let j = 0; j < filtered.length; j++) {
-          const m = filtered[j] || {};
-          const typeEn = (m.typeEn || '').toString().toLowerCase();
+        for (let i = 0; i < list.length; i++) {
+          const m = list[i] || {};
+          const typeEn = (m.typeEn || m.type || '').toString().toLowerCase();
           const name   = m.nameJa || m.nameEn || '-';
           const power  = (m.power != null) ? m.power : '-';
 
-          // ゲージ本数（スペシャルのみ）
           let gaugeNum = null;
           if (isSpecial) {
             let bars = m.gaugeBars;
@@ -1470,8 +1558,13 @@ const typeChecker = {
             gaugeNum = Math.max(1, Math.min(3, bars));
           }
 
+          const isStrongest = isSpecial && bestMoveId && (m.id === bestMoveId);
+          const ddClass =
+            'pokemon-recommend-list-item-attack-info is_' + typeEn +
+            (isStrongest ? ' is_strongest' : '');
+
           block += `
-              <dd class="pokemon-recommend-list-item-attack-info is_${typeEn}">
+              <dd class="${ddClass}">
                 <div class="pokemon-recommend-list-item-attack-name">
                   <span class="icon icon-type-${typeEn}"></span>${name}
                 </div>`;
@@ -1479,7 +1572,9 @@ const typeChecker = {
           if (isSpecial) {
             block += `
                 <div class="pokemon-recommend-list-item-attack-gauge">
-                  <svg class="gauge" aria-hidden="true"><use href="#gauge${gaugeNum}"></use></svg>
+                  <svg class="gauge" aria-hidden="true">
+                    <use href="#gauge${gaugeNum}"></use>
+                  </svg>
                 </div>`;
           }
 
@@ -1495,22 +1590,24 @@ const typeChecker = {
         return block;
       };
 
+      // ==== メインHTML ====
       let html = '';
 
       for (let i = 0; i < list.length; i++) {
         const d = list[i] || {};
-        const img = pokemonUtil.getImageUrlByNo(d.id);
-        const typesJa = d.typesJa || [];
-        const typesEn = d.typesEn || [];
+
+        const img      = pokemonUtil.getImageUrlByNo(d.id);
+        const typesJa  = d.typesJa || [];
+        const typesEn  = d.typesEn || [];
 
         const typeHtml = buildTypeBadges(typesJa, typesEn);
 
         const normalMoves  = Array.isArray(d.moves?.normal)  ? d.moves.normal  : [];
         const specialMoves = Array.isArray(d.moves?.special) ? d.moves.special : [];
 
-        const bestSpecial  = d._bestSpecial || null;
-        const bestTypeEn   = d._bestTypeEn || '';
-        const bestMoveId   = bestSpecial ? bestSpecial.id : '';
+        const bestSpecial = d._bestSpecial || null;
+        const bestTypeEn  = d._bestTypeEn || '';
+        const bestMoveId  = bestSpecial ? bestSpecial.id : '';
 
         const normalHtml  = buildMovesHtml('ノーマル',  normalMoves,  { bestTypeEn });
         const specialHtml = buildMovesHtml('スペシャル', specialMoves, { bestTypeEn, bestMoveId });
@@ -1518,6 +1615,12 @@ const typeChecker = {
         const goAtk  = d.goStats?.attack  ?? '-';
         const goDef  = d.goStats?.defense ?? '-';
         const goStam = d.goStats?.stamina ?? '-';
+
+        // ★ここだけ pokemonUtil の表示名生成を使う
+        const displayName =
+          (pokemonUtil.buildRecommendDisplayName
+            ? pokemonUtil.buildRecommendDisplayName(d)
+            : (d.nameJa || '-'));
 
         html += `
           <li class="pokemon-recommend-list-item js_toggle-wrapper">
@@ -1528,11 +1631,11 @@ const typeChecker = {
                     src="${img}"
                     decoding="async"
                     loading="lazy"
-                    alt="${d.nameJa || '-'}"
+                    alt="${displayName}"
                     onerror="pokemonUtil.handleImageError(this)"
                   >
                 </div>
-                <div class="pokemon-info-name">${d.nameJa || '-'}</div>
+                <div class="pokemon-info-name">${displayName}</div>
                 <div class="pokemon-info-type">
                   ${typeHtml}
                 </div>
@@ -1573,6 +1676,7 @@ const typeChecker = {
   },
 
   createRecommendHtml : function(wrapper, pokemon) {
+    console.log('[renderRecommendations] list len =', list.length);
     const pokemonData = getPokemonData(pokemon);
     for ( let i=0; i<pokemonData.length; i++ ) {
       const data = pokemonData[i];

@@ -110,179 +110,276 @@ const pokemonUtil = {
     get(key)    { return this.state[key]; }
   },
 
-// 図鑑番号ベースで GO ステータス＋ゲンシ／メガ override を当てる版
-attachGoStats : (function(){
-  let _metaById  = null; // pokemonId → meta
-  let _metaByNo  = null; // no        → meta
-  let _ovByBase  = null; // basePokemonId → [override,...]
-  let _ovByNo    = null; // dex no         → [override,...]
+  // 図鑑番号ベースで GO ステータス＋ゲンシ／メガ override を当てる版
+  attachGoStats : (function(){
+    let _metaById  = null; // pokemonId → meta
+    let _metaByNo  = null; // no        → meta
+    let _ovByBase  = null; // basePokemonId → [override,...]
+    let _ovByNo    = null; // dex no         → [override,...]
 
-  function buildIndexes() {
-    if (_metaById && _metaByNo && _ovByBase && _ovByNo) return;
+    function buildIndexes() {
+      if (_metaById && _metaByNo && _ovByBase && _ovByNo) return;
 
-    const metaList = pokemonUtil.data.get('GO_META') || [];
-    const ovRaw    = pokemonUtil.data.get('GO_META_OVERRIDE') || {};
+      const metaList = pokemonUtil.data.get('GO_META') || [];
+      const ovRaw    = pokemonUtil.data.get('GO_META_OVERRIDE') || {};
 
-    _metaById = {};
-    _metaByNo = {};
-    metaList.forEach(function(m){
-      if (!m) return;
-      const pid = m.pokemonId;
-      const no  = Number(m.no);
-      if (pid) _metaById[pid] = m;
-      if (Number.isFinite(no)) _metaByNo[no] = m;
-    });
-
-    _ovByBase = {};
-    _ovByNo   = {};
-
-    Object.keys(ovRaw || {}).forEach(function(key){
-      const ov = ovRaw[key];
-      if (!ov) return;
-
-      const baseId = ov.basePokemonId || key.split('_')[0]; // 'KYOGRE' など
-      if (!baseId) return;
-
-      const tempId = ov.tempId || key.split('_').slice(1).join('_'); // 'TEMP_EVOLUTION_PRIMAL' 等
-      const stats  = ov.stats || {};
-
-      // basePokemonId → list
-      if (!_ovByBase[baseId]) _ovByBase[baseId] = [];
-      _ovByBase[baseId].push({
-        key,
-        basePokemonId: baseId,
-        tempId,
-        stats
+      _metaById = {};
+      _metaByNo = {};
+      metaList.forEach(function(m){
+        if (!m) return;
+        const pid = m.pokemonId;
+        const no  = Number(m.no);
+        if (pid) _metaById[pid] = m;
+        if (Number.isFinite(no)) _metaByNo[no] = m;
       });
 
-      // 図鑑番号でも引けるように no を求める
-      const meta = _metaById[baseId];
-      const no   = meta ? Number(meta.no) : NaN;
-      if (Number.isFinite(no)) {
-        if (!_ovByNo[no]) _ovByNo[no] = [];
-        _ovByNo[no].push({
+      _ovByBase = {};
+      _ovByNo   = {};
+
+      Object.keys(ovRaw || {}).forEach(function(key){
+        const ov = ovRaw[key];
+        if (!ov) return;
+
+        const baseId = ov.basePokemonId || key.split('_')[0]; // 'KYOGRE' など
+        if (!baseId) return;
+
+        const tempId = ov.tempId || key.split('_').slice(1).join('_'); // 'TEMP_EVOLUTION_PRIMAL' 等
+
+        // ★ override 側にタイプがあれば保持しておく
+        const typesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : null;
+        const typesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : null;
+        const stats   = ov.stats || {};
+
+        const ovEntry = {
           key,
           basePokemonId: baseId,
           tempId,
-          stats
+          stats,
+          typesEn: ov.typesEn || null,
+          typesJa: ov.typesJa || null,
+        };
+
+        // basePokemonId → list
+        if (!_ovByBase[baseId]) _ovByBase[baseId] = [];
+        _ovByBase[baseId].push(ovEntry);
+
+        // 図鑑番号でも引けるように no を求める
+        const meta = _metaById[baseId];
+        const no   = meta ? Number(meta.no) : NaN;
+        if (Number.isFinite(no)) {
+          if (!_ovByNo[no]) _ovByNo[no] = [];
+          _ovByNo[no].push(ovEntry);
+        }
+      });
+
+      console.log(
+        '[attachGoStats] metaById=', Object.keys(_metaById).length,
+        'metaByNo=', Object.keys(_metaByNo).length,
+        'overrideBases=', Object.keys(_ovByBase).length,
+        'overrideNos=', Object.keys(_ovByNo).length
+      );
+    }
+
+    // ゲンシ／メガっぽい名前かどうか
+    function detectFlags(pd) {
+      const flags = [];
+
+      [
+        pd.formKey,
+        pd.form,
+        pd.formId,
+        pd.tempEvoId,
+        pd.nameEn,
+        pd.nameJa
+      ].forEach(function(v){
+        if (v == null) return;
+        flags.push(String(v).toUpperCase());
+      });
+
+      const isPrimal = flags.some(function(s){
+        return s.indexOf('ゲンシ') >= 0 || s.indexOf('PRIMAL') >= 0;
+      });
+
+      const isMega = flags.some(function(s){
+        return s.indexOf('メガ') >= 0 || s.indexOf('MEGA') >= 0;
+      });
+
+      return { isPrimal, isMega };
+    }
+
+    // override リストから、PRIMAL / MEGA を見て 1つ選ぶ
+    // ★ 通常フォームには絶対に適用しないようにする
+    function chooseOverride(list, flags, pd) {
+      if (!list || !list.length) return null;
+
+      const { isPrimal, isMega } = flags;
+
+      // フォームキー（メガX/Yやゲンシ用）
+      const formKey = (pd && (pd.form || pd.formKey || pd.tempEvoId))
+        ? String(pd.form || pd.formKey || pd.tempEvoId).toUpperCase()
+        : '';
+
+      // 通常フォーム（メガでもゲンシでもない）は override しない
+      if (!isPrimal && !isMega && !formKey) {
+        return null;
+      }
+
+      // 1) formKey に tempId が含まれているものを優先（X / Y の区別など）
+      if (formKey) {
+        for (let i = 0; i < list.length; i++) {
+          const ov  = list[i];
+          const tid = String(ov.tempId || ov.key || '').toUpperCase(); // 例: 'TEMP_EVOLUTION_MEGA_X'
+          if (!tid) continue;
+
+          if (formKey.indexOf(tid) >= 0) {
+            return ov;
+          }
+        }
+      }
+
+      // 2) それでも見つからなければ、PRIMAL / MEGA フラグでざっくり選ぶ（ゲンシ／メガ共用）
+      let candidate = null;
+      list.forEach(function (ov) {
+        const tid = String(ov.tempId || '').toUpperCase();
+        if (!tid) return;
+
+        if (isPrimal && tid.indexOf('PRIMAL') >= 0) {
+          candidate = ov;
+        } else if (isMega && tid.indexOf('MEGA') >= 0) {
+          candidate = ov;
+        }
+      });
+
+      // 3) 通常フォームに誤適用しないため、ここで list[0] にはフォールバックしない
+      return candidate;
+    }
+
+    // ★ override.types からタイプ配列を組み立てて pd に反映
+    function applyTypeOverride(pd, ov) {
+      let typesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : [];
+      let typesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : [];
+
+      if (!typesJa.length && !typesEn.length) return;
+
+      if (!typesEn.length && typesJa.length) {
+        typesEn = typesJa.map(function(t){
+          return pokemonUtil.translateTypes?.toEnType?.(t) || '';
         });
       }
-    });
-
-    console.log(
-      '[attachGoStats] metaById=', Object.keys(_metaById).length,
-      'metaByNo=', Object.keys(_metaByNo).length,
-      'overrideBases=', Object.keys(_ovByBase).length,
-      'overrideNos=', Object.keys(_ovByNo).length
-    );
-  }
-
-  // ゲンシ／メガっぽい名前かどうか
-  function detectFlags(pd) {
-    const flags = [];
-
-    [
-      pd.formKey,
-      pd.form,
-      pd.formId,
-      pd.tempEvoId,
-      pd.nameEn,
-      pd.nameJa
-    ].forEach(function(v){
-      if (v == null) return;
-      flags.push(String(v).toUpperCase());
-    });
-
-    const isPrimal = flags.some(function(s){
-      return s.indexOf('ゲンシ') >= 0 || s.indexOf('PRIMAL') >= 0;
-    });
-
-    const isMega = flags.some(function(s){
-      return s.indexOf('メガ') >= 0 || s.indexOf('MEGA') >= 0;
-    });
-
-    return { isPrimal, isMega };
-  }
-
-  // override リストから、PRIMAL / MEGA を見て 1つ選ぶ
-  function chooseOverride(list, flags) {
-    if (!list || !list.length) return null;
-    const { isPrimal, isMega } = flags;
-    let candidate = null;
-
-    list.forEach(function(ov){
-      const tid = String(ov.tempId || '').toUpperCase();
-      if (!tid) return;
-
-      if (isPrimal && tid.indexOf('PRIMAL') >= 0) {
-        candidate = ov;
-      } else if (isMega && tid.indexOf('MEGA') >= 0) {
-        candidate = ov;
+      if (!typesJa.length && typesEn.length) {
+        typesJa = typesEn.map(function(t){
+          return pokemonUtil.translateTypes?.toJaType?.(t) || '';
+        });
       }
-    });
 
-    return candidate;
-  }
+      typesJa = Array.from(new Set(
+        typesJa.map(function(t){ return (t || '').toString(); }).filter(Boolean)
+      ));
+      typesEn = Array.from(new Set(
+        typesEn.map(function(t){ return (t || '').toString().toLowerCase(); }).filter(Boolean)
+      ));
 
-  return function attachGoStats(pd) {
-    if (!pd) return pd;
-
-    buildIndexes();
-
-    // 図鑑番号（no）を優先して見る
-    let dexNo = null;
-    if (pd.no != null && Number.isFinite(Number(pd.no))) {
-      dexNo = Number(pd.no);
-    } else if (pd.id != null && Number.isFinite(Number(pd.id))) {
-      dexNo = Number(pd.id);
+      if (typesJa.length) pd.typesJa = typesJa;
+      if (typesEn.length) pd.typesEn = typesEn;
     }
 
-    // ベースとなる meta（通常フォーム）
-    let baseMeta = null;
+    return function attachGoStats(pd) {
+      if (!pd) return pd;
 
-    if (dexNo != null && _metaByNo[dexNo]) {
-      baseMeta = _metaByNo[dexNo];
-    } else {
-      // no が取れない場合のフォールバック：pokemonId ベース
-      const rawId  = pd.pokemonId || pd.id;
-      const baseId = rawId ? String(rawId).split('_')[0] : null;
-      if (baseId && _metaById[baseId]) {
-        baseMeta = _metaById[baseId];
+      buildIndexes();
+
+      // 図鑑番号（no）を優先して見る
+      let dexNo = null;
+      if (pd.no != null && Number.isFinite(Number(pd.no))) {
+        dexNo = Number(pd.no);
+      } else if (pd.id != null && Number.isFinite(Number(pd.id))) {
+        dexNo = Number(pd.id);
       }
-    }
 
-    if (baseMeta && baseMeta.stats) {
-      const s = baseMeta.stats;
-      pd.goStats = pd.goStats || {};
-      pd.goStats.attack  = s.attack;
-      pd.goStats.defense = s.defence;
-      pd.goStats.stamina = s.stamina;
-    }
+      // ベースとなる meta（通常フォーム）
+      let baseMeta = null;
 
-    // === ここからゲンシ／メガ override ===
-    const flags = detectFlags(pd);
+      if (dexNo != null && _metaByNo[dexNo]) {
+        baseMeta = _metaByNo[dexNo];
+      } else {
+        // no が取れない場合のフォールバック：pokemonId ベース
+        const rawId  = pd.pokemonId || pd.id;
+        const baseId = rawId ? String(rawId).split('_')[0] : null;
+        if (baseId && _metaById[baseId]) {
+          baseMeta = _metaById[baseId];
+        }
+      }
 
-    let ovList = null;
+      // 通常フォームの GO 種族値
+      if (baseMeta && baseMeta.stats) {
+        const s = baseMeta.stats;
+        pd.goStats = pd.goStats || {};
+        pd.goStats.attack  = s.attack;
+        pd.goStats.defense = s.defence;
+        pd.goStats.stamina = s.stamina;
+      }
 
-    if (dexNo != null && _ovByNo[dexNo]) {
-      ovList = _ovByNo[dexNo];
-    } else if (baseMeta && baseMeta.pokemonId && _ovByBase[baseMeta.pokemonId]) {
-      ovList = _ovByBase[baseMeta.pokemonId];
-    }
+      // === ここからゲンシ／メガ override ===
+      const flags = detectFlags(pd);
 
-    const ov = chooseOverride(ovList, flags);
-    if (ov && ov.stats) {
-      const s = ov.stats;
-      pd.goStats = pd.goStats || {};
-      if (s.attack  != null) pd.goStats.attack  = s.attack;
-      if (s.defence != null) pd.goStats.defense = s.defence;
-      if (s.stamina != null) pd.goStats.stamina = s.stamina;
-      console.log('[attachGoStats] override applied:', dexNo, pd.nameJa || pd.nameEn, ov.key, pd.goStats);
-    }
+      let ovList = null;
 
-    return pd;
-  };
-})(),
+      if (dexNo != null && _ovByNo[dexNo]) {
+        ovList = _ovByNo[dexNo];
+      } else if (baseMeta && baseMeta.pokemonId && _ovByBase[baseMeta.pokemonId]) {
+        ovList = _ovByBase[baseMeta.pokemonId];
+      }
+
+      const ov = chooseOverride(ovList, flags, pd);
+
+      // 種族値の上書き
+      if (ov && ov.stats) {
+        const s = ov.stats;
+        pd.goStats = pd.goStats || {};
+        if (s.attack  != null) pd.goStats.attack  = s.attack;
+        if (s.defence != null) pd.goStats.defense = s.defence;
+        if (s.stamina != null) pd.goStats.stamina = s.stamina;
+        console.log(
+          '[attachGoStats] override applied:',
+          dexNo,
+          pd.nameJa || pd.nameEn,
+          ov.key,
+          pd.goStats
+        );
+      }
+
+      // ★ タイプの上書き（override に typesEn / typesJa があれば使う）
+      if (ov) {
+        const ovTypesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : null;
+        const ovTypesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : null;
+
+        if (ovTypesEn && ovTypesEn.length) {
+          pd.typesEn = ovTypesEn.map(function(t) {
+            return (t || '').toString().toLowerCase();
+          });
+        }
+        if (ovTypesJa && ovTypesJa.length) {
+          pd.typesJa = ovTypesJa.map(function(t) {
+            return (t || '').toString();
+          });
+        }
+
+        if ((ovTypesEn && ovTypesEn.length) || (ovTypesJa && ovTypesJa.length)) {
+          console.log(
+            '[attachGoStats] type override applied:',
+            dexNo,
+            pd.nameJa || pd.nameEn,
+            'typesEn=',
+            pd.typesEn,
+            'typesJa=',
+            pd.typesJa
+          );
+        }
+      }
+
+      return pd;
+    };
+  })(),
 
   // 画像URL関連 ---------------------------------------------------
   getImageUrl : function(p) {
@@ -1221,4 +1318,66 @@ attachGoStats : (function(){
     return s.trim().toLowerCase();        // ex) 'WATER' → 'water'
   },
 
+  // フォルム/テンプレートID/ポケモンID → 「ガラル」「アローラ」「X」「Y」などのラベル
+  getFormRegionLabel : function(form, templateId, pokemonId) {
+    form       = (form       || '').toString().toUpperCase();
+    templateId = (templateId || '').toString().toUpperCase();
+    pokemonId  = (pokemonId  || '').toString().toUpperCase();
+
+    // ==== 1. メガリザードンX / Y を最優先で判定 ====
+    if (pokemonId === 'CHARIZARD') {
+      // どちらかに "MEGA_X" / "MEGA_Y" が含まれていればOKにしておく
+      if (form.indexOf('MEGA_X') >= 0 || templateId.indexOf('MEGA_X') >= 0) return 'X';
+      if (form.indexOf('MEGA_Y') >= 0 || templateId.indexOf('MEGA_Y') >= 0) return 'Y';
+    }
+
+    // ==== 2. 汎用メガは表示いじらない（「メガデンリュウ」のまま） ====
+    if (form.indexOf('MEGA') >= 0 || templateId.indexOf('MEGA') >= 0) {
+      return '';  // 「（メガ）」などは付けない
+    }
+
+    // ==== 3. リージョン判定 ====
+    const REGION_LABELS = {
+      ALOLA   : 'アローラ',
+      ALOLAN  : 'アローラ',
+      GALAR   : 'ガラル',
+      GALARIAN: 'ガラル',
+      HISUI   : 'ヒスイ',
+      HISAUI  : 'ヒスイ',
+      PALDEA  : 'パルデア'
+    };
+
+    for (var key in REGION_LABELS) {
+      if (!Object.prototype.hasOwnProperty.call(REGION_LABELS, key)) continue;
+      if (form.indexOf(key) >= 0 || templateId.indexOf(key) >= 0) {
+        return REGION_LABELS[key];
+      }
+    }
+
+    return '';  // ラベルなし
+  },
+
+  // ==== 画面に表示する正式名を生成 ====
+  buildRecommendDisplayName : function(d) {
+    const rawName = d && d.nameJa ? String(d.nameJa) : '-';
+
+    const region = pokemonUtil.getFormRegionLabel(
+      d && d.form,
+      d && d.templateId,
+      d && d.pokemonId
+    );
+
+    console.log(d.form, d.templateId, d.pokemonId);
+
+    // ラベルなしならそのまま
+    if (!region) return rawName;
+
+    // ★ メガリザードンX / Y → 「メガリザードンX」「メガリザードンY」
+    if ((region === 'X' || region === 'Y') && rawName.indexOf('メガリザードン') === 0) {
+      return rawName + region;
+    }
+
+    // ★ それ以外（ガラル・アローラなど） → 「ポケモン名（ガラル）」形式
+    return `${rawName}（${region}）`;
+  },
 };
