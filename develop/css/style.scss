@@ -608,7 +608,7 @@
         justify-content: space-between;
         padding: 0 10px;
         &-item {
-          width: calc(33.3% - 5px);
+          width: calc(50% - 5px);
           margin: 0;
           a {
             padding: 10px 0;
@@ -645,7 +645,7 @@
       &-list {
         margin-right: -10px;
         li {
-          width: calc(20% - 10px);
+          width: calc(100% / 6 - 10px);
           margin: 0 10px 10px 0;
           input[type="checkbox"] {
             & + label {
@@ -657,6 +657,7 @@
               padding: 3px 0;
               border-radius: 8px;
               white-space: nowrap;
+              letter-spacing: -0.05em;
               .icon {
                 position: relative;
                 top: 0;

@@ -226,6 +226,9 @@ const typeChecker = {
 
           // ★ check 側では引数をそのまま渡しておく（中で TABLE を再決定してるならそのまま）
           typeChecker.getType.check(typeData, _this);
+          if (typeof typeChecker.searchPokemon.openList === 'function') {
+            typeChecker.searchPokemon.openList();
+          }
 
           console.log('defenderTypesJa:', typeChecker.searchPokemon.getSelectedTypesJa());
         }
@@ -483,13 +486,13 @@ const typeChecker = {
         : (data && Array.isArray(data.list)) ? data.list
         : [];
 
-    //    attachGoStats は「1件ずつ」処理する関数なので map で回す
-    const srcWithGo = (pokemonUtil.attachGoStats)
-      ? srcArray.map(function(p) {
-          // そのまま mutate でOKならこのまま
-          return pokemonUtil.attachGoStats(p);
-        })
-      : srcArray;
+      //    attachGoStats は「1件ずつ」処理する関数なので map で回す
+      const srcWithGo = (pokemonUtil.attachGoStats)
+        ? srcArray.map(function(p) {
+            // そのまま mutate でOKならこのまま
+            return pokemonUtil.attachGoStats(p);
+          })
+        : srcArray;
 
       const filtered = typeChecker.searchPokemon.buildSelectableList(srcWithGo);
       this.cacheData = filtered;
@@ -504,6 +507,27 @@ const typeChecker = {
       const resetBtn    = $(typeChecker.searchPokemon.resetBtn);
       const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
 
+            // ====== リスト開閉ヘルパ ======
+      let blurTimer = null;
+
+      function openList() {
+        if (blurTimer) {
+          clearTimeout(blurTimer);
+          blurTimer = null;
+        }
+        wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
+
+        // リストが空なら復元
+        if (pokemonList.find('li').length === 0 && $('.js_list-html').length) {
+          pokemonList.html($('.js_list-html').html());
+          pokemonList.find('li').show();
+        }
+      }
+
+      // 他の処理からも呼べるように公開
+      typeChecker.searchPokemon.openList = openList;
+
+
       // 初回キャッシュ作成
       if ($('.js_list-html').length === 0) {
         $('body').append('<ul class="js_list-html" style="display:none;"></ul>\n');
@@ -511,7 +535,6 @@ const typeChecker = {
       }
 
       // ====== フォーカス・ブラー制御 ======
-      let blurTimer = null;
       textbox.off('focus click').on('focus click', function() {
         if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
         wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
