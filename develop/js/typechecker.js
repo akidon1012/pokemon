@@ -390,40 +390,32 @@ const typeChecker = {
         msg.fadeOut(1000);
       }, 1000);
     },
-    _filterListByTypesJa: function(selectedJa) {
-      const hasFilter = Array.isArray(selectedJa) && selectedJa.length > 0;
-      const set = new Set(selectedJa || []);
+    // タイプフィルタ（AND / OR対応版）
+    _filterListByTypesJa : function(selected){
+      const mode = typeChecker.searchPokemon.getAndOrMode(); // ← AND / OR読み取り
+      const list = $(typeChecker.searchPokemon.pokemonList).find('li');
 
-      const $root  = typeChecker.listScope.pickRoot();
-      const $items = typeChecker.listScope.pickItems($root);
-      if (!$items.length) {
-        console.warn('[getType] list items not found in scope');
+      // タイプ未選択 → 全表示
+      if (!selected || !selected.length){
+        list.show();
         return;
       }
 
-      let showCnt = 0, totalCnt = 0, missCnt = 0;
-      $items.each(function() {
-        totalCnt++;
-        const $el = $(this);
-        const typesJa = typeChecker.getType._resolveTypesForElement($el);
-        if (!typesJa.length) {
-          missCnt++;
-          if (missCnt <= 5) {
-            console.debug('[miss] no types', {
-              no: $el.attr('data-no'),
-              nameEn: $el.attr('data-name-en') || $el.data('nameEn'),
-              nameJa: $el.attr('data-name-ja') || $el.data('nameJa'),
-              species: $el.attr('data-species-id') || $el.data('speciesId')
-            });
-          }
+      list.each(function(){
+        const types = ($(this).find('a').data('types-ja') || '').split(',');
+
+        let ok = false;
+
+        if (mode === 'and'){
+          // 🔹 AND：選んだタイプすべてを持つ個体のみ表示
+          ok = selected.every(t => types.includes(t));
+        } else {
+          // 🔹 OR：どれか1つでも合えば表示
+          ok = selected.some(t => types.includes(t));
         }
-        const show = !hasFilter || typesJa.some(t => set.has(t));
-        if (show) showCnt++;
-        $el.toggle(show);
+
+        $(this).toggle(ok);
       });
-
-      console.log(`[getType] filtered (scoped): ${showCnt}/${totalCnt} (miss types: ${missCnt})`);
-
     },
     _resolveTypesForElement: function($el) {
       const pre = ($el.attr('data-types-ja') || '').split(',').filter(Boolean);
@@ -474,6 +466,7 @@ const typeChecker = {
     resetBtn : '.js_reset',
     clearBtn : '.js_search-clear',
     selectedArea : '.js_pokemon-search-result',      // 追加：選択結果の描画先
+    radioAndOr : 'input[name="and_or"]',
     cacheData : [],                                  // 追加：iniで受け取ったデータを保持（リセット再構築用）
     typeName : [
       'normal','fire','water','grass','electric','ice','fighting','poison','ground',
@@ -483,6 +476,105 @@ const typeChecker = {
       'ノーマル','ほのお','みず','くさ','でんき','こおり','かくとう','どく','じめん',
       'ひこう','エスパー','むし','いわ','ゴースト','ドラゴン','あく','はがね','フェアリー'
     ],
+
+    ini : function(data) {
+      const srcArray =
+        Array.isArray(data) ? data
+        : (data && Array.isArray(data.list)) ? data.list
+        : [];
+
+    //    attachGoStats は「1件ずつ」処理する関数なので map で回す
+    const srcWithGo = (pokemonUtil.attachGoStats)
+      ? srcArray.map(function(p) {
+          // そのまま mutate でOKならこのまま
+          return pokemonUtil.attachGoStats(p);
+        })
+      : srcArray;
+
+      const filtered = typeChecker.searchPokemon.buildSelectableList(srcWithGo);
+      this.cacheData = filtered;
+
+      // ポケモン一覧の再構築は filtered を元に 1 回だけ行う
+      typeChecker.searchPokemon.clear(filtered);
+
+      const wrapper     = $(typeChecker.searchPokemon.wrapper);
+      const textbox     = wrapper.find(typeChecker.searchPokemon.textbox);
+      const pokemonList = wrapper.find(typeChecker.searchPokemon.pokemonList);
+      const checkbox    = $(typeChecker.getType.checkbox);
+      const resetBtn    = $(typeChecker.searchPokemon.resetBtn);
+      const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
+
+      // 初回キャッシュ作成
+      if ($('.js_list-html').length === 0) {
+        $('body').append('<ul class="js_list-html" style="display:none;"></ul>\n');
+        $('.js_list-html').html(pokemonList.html());
+      }
+
+      // ====== フォーカス・ブラー制御 ======
+      let blurTimer = null;
+      textbox.off('focus click').on('focus click', function() {
+        if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
+        wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
+        // リストが空なら復元
+        if (pokemonList.find('li').length === 0 && $('.js_list-html').length) {
+          pokemonList.html($('.js_list-html').html());
+          pokemonList.find('li').show();
+        }
+      });
+      textbox.off('blur').on('blur', function() {
+        blurTimer = setTimeout(function() {
+          wrapper.removeClass(typeChecker.searchPokemon.isActiveClassName);
+          blurTimer = null;
+        }, 120);
+      });
+
+      // ====== 入力で絞り込み ======
+      let composing = false;
+      textbox.on('compositionstart', function(){ composing = true; });
+      textbox.on('compositionend',  function(){ composing = false; textbox.trigger('keyup'); });
+
+      textbox.off('keyup change').on('keyup change', function() {
+        if (composing) return;
+        if (textbox.is(':focus')) wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
+
+        const keywordRaw = $(this).val();
+        const keyword = pokemonUtil.translate.katakana(String(keywordRaw).trim());
+
+        // 毎回全件復元してからフィルタ
+        if ($('.js_list-html').length) {
+          pokemonList.html($('.js_list-html').html());
+        }
+
+        if (keyword === '') {
+          pokemonList.find('li').show();
+          if (typeChecker.getType?.clear) typeChecker.getType.clear();
+          checkbox.each(function(){ $(this).prop('checked', false); });
+          clearBtn.hide();
+
+          // ★ 追加：入力が空になったら選択カードも削除
+          typeChecker.searchPokemon.clearSelected();
+          return;
+        }
+
+        pokemonList.find('li').each(function() {
+          const text = $(this).text();
+          $(this).toggle(text.indexOf(keyword) > -1);
+        });
+        clearBtn.show();
+      });
+
+      // ====== リスト選択（mousedown→pointerdown の既存方針を関数参照に置換） ======
+      $(document)
+        .off('pointerdown.pokemonList mousedown.pokemonList')
+        .on('pointerdown.pokemonList mousedown.pokemonList', '.js_pokemon-search-list a', typeChecker.searchPokemon.handlePick);
+
+        $(document).on('change', typeChecker.searchPokemon.radioAndOr, function(){
+          const sel = typeChecker.searchPokemon.getSelectedTypesJa();
+          typeChecker.getType._filterListByTypesJa(sel);
+        });      
+      // ====== リセット ======
+      resetBtn.off('click').on('click', typeChecker.searchPokemon.handleReset);
+    },
 
     // ========== 共通カードの描画/クリア ==========
     renderSelected : function(poke){
@@ -815,100 +907,6 @@ const typeChecker = {
       return name;
     },
     // ========== 既存：初期化 ==========
-    ini : function(data) {
-      const srcArray =
-        Array.isArray(data) ? data
-        : (data && Array.isArray(data.list)) ? data.list
-        : [];
-
-    //    attachGoStats は「1件ずつ」処理する関数なので map で回す
-    const srcWithGo = (pokemonUtil.attachGoStats)
-      ? srcArray.map(function(p) {
-          // そのまま mutate でOKならこのまま
-          return pokemonUtil.attachGoStats(p);
-        })
-      : srcArray;
-
-      const filtered = typeChecker.searchPokemon.buildSelectableList(srcWithGo);
-      this.cacheData = filtered;
-
-      // ポケモン一覧の再構築は filtered を元に 1 回だけ行う
-      typeChecker.searchPokemon.clear(filtered);
-
-      const wrapper     = $(typeChecker.searchPokemon.wrapper);
-      const textbox     = wrapper.find(typeChecker.searchPokemon.textbox);
-      const pokemonList = wrapper.find(typeChecker.searchPokemon.pokemonList);
-      const checkbox    = $(typeChecker.getType.checkbox);
-      const resetBtn    = $(typeChecker.searchPokemon.resetBtn);
-      const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
-
-      // 初回キャッシュ作成
-      if ($('.js_list-html').length === 0) {
-        $('body').append('<ul class="js_list-html" style="display:none;"></ul>\n');
-        $('.js_list-html').html(pokemonList.html());
-      }
-
-      // ====== フォーカス・ブラー制御 ======
-      let blurTimer = null;
-      textbox.off('focus click').on('focus click', function() {
-        if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
-        wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
-        // リストが空なら復元
-        if (pokemonList.find('li').length === 0 && $('.js_list-html').length) {
-          pokemonList.html($('.js_list-html').html());
-          pokemonList.find('li').show();
-        }
-      });
-      textbox.off('blur').on('blur', function() {
-        blurTimer = setTimeout(function() {
-          wrapper.removeClass(typeChecker.searchPokemon.isActiveClassName);
-          blurTimer = null;
-        }, 120);
-      });
-
-      // ====== 入力で絞り込み ======
-      let composing = false;
-      textbox.on('compositionstart', function(){ composing = true; });
-      textbox.on('compositionend',  function(){ composing = false; textbox.trigger('keyup'); });
-
-      textbox.off('keyup change').on('keyup change', function() {
-        if (composing) return;
-        if (textbox.is(':focus')) wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
-
-        const keywordRaw = $(this).val();
-        const keyword = pokemonUtil.translate.katakana(String(keywordRaw).trim());
-
-        // 毎回全件復元してからフィルタ
-        if ($('.js_list-html').length) {
-          pokemonList.html($('.js_list-html').html());
-        }
-
-        if (keyword === '') {
-          pokemonList.find('li').show();
-          if (typeChecker.getType?.clear) typeChecker.getType.clear();
-          checkbox.each(function(){ $(this).prop('checked', false); });
-          clearBtn.hide();
-
-          // ★ 追加：入力が空になったら選択カードも削除
-          typeChecker.searchPokemon.clearSelected();
-          return;
-        }
-
-        pokemonList.find('li').each(function() {
-          const text = $(this).text();
-          $(this).toggle(text.indexOf(keyword) > -1);
-        });
-        clearBtn.show();
-      });
-
-      // ====== リスト選択（mousedown→pointerdown の既存方針を関数参照に置換） ======
-      $(document)
-        .off('pointerdown.pokemonList mousedown.pokemonList')
-        .on('pointerdown.pokemonList mousedown.pokemonList', '.js_pokemon-search-list a', typeChecker.searchPokemon.handlePick);
-
-      // ====== リセット ======
-      resetBtn.off('click').on('click', typeChecker.searchPokemon.handleReset);
-    },
 
     // 既存：型で選択（そのまま）
     select : function(arry) {
@@ -948,15 +946,19 @@ const typeChecker = {
       const sel = typeChecker.getType.checkbox; // 例: 'input[name="pokemon-type"]'
       const nodes = document.querySelectorAll(sel + ':checked');
       const arr = Array.prototype.map.call(nodes, el => {
-        // value が英名の場合は和名に寄せる、すでに和名ならそのまま
         const v = el.value || '';
-        // どちらの可能性もある前提で normalize
         const jaFromEn = pokemonUtil.translateTypes.toJaType(v);
         return jaFromEn || v;
       });
       return arr;
     },
 
+    getAndOrMode : function() {
+      const v = $('input[name="and_or"]:checked').val();
+      return (v === 'or') ? 'or' : 'and'; // ← デフォルトはAND
+    },
+
+    
     clear : function(list) {
       const pokemonList = $(typeChecker.searchPokemon.pokemonList);
       pokemonList.empty();

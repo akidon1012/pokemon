@@ -177,6 +177,52 @@
     &-result {
       margin-top: 20px;
     }
+    &-and-or {
+      margin-bottom: 5px;
+      &-list {
+        display: flex;
+        justify-content: flex-end;
+        align-items: baseline;
+        &-item {
+          margin-left: 10px;
+          input[type="radio"] {
+            display: none;
+            & + label {
+              padding-left: 20px;
+              position: relative;
+              &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                width: 14px;
+                height: 14px;
+                border: 1px solid #999;
+                border-radius: 50%;
+              }
+            }
+            &:checked {
+              & + label {
+                &::after {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  top: 50%;
+                  left: 3px;
+                  transform: translateY(-50%);
+                  width: 10px;
+                  height: 10px;
+                  background: #000;
+                  border-radius: 50%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     &.is_active {
       .pokemon-search {
         &-input {
