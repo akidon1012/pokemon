@@ -1638,9 +1638,52 @@ const typeChecker = {
         const bestMoveId = (opts && opts.bestMoveId) || '';
         const isSpecial  = (label === 'スペシャル');
 
+        const ownerTypesEn = Array.isArray(opts && opts.typesEn)
+          ? opts.typesEn.map(t => (t || '').toString().toLowerCase())
+          : [];
+
         let list = src.slice();
 
-        // ノーマル：スペシャルと同タイプを優先
+        // ==== ゲージ本数算出（スペシャル用） ====
+        const getBars = function(m) {
+          let bars = m && m.gaugeBars;
+          if (!bars) {
+            const e = Math.abs(Number(m && m.energy) || 0);
+            if (e > 0) {
+              if (e <= 35)      bars = 3;
+              else if (e <=55)  bars = 2;
+              else              bars = 1;
+            } else {
+              bars = 1;
+            }
+          }
+          bars = Math.max(1, Math.min(3, bars));
+          return bars;
+        };
+
+        // ==== スコア計算 ====
+        const calcScore = function(m) {
+          if (!m) return 0;
+          const power = Number(m.power) || 0;
+          if (!power) return 0;
+
+          const typeEn = (m.typeEn || m.type || '').toString().toLowerCase();
+          let stab = 1.0;
+          if (typeEn && ownerTypesEn.length && ownerTypesEn.includes(typeEn)) {
+            stab = 1.2; // GOのSTABをざっくり反映
+          }
+
+          if (isSpecial) {
+            const bars = getBars(m); // 1〜3
+            // 威力 × STAB × ゲージ本数
+            return power * stab * bars;
+          } else {
+            // ノーマル技は威力 × STAB
+            return power * stab;
+          }
+        };
+
+        // ノーマル：スペシャルと同タイプを優先（元の仕様維持）
         if (!isSpecial && bestTypeEn) {
           const sameType = list.filter(m => {
             return (m.typeEn || m.type || '').toString().toLowerCase() === bestTypeEn;
@@ -1650,20 +1693,32 @@ const typeChecker = {
           }
         }
 
-        // スペシャル：一番強い技を先頭へ
-        if (isSpecial && bestMoveId) {
+        // ==== 並び順を「強い順」に統一 ====
+        if (isSpecial) {
           list.sort((a, b) => {
             const idA = a && a.id;
             const idB = b && b.id;
-            if (idA === bestMoveId && idB !== bestMoveId) return -1;
-            if (idB === bestMoveId && idA !== bestMoveId) return 1;
-            const pA = Number(a.power) || 0;
-            const pB = Number(b.power) || 0;
-            return pB - pA;
+
+            const scoreA = calcScore(a);
+            const scoreB = calcScore(b);
+
+            // bestMoveId が決まっている場合はそれを最優先
+            if (bestMoveId) {
+              if (idA === bestMoveId && idB !== bestMoveId) return -1;
+              if (idB === bestMoveId && idA !== bestMoveId) return 1;
+            }
+            return scoreB - scoreA; // スコア降順
+          });
+        } else {
+          // ノーマル技は単純に威力（STAB込み）の降順
+          list.sort((a, b) => {
+            const sa = calcScore(a);
+            const sb = calcScore(b);
+            return sb - sa;
           });
         }
 
-        // ノーマル技は最低1つは出す
+        // ノーマル技は最低1つは出す（元の仕様維持）
         if (!list.length && src.length) {
           list = [src[0]];
         }
@@ -1681,21 +1736,13 @@ const typeChecker = {
 
           let gaugeNum = null;
           if (isSpecial) {
-            let bars = m.gaugeBars;
-            if (!bars) {
-              const e = Math.abs(Number(m.energy) || 0);
-              if (e > 0) {
-                if (e <= 35)      bars = 3;
-                else if (e <=55)  bars = 2;
-                else              bars = 1;
-              } else {
-                bars = 1;
-              }
-            }
-            gaugeNum = Math.max(1, Math.min(3, bars));
+            const bars = getBars(m);
+            gaugeNum   = bars; // 1〜3
           }
 
-          const isStrongest = isSpecial && bestMoveId && (m.id === bestMoveId);
+          const isStrongest =
+            isSpecial && bestMoveId && (m.id === bestMoveId);
+
           const ddClass =
             'pokemon-recommend-list-item-attack-info is_' + typeEn +
             (isStrongest ? ' is_strongest' : '');
@@ -1758,8 +1805,8 @@ const typeChecker = {
         const bestTypeEn  = d._bestTypeEn || '';
         const bestMoveId  = bestSpecial ? bestSpecial.id : '';
 
-        const normalHtml  = buildMovesHtml('ノーマル',  normalMoves,  { bestTypeEn });
-        const specialHtml = buildMovesHtml('スペシャル', specialMoves, { bestTypeEn, bestMoveId });
+        const normalHtml  = buildMovesHtml('ノーマル',  normalMoves,  { bestTypeEn, typesEn });
+        const specialHtml = buildMovesHtml('スペシャル', specialMoves, { bestTypeEn, bestMoveId, typesEn });
 
         const goAtk  = d.goStats?.attack  ?? '-';
         const goDef  = d.goStats?.defense ?? '-';

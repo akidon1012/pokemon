@@ -396,25 +396,40 @@ const pokemonUtil = {
     };
   })(),
 
+  // =====================
+  // suffix_map から suffix を拾う新規ヘルパー
+  // =====================
+  resolveSpriteSuffixFromMap : function(p) {
+    const map = window.POKEMON_SPRITE_SUFFIX_MAP || {};
+    if (!p || !Object.keys(map).length) return null;
+
+    const keys = [];
+
+    if (p.pokemonId) keys.push(String(p.pokemonId).toUpperCase());
+    if (p.basePokemonId && p.tempId) {
+      keys.push(`${p.basePokemonId.toUpperCase()}_${p.tempId.toUpperCase()}`);
+    }
+    if (p.formKey) keys.push(String(p.formKey).toUpperCase());
+    if (p.formId && p.basePokemonId) keys.push(`${p.basePokemonId.toUpperCase()}_${p.formId.toUpperCase()}`);
+    if (p.tempEvoId && p.basePokemonId) keys.push(`${p.basePokemonId.toUpperCase()}_${p.tempEvoId.toUpperCase()}`);
+
+    for (const k of keys) {
+      const entry = map[k];
+      if (entry && entry.suffix) return String(entry.suffix);
+    }
+    return null;
+  },
+
   // 画像URL関連 ---------------------------------------------------
   getImageUrl : function(p) {
-    // p が null/undefined なら no_img
     if (!p) return '/images/no_img.svg';
 
-    // --- 図鑑Noを決める ---
+    // no / id から図鑑番号を決める
     let no = null;
-
-    // 数字や文字列で直接渡された場合にも一応対応しておく
-    if (typeof p === 'number' || (typeof p === 'string' && /^\d+$/.test(p))) {
-      no = Number(p);
-    } else {
-      if (p.no != null) {
-        no = Number(p.no);
-      } else if (p.dex != null) {
-        no = Number(p.dex);
-      } else if (p.id != null) {
-        no = Number(p.id);
-      }
+    if (p.no != null && Number.isFinite(Number(p.no))) {
+      no = Number(p.no);
+    } else if (p.id != null && Number.isFinite(Number(p.id))) {
+      no = Number(p.id);
     }
 
     if (!Number.isFinite(no) || no <= 0) {
@@ -423,68 +438,49 @@ const pokemonUtil = {
 
     const n3 = String(no).padStart(3, '0');
 
-    // フォーム種別・フォームID（classifyForm/buildSelectableList で付けたやつを使う想定）
-    const kind = p.formKind || p.kind || null; // 'base' | 'mega' | 'primal' | 'region' など
-    const form = String(p.form || p.formId || p.tempId || '').toUpperCase();
+    // 1. suffix_map から suffix を探す
+    let suffix = pokemonUtil.resolveSpriteSuffixFromMap(p);
 
-    let suffix = null;
-
-    // =============================================================
-    // 1) メガ／ゲンシ：基本すべて 51 を使う（XY 含めて一律）
-    // =============================================================
-    if (kind === 'mega' || kind === 'primal') {
-      const want = '51';
-      if (typeof pokemonUtil.imageSuffixExists === 'function') {
-        if (pokemonUtil.imageSuffixExists(no, want)) {
-          suffix = want;
-        }
-      } else {
-        // imageSuffixExists がない場合はそのまま 51 を採用
-        suffix = want;
-      }
-    }
-
-    // =============================================================
-    // 2) リージョンフォーム：基本は通常アイコンと同じ扱い
-    //    → 00 があれば 00、なければ最初の suffix
-    // =============================================================
-    if (!suffix && kind === 'region') {
-      if (typeof pokemonUtil.imageSuffixExists === 'function' &&
-          pokemonUtil.imageSuffixExists(no, '00')) {
-        suffix = '00';
-      }
-    }
-
-    // =============================================================
-    // 3) ここまでで suffix が決まっていなければ、
-    //    画像ファイル一覧から自動判定（通常フォームも含む）
-    // =============================================================
+    // 2. 見つからなかった場合のフォールバックロジック
     if (!suffix) {
-      let suffixList = [];
+      const flags = [];
+      [
+        p.pokemonId,
+        p.form,
+        p.formId,
+        p.tempEvoId,
+        p.nameEn,
+        p.nameJa
+      ].forEach(function(v) {
+        if (v == null) return;
+        flags.push(String(v).toUpperCase());
+      });
 
-      if (typeof pokemonUtil.listAvailableFormSuffix === 'function') {
-        suffixList = pokemonUtil.listAvailableFormSuffix(no) || [];
-      }
+      const text = flags.join(' ');
 
-      if (!suffixList.length) {
-        // その番号のファイルが1枚も見つからない → とりあえず 00 を試す
-        suffix = '00';
-      } else {
-        // 00 があれば 00 優先、なければ先頭を採用
-        if (suffixList.includes('00')) {
-          suffix = '00';
+      // メガっぽい
+      if (text.includes('MEGA')) {
+        // X / Y だけは分ける
+        if (text.includes('MEGA_X')) {
+          suffix = '51';
+        } else if (text.includes('MEGA_Y')) {
+          suffix = '52';
         } else {
-          suffix = suffixList[0];
+          suffix = '51';
         }
+      }
+      // ゲンシっぽい
+      else if (text.includes('PRIMAL') || text.includes('ゲンシ')) {
+        suffix = '51';
+      }
+      // それ以外は通常フォーム扱い
+      else {
+        suffix = '00';
       }
     }
 
-    const url = '/images/pokemon/pokemon_icon_' + n3 + '_' + suffix + '.png';
-
-    // 必要ならデバッグログ
-    // console.log('[img check]', p.nameJa || p.name || p.pokemonId || no, no, kind || '-', suffix, url);
-
-    return url;
+    // ここで suffix が決まっている前提
+    return '/images/pokemon/pokemon_icon_' + n3 + '_' + suffix + '.png';
   },
 
   // 既存コードから呼ばれている兼ね合い用
