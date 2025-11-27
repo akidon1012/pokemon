@@ -6,29 +6,37 @@
       "stamina": 190,
       "attack": 241,
       "defence": 246
-    }
+    },
+    "typesEn": [
+      "grass",
+      "poison"
+    ]
   },
   "CHARIZARD_TEMP_EVOLUTION_MEGA_X": {
     "basePokemonId": "CHARIZARD",
     "tempId": "TEMP_EVOLUTION_MEGA_X",
-    "typesEn": ["fire", "dragon"],
-    "typesJa": ["ほのお", "ドラゴン"],
     "stats": {
       "stamina": 186,
       "attack": 273,
       "defence": 213
-    }
+    },
+    "typesEn": [
+      "fire",
+      "dragon"
+    ]
   },
   "CHARIZARD_TEMP_EVOLUTION_MEGA_Y": {
     "basePokemonId": "CHARIZARD",
     "tempId": "TEMP_EVOLUTION_MEGA_Y",
-    "typesEn": ["fire", "flying"],
-    "typesJa": ["ほのお", "ひこう"],
     "stats": {
       "stamina": 186,
       "attack": 319,
       "defence": 212
-    }
+    },
+    "typesEn": [
+      "fire",
+      "flying"
+    ]
   },
   "BLASTOISE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "BLASTOISE",
@@ -37,7 +45,10 @@
       "stamina": 188,
       "attack": 264,
       "defence": 237
-    }
+    },
+    "typesEn": [
+      "water"
+    ]
   },
   "BEEDRILL_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "BEEDRILL",
@@ -46,7 +57,11 @@
       "stamina": 163,
       "attack": 303,
       "defence": 148
-    }
+    },
+    "typesEn": [
+      "bug",
+      "poison"
+    ]
   },
   "PIDGEOT_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "PIDGEOT",
@@ -55,7 +70,11 @@
       "stamina": 195,
       "attack": 280,
       "defence": 175
-    }
+    },
+    "typesEn": [
+      "normal",
+      "flying"
+    ]
   },
   "ALAKAZAM_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "ALAKAZAM",
@@ -64,7 +83,10 @@
       "stamina": 146,
       "attack": 367,
       "defence": 207
-    }
+    },
+    "typesEn": [
+      "psychic"
+    ]
   },
   "SLOWBRO_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SLOWBRO",
@@ -73,7 +95,11 @@
       "stamina": 216,
       "attack": 224,
       "defence": 259
-    }
+    },
+    "typesEn": [
+      "water",
+      "psychic"
+    ]
   },
   "GENGAR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GENGAR",
@@ -82,7 +108,11 @@
       "stamina": 155,
       "attack": 349,
       "defence": 199
-    }
+    },
+    "typesEn": [
+      "ghost",
+      "poison"
+    ]
   },
   "KANGASKHAN_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "KANGASKHAN",
@@ -91,7 +121,10 @@
       "stamina": 233,
       "attack": 246,
       "defence": 210
-    }
+    },
+    "typesEn": [
+      "normal"
+    ]
   },
   "PINSIR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "PINSIR",
@@ -100,7 +133,11 @@
       "stamina": 163,
       "attack": 305,
       "defence": 231
-    }
+    },
+    "typesEn": [
+      "bug",
+      "flying"
+    ]
   },
   "GYARADOS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GYARADOS",
@@ -109,7 +146,11 @@
       "stamina": 216,
       "attack": 292,
       "defence": 247
-    }
+    },
+    "typesEn": [
+      "water",
+      "dark"
+    ]
   },
   "AERODACTYL_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "AERODACTYL",
@@ -118,7 +159,11 @@
       "stamina": 190,
       "attack": 292,
       "defence": 210
-    }
+    },
+    "typesEn": [
+      "rock",
+      "flying"
+    ]
   },
   "AMPHAROS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "AMPHAROS",
@@ -127,7 +172,11 @@
       "stamina": 207,
       "attack": 294,
       "defence": 203
-    }
+    },
+    "typesEn": [
+      "electric",
+      "dragon"
+    ]
   },
   "STEELIX_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "STEELIX",
@@ -136,7 +185,11 @@
       "stamina": 181,
       "attack": 212,
       "defence": 327
-    }
+    },
+    "typesEn": [
+      "steel",
+      "ground"
+    ]
   },
   "SCIZOR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SCIZOR",
@@ -145,7 +198,11 @@
       "stamina": 172,
       "attack": 279,
       "defence": 250
-    }
+    },
+    "typesEn": [
+      "bug",
+      "steel"
+    ]
   },
   "HERACROSS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "HERACROSS",
@@ -154,7 +211,11 @@
       "stamina": 190,
       "attack": 334,
       "defence": 223
-    }
+    },
+    "typesEn": [
+      "bug",
+      "fighting"
+    ]
   },
   "HOUNDOOM_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "HOUNDOOM",
@@ -163,7 +224,11 @@
       "stamina": 181,
       "attack": 289,
       "defence": 194
-    }
+    },
+    "typesEn": [
+      "dark",
+      "fire"
+    ]
   },
   "TYRANITAR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "TYRANITAR",
@@ -172,7 +237,11 @@
       "stamina": 225,
       "attack": 309,
       "defence": 276
-    }
+    },
+    "typesEn": [
+      "rock",
+      "dark"
+    ]
   },
   "SCEPTILE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SCEPTILE",
@@ -181,7 +250,11 @@
       "stamina": 172,
       "attack": 320,
       "defence": 186
-    }
+    },
+    "typesEn": [
+      "grass",
+      "dragon"
+    ]
   },
   "BLAZIKEN_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "BLAZIKEN",
@@ -190,7 +263,11 @@
       "stamina": 190,
       "attack": 329,
       "defence": 168
-    }
+    },
+    "typesEn": [
+      "fire",
+      "fighting"
+    ]
   },
   "SWAMPERT_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SWAMPERT",
@@ -199,7 +276,11 @@
       "stamina": 225,
       "attack": 283,
       "defence": 218
-    }
+    },
+    "typesEn": [
+      "water",
+      "ground"
+    ]
   },
   "GARDEVOIR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GARDEVOIR",
@@ -208,7 +289,11 @@
       "stamina": 169,
       "attack": 326,
       "defence": 229
-    }
+    },
+    "typesEn": [
+      "psychic",
+      "fairy"
+    ]
   },
   "SABLEYE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SABLEYE",
@@ -217,7 +302,11 @@
       "stamina": 137,
       "attack": 151,
       "defence": 216
-    }
+    },
+    "typesEn": [
+      "dark",
+      "ghost"
+    ]
   },
   "MAWILE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "MAWILE",
@@ -226,7 +315,11 @@
       "stamina": 137,
       "attack": 188,
       "defence": 217
-    }
+    },
+    "typesEn": [
+      "steel",
+      "fairy"
+    ]
   },
   "AGGRON_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "AGGRON",
@@ -235,7 +328,10 @@
       "stamina": 172,
       "attack": 247,
       "defence": 331
-    }
+    },
+    "typesEn": [
+      "steel"
+    ]
   },
   "MEDICHAM_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "MEDICHAM",
@@ -244,7 +340,11 @@
       "stamina": 155,
       "attack": 205,
       "defence": 179
-    }
+    },
+    "typesEn": [
+      "fighting",
+      "psychic"
+    ]
   },
   "MANECTRIC_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "MANECTRIC",
@@ -253,7 +353,10 @@
       "stamina": 172,
       "attack": 286,
       "defence": 179
-    }
+    },
+    "typesEn": [
+      "electric"
+    ]
   },
   "SHARPEDO_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SHARPEDO",
@@ -262,7 +365,11 @@
       "stamina": 172,
       "attack": 289,
       "defence": 144
-    }
+    },
+    "typesEn": [
+      "water",
+      "dark"
+    ]
   },
   "CAMERUPT_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "CAMERUPT",
@@ -271,7 +378,11 @@
       "stamina": 172,
       "attack": 253,
       "defence": 183
-    }
+    },
+    "typesEn": [
+      "fire",
+      "ground"
+    ]
   },
   "ALTARIA_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "ALTARIA",
@@ -280,7 +391,11 @@
       "stamina": 181,
       "attack": 222,
       "defence": 218
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "fairy"
+    ]
   },
   "BANETTE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "BANETTE",
@@ -289,7 +404,10 @@
       "stamina": 162,
       "attack": 312,
       "defence": 160
-    }
+    },
+    "typesEn": [
+      "ghost"
+    ]
   },
   "ABSOL_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "ABSOL",
@@ -298,7 +416,10 @@
       "stamina": 163,
       "attack": 314,
       "defence": 130
-    }
+    },
+    "typesEn": [
+      "dark"
+    ]
   },
   "GLALIE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GLALIE",
@@ -307,7 +428,10 @@
       "stamina": 190,
       "attack": 252,
       "defence": 168
-    }
+    },
+    "typesEn": [
+      "ice"
+    ]
   },
   "SALAMENCE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "SALAMENCE",
@@ -316,7 +440,11 @@
       "stamina": 216,
       "attack": 310,
       "defence": 251
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "flying"
+    ]
   },
   "METAGROSS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "METAGROSS",
@@ -325,7 +453,11 @@
       "stamina": 190,
       "attack": 300,
       "defence": 289
-    }
+    },
+    "typesEn": [
+      "steel",
+      "psychic"
+    ]
   },
   "LATIAS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "LATIAS",
@@ -334,7 +466,11 @@
       "stamina": 190,
       "attack": 289,
       "defence": 297
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "psychic"
+    ]
   },
   "LATIOS_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "LATIOS",
@@ -343,7 +479,11 @@
       "stamina": 190,
       "attack": 335,
       "defence": 241
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "psychic"
+    ]
   },
   "KYOGRE_TEMP_EVOLUTION_PRIMAL": {
     "basePokemonId": "KYOGRE",
@@ -352,18 +492,23 @@
       "stamina": 218,
       "attack": 353,
       "defence": 268
-    }
+    },
+    "typesEn": [
+      "water"
+    ]
   },
   "GROUDON_TEMP_EVOLUTION_PRIMAL": {
     "basePokemonId": "GROUDON",
     "tempId": "TEMP_EVOLUTION_PRIMAL",
-    "typesEn": ["ground", "fire"],
-    "typesJa": ["じめん", "ほのお"],
     "stats": {
       "stamina": 218,
       "attack": 353,
       "defence": 268
-    }
+    },
+    "typesEn": [
+      "ground",
+      "fire"
+    ]
   },
   "RAYQUAZA_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "RAYQUAZA",
@@ -372,7 +517,11 @@
       "stamina": 227,
       "attack": 377,
       "defence": 210
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "flying"
+    ]
   },
   "LOPUNNY_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "LOPUNNY",
@@ -381,7 +530,11 @@
       "stamina": 163,
       "attack": 282,
       "defence": 214
-    }
+    },
+    "typesEn": [
+      "normal",
+      "fighting"
+    ]
   },
   "GARCHOMP_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GARCHOMP",
@@ -390,7 +543,11 @@
       "stamina": 239,
       "attack": 339,
       "defence": 222
-    }
+    },
+    "typesEn": [
+      "dragon",
+      "ground"
+    ]
   },
   "LUCARIO_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "LUCARIO",
@@ -399,7 +556,11 @@
       "stamina": 172,
       "attack": 310,
       "defence": 175
-    }
+    },
+    "typesEn": [
+      "fighting",
+      "steel"
+    ]
   },
   "ABOMASNOW_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "ABOMASNOW",
@@ -408,7 +569,11 @@
       "stamina": 207,
       "attack": 240,
       "defence": 191
-    }
+    },
+    "typesEn": [
+      "grass",
+      "ice"
+    ]
   },
   "GALLADE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "GALLADE",
@@ -417,7 +582,11 @@
       "stamina": 169,
       "attack": 326,
       "defence": 230
-    }
+    },
+    "typesEn": [
+      "psychic",
+      "fighting"
+    ]
   },
   "AUDINO_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "AUDINO",
@@ -426,7 +595,11 @@
       "stamina": 230,
       "attack": 147,
       "defence": 239
-    }
+    },
+    "typesEn": [
+      "normal",
+      "fairy"
+    ]
   },
   "DIANCIE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "DIANCIE",
@@ -435,6 +608,10 @@
       "stamina": 137,
       "attack": 342,
       "defence": 235
-    }
+    },
+    "typesEn": [
+      "rock",
+      "fairy"
+    ]
   }
 }

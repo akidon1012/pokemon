@@ -43,26 +43,26 @@ const pokemonCard = {
     $area.empty().append(this.build(poke));
   },
 
-  badges : function(typesInput) {
-  const toList = (v) => {
-    if (Array.isArray(v)) return v.filter(Boolean);
-    if (typeof v === 'string') return v.split(',').map(s => s.trim()).filter(Boolean);
-    return [];
-  };
-  const types = toList(typesInput);
+  badges: function(typesInput) {
+    const toList = (v) => {
+      if (Array.isArray(v)) return v.filter(Boolean);
+      if (typeof v === 'string') return v.split(',').map(s => s.trim()).filter(Boolean);
+      return [];
+    };
+    const types = toList(typesInput);
 
-  if (!types.length) return '<div class="pokemon-types"></div>';
+    if (!types.length) return '<div class="pokemon-types"></div>';
 
-  const html = types.map(t => {
-    // t が和名/英名どちらでもOKにする
-    const en = (pokemonUtil.translateTypes?.toEnType?.(t) || String(t).toLowerCase());
-    const ja = (pokemonUtil.translateTypes?.toJaType?.(en) || String(t));
-    return `<span class="badge type type-${en}">${ja}</span>`;
-  }).join('');
+    const html = types.map(t => {
+      const en = (pokemonUtil.translateTypes?.toEnType?.(t) || String(t).toLowerCase());
+      const ja = (pokemonUtil.translateTypes?.toJaType?.(en) || String(t));
+      return `<span class="badge type type-${en}">${ja}</span>`;
+    }).join('');
 
-  return `<div class="pokemon-types">${html}</div>`;
-},
-}
+    return `<div class="pokemon-types">${html}</div>`;
+  }
+};
+
 const pokemonUtil = {
   data : {
     state: { POKEMON_DATA: [], TYPE_DEFENSE: [], MOVES: [], GO_META: [], GO_META_OVERRIDE: {} },
@@ -349,22 +349,15 @@ const pokemonUtil = {
       }
 
       // ★ タイプの上書き（override に typesEn / typesJa があれば使う）
+      // ★ タイプの上書き（override に typesEn / typesJa があれば使う）
       if (ov) {
-        const ovTypesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : null;
-        const ovTypesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : null;
+        // helper をそのまま使う：
+        //  - En だけ／Ja だけ／両方 どれでもOK
+        //  - 片方しかなければ翻訳して補完
+        //  - 重複除去もしてくれる
+        applyTypeOverride(pd, ov);
 
-        if (ovTypesEn && ovTypesEn.length) {
-          pd.typesEn = ovTypesEn.map(function(t) {
-            return (t || '').toString().toLowerCase();
-          });
-        }
-        if (ovTypesJa && ovTypesJa.length) {
-          pd.typesJa = ovTypesJa.map(function(t) {
-            return (t || '').toString();
-          });
-        }
-
-        if ((ovTypesEn && ovTypesEn.length) || (ovTypesJa && ovTypesJa.length)) {
+        if (pd.typesEn || pd.typesJa) {
           console.log(
             '[attachGoStats] type override applied:',
             dexNo,

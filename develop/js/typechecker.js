@@ -821,12 +821,19 @@ const typeChecker = {
         : (data && Array.isArray(data.list)) ? data.list
         : [];
 
-      const filtered = typeChecker.searchPokemon.buildSelectableList(data);
+    //    attachGoStats は「1件ずつ」処理する関数なので map で回す
+    const srcWithGo = (pokemonUtil.attachGoStats)
+      ? srcArray.map(function(p) {
+          // そのまま mutate でOKならこのまま
+          return pokemonUtil.attachGoStats(p);
+        })
+      : srcArray;
+
+      const filtered = typeChecker.searchPokemon.buildSelectableList(srcWithGo);
       this.cacheData = filtered;
 
-      // ★ ポケモン一覧の再構築は filtered を元に 1 回だけ行う
+      // ポケモン一覧の再構築は filtered を元に 1 回だけ行う
       typeChecker.searchPokemon.clear(filtered);
-      // typeChecker.searchPokemon.clear(data); // ← これは不要なので削除 or コメントアウト
 
       const wrapper     = $(typeChecker.searchPokemon.wrapper);
       const textbox     = wrapper.find(typeChecker.searchPokemon.textbox);
@@ -1475,21 +1482,28 @@ const typeChecker = {
       });
 
       // ==== HTMLパーツ生成 ====
-
+      // タイプバッジ（英語タイプを正とし、日本語は毎回変換して作る）
       const buildTypeBadges = function(typesJa, typesEn) {
-        const jaArr = Array.isArray(typesJa) ? typesJa : [];
-        const enArr = Array.isArray(typesEn) ? typesEn : [];
+        const enArr = Array.isArray(typesEn) ? typesEn.slice() : [];
         let html = '';
 
-        for (let i = 0; i < Math.max(jaArr.length, enArr.length); i++) {
-          const ja = jaArr[i] || '';
+        for (let i = 0; i < enArr.length; i++) {
           const en = (enArr[i] || '').toString().toLowerCase();
+          if (!en) continue;
+
+          // 英語タイプ → 日本語タイプに変換
+          const ja = pokemonUtil.translateTypes?.toJaType
+            ? (pokemonUtil.translateTypes.toJaType(en) || '')
+            : '';
+
           if (!ja) continue;
+
           html += `
             <div class="badge">
               <span class="icon icon-type-${en}"></span>${ja}
             </div>`;
         }
+
         return html;
       };
 
@@ -1674,23 +1688,6 @@ const typeChecker = {
     },
 
   },
-
-  createRecommendHtml : function(wrapper, pokemon) {
-    console.log('[renderRecommendations] list len =', list.length);
-    const pokemonData = getPokemonData(pokemon);
-    for ( let i=0; i<pokemonData.length; i++ ) {
-      const data = pokemonData[i];
-      const id = pokemonData[i]['id'];
-      const normalMoves = pokemonData[i]['moves']['normal'];
-      const specialMoves = pokemonData[i]['moves']['normal'];
-      for (let j=0; j<normalMoves.length; j++) {
-        /* HTMLを生成 */
-      }
-      /* HTMLを生成 */
-    }
-    wrapper.append(html);
-  }
-
 }
 
 $(function() {
