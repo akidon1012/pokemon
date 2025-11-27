@@ -152,7 +152,9 @@
       }
     }
     &-reset {
-      margin-left: 15px;
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 15px 10px;
       a {
         display: block;
         color: $color-text;
@@ -247,13 +249,12 @@
     &-wrapper {
       display: flex;
       align-items: center;
-      padding: 5px;
       border: 1px solid #DDD;
       background: #FFF;
     }
     &-img {
-      width: 40px;
-      height: 40px;
+      width: 60px;
+      height: 60px;
       flex-shrink: 0;
       margin-right: 10px;
       img {
@@ -503,7 +504,10 @@
           line-height: 1.6;
           &-wrapper {
             padding: 5px;
-            border-top: 1px solid #DDD;
+            border-bottom: 1px solid #DDD;
+            &:last-child {
+              border-bottom: none;
+            }
           }
           &-label {
             font-size: 12px;

@@ -5,10 +5,32 @@ const POKEMON_ICON_SUFFIX_BY_NO = {
   // ほかにも見つかったらここへ追記
 };
 
+// メガ／ゲンシ／リージョン用アイコンの対応表（あとで中身を埋める）
+window.pokemonSpecialIconMap = window.pokemonSpecialIconMap || {};
+
 const pokemonCard = {
   build: function(poke) { 
     const name  = poke?.name  || '';
-    const img   = poke?.image || 'https://placehold.jp/300x300.png';
+
+    // 1. 事前に指定された image があればそれ優先
+    let img = poke?.image || '';
+
+    // 2. 無ければ pokemonUtil で決定
+    if (!img && typeof pokemonUtil !== 'undefined') {
+      if (typeof pokemonUtil.getImageUrl === 'function') {
+        img = pokemonUtil.getImageUrl(poke);
+      }
+      // 念のため no だけ分かっているケースもフォロー
+      if (!img && typeof pokemonUtil.getImageUrlByNo === 'function' && poke?.no != null) {
+        img = pokemonUtil.getImageUrlByNo(poke.no);
+      }
+    }
+
+    // 3. それでも無ければ no_img
+    if (!img) {
+      img = '/images/no_img.svg';
+    }
+
     const types = Array.isArray(poke?.types) ? poke.types : [];
 
     const typeBadges = types.map(function(tJa) {
@@ -376,52 +398,98 @@ const pokemonUtil = {
 
   // 画像URL関連 ---------------------------------------------------
   getImageUrl : function(p) {
-    if (!p || !p.no) return '';
+    // p が null/undefined なら no_img
+    if (!p) return '/images/no_img.svg';
 
-    const no4 = String(p.no).padStart(4, '0');
-    const id  = String(p.pokemonId || '').toUpperCase();
-    let suffix = '00';
+    // --- 図鑑Noを決める ---
+    let no = null;
 
-    const kind = p.formKind;    // 'base' | 'mega' | 'primal' | 'region'
-    const region = p.region;    // 'alola' | 'galar' | null
-
-    if (kind === 'mega') {
-      let sub = 'mega';
-      if (/_MEGA_X$/i.test(p.form)) sub = 'mega_x';
-      if (/_MEGA_Y$/i.test(p.form)) sub = 'mega_y';
-
-      const mapKey = `${id}|${sub}`;
-      suffix = pokemonSpecialIconMap[mapKey] ?? '00';
-
-    } else if (kind === 'primal') {
-      suffix = pokemonSpecialIconMap[`${id}|primal`] ?? '00';
-
-    } else if (kind === 'region' && region) {
-      suffix = pokemonSpecialIconMap[`${id}|${region}`] ?? '00';
+    // 数字や文字列で直接渡された場合にも一応対応しておく
+    if (typeof p === 'number' || (typeof p === 'string' && /^\d+$/.test(p))) {
+      no = Number(p);
+    } else {
+      if (p.no != null) {
+        no = Number(p.no);
+      } else if (p.dex != null) {
+        no = Number(p.dex);
+      } else if (p.id != null) {
+        no = Number(p.id);
+      }
     }
 
-    return `/images/pokemon/pokemon_icon_${no4}_${suffix}.png`;
-  },
-
-  getImageUrlByNo : function(no) {
-    if (!no && no !== 0) return '/images/no_img.svg';
+    if (!Number.isFinite(no) || no <= 0) {
+      return '/images/no_img.svg';
+    }
 
     const n3 = String(no).padStart(3, '0');
 
-    // 1. まずは通常フォーム用の _00 を優先
-    if (pokemonUtil.imageSuffixExists(no, '00')) {
-      return '/images/pokemon/pokemon_icon_' + n3 + '_00.png';
+    // フォーム種別・フォームID（classifyForm/buildSelectableList で付けたやつを使う想定）
+    const kind = p.formKind || p.kind || null; // 'base' | 'mega' | 'primal' | 'region' など
+    const form = String(p.form || p.formId || p.tempId || '').toUpperCase();
+
+    let suffix = null;
+
+    // =============================================================
+    // 1) メガ／ゲンシ：基本すべて 51 を使う（XY 含めて一律）
+    // =============================================================
+    if (kind === 'mega' || kind === 'primal') {
+      const want = '51';
+      if (typeof pokemonUtil.imageSuffixExists === 'function') {
+        if (pokemonUtil.imageSuffixExists(no, want)) {
+          suffix = want;
+        }
+      } else {
+        // imageSuffixExists がない場合はそのまま 51 を採用
+        suffix = want;
+      }
     }
 
-    // 2. _00 が無ければ、その No の suffix 一覧を取得して先頭を使う
-    const suffixList = pokemonUtil.listAvailableFormSuffix(no);
-    if (suffixList.length > 0) {
-      const suffix = suffixList[0]; // ここは必要に応じてソートルールを変えてもOK
-      return '/images/pokemon/pokemon_icon_' + n3 + '_' + suffix + '.png';
+    // =============================================================
+    // 2) リージョンフォーム：基本は通常アイコンと同じ扱い
+    //    → 00 があれば 00、なければ最初の suffix
+    // =============================================================
+    if (!suffix && kind === 'region') {
+      if (typeof pokemonUtil.imageSuffixExists === 'function' &&
+          pokemonUtil.imageSuffixExists(no, '00')) {
+        suffix = '00';
+      }
     }
 
-    // 3. それでもなければ no image（onerror＋no_img.svg でも最終保険あり）
-    return '/images/no_img.svg';
+    // =============================================================
+    // 3) ここまでで suffix が決まっていなければ、
+    //    画像ファイル一覧から自動判定（通常フォームも含む）
+    // =============================================================
+    if (!suffix) {
+      let suffixList = [];
+
+      if (typeof pokemonUtil.listAvailableFormSuffix === 'function') {
+        suffixList = pokemonUtil.listAvailableFormSuffix(no) || [];
+      }
+
+      if (!suffixList.length) {
+        // その番号のファイルが1枚も見つからない → とりあえず 00 を試す
+        suffix = '00';
+      } else {
+        // 00 があれば 00 優先、なければ先頭を採用
+        if (suffixList.includes('00')) {
+          suffix = '00';
+        } else {
+          suffix = suffixList[0];
+        }
+      }
+    }
+
+    const url = '/images/pokemon/pokemon_icon_' + n3 + '_' + suffix + '.png';
+
+    // 必要ならデバッグログ
+    // console.log('[img check]', p.nameJa || p.name || p.pokemonId || no, no, kind || '-', suffix, url);
+
+    return url;
+  },
+
+  // 既存コードから呼ばれている兼ね合い用
+  getImageUrlByNo : function (no) {
+    return pokemonUtil.getImageUrl({ no: no });
   },
 
   handleImageError : function(img) {

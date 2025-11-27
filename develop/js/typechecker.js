@@ -586,15 +586,82 @@ const typeChecker = {
         clearBtn.show();
       });
 
-      // ====== リスト選択（mousedown→pointerdown の既存方針を関数参照に置換） ======
-      $(document)
-        .off('pointerdown.pokemonList mousedown.pokemonList')
-        .on('pointerdown.pokemonList mousedown.pokemonList', '.js_pokemon-search-list a', typeChecker.searchPokemon.handlePick);
+    // ====== 枠外タップで一覧を閉じる ======
+    $(document)
+      .off('pointerdown.pokemonSearchOutside')
+      .on('pointerdown.pokemonSearchOutside', function(e) {
+        const $target  = $(e.target);
+        const $wrapper = $(typeChecker.searchPokemon.wrapper);
+        if (!$wrapper.length) return;
 
-        $(document).on('change', typeChecker.searchPokemon.radioAndOr, function(){
-          const sel = typeChecker.searchPokemon.getSelectedTypesJa();
-          typeChecker.getType._filterListByTypesJa(sel);
-        });      
+        // ラッパー内をタップしたときは何もしない
+        if ($target.closest(typeChecker.searchPokemon.wrapper).length) {
+          return;
+        }
+
+        // ラッパー外をタップしたら一覧を閉じる
+        $wrapper.removeClass(typeChecker.searchPokemon.isActiveClassName);
+      });
+
+      // ====== リスト選択（mousedown→pointerdown の既存方針を関数参照に置換） ======
+      (function() {
+        let startX = 0;
+        let startY = 0;
+        let moved  = false;
+        let isTouchPointer = false;
+        let activeEl = null;
+        const MOVE_THRESHOLD = 6; // px：これより動いたら「スクロール」とみなす
+
+        $(document)
+          .off('.pokemonList')
+          .on('pointerdown.pokemonList', '.js_pokemon-search-list a', function(e) {
+            const ev = e.originalEvent || e;
+            const pointerType = ev.pointerType || '';
+
+            const isTouchLike =
+              pointerType === 'touch' ||
+              pointerType === 'pen';
+
+            // マウス操作は従来どおり「押した瞬間に選択」でOK
+            if (!isTouchLike) {
+              return typeChecker.searchPokemon.handlePick.call(this, e);
+            }
+
+            // タッチ操作の場合は「タップ or スクロール」を判定
+            isTouchPointer = true;
+            activeEl = this;
+            startX = ev.clientX;
+            startY = ev.clientY;
+            moved  = false;
+          })
+          .on('pointermove.pokemonList', function(e) {
+            if (!isTouchPointer) return;
+            const ev = e.originalEvent || e;
+
+            const dx = ev.clientX - startX;
+            const dy = ev.clientY - startY;
+            if (Math.abs(dx) > MOVE_THRESHOLD || Math.abs(dy) > MOVE_THRESHOLD) {
+              moved = true; // ある程度動いたらスクロール扱い
+            }
+          })
+          .on('pointerup.pokemonList pointercancel.pokemonList', function(e) {
+            if (!isTouchPointer) return;
+
+            if (!moved && activeEl) {
+              // ほとんど動かなかった → タップとして扱う
+              typeChecker.searchPokemon.handlePick.call(activeEl, e);
+            }
+
+            // リセット
+            isTouchPointer = false;
+            activeEl = null;
+          });
+      })();
+
+      $(document).on('change', typeChecker.searchPokemon.radioAndOr, function(){
+        const sel = typeChecker.searchPokemon.getSelectedTypesJa();
+        typeChecker.getType._filterListByTypesJa(sel);
+      });      
       // ====== リセット ======
       resetBtn.off('click').on('click', typeChecker.searchPokemon.handleReset);
     },
@@ -636,18 +703,54 @@ const typeChecker = {
 
     // ========== リスト項目 → pokeオブジェクトの正規化 ==========
     normalizeFromAnchor : function($a){
+      // 表示名・タイプ
       const nameJa   = $a.text();
-      const typesStr = $a.data('types-ja') ?? $a.attr('data-types-ja'); // 'みず,くさ'
+      const typesStr = $a.data('types-ja') ?? $a.attr('data-types-ja');
       const typesJa  = String(typesStr || '').split(',').filter(Boolean);
 
-      // data-no は .data() → .attr() の順で安全取得
-      const rawNo    = ($a.data('no') != null) ? $a.data('no') : $a.attr('data-no');
-      const id       = typeChecker.searchPokemon.normalizeId(rawNo);
+      // 図鑑No
+      const rawNo = ($a.data('no') != null) ? $a.data('no') : $a.attr('data-no');
+      const no    = typeChecker.searchPokemon.normalizeId(rawNo);
+
+      // ★ フォーム情報などを全部拾う
+      const pid      = $a.attr('data-pid')      || null; // KYOGRE_TEMP_EVOLUTION_PRIMAL など
+      const basePid  = $a.attr('data-basepid')  || null;
+      const formKind = $a.attr('data-formkind') || null; // 'base' | 'mega' | 'primal' | 'region'
+      const region   = $a.attr('data-region')   || null;
+      const tempId   = $a.attr('data-tempid')   || $a.attr('data-tempevoid') || null;
+      const form     = $a.attr('data-form')     || null;
+
+      // 画像決定用の内部オブジェクト
+      const pd = {
+        no,
+        id: no,
+        pokemonId: pid,
+        basePokemonId: basePid,
+        tempId,
+        formId: tempId,
+        form,
+        formKind,
+        region,
+        nameJa,
+        name: nameJa,
+        typesJa,
+        typesEn: Array.isArray(typesJa)
+          ? typesJa.map(t => pokemonUtil.translateTypes?.toEnType?.(t) || '')
+          : []
+      };
+
+      // ★ ここで共通の画像ロジックを使う
+      const imageUrl = pokemonUtil.getImageUrl(pd);
+
+      // デバッグ（確認できたら消してOK）
+      console.log('[normalizeFromAnchor]', nameJa, pd.formKind, pd.pokemonId, imageUrl);
+
       return {
-        id    : id,
+        id    : no,
         name  : nameJa,
         types : typesJa,
-        image : typeChecker.searchPokemon.resolveImage(id, null)
+        image : imageUrl,
+        _raw  : pd   // 必要なら後で使えるように生データも持たせる
       };
     },
 
@@ -661,32 +764,19 @@ const typeChecker = {
 
 
     // ========== イベントハンドラ（関数参照でバインド） ==========
-    handlePick: function(e) {
+    handlePick : function(e) {
       e.preventDefault();
       const $a = $(this);
 
-      const nameJa   = $a.text();
-      const typesStr = $a.data('types-ja') ?? $a.attr('data-types-ja');
-      const typesJa  = String(typesStr || '').split(',').filter(Boolean);
-
-      // ★ data-no / attr('data-no') 両方を見て fallback
-      const noRaw = $a.data('no') ?? $a.attr('data-no');
-      const no    = (noRaw != null && noRaw !== '') ? Number(noRaw) : null;
-
-      let image = '';
-      if (no != null && !Number.isNaN(no)) {
-        image = pokemonUtil.getImageUrlByNo(no);
-      }
+      // ★ 共通正規化
+      const poke = typeChecker.searchPokemon.normalizeFromAnchor($a);
 
       // カード描画
       const resultArea = $('.js_pokemon-search-result');
-      pokemonCard.render({
-        name:  nameJa,
-        types: typesJa,
-        image: image
-      }, resultArea);
+      pokemonCard.render(poke, resultArea);
 
-      // ★タイプ選択チェックボックス反映
+      // タイプ選択チェックボックス反映
+      const typesJa = Array.isArray(poke.types) ? poke.types : [];
       if (typesJa.length) {
         typeChecker.searchPokemon.select(typesJa);
       } else {
@@ -695,6 +785,7 @@ const typeChecker = {
       }
 
       // テキストボックス更新
+      const nameJa  = poke.name || '';
       const textbox = $(typeChecker.searchPokemon.wrapper).find(typeChecker.searchPokemon.textbox);
       textbox.val(nameJa);
       textbox.trigger('keyup'); // 再フィルタ
@@ -980,7 +1071,6 @@ const typeChecker = {
       const v = $('input[name="and_or"]:checked').val();
       return (v === 'or') ? 'or' : 'and'; // ← デフォルトはAND
     },
-
     
     clear : function(list) {
       const pokemonList = $(typeChecker.searchPokemon.pokemonList);
@@ -994,10 +1084,29 @@ const typeChecker = {
 
         $a.text(label);
 
-        // ★ ここを必ず入れる
         $a.attr('data-no', p.no);
         if (Array.isArray(p.typesJa)) {
           $a.attr('data-types-ja', p.typesJa.join(','));
+        }
+
+        // ★ 追加：画像決定に必要な情報も埋めておく
+        if (p.pokemonId) {
+          $a.attr('data-pid', p.pokemonId);
+        }
+        if (p.basePokemonId) {
+          $a.attr('data-basepid', p.basePokemonId);
+        }
+        if (p.formKind) {
+          $a.attr('data-formkind', p.formKind); // 'base' | 'mega' | 'primal' | 'region'
+        }
+        if (p.region) {
+          $a.attr('data-region', p.region);     // 'alola' など
+        }
+        if (p.form) {
+          $a.attr('data-form', p.form);         // '_MEGA_X' など
+        }
+        if (p.tempEvoId) {
+          $a.attr('data-tempevoid', p.tempEvoId);
         }
 
         $li.append($a);
@@ -1043,6 +1152,52 @@ const typeChecker = {
   },
 
   recommend : {
+    buildDisplayPokemon: function(raw) {
+      if (!raw) return null;
+
+      // 元オブジェクトを壊さないようにコピー
+      var p = Object.assign({}, raw);
+
+      // ====== 名前まわり整形 ======
+      var nameJa =
+        p.labelJa ||
+        p.nameJa ||
+        p.name   ||
+        p.nameEn ||
+        '';
+
+      // ====== タイプ（日本語） ======
+      var typesJa = Array.isArray(p.typesJa)
+        ? p.typesJa.slice()
+        : [];
+
+      // typesJa が無くて typesEn だけある場合は変換
+      if (!typesJa.length && Array.isArray(p.typesEn) && pokemonUtil.translateTypes?.toJaType) {
+        typesJa = p.typesEn
+          .map(function(en) { return pokemonUtil.translateTypes.toJaType(en) || ''; })
+          .filter(Boolean);
+      }
+
+      // ====== フォーム情報を補完（classifyForm を再利用） ======
+      if (!p.formKind && typeChecker.searchPokemon && typeof typeChecker.searchPokemon.classifyForm === 'function') {
+        var c = typeChecker.searchPokemon.classifyForm(p);
+        p.formKind = p.formKind || c.kind;
+        p.region   = p.region   || c.region;
+      }
+
+      // ====== 画像URL（メガ・ゲンシ対応） ======
+      var img = pokemonUtil.getImageUrl(p);
+
+      // ====== pokemonCard に渡す形へ正規化 ======
+      return {
+        id    : p.no || p.id || null,
+        name  : nameJa,
+        types : typesJa,
+        image : img,
+        _raw  : p   // デバッグや拡張用に元データも残しておく
+      };
+    },
+
     updateByDefenderTypes: function(checkedEn, defenseTable){
       try {
         console.log('[recommend.updateByDefenderTypes] checkedEn =', checkedEn);
@@ -1359,63 +1514,6 @@ const typeChecker = {
 
       return sliced;
     },
-
-    // renderRecommendations: function($wrap, json) {
-    //   console.log(
-    //     '[renderRecommendations DEBUG] start',
-    //     'jsonLen=', Array.isArray(json) ? json.length : json,
-    //     '$wrap=', $wrap
-    //   );
-
-    //   var $w = ($wrap instanceof jQuery) ? $wrap : $($wrap);
-    //   if (!$w.length) {
-    //     console.warn('[renderRecommendations DEBUG] $w.length = 0');
-    //     return;
-    //   }
-
-    //   var list = Array.isArray(json) ? json.slice() : [];
-    //   console.log('[renderRecommendations DEBUG] list.length =', list.length);
-
-    //   if (!list.length) {
-    //     $w.empty();
-    //     return;
-    //   }
-
-    //   try {
-    //     var html = '';
-
-    //     for (var i = 0; i < list.length; i++) {
-    //       var d = list[i] || {};
-
-    //       var displayName;
-    //       if (pokemonUtil && typeof pokemonUtil.buildRecommendDisplayName === 'function') {
-    //         displayName = pokemonUtil.buildRecommendDisplayName(d);
-    //       } else {
-    //         displayName = d.nameJa || d.nameEn || '-';
-    //       }
-
-    //       html +=
-    //         '<li class="pokemon-recommend-list-item">' +
-    //           '<div class="pokemon-info-name">' + displayName + '</div>' +
-    //         '</li>';
-    //     }
-
-    //     console.log(
-    //       '[renderRecommendations DEBUG] html.length =',
-    //       html.length,
-    //       'preview=',
-    //       html.slice(0, 200)
-    //     );
-
-    //     $w.html(html);
-    //     console.log(
-    //       '[renderRecommendations DEBUG] applied. innerHTML.length =',
-    //       $w.html().length
-    //     );
-    //   } catch (e) {
-    //     console.error('[renderRecommendations DEBUG] ERROR', e);
-    //   }
-    // }
     
     renderRecommendations: function($wrap, json) {
       console.log(
@@ -1635,7 +1733,19 @@ const typeChecker = {
       for (let i = 0; i < list.length; i++) {
         const d = list[i] || {};
 
-        const img      = pokemonUtil.getImageUrlByNo(d.id);
+        // ★ ここを修正：フォーム情報を補完して getImageUrl を使う
+        let formInfo = { kind: d.formKind || null, region: d.region || null };
+        if (typeChecker.searchPokemon && typeof typeChecker.searchPokemon.classifyForm === 'function') {
+          formInfo = typeChecker.searchPokemon.classifyForm(d);
+        }
+
+        const pokeForImg = Object.assign({}, d, {
+          formKind: formInfo.kind || d.formKind || null,
+          region  : formInfo.region || d.region || null
+        });
+
+        const img      = pokemonUtil.getImageUrl(pokeForImg);
+
         const typesJa  = d.typesJa || [];
         const typesEn  = d.typesEn || [];
 
