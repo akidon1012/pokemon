@@ -17,3 +17,40 @@ $breakpoints: (
     @content;
   }
 }
+
+// タイプ一覧
+$poke-types: (
+  normal:   0,
+  fire:     1,
+  water:    2,
+  grass:    3,
+  electric: 4,
+  ice:      5,
+  fighting: 6,
+  poison:   7,
+  ground:   8,
+  flying:   9,
+  psychic:  10,
+  bug:      11,
+  rock:     12,
+  ghost:    13,
+  dragon:   14,
+  dark:     15,
+  steel:    16,
+  fairy:    17
+);
+
+// これだけで基礎＋18種のpositionを全部生成
+@mixin type-icons($size: 32px) {
+  width: $size;
+  height: $size;
+  background: url("../images/types.png") no-repeat;
+  background-size: calc($size * 18) $size;
+
+  @each $name, $index in $poke-types {
+    &-#{$name} {
+      background-position: calc(#{$index} * -1 * #{$size}) 0;
+    }
+  }
+}
+

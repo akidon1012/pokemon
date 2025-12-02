@@ -308,7 +308,7 @@ const typeChecker = {
         const html =
           `
           <li><a href="javascript:void(0);" data-type="${t}">
-            <span class="icon icon-type-${t}"></span>${ja} <span class="multiplier">×${mult}</span>
+            <span class="icon-type icon-type-${t}"></span>${ja} <span class="multiplier">×${mult}</span>
           </a></li>
           `;
 
@@ -515,7 +515,7 @@ const typeChecker = {
           clearTimeout(blurTimer);
           blurTimer = null;
         }
-        wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
+        // wrapper.addClass(typeChecker.searchPokemon.isActiveClassName);
 
         // リストが空なら復元
         if (pokemonList.find('li').length === 0 && $('.js_list-html').length) {
@@ -677,23 +677,6 @@ const typeChecker = {
       } else if (typeof card.build === 'function') {
         $(this.selectedArea || '.js_pokemon-search-result').empty().append(card.build(poke));
       }
-      var $img = $(this.selectedArea || '.js_pokemon-search-result').find('img').first();
-      if ($img.length) {
-        $img.off('error.spFallback').on('error.spFallback', function(){
-          // PokeAPI 通常スプライトにフォールバック
-          this.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + (poke?.id || '') + '.png';
-        });
-      }
-    },
-
-    resolveImage : function(noOrId, pokeObj){
-      if (pokeObj && pokeObj.image) return pokeObj.image;
-      var id = typeChecker.searchPokemon.normalizeId(noOrId);
-      if (id) {
-        // 公式アートワーク直URL（常に確定で作る）
-        return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png';
-      }
-      return 'https://placehold.jp/300x300.png';
     },
 
     clearSelected : function(){
@@ -739,17 +722,10 @@ const typeChecker = {
           : []
       };
 
-      // ★ ここで共通の画像ロジックを使う
-      const imageUrl = pokemonUtil.getImageUrl(pd);
-
-      // デバッグ（確認できたら消してOK）
-      console.log('[normalizeFromAnchor]', nameJa, pd.formKind, pd.pokemonId, imageUrl);
-
       return {
         id    : no,
         name  : nameJa,
         types : typesJa,
-        image : imageUrl,
         _raw  : pd   // 必要なら後で使えるように生データも持たせる
       };
     },
@@ -1185,15 +1161,11 @@ const typeChecker = {
         p.region   = p.region   || c.region;
       }
 
-      // ====== 画像URL（メガ・ゲンシ対応） ======
-      var img = pokemonUtil.getImageUrl(p);
-
       // ====== pokemonCard に渡す形へ正規化 ======
       return {
         id    : p.no || p.id || null,
         name  : nameJa,
         types : typesJa,
-        image : img,
         _raw  : p   // デバッグや拡張用に元データも残しておく
       };
     },
@@ -1623,7 +1595,7 @@ const typeChecker = {
 
           html += `
             <div class="badge">
-              <span class="icon icon-type-${en}"></span>${ja}
+              <span class="icon-type icon-type-${en}"></span>${ja}
             </div>`;
         }
 
@@ -1750,7 +1722,7 @@ const typeChecker = {
           block += `
               <dd class="${ddClass}">
                 <div class="pokemon-recommend-list-item-attack-name">
-                  <span class="icon icon-type-${typeEn}"></span>${name}
+                  <span class="icon-type icon-type-${typeEn}"></span>${name}
                 </div>`;
 
           if (isSpecial) {
@@ -1780,18 +1752,10 @@ const typeChecker = {
       for (let i = 0; i < list.length; i++) {
         const d = list[i] || {};
 
-        // ★ ここを修正：フォーム情報を補完して getImageUrl を使う
         let formInfo = { kind: d.formKind || null, region: d.region || null };
         if (typeChecker.searchPokemon && typeof typeChecker.searchPokemon.classifyForm === 'function') {
           formInfo = typeChecker.searchPokemon.classifyForm(d);
         }
-
-        const pokeForImg = Object.assign({}, d, {
-          formKind: formInfo.kind || d.formKind || null,
-          region  : formInfo.region || d.region || null
-        });
-
-        const img      = pokemonUtil.getImageUrl(pokeForImg);
 
         const typesJa  = d.typesJa || [];
         const typesEn  = d.typesEn || [];
@@ -1822,25 +1786,17 @@ const typeChecker = {
           <li class="pokemon-recommend-list-item js_toggle-wrapper">
             <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
               <div class="pokemon-info-wrapper">
-                <div class="pokemon-info-img">
-                  <img
-                    src="${img}"
-                    decoding="async"
-                    loading="lazy"
-                    alt="${displayName}"
-                    onerror="pokemonUtil.handleImageError(this)"
-                  >
-                </div>
-                <div class="pokemon-info-name">${displayName}</div>
-                <div class="pokemon-info-type">
-                  ${typeHtml}
-                </div>
+                <a href="javascript:void(0);" class="js_toggle-trigger">
+                  <div class="pokemon-info-name">${displayName}</div>
+                  <div class="pokemon-info-type">
+                    ${typeHtml}
+                  </div>
+                </a>
               </div>
-              <a href="javascript:void(0);" class="js_toggle-trigger"></a>
             </div>
             <div class="js_toggle-content">
               <dl class="pokemon-recommend-info-score">
-                <dt class="pokemon-recommend-info-score-label">種族値(GO)</dt>
+                <dt class="pokemon-recommend-info-score-label">種族値</dt>
                 <dl class="pokemon-recommend-info-score-value">
                   <ul class="pokemon-recommend-info-score-list">
                     <li class="pokemon-recommend-info-score-list-item">

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-@import '_iconfont.scss';
+// @import '_iconfont.scss';
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Kaisei+Opti&display=swap');
+
 @import '_reset.scss';
 @import '_variables.scss';
 @import '_mixin.scss';
@@ -13,6 +15,10 @@
   width: 960px;
   max-width: calc(100% - 60px);
   margin: 0 auto;
+  font-family: "Kaisei Opti", serif;
+  font-weight: 400;
+  font-style: normal;
+
   .pokemon-select {
     &-tabs {
       border-bottom: 1px solid #DDD;
@@ -20,31 +26,33 @@
       &-item {
         width: 300px;
         margin-right: 10px;
+        position :relative;
         a {
           display: flex;
           justify-content: center;
           align-items: center;
           color: $color-text;
-          background: #f0f0f0;
-          border: 1px solid #DDD;
-          border-bottom: none;
-          border-radius: 5px 5px 0 0;
           text-decoration: none;
           text-align: center;
           font-size: 16px;
           font-weight: 600;
           line-height: 1.2;
-          padding: 10px 0;
-          height: 100%;
-          box-sizing: border-box;
+          padding: 0 10px 10px;
+          height: 40px;
+          color: #7a7a7a;
         }
         &.is_active {
-          margin-bottom: -1px;
+          &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            border-bottom: 4px solid $color-red;
+          }
           a {
-            color: #FFF;
-            background: $color-red;
-            border-color: $color-red;
-            padding-bottom: 11px;
+            color: $color-text;
           }
         }
       }
@@ -247,8 +255,6 @@
   }
   .pokemon-info {
     &-wrapper {
-      display: flex;
-      align-items: center;
       border: 1px solid #DDD;
       background: #FFF;
     }
@@ -273,8 +279,8 @@
         align-items: center;
         width: 56px;
         font-size: 11px;
+        font-weight: 500;
         line-height: 1.4;
-        padding-top: 10px;
       }
       .icon {
         font-size: 28px;
@@ -282,6 +288,7 @@
     }
     &-name {
       font-size: 20px;
+      font-weight: 500;
     }
   }
   .pokemon-type {
@@ -368,7 +375,8 @@
             line-height: 20px;
             margin: 0 15px 10px 0;
             a {
-              display: inline-block;
+              display: flex;
+              align-items: center;
               color: $color-text;
               border-bottom: 1px solid transparent;
               text-decoration: none;
@@ -377,18 +385,20 @@
                 border-bottom: 1px solid $color-text;
               }
             }
-            .icon {
-              position: absolute;
-              top: 3px;
+            .icon-type {
+              position: relative;
+              top: 2px;
               left: 0;
               font-size: 18px;
               margin-right: 3px;
-              position: relative;
+              display: block;
+              @include type-icons(20px);
             }
             .multiplier {
               font-size: 12px;
               position: relative;
-              left: -5px;
+              top: 2px;
+              left: -3px;
             }
           }
         }
@@ -436,11 +446,12 @@
         display: flex;
         justify-content: center;
         align-items: baseline;
-        padding: 5px;
+        padding: 10px 5px 5px;
         border-top: 1px solid #DDD;
+        border-bottom: 1px solid #DDD;
         &-label {
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 500;
           &::after {
             content: "：";
           }
@@ -454,8 +465,11 @@
             font-weight: 500;
             margin-right: 10px;
             .num {
-              font-size: 16px;
+              font-size: 18px;
+              font-family: "Josefin Sans", sans-serif;
+              font-optical-sizing: auto;
               font-weight: 600;
+              font-style: normal;
             }
           }
         }
@@ -468,37 +482,44 @@
         border-radius: 5px;
         margin-bottom: 10px;
         &-header {
-          padding-right: 30px;
           position: relative;
           .pokemon-info-wrapper {
             border: none;
-          }
-          .js_toggle-trigger {
-            display: block;
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            transform: translateY(-50%);
-            &::after {
-              content: "";
-              display: block;
-              position: absolute;
-              top: 50%;
-              right: 0;
-              width: 6px;
-              height: 6px;
-              border-right: 2px solid #DDD;
-              border-bottom: 2px solid #DDD;
-              transform: rotate(45deg);
-            }
-            &.is_toggle-opened {
+            a {
+              display: flex;
+              align-items: center;
+              padding: 10px 30px 10px 10px;
+              color: $color-text;
+              text-decoration: none;
+              position: relative;
               &::after {
-                transform: rotate(225deg);
+                content: "";
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                width: 6px;
+                height: 6px;
+                border-right: 2px solid #DDD;
+                border-bottom: 2px solid #DDD;
+                transform: rotate(45deg);
+              }
+              &.is_toggle-opened {
+                &::after {
+                  transform: rotate(225deg);
+                }
               }
             }
           }
+          // .js_toggle-trigger {
+          //   display: block;
+          //   position: absolute;
+          //   top: 50%;
+          //   right: 10px;
+          //   width: 40px;
+          //   height: 40px;
+          //   transform: translateY(-50%);
+          // }
         }
         &-attack {
           line-height: 1.6;
@@ -576,6 +597,7 @@
           &-name {
             padding-left: 1em;
             font-size: 18px;
+            font-weight: 500;
             margin-right: 10px;
           }
           &-gauge {
@@ -595,6 +617,11 @@
             width: 30px;
             margin-left: auto;
             text-align: right;
+            font-size: 22px;
+            font-family: "Josefin Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
           }
         }
         .js_toggle-content {
@@ -736,5 +763,11 @@
         }
       }
     }
+  }
+}
+
+.icon {
+  &-type {
+    @include type-icons(32px);
   }
 }

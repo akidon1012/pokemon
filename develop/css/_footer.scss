@@ -1,0 +1,12 @@
+.footer {
+  padding: 10px;
+  color: #FFF;
+  background: #666;
+  &-note {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  &-copyright {
+    font-size: 10px;
+  }
+}
