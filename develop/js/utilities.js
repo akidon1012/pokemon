@@ -15,9 +15,19 @@ const pokemonCard = {
     const typeEn = toEn(mv.typeJa || mv.type);
     const power  = mv.power;
 
-    const rating    = opt.rating || mv.__globalRating || 0;      // 1〜5
-    const gaugeId   = opt.gaugeId || mv.__gaugeSvgId || '';      // 'gauge1' / 'gauge2'
-    const strongest = !!(opt.isStrongest || mv.__isStrongest);   // 最強フラグ
+    const category  = opt.category || 'normal'; // 'normal' or 'special'
+    const showStars = !!opt.showStars;         // true: ★を描画
+    const showGauge = !!opt.showGauge;         // true: ゲージsvgを描画
+
+    // ★レーティング（1〜5・0は表示なし）
+    const rating = showStars ? (opt.rating || mv.__globalRating || 0) : 0;
+
+    // ゲージID
+    const gaugeId = showGauge
+      ? (opt.gaugeId || mv.__gaugeSvgId || pokemonCard.resolveGaugeId(mv))
+      : '';
+
+    const strongest = !!(opt.isStrongest || mv.__isStrongest);
 
     let h = '';
 
@@ -26,7 +36,7 @@ const pokemonCard = {
     if (strongest) h += ' is_strongest';
     h += '">';
 
-    // 技名＋タイプ
+    // 技名＋タイプアイコン
     h += '<div class="pokemon-info-list-item-attack-name">';
     if (typeEn) {
       h += '<span class="icon-type icon-type-' + typeEn + '"></span>';
@@ -34,25 +44,26 @@ const pokemonCard = {
     h += esc(name);
     h += '</div>';
 
-    // ゲージ
-    if (gaugeId) {
-      h += '<div class="pokemon-info-list-item-attack-gauge">';
-      h += '<svg class="gauge" aria-hidden="true"><use href="#' + gaugeId + '"></use></svg>';
-      h += '</div>';
+    // ★★ スペシャル技のときだけ ★★
+    if (category === 'special') {
+      // ★アイコン
+      if (rating > 0) {
+        h += '<div class="pokemon-info-list-item-attack-stars">';
+        for (let i = 0; i < rating; i += 1) {
+          h += '<span class="icon-star"></span>';
+        }
+        h += '</div>';
+      }
+
+      // ゲージ
+      if (gaugeId) {
+        h += '<div class="pokemon-info-list-item-attack-gauge">';
+        h += '<svg class="gauge" aria-hidden="true"><use href="#' + gaugeId + '"></use></svg>';
+        h += '</div>';
+      }
     }
 
-    // ★評価（おすすめ用。1匹側では rating=0 を渡す）
-    if (rating > 0) {
-      const full  = '★★★★★';
-      const empty = '☆☆☆☆☆';
-      const stars = full.slice(0, rating) + empty.slice(rating);
-
-      h += '<div class="pokemon-info-list-item-attack-rating rating-' + rating + '">';
-      h += '<span class="pokemon-info-list-item-attack-stars">' + stars + '</span>';
-      h += '</div>';
-    }
-
-    // 威力
+    // 威力（ノーマル／スペシャル共通）
     if (power != null) {
       h += '<div class="pokemon-info-list-item-attack-power">' + power + '</div>';
     }
@@ -74,7 +85,7 @@ const pokemonCard = {
     const abs = Math.abs(energy);
     if (abs >= 75) return 'gauge1'; // 1ゲージ
     if (abs >= 45) return 'gauge2'; // 2ゲージ
-    return 'gauge2';
+    return 'gauge3';                // それ以外は3ゲージとみなす
   },
 
   // -----------------------------
@@ -133,19 +144,19 @@ const pokemonCard = {
       '" style="display:' + (opened ? 'block' : 'none') + ';">');
 
     // 種族値
-    h.push('<dl class="pokemon-recommend-info-score">');
-    h.push('<dt class="pokemon-recommend-info-score-label">種族値(GO)</dt>');
-    h.push('<dl class="pokemon-recommend-info-score-value">');
-    h.push('<ul class="pokemon-recommend-info-score-list">');
+    h.push('<dl class="pokemon-info-score">');
+    h.push('<dt class="pokemon-info-score-label">種族値(GO)</dt>');
+    h.push('<dl class="pokemon-info-score-value">');
+    h.push('<ul class="pokemon-info-score-list">');
 
     if (atk) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">こうげき <span class="num">' + atk + '</span></li>');
+      h.push('<li class="pokemon-info-score-list-item">こうげき <span class="num">' + atk + '</span></li>');
     }
     if (def) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">ぼうぎょ <span class="num">' + def + '</span></li>');
+      h.push('<li class="pokemon-info-score-list-item">ぼうぎょ <span class="num">' + def + '</span></li>');
     }
     if (sta) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">HP <span class="num">' + sta + '</span></li>');
+      h.push('<li class="pokemon-info-score-list-item">HP <span class="num">' + sta + '</span></li>');
     }
 
     h.push('</ul>');
@@ -165,8 +176,9 @@ const pokemonCard = {
 
       normalMoves.forEach(function (mv) {
         h.push(self.buildMoveRow(mv, {
-          gaugeId: '',
-          rating : showStars ? (mv.__globalRating || 0) : 0
+          category : 'normal',
+          showStars: false,
+          showGauge: false
         }));
       });
 
@@ -181,10 +193,10 @@ const pokemonCard = {
       h.push('<dt class="pokemon-info-list-item-attack-label">スペシャル</dt>');
 
       specialMoves.forEach(function (mv) {
-        const gaugeId = self.resolveGaugeId(mv);
         h.push(self.buildMoveRow(mv, {
-          gaugeId: gaugeId,
-          rating : showStars ? (mv.__globalRating || 0) : 0,
+          category   : 'special',
+          showStars  : opt.showStars, // ★ ここが true のときだけ星表示
+          showGauge  : true,
           isStrongest: !!mv.__isStrongest
         }));
       });
@@ -221,7 +233,16 @@ const pokemonCard = {
 
   // 1匹表示用カード
   build: function (poke) {
-    const nameJa  = poke.nameJa || poke.name || '';
+    const baseName = poke.nameJa || poke.name || poke.nameEn || '';
+    const regionLabel = pokemonUtil.getFormRegionLabel(
+      poke.form || '',
+      poke.templateId || '',
+      poke.pokemonId || ''
+    );
+
+    const nameJa = regionLabel
+      ? `${baseName}（${regionLabel}）`
+      : baseName;
     const typesJa = Array.isArray(poke.typesJa || poke.types)
       ? (poke.typesJa || poke.types)
       : [];
@@ -274,23 +295,23 @@ const pokemonCard = {
     h.push('<div class="js_toggle-content is_toggle-opened" style="display: block;">');
 
     // 種族値(GO)
-    h.push('<dl class="pokemon-recommend-info-score">');
-    h.push('<dt class="pokemon-recommend-info-score-label">種族値(GO)</dt>');
-    h.push('<dl class="pokemon-recommend-info-score-value">');
-    h.push('<ul class="pokemon-recommend-info-score-list">');
+    h.push('<dl class="pokemon-info-score">');
+    h.push('<dt class="pokemon-info-score-label">種族値(GO)</dt>');
+    h.push('<dl class="pokemon-info-score-value">');
+    h.push('<ul class="pokemon-info-score-list">');
 
     if (atk) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">');
+      h.push('<li class="pokemon-info-score-list-item">');
       h.push('こうげき <span class="num">' + atk + '</span>');
       h.push('</li>');
     }
     if (def) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">');
+      h.push('<li class="pokemon-info-score-list-item">');
       h.push('ぼうぎょ <span class="num">' + def + '</span>');
       h.push('</li>');
     }
     if (sta) {
-      h.push('<li class="pokemon-recommend-info-score-list-item">');
+      h.push('<li class="pokemon-info-score-list-item">');
       h.push('HP <span class="num">' + sta + '</span>');
       h.push('</li>');
     }

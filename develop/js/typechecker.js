@@ -1205,6 +1205,11 @@ const typeChecker = {
         p.region   = p.region   || c.region;
       }
 
+      // ★ リージョン表記を付与（アローラだけまず対応）
+      if (p.region === 'ALOLA' && nameJa.indexOf('アローラ') === -1) {
+        nameJa += '（アローラ）';
+      }
+
       // ====== pokemonCard に渡す形へ正規化 ======
       return {
         id    : p.no || p.id || null,
@@ -1403,6 +1408,25 @@ const typeChecker = {
         const seSpecial = [];
         let bestMoveScore = 0;
 
+        // ==== ゲージ本数による補正係数（案A） ====
+        // energy はマイナス値（-80 など）を想定
+        const getGaugeFactor = function(m) {
+          if (!m) return 1.0;
+          const energy = (typeof m.energy === 'number') ? m.energy : null;
+          if (energy == null || energy >= 0) return 1.0;
+
+          const abs = Math.abs(energy);
+
+          // energy -75 以下 … 1ゲージ想定
+          if (abs >= 75) return 1.0;   // 1ゲージ：そのまま
+
+          // -45〜-74 … 2ゲージ
+          if (abs >= 45) return 1.05;  // 2ゲージ：ちょい優遇
+
+          // それより軽い … 3ゲージ相当
+          return 1.15;                 // 3ゲージ：さらに優遇
+        };
+
         const pushMove = function(m, category) {
           if (!m) return;
           const typeEn = (m.typeEn || '').toString().toLowerCase();
@@ -1418,7 +1442,7 @@ const typeChecker = {
           const hasStab = attackerTypesEn.includes(typeEn);
           const stab    = hasStab ? 1.2 : 1.0;
 
-          // ワザ単体スコア（威力 × 相性倍率 × STAB）
+          // ★ ここは補正なし（威力 × 相性 × STAB だけ）
           const moveScore = power * mult * stab;
 
           const move = $.extend({}, m, {
@@ -1443,20 +1467,31 @@ const typeChecker = {
         // SE 技が1つもなければ候補外
         if (!seNormal.length && !seSpecial.length) return;
 
-        // ===== ポケモン側の総合スコア =====
-        const atkStat = pd.goStats?.attack  || 0;
-        const defStat = pd.goStats?.defense || pd.goStats?.defence || 0;
-        const staStat = pd.goStats?.stamina || 0;
+      // ★ ここで威力（moveScore）順にソートする（降順）
+      seNormal.sort(function(a, b) {
+        return (b.moveScore || 0) - (a.moveScore || 0);
+      });
 
-        const MAX_ATK    = 300;
-        const MAX_DEFSTA = 600;
+      seSpecial.sort(function(a, b) {
+        return (b.moveScore || 0) - (a.moveScore || 0);
+      });
 
-        const atkNorm  = atkStat / MAX_ATK;
-        const bulkNorm = (defStat + staStat) / MAX_DEFSTA;
+      // ===== ポケモン側の総合スコア（種族値を強めに反映） =====
+      const atkStat = pd.goStats?.attack  || 0;
+      const defStat = pd.goStats?.defense || pd.goStats?.defence || 0;
+      const staStat = pd.goStats?.stamina || 0;
 
-        const statWeight = (atkNorm * 0.7) + (bulkNorm * 0.3);
+      // 攻撃寄りにした正規化係数
+      const MAX_ATK    = 350;  // 以前: 300
+      const MAX_DEFSTA = 700;  // 以前: 600
 
-        const monScore = bestMoveScore * (statWeight || 1);
+      const atkNorm  = atkStat / MAX_ATK;              // 攻撃
+      const bulkNorm = (defStat + staStat) / MAX_DEFSTA; // 耐久
+
+      // 攻撃 0.85 : 耐久 0.15 でウェイトを強めに
+      const statWeight = (atkNorm * 0.85) + (bulkNorm * 0.15);
+
+      const monScore = bestMoveScore * (statWeight || 1);
 
         // 表示用タイプ（日本語）は、上書きがあればそちら優先
         const typesJa = formOverride && Array.isArray(formOverride.typesJa) && formOverride.typesJa.length
@@ -1464,14 +1499,29 @@ const typeChecker = {
           : (Array.isArray(pd.typesJa) ? pd.typesJa.slice() : []);
 
         const typesEnForDef = attackerTypesEn.slice(); // 被ダメ計算にも使う
+        // ベースの名前
+        const baseNameJa = pd.nameJa || pd.nameJaLocalized || pd.nameEn || '';
+
+        // 既存のヘルパーでリージョンラベル取得
+        const regionLabel = pokemonUtil.getFormRegionLabel(
+          pd.form || '',
+          pd.templateId || '',
+          pd.pokemonId || ''
+        );
+
+        // 「キュウコン（アローラ）」みたいな表示名
+        const displayNameJa = regionLabel
+          ? `${baseNameJa}（${regionLabel}）`
+          : baseNameJa;
+
         results.push({
           id:        pd.id,
-          nameJa:    pd.nameJa,
+          nameJa:    displayNameJa,
+          rawNameJa: baseNameJa,
           nameEn:    pd.nameEn,
           typesJa:   pd.typesJa || [],
           typesEn:   pd.typesEn || [],
 
-          // ★★★ ここを追加 ★★★
           form:       pd.form || '',
           pokemonId:  pd.pokemonId || '',
           templateId: pd.templateId || '',
@@ -1482,7 +1532,8 @@ const typeChecker = {
           },
           goStats:   pd.goStats || {},
           baseTotal: pd.baseTotal || 0,
-          score:     monScore
+          score:     monScore,
+          maxMoveScore: bestMoveScore 
         });
       });
 
@@ -1513,10 +1564,21 @@ const typeChecker = {
 
       // スコア順に並べる（同点は攻撃種族値 → BST）
       finalList.sort(function(a, b){
+        const maxA = a.maxMoveScore || 0;
+        const maxB = b.maxMoveScore || 0;
+
+        // ① 最優先：最大技火力（降順）
+        if (maxB !== maxA) return maxB - maxA;
+
+        // ② 同点なら今までの総合スコアで比較
         if (b.score !== a.score) return b.score - a.score;
+
+        // ③ さらに同点なら攻撃種族値
         const atkA = a.goStats?.attack || 0;
         const atkB = b.goStats?.attack || 0;
         if (atkB !== atkA) return atkB - atkA;
+
+        // ④ 最後に合計種族値
         return (b.baseTotal || 0) - (a.baseTotal || 0);
       });
 
@@ -1529,6 +1591,140 @@ const typeChecker = {
       if (sliced[0]) {
         console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
       }
+
+      // ★ レーティング用のゲージ補正（1ゲージ〜3ゲージ）
+      const getGaugeFactorForRating = function(m) {
+        if (!m) return 1.0;
+        const energy = (typeof m.energy === 'number') ? m.energy : null;
+        if (energy == null || energy >= 0) return 1.0;
+
+        const abs = Math.abs(energy);
+
+        // ここは好みで調整可
+        if (abs >= 75) return 0.9;  // 1ゲージ: 少し不利
+        if (abs >= 45) return 1.0;  // 2ゲージ: 基準
+        return 1.2;                 // 3ゲージ: 結構優遇
+      };
+
+      // ===========================================
+      // ★ スペシャル技のグローバル5段階評価
+      //    ＋ ゲージ補正 ＋ 弱点時★下限
+      // ===========================================
+
+      // ★★ ② 正規化範囲の固定（40〜200 にクランプ）
+      const SCORE_MIN = 50;
+      const SCORE_MAX = 400;
+
+      const clampScore = function (s) {
+        const v = Number(s || 0);
+        if (!Number.isFinite(v) || v <= 0) return SCORE_MIN;
+        if (v < SCORE_MIN) return SCORE_MIN;
+        if (v > SCORE_MAX) return SCORE_MAX;
+        return v;
+      };
+
+      const toBaseRating = function (score) {
+        const v = clampScore(score); // ここで ② を適用
+        const norm = (v - SCORE_MIN) / (SCORE_MAX - SCORE_MIN); // 0〜1
+        let bucket = Math.round(norm * 4) + 1;                  // 1〜5 に丸め
+        if (bucket < 1) bucket = 1;
+        if (bucket > 5) bucket = 5;
+        return bucket;
+      };
+
+      // ゲージ本数による補正（A案強め版）
+      const gaugeOffset = function (mv) {
+        const energy = (typeof mv.energy === 'number') ? mv.energy : null;
+        if (energy == null || energy >= 0) return 0;
+
+        const abs = Math.abs(energy);
+
+        // 1G: -3 / 2G: 0 / 3G: +1
+        if (abs >= 75) return -2;  // 1ゲージ
+        if (abs >= 45) return 0;   // 2ゲージ
+        return +1;                 // 3ゲージ
+      };
+
+      const resolveGaugeIdFromEnergy = function (mv) {
+        if (mv.__gaugeSvgId) return mv.__gaugeSvgId;
+        const energy = mv.energy;
+        if (energy == null || energy >= 0) return '';
+
+        const abs = Math.abs(energy);
+        if (abs >= 75) return 'gauge1';
+        if (abs >= 45) return 'gauge2';
+        return 'gauge3';
+      };
+
+      // 各ポケモンのスペシャル技に評価を付与
+      sliced.forEach(function (r) {
+        const specials = (r.moves && Array.isArray(r.moves.special))
+          ? r.moves.special
+          : [];
+
+        // ★ このポケモンの攻撃種族値から、技評価用の係数を作る
+        const atkStat = r.goStats?.attack || 0;
+        // だいたい 0.9〜1.3 くらいに収まるイメージ
+        const statFactorForRating = 0.6 + (atkStat / 500);
+
+        let bestScore = -Infinity;
+        let bestIndex = -1;
+
+        specials.forEach(function (mv, idx) {
+          // ① 種族値込みのベーススコア
+          const baseScoreRaw = Number(mv.moveScore || 0);
+          if (!Number.isFinite(baseScoreRaw) || baseScoreRaw <= 0) return;
+
+          const baseScore = baseScoreRaw * statFactorForRating;
+
+          // ② 0〜1 正規化 → 1〜5 段階（toBaseRating の想定）
+          let rating = toBaseRating(baseScore);   // だいたい 1〜5
+
+          // ③ ゲージ本数の補正（1G -2 / 2G 0 / 3G +1 など）
+          rating += gaugeOffset(mv);
+
+          // ④ タイプ相性・STAB の情報
+          const isSE    = mv.mult != null && mv.mult >= 1.6; // こうかばつぐん
+          const hasStab = mv.stab != null && mv.stab > 1.0;  // タイプ一致
+
+          // ⑤ 弱点＋STAB ボーナス
+          //    ここで「こんげんのはどう」「だんがいのつるぎ」をしっかり持ち上げる
+          if (isSE && hasStab) {
+            rating += 1.5;        // 主力技は+1.5段階くらいブースト
+          } else if (isSE) {
+            rating += 0.5;        // 非STABだけど弱点はちょい盛り
+          } else if (hasStab) {
+            rating += 0.3;        // STABだけでもほんのり加点
+          }
+
+          // ⑥ 弱点のときの最低保証
+          if (isSE) {
+            if (hasStab && rating < 3) {
+              rating = 3;         // STAB＋弱点は★3未満にはしない
+            } else if (!hasStab && rating < 2) {
+              rating = 2;         // 非STAB弱点は★2未満にはしない
+            }
+          }
+
+          // ⑦ 最終クリップ＆丸め
+          rating = Math.round(rating);
+          if (rating < 1) rating = 1;
+          if (rating > 5) rating = 5;
+
+          mv.__globalRating = rating;
+          mv.__gaugeSvgId   = resolveGaugeIdFromEnergy(mv);
+
+          // ついでに、そのポケモン内での「最強技」判定にも使う
+          if (baseScore > bestScore) {
+            bestScore = baseScore;
+            bestIndex = idx;
+          }
+        });
+
+        if (bestIndex >= 0 && specials[bestIndex]) {
+          specials[bestIndex].__isStrongest = true;
+        }
+      });
 
       return sliced;
     },
@@ -1557,7 +1753,7 @@ const typeChecker = {
         arr.forEach(function (r, idx) {
           const html = pokemonCard.buildInfoItemHtml(r, {
             opened   : false, // 一覧は閉じた状態から
-            showStars: false  // まずは★なし（あとで付ける）
+            showStars: true
           });
           h.push(html);
         });

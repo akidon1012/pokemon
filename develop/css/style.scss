@@ -273,7 +273,7 @@
       a {
         display: flex;
         align-items: center;
-        padding: 10px 30px 10px 10px;
+        padding: 5px 30px 5px 10px;
         color: $color-text;
         text-decoration: none;
         position: relative;
@@ -392,12 +392,25 @@
           }
           &-name {
             padding-left: 0.5em;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             letter-spacing: -0.1em;
-            margin-right: 10px;
-            max-width: 150px;
+            margin-right: 5px;
+            width: 120px;
+            flex-shrink: 0;
             @include line-clamp(1);
+          }
+          &-stars {
+            display: flex;
+            align-items: center;
+            .icon-star {
+              display: block;
+              width: 14px;
+              height: 14px;
+              background: url("../images/icon_star.png") no-repeat;
+              background-size: contain;
+              margin-right: 2px;
+            }
           }
           &-gauge {
             margin-left: auto;
@@ -447,18 +460,53 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 56px;
-        font-size: 11px;
+        width: 50px;
+        font-size: 10px;
         font-weight: 500;
         line-height: 1.4;
+        white-space: nowrap;
       }
       .icon {
-        font-size: 28px;
+        &-type {
+          @include type-icons(28px);
+        }
       }
     }
     &-name {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
+    }
+    &-score {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      padding: 10px 5px 5px;
+      border-top: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+      &-label {
+        font-size: 14px;
+        font-weight: 500;
+        &::after {
+          content: "：";
+        }
+      }
+      &-list {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        &-item {
+          font-size: 12px;
+          font-weight: 500;
+          margin-right: 10px;
+          .num {
+            font-size: 16px;
+            font-family: "Josefin Sans", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+          }
+        }
+      }
     }
   }
   .pokemon-type {
@@ -612,38 +660,6 @@
   }
   .pokemon-recommend {
     &-info {
-      &-score {
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        padding: 10px 5px 5px;
-        border-top: 1px solid #DDD;
-        border-bottom: 1px solid #DDD;
-        &-label {
-          font-size: 14px;
-          font-weight: 500;
-          &::after {
-            content: "：";
-          }
-        }
-        &-list {
-          display: flex;
-          justify-content: center;
-          align-items: baseline;
-          &-item {
-            font-size: 14px;
-            font-weight: 500;
-            margin-right: 10px;
-            .num {
-              font-size: 18px;
-              font-family: "Josefin Sans", sans-serif;
-              font-optical-sizing: auto;
-              font-weight: 600;
-              font-style: normal;
-            }
-          }
-        }
-      }
     }
 
   }
