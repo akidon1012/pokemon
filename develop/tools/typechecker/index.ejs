@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Pokémon type checker</title>
-    <link rel="stylesheet" href="../../css/style.css?t=20251202" />
+    <link rel="stylesheet" href="../../css/style.css?t=20251204" />
   </head>
   <body>
     <div class="container">
@@ -37,11 +37,11 @@
                     <ul class="pokemon-search-and-or-list js_and-or">
                       <li class="pokemon-search-and-or-list-item">
                         <input type="radio" name="and_or" id="and_or-and" value="and" checked>
-                        <label for="and_or-and">AND検索</label>
+                        <label for="and_or-and">すべて含む</label>
                       </li>
                       <li class="pokemon-search-and-or-list-item">
                         <input type="radio" name="and_or" id="and_or-or" value="or">
-                        <label for="and_or-or">OR検索</label>
+                        <label for="and_or-or">いずれか含む</label>
                       </li>
                     </ul>
                   </div>
@@ -122,20 +122,21 @@
                 </div>
                 <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
                   <div class="pokemon-recommend">
-                    <ul class="pokemon-recommend-list js_pokemon-recommend-list">
-                      <!-- <li class="pokemon-recommend-list-item js_toggle-wrapper">
-                        <div class="pokemon-recommend-list-item-header js_pokemon-recommend-list-item-header">
+                    <ul class="pokemon-info-list js_pokemon-info-list">
+                      <!-- <li class="pokemon-info-list-item js_toggle-wrapper">
+                        <div class="pokemon-info-list-item-header js_pokemon-info-list-item-header">
                           <div class="pokemon-info-wrapper">
-                            <div class="pokemon-info-img">
-                              <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="ハスボー">
-                            </div>
-                            <div class="pokemon-info-name">ハスボー</div>
-                            <div class="pokemon-info-type">
-                              <div class="badge"><span class="icon-type icon-type-water"></span>みず</div>
-                              <div class="badge"><span class="icon-type icon-type-grass"></span>くさ</div>
-                            </div>
+                            <a href="javascript:void(0);" class="js_toggle-trigger">
+                              <div class="pokemon-info-img">
+                                <img src="https://placehold.jp/300x300.png" decoding="async" loading="lazy" alt="ハスボー">
+                              </div>
+                              <div class="pokemon-info-name">ハスボー</div>
+                              <div class="pokemon-info-type">
+                                <div class="badge"><span class="icon-type icon-type-water"></span>みず</div>
+                                <div class="badge"><span class="icon-type icon-type-grass"></span>くさ</div>
+                              </div>
+                            </a>
                           </div>
-                          <a href="javascript:void(0);" class="js_toggle-trigger"></a>
                         </div>
                         <div class="js_toggle-content">
                           <dl class="pokemon-recommend-info-score">
@@ -154,44 +155,44 @@
                               </ul>
                             </dl>
                           </dl>
-                          <div class="pokemon-recommend-list-item-attack-wrapper">
-                            <dl class="pokemon-recommend-list-item-attack">
-                              <dt class="pokemon-recommend-list-item-attack-label">ノーマル</dt>
-                              <dd class="pokemon-recommend-list-item-attack-info is_water">
-                                <div class="pokemon-recommend-list-item-attack-name">
+                          <div class="pokemon-info-list-item-attack-wrapper">
+                            <dl class="pokemon-info-list-item-attack">
+                              <dt class="pokemon-info-list-item-attack-label">ノーマル</dt>
+                              <dd class="pokemon-info-list-item-attack-info is_water">
+                                <div class="pokemon-info-list-item-attack-name">
                                   <span class="icon-type icon-type-water"></span>みずでっぽう
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-power">20</div>
+                                <div class="pokemon-info-list-item-attack-power">20</div>
                               </dd>
                             </dl>
-                            <dl class="pokemon-recommend-list-item-attack">
-                              <dt class="pokemon-recommend-list-item-attack-label">スペシャル</dt>
-                              <dd class="pokemon-recommend-list-item-attack-info is_water">
-                                <div class="pokemon-recommend-list-item-attack-name">
+                            <dl class="pokemon-info-list-item-attack">
+                              <dt class="pokemon-info-list-item-attack-label">スペシャル</dt>
+                              <dd class="pokemon-info-list-item-attack-info is_water">
+                                <div class="pokemon-info-list-item-attack-name">
                                   <span class="icon-type icon-type-water"></span>ハイドロポンプ
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-gauge">
+                                <div class="pokemon-info-list-item-attack-gauge">
                                   <svg class="gauge" aria-hidden="true"><use href="#gauge1"></use></svg>
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-power">200</div>
+                                <div class="pokemon-info-list-item-attack-power">200</div>
                               </dd>
-                              <dd class="pokemon-recommend-list-item-attack-info is_ice">
-                                <div class="pokemon-recommend-list-item-attack-name">
+                              <dd class="pokemon-info-list-item-attack-info is_ice">
+                                <div class="pokemon-info-list-item-attack-name">
                                   <span class="icon-type icon-type-ice"></span>ふぶき
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-gauge">
+                                <div class="pokemon-info-list-item-attack-gauge">
                                   <svg class="gauge" aria-hidden="true"><use href="#gauge2"></use></svg>
                                 </div>
-                                 <div class="pokemon-recommend-list-item-attack-power">100</div>
+                                 <div class="pokemon-info-list-item-attack-power">100</div>
                                </dd>
-                              <dd class="pokemon-recommend-list-item-attack-info is_grass">
-                                <div class="pokemon-recommend-list-item-attack-name">
+                              <dd class="pokemon-info-list-item-attack-info is_grass">
+                                <div class="pokemon-info-list-item-attack-name">
                                   <span class="icon-type icon-type-grass"></span>ソーラービーム
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-gauge">
+                                <div class="pokemon-info-list-item-attack-gauge">
                                   <svg class="gauge" aria-hidden="true"><use href="#gauge3"></use></svg>
                                 </div>
-                                <div class="pokemon-recommend-list-item-attack-power">50</div>
+                                <div class="pokemon-info-list-item-attack-power">50</div>
                               </dd>
                             </dl>
                           </div>
@@ -263,8 +264,8 @@
       <%- include('../common/_footer.ejs') %>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="../../data/pokemon_image_list.js?t=20251202" defer></script>
-    <script src="../../js/utilities.js?t=20251202" defer></script>
-    <script src="../../js/typechecker.js?t=20251202" defer></script>
+    <script src="../../data/pokemon_image_list.js?t=20251204" defer></script>
+    <script src="../../js/utilities.js?t=20251204" defer></script>
+    <script src="../../js/typechecker.js?t=20251204" defer></script>
   </body>
 </html>
