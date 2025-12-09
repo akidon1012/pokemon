@@ -390,22 +390,29 @@
             }
           }
           &-name {
-            padding-left: 0.5em;
+            display: flex;
+            align-items: center;
             font-size: 16px;
             font-weight: 500;
             letter-spacing: -0.1em;
             margin-right: 5px;
-            width: 120px;
+            width: 140px;
             flex-shrink: 0;
             @include line-clamp(1);
+            .icon-type {
+              display: inline-block;
+              position: relative;
+              top: 5px;
+              @include type-icons(22px);
+            }
           }
           &-stars {
             display: flex;
             align-items: center;
             .icon-star {
               display: block;
-              width: 14px;
-              height: 14px;
+              width: 12px;
+              height: 12px;
               background: url("../images/icon_star.png") no-repeat;
               background-size: contain;
               margin-right: 2px;

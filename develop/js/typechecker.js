@@ -66,52 +66,6 @@ const toggle = {
   }
 };
 // ★ フォームごとのタイプ上書きテーブルを GO メタから自動生成
-// === フォームごとのタイプ上書きテーブルを GO メタから自動生成 ===
-// === フォームごとのタイプ上書きテーブル（手動定義） ===
-var TYPE_OVERRIDE_BY_FORM = {
-  // ガラル三鳥
-  'ARTICUNO_GALARIAN': {
-    typesEn: ['psychic', 'flying'],
-    typesJa: ['エスパー', 'ひこう']
-  },
-  'ZAPDOS_GALARIAN': {
-    typesEn: ['fighting', 'flying'],
-    typesJa: ['かくとう', 'ひこう']
-  },
-  'MOLTRES_GALARIAN': {
-    typesEn: ['dark', 'flying'],
-    typesJa: ['あく', 'ひこう']
-  },
-
-  // アローラナッシー
-  'EXEGGUTOR_ALOLA': {
-    typesEn: ['grass', 'dragon'],
-    typesJa: ['くさ', 'ドラゴン']
-  },
-
-  // 必要に応じてここに追加:
-  // 'RAICHU_ALOLA': { ... },
-  // 'MAROWAK_ALOLA': { ... },
-};
-// === フォーム名変換
-var FORM_LABEL_MAP = {
-  'ZAPDOS_GALARIAN': 'ガラル',
-  'ARTICUNO_GALARIAN':'ガラル',
-  'MOLTRES_GALARIAN':'ガラル',
-
-  'EXEGGUTOR_ALOLA':'アローラ',
-  'RAICHU_ALOLA':'アローラ',
-  'MAROWAK_ALOLA':'アローラ',
-
-  // メガ進化
-  'CHARIZARD_MEGA_X':'メガX',
-  'CHARIZARD_MEGA_Y':'メガY',
-  'VENUSAUR_TEMP_EVOLUTION_MEGA':'メガ',
-  'BLASTOISE_TEMP_EVOLUTION_MEGA':'メガ',
-
-  // 必要なら今後ここへ追加🔽
-  // 'GROUDON_PRIMAL':'ゲンシ' ...
-};
 
 const typeChecker = {
   MULT : { dbl: 1.6, half: 0.625, zero: 0.39 }, // 単タイプ時の係数
@@ -465,6 +419,7 @@ const typeChecker = {
     selectedArea : '.js_pokemon-search-result',      // 追加：選択結果の描画先
     radioAndOr : 'input[name="and_or"]',
     cacheData : [],                                  // 追加：iniで受け取ったデータを保持（リセット再構築用）
+    _dataset : [],                                   // 追加：検索用データセット（no+form 重複排除済み）
     typeName : [
       'normal','fire','water','grass','electric','ice','fighting','poison','ground',
       'flying','psychic','bug','rock','ghost','dragon','dark','steel','fairy'
@@ -480,16 +435,17 @@ const typeChecker = {
         : (data && Array.isArray(data.list)) ? data.list
         : [];
 
-      //    attachGoStats は「1件ずつ」処理する関数なので map で回す
+      // attachGoStats は「1件ずつ」処理する関数なので map で回す
       const srcWithGo = (pokemonUtil.attachGoStats)
         ? srcArray.map(function(p) {
-            // そのまま mutate でOKならこのまま
             return pokemonUtil.attachGoStats(p);
           })
         : srcArray;
 
-      const filtered = typeChecker.searchPokemon.buildSelectableList(srcWithGo);
+      // ★ 検索用データセットを no + '|' + form で重複排除して構築
+      const filtered = typeChecker.searchPokemon.buildDataset(srcWithGo);
       this.cacheData = filtered;
+      this._dataset  = filtered;
 
       // ポケモン一覧の再構築は filtered を元に 1 回だけ行う
       typeChecker.searchPokemon.clear(filtered);
@@ -501,7 +457,7 @@ const typeChecker = {
       const resetBtn    = $(typeChecker.searchPokemon.resetBtn);
       const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
 
-            // ====== リスト開閉ヘルパ ======
+      // ====== リスト開閉ヘルパ ======
       let blurTimer = null;
 
       function openList() {
@@ -520,7 +476,6 @@ const typeChecker = {
 
       // 他の処理からも呼べるように公開
       typeChecker.searchPokemon.openList = openList;
-
 
       // 初回キャッシュ作成
       if ($('.js_list-html').length === 0) {
@@ -568,7 +523,7 @@ const typeChecker = {
           checkbox.each(function(){ $(this).prop('checked', false); });
           clearBtn.hide();
 
-          // ★ 追加：入力が空になったら選択カードも削除
+          // 入力が空になったら選択カードも削除
           typeChecker.searchPokemon.clearSelected();
           return;
         }
@@ -580,24 +535,24 @@ const typeChecker = {
         clearBtn.show();
       });
 
-    // ====== 枠外タップで一覧を閉じる ======
-    $(document)
-      .off('pointerdown.pokemonSearchOutside')
-      .on('pointerdown.pokemonSearchOutside', function(e) {
-        const $target  = $(e.target);
-        const $wrapper = $(typeChecker.searchPokemon.wrapper);
-        if (!$wrapper.length) return;
+      // ====== 枠外タップで一覧を閉じる ======
+      $(document)
+        .off('pointerdown.pokemonSearchOutside')
+        .on('pointerdown.pokemonSearchOutside', function(e) {
+          const $target  = $(e.target);
+          const $wrapper = $(typeChecker.searchPokemon.wrapper);
+          if (!$wrapper.length) return;
 
-        // ラッパー内をタップしたときは何もしない
-        if ($target.closest(typeChecker.searchPokemon.wrapper).length) {
-          return;
-        }
+          // ラッパー内をタップしたときは何もしない
+          if ($target.closest(typeChecker.searchPokemon.wrapper).length) {
+            return;
+          }
 
-        // ラッパー外をタップしたら一覧を閉じる
-        $wrapper.removeClass(typeChecker.searchPokemon.isActiveClassName);
-      });
+          // ラッパー外をタップしたら一覧を閉じる
+          $wrapper.removeClass(typeChecker.searchPokemon.isActiveClassName);
+        });
 
-      // ====== リスト選択（mousedown→pointerdown の既存方針を関数参照に置換） ======
+      // ====== リスト選択（pointer 系） ======
       (function() {
         let startX = 0;
         let startY = 0;
@@ -655,7 +610,8 @@ const typeChecker = {
       $(document).on('change', typeChecker.searchPokemon.radioAndOr, function(){
         const sel = typeChecker.searchPokemon.getSelectedTypesJa();
         typeChecker.getType._filterListByTypesJa(sel);
-      });      
+      });
+
       // ====== リセット ======
       resetBtn.off('click').on('click', typeChecker.searchPokemon.handleReset);
     },
@@ -718,8 +674,13 @@ const typeChecker = {
 
       return {
         id    : no,
+        no    : no,
         name  : nameJa,
         types : typesJa,
+        form  : form,
+        pokemonId     : pid,
+        basePokemonId : basePid,
+        region        : region,
         _raw  : pd   // 必要なら後で使えるように生データも持たせる
       };
     },
@@ -732,7 +693,6 @@ const typeChecker = {
       return Number.isFinite(id) && id > 0 ? id : null;
     },
 
-
     // ========== イベントハンドラ（関数参照でバインド） ==========
     handlePick : function(e) {
       e.preventDefault();
@@ -741,30 +701,57 @@ const typeChecker = {
       // 1) 一覧の <a> から基本情報（pokemonId, form など）取得
       const lite = typeChecker.searchPokemon.normalizeFromAnchor($a) || {};
 
-      // 2) pokemonUtil.getPokemonData で GO メタ＋技入りのフルデータ取得
-      let pdArr = pokemonUtil.getPokemonData(lite);
-      let pd    = Array.isArray(pdArr) ? pdArr[0] : pdArr;
+      const pickedNo   = lite.no != null ? lite.no : lite.id;
+      const pickedForm = (lite.form != null ? lite.form : (lite._raw && lite._raw.form)) || '';
+
+      // 2) getPokemonData に投げるためのクエリオブジェクトを組み立て
+      //    → _raw をベースに、no / id / form などをトップレベルに出しておく
+      const baseRaw = lite._raw || {};
+      const query = Object.assign(
+        {},
+        baseRaw,
+        {
+          no   : pickedNo,
+          id   : pickedNo,
+          form : pickedForm,
+          // 念のため pokemonId / basePokemonId / region も表に出す
+          pokemonId     : lite.pokemonId     || baseRaw.pokemonId     || null,
+          basePokemonId : lite.basePokemonId || baseRaw.basePokemonId || null,
+          region        : lite.region        || baseRaw.region        || null,
+          // 表示名／タイプも渡しておく（getPokemonData側で使わなくても害はない）
+          nameJa : lite.name || baseRaw.nameJa || baseRaw.name || '',
+          name   : lite.name || baseRaw.name   || baseRaw.nameJa || '',
+          typesJa: lite.types || baseRaw.typesJa || baseRaw.types || []
+        }
+      );
+
+      // 3) pokemonUtil.getPokemonData で GO メタ＋技入りのフルデータ取得
+      let pd = null;
+      if (typeof pokemonUtil.getPokemonData === 'function') {
+        let pdArr = pokemonUtil.getPokemonData(query);
+        pd = Array.isArray(pdArr) ? pdArr[0] : pdArr;
+      }
 
       if (!pd) {
-        console.warn('[handlePick] pokemonUtil.getPokemonData returned empty', lite);
+        console.warn('[handlePick] pokemonUtil.getPokemonData returned empty', query);
         return;
       }
 
-      // 3) GO ステータスを付与（あれば）
-      if (pokemonUtil.attachGoStats) {
+      // 4) GO ステータスを付与（あれば）
+      if (typeof pokemonUtil.attachGoStats === 'function') {
         pd = pokemonUtil.attachGoStats(pd) || pd;
       }
 
-      // 4) 画面表示用に merge
+      // 5) 画面表示用に merge
       const poke = Object.assign({}, pd, lite);
 
       console.log('[handlePick merged poke]', poke);
 
-      // 5) 1匹カード描画
+      // 6) 1匹カード描画（種族値＋わざが利用できるはず）
       const $resultArea = $('.js_pokemon-search-result');
       pokemonCard.render(poke, $resultArea);
 
-      // 6) タイプ選択チェックボックス反映（元の処理を維持）
+      // 7) タイプ選択チェックボックス反映（元の処理を維持）
       const typesJaSrc = poke.typesJa || poke.types;
       const typesJa = Array.isArray(typesJaSrc) ? typesJaSrc : [];
 
@@ -783,22 +770,25 @@ const typeChecker = {
         }
       }
 
-      // 7) 検索テキストボックス更新
-      const nameJa = poke.nameJa || poke.name || '';
-      if (typeChecker.searchPokemon.keyword) {
-        const $input = $(typeChecker.searchPokemon.keyword);
-        if ($input.length) {
-          $input.val(nameJa);
-        }
+      // 8) 検索テキストボックス更新（表示名は getDisplayNameJa 優先＋trim）
+      const displayNameRaw = (typeof pokemonUtil.getDisplayNameJa === 'function')
+        ? pokemonUtil.getDisplayNameJa(poke)
+        : (poke.nameJa || poke.name || '');
+      const displayName = String(displayNameRaw).trim();
+
+      const $input = $(typeChecker.searchPokemon.textbox);
+      if ($input.length) {
+        $input.val(displayName);
       }
     },
+
     handleReset : function(){
-      const wrapper     = $(typeChecker.searchPokemon.wrapper);
-      const pokemonList = wrapper.find(typeChecker.searchPokemon.pokemonList);
-      const checkbox    = $(typeChecker.getType.checkbox);
-      const recommendList = $(typeChecker.getType.checkbox);
-      const clearBtn    = $(typeChecker.searchPokemon.clearBtn);
-      const data        = typeChecker.searchPokemon.cacheData;
+      const wrapper       = $(typeChecker.searchPokemon.wrapper);
+      const pokemonList   = wrapper.find(typeChecker.searchPokemon.pokemonList);
+      const checkbox      = $(typeChecker.getType.checkbox);
+      const recommendList = $(typeChecker.getType.checkbox); // 既存のまま
+      const clearBtn      = $(typeChecker.searchPokemon.clearBtn);
+      const data          = typeChecker.searchPokemon.cacheData;
 
       pokemonList.empty();
       typeChecker.searchPokemon.clear(data);          // リスト再構築
@@ -808,7 +798,7 @@ const typeChecker = {
       typeChecker.getType._filterListByTypesJa([]);
       clearBtn.hide();
 
-      // ★ 追加：選択カードをクリア
+      // 選択カードをクリア
       typeChecker.searchPokemon.clearSelected();
     },
 
@@ -816,7 +806,7 @@ const typeChecker = {
       const formRaw = String(p.form || '');
       const f       = formRaw.toUpperCase();
 
-      // ★ 図鑑Noベースのキー
+      // 図鑑Noベースのキー
       const no = (p.no != null) ? p.no
                 : (p.dex != null) ? p.dex
                 : (p.pokedex_id != null) ? p.pokedex_id
@@ -872,7 +862,41 @@ const typeChecker = {
       return { kind: 'other', key: speciesKey + '|other|' + f, region: null };
     },
 
-    // ======== 追加：セレクト用リストを構築 ========
+    // ======== 新規：no + '|' + form で検索用データセット構築 ========
+    // ======== no + '|' + form で検索用データセット構築 ========
+    buildDataset : function(data) {
+      const all  = Array.isArray(data) ? data : [];
+      const seen = Object.create(null);
+      const out  = [];
+
+      all.forEach(function(pd) {
+        if (!pd) return;
+
+        const no = Number(pd.no || pd.id || 0);
+        if (!no) return;
+
+        const form = (pd.form || '').toString(); // 通常フォームは '' のまま
+
+        // ★ ザシアン／ザマゼンタは「通常フォーム」を検索候補から除外
+        //   → 英雄（れきせん）／けんのおう だけを出したい想定
+        const pid = (pd.pokemonId || '').toString().toUpperCase();
+        if (!form && (pid === 'ZACIAN' || pid === 'ZAMAZENTA')) {
+          return;
+        }
+
+        const key  = no + '|' + form;
+
+        if (seen[key]) return;
+        seen[key] = true;
+
+        out.push(pd);
+      });
+
+      console.log('[searchPokemon.buildDataset] size =', out.length);
+      return out;
+    },
+
+    // ======== 既存：セレクト用リスト構築（今は未使用でも残しておく） ========
     buildSelectableList : function(data) {
       const src  = Array.isArray(data) ? data : [];
       const seen = new Set();
@@ -928,7 +952,6 @@ const typeChecker = {
           .trim();
 
         // 図鑑Noから「本来の種族名」が取れるならそれを優先
-        // メガニウム / メガヤンマ みたいに "メガ" が名前に含まれても安全
         const speciesJa = (p.no != null && baseNameJaByNo[p.no])
           ? baseNameJaByNo[p.no]
           : baseJa;
@@ -982,8 +1005,11 @@ const typeChecker = {
       return out;
     },
 
-    // ======== 追加：表示ラベル整形 ========
+    // ======== 追加：表示ラベル整形（今後使うなら getDisplayNameJa 優先にしてOK） ========
     formatPokemonLabel : function(p) {
+      if (pokemonUtil.getDisplayNameJa) {
+        return pokemonUtil.getDisplayNameJa(p);
+      }
       const name = p.nameJa || p.name || p.nameEn || '???';
       const c    = typeChecker.searchPokemon.classifyForm(p);
 
@@ -1019,7 +1045,6 @@ const typeChecker = {
       }
       return name;
     },
-    // ========== 既存：初期化 ==========
 
     // 既存：型で選択（そのまま）
     select : function(arry) {
@@ -1070,7 +1095,7 @@ const typeChecker = {
       const v = $('input[name="and_or"]:checked').val();
       return (v === 'or') ? 'or' : 'and'; // ← デフォルトはAND
     },
-    
+
     clear : function(list) {
       const pokemonList = $(typeChecker.searchPokemon.pokemonList);
       pokemonList.empty();
@@ -1079,25 +1104,27 @@ const typeChecker = {
         const $li = $('<li class="pokemon-search-list-item">');
         const $a  = $('<a href="javascript:void(0);"></a>');
 
-        const label = p.labelJa || p.nameJa || p.name || '';
+        // ★ 表示名は必ず getDisplayNameJa 経由
+        const label = (pokemonUtil.getDisplayNameJa)
+          ? pokemonUtil.getDisplayNameJa(p)
+          : (p.labelJa || p.nameJa || p.name || '');
 
         const typesJa = Array.isArray(p.typesJa) ? p.typesJa : [];
         const iconsHtml = typeChecker.searchPokemon.buildTypeIcons(typesJa);
-        
+
         $a.html(`
           <div class="pokemon-search-list-item-name">${label}</div>
           <div class="pokemon-search-list-item-type">
             ${iconsHtml}
           </div>
-          `
-        );
+        `);
 
         $a.attr('data-no', p.no);
         if (Array.isArray(p.typesJa)) {
           $a.attr('data-types-ja', p.typesJa.join(','));
         }
 
-        // ★ 追加：画像決定に必要な情報も埋めておく
+        // 画像決定に必要な情報も埋めておく
         if (p.pokemonId) {
           $a.attr('data-pid', p.pokemonId);
         }
@@ -1390,7 +1417,7 @@ const typeChecker = {
 
         // ★ フォームからタイプ上書き（ガラル/アローラ等）
         const formKey      = pd.form || (pd._raw && pd._raw.form) || '';
-        const formLabel = FORM_LABEL_MAP[formKey] || '';
+        const formLabel    = FORM_LABEL_MAP[formKey] || '';
         const formOverride = TYPE_OVERRIDE_BY_FORM && TYPE_OVERRIDE_BY_FORM[formKey]
           ? TYPE_OVERRIDE_BY_FORM[formKey]
           : null;
@@ -1408,8 +1435,6 @@ const typeChecker = {
         const seSpecial = [];
         let bestMoveScore = 0;
 
-        // ==== ゲージ本数による補正係数（案A） ====
-        // energy はマイナス値（-80 など）を想定
         const getGaugeFactor = function(m) {
           if (!m) return 1.0;
           const energy = (typeof m.energy === 'number') ? m.energy : null;
@@ -1417,14 +1442,9 @@ const typeChecker = {
 
           const abs = Math.abs(energy);
 
-          // energy -75 以下 … 1ゲージ想定
-          if (abs >= 75) return 1.0;   // 1ゲージ：そのまま
-
-          // -45〜-74 … 2ゲージ
-          if (abs >= 45) return 1.05;  // 2ゲージ：ちょい優遇
-
-          // それより軽い … 3ゲージ相当
-          return 1.15;                 // 3ゲージ：さらに優遇
+          if (abs >= 75) return 1.0;   // 1ゲージ
+          if (abs >= 45) return 1.05;  // 2ゲージ
+          return 1.15;                 // 3ゲージ
         };
 
         const pushMove = function(m, category) {
@@ -1442,14 +1462,14 @@ const typeChecker = {
           const hasStab = attackerTypesEn.includes(typeEn);
           const stab    = hasStab ? 1.2 : 1.0;
 
-          // ★ ここは補正なし（威力 × 相性 × STAB だけ）
+          // ここではゲージ補正は入れず、純粋な火力だけを見る
           const moveScore = power * mult * stab;
 
           const move = $.extend({}, m, {
-            mult:      mult,
-            stab:      stab,
-            moveScore: moveScore,
-            category:  category
+            mult      : mult,
+            stab      : stab,
+            moveScore : moveScore,
+            category  : category
           });
 
           if (category === 'normal') {
@@ -1467,57 +1487,74 @@ const typeChecker = {
         // SE 技が1つもなければ候補外
         if (!seNormal.length && !seSpecial.length) return;
 
-      // ★ ここで威力（moveScore）順にソートする（降順）
-      seNormal.sort(function(a, b) {
-        return (b.moveScore || 0) - (a.moveScore || 0);
-      });
+        // 技一覧は威力順にソート（降順）
+        seNormal.sort(function(a, b) {
+          return (b.moveScore || 0) - (a.moveScore || 0);
+        });
+        seSpecial.sort(function(a, b) {
+          return (b.moveScore || 0) - (a.moveScore || 0);
+        });
 
-      seSpecial.sort(function(a, b) {
-        return (b.moveScore || 0) - (a.moveScore || 0);
-      });
+        // ===== ポケモン側の総合スコア =====
+        const atkStat = (pd.goStats?.attack  || pd.baseStats?.attack  || 0);
+        const defStat = (pd.goStats?.defense || pd.goStats?.defence || pd.baseStats?.defence || 0);
+        const staStat = (pd.goStats?.stamina || pd.baseStats?.hp      || 0);
 
-      // ===== ポケモン側の総合スコア（種族値を強めに反映） =====
-      const atkStat = pd.goStats?.attack  || 0;
-      const defStat = pd.goStats?.defense || pd.goStats?.defence || 0;
-      const staStat = pd.goStats?.stamina || 0;
+        const MAX_ATK    = 300;
+        const MAX_DEFSTA = 600;
 
-      // 攻撃寄りにした正規化係数
-      const MAX_ATK    = 350;  // 以前: 300
-      const MAX_DEFSTA = 700;  // 以前: 600
+        // ★ ステータス正規化は 0〜1 にクランプ（上限キャップ）
+        const atkNorm  = Math.min(1.0, atkStat / MAX_ATK);
+        const bulkNorm = Math.min(1.0, (defStat + staStat) / MAX_DEFSTA);
 
-      const atkNorm  = atkStat / MAX_ATK;              // 攻撃
-      const bulkNorm = (defStat + staStat) / MAX_DEFSTA; // 耐久
+        // ★ 攻撃寄りだけど耐久も見る
+        const statWeight = (atkNorm * 0.8) + (bulkNorm * 0.2);
 
-      // 攻撃 0.85 : 耐久 0.15 でウェイトを強めに
-      const statWeight = (atkNorm * 0.85) + (bulkNorm * 0.15);
+        // ★ ボスからの被ダメ倍率を計算
+        const defTypesEnForThisMon = Array.isArray(pd.typesEn)
+          ? pd.typesEn.map(function(t){ return (t || '').toString().toLowerCase(); })
+          : [];
 
-      const monScore = bestMoveScore * (statWeight || 1);
+        let bossDamageMult = calcBossDamage(defTypesEnForThisMon);
+        if (!Number.isFinite(bossDamageMult) || bossDamageMult <= 0) {
+          bossDamageMult = 1.0;
+        }
+
+        // ★ 防御補正
+        //   - 耐性持ち（<1.0）は「1.0扱い」で過剰に優遇しない
+        //   - 弱点持ち（>1.0）のみ、ゆるくペナルティ
+        const DEF_POW  = 0.3; // ← 0.6 から緩めた（弱点ペナルティを軽くする）
+        const adjMult  = Math.max(1.0, bossDamageMult);
+        const defPenalty = Math.pow(adjMult, DEF_POW);
+
+        // ★ 最終モンスコア：攻撃 × 種族値 × 防御補正
+        const monScore = (bestMoveScore * (statWeight || 1)) / (defPenalty || 1);
 
         // 表示用タイプ（日本語）は、上書きがあればそちら優先
         const typesJa = formOverride && Array.isArray(formOverride.typesJa) && formOverride.typesJa.length
           ? formOverride.typesJa.slice()
           : (Array.isArray(pd.typesJa) ? pd.typesJa.slice() : []);
 
-        const typesEnForDef = attackerTypesEn.slice(); // 被ダメ計算にも使う
-        // ベースの名前
-        const baseNameJa = pd.nameJa || pd.nameJaLocalized || pd.nameEn || '';
+        const typesEnForDef = attackerTypesEn.slice();
 
-        // 既存のヘルパーでリージョンラベル取得
-        const regionLabel = pokemonUtil.getFormRegionLabel(
-          pd.form || '',
-          pd.templateId || '',
-          pd.pokemonId || ''
-        );
+        // ★ 表示名は共通ユーティリティに任せる
+        //   - メガリザX/Y 特例もここで吸収
+        //   - formLabelJa があれば「○○（△△）」形式になる
+        const displayNameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
+          ? pokemonUtil.getDisplayNameJa(pd)
+          : (pd.nameJa || pd.name || pd.nameJaLocalized || pd.nameEn || '');
 
-        // 「キュウコン（アローラ）」みたいな表示名
-        const displayNameJa = regionLabel
-          ? `${baseNameJa}（${regionLabel}）`
-          : baseNameJa;
+        const rawNameJa =
+          pd.nameJa ||
+          pd.name ||
+          pd.nameJaLocalized ||
+          pd.nameEn ||
+          '';
 
         results.push({
           id:        pd.id,
           nameJa:    displayNameJa,
-          rawNameJa: baseNameJa,
+          rawNameJa: rawNameJa,
           nameEn:    pd.nameEn,
           typesJa:   pd.typesJa || [],
           typesEn:   pd.typesEn || [],
@@ -1530,57 +1567,71 @@ const typeChecker = {
             normal:  seNormal,
             special: seSpecial
           },
-          goStats:   pd.goStats || {},
-          baseTotal: pd.baseTotal || 0,
-          score:     monScore,
-          maxMoveScore: bestMoveScore 
+          goStats:      pd.goStats || {},
+          baseTotal:    pd.baseTotal || 0,
+          score:        monScore,
+          maxMoveScore: bestMoveScore
         });
       });
 
-      // === ステップ1：ボスから「こうかばつぐん」を取られるポケモンを除外 ===
-      const baseList  = results.slice();
-      const DAMAGE_SE = 1.6 - eps;
+      const finalList = results.slice();
 
-      const safeList = baseList.filter(function(r, idx) {
-        const typesEn = Array.isArray(r.typesEn) ? r.typesEn : [];
-        const dmg = calcBossDamage(typesEn); // ボス → このポケモン への倍率
-
-        if (idx < 10) {
-          console.log('[defensive filter]', r.nameJa, 'typesEn=', typesEn, 'dmg=', dmg);
-        }
-
-        // dmg が 1.6 以上（こうかばつぐん以上）なら候補から外す
-        return dmg < DAMAGE_SE;
-      });
-
-      console.log(
-        '[recommendCounters] defensive filter: before=',
-        baseList.length,
-        'after=',
-        safeList.length
-      );
-
-      const finalList = safeList.length ? safeList : baseList;
-
-      // スコア順に並べる（同点は攻撃種族値 → BST）
+      // スコア順に並べる
       finalList.sort(function(a, b){
+        const scoreA = a.score || 0;
+        const scoreB = b.score || 0;
+
+        // ① 総合スコア
+        if (scoreB !== scoreA) return scoreB - scoreA;
+
+        // ② 最大技火力
         const maxA = a.maxMoveScore || 0;
         const maxB = b.maxMoveScore || 0;
-
-        // ① 最優先：最大技火力（降順）
         if (maxB !== maxA) return maxB - maxA;
 
-        // ② 同点なら今までの総合スコアで比較
-        if (b.score !== a.score) return b.score - a.score;
-
-        // ③ さらに同点なら攻撃種族値
+        // ③ 攻撃種族値
         const atkA = a.goStats?.attack || 0;
         const atkB = b.goStats?.attack || 0;
         if (atkB !== atkA) return atkB - atkA;
 
-        // ④ 最後に合計種族値
+        // ④ 合計種族値
         return (b.baseTotal || 0) - (a.baseTotal || 0);
       });
+
+      const uniqueList = [];
+      const seen = new Map(); // key: no|atk|def|sta|typesEn
+
+      finalList.forEach(function(r) {
+        const no   = r.no || r.id || 0;
+        const atk  = r.goStats?.attack  || 0;
+        const def  = r.goStats?.defense || 0;
+        const sta  = r.goStats?.stamina || 0;
+        const tEn  = Array.isArray(r.typesEn) ? r.typesEn.join('/') : '';
+        const key  = [no, atk, def, sta, tEn].join('|');
+
+        if (!seen.has(key)) {
+          // はじめて見た種 → そのまま採用
+          seen.set(key, uniqueList.length);
+          uniqueList.push(r);
+          return;
+        }
+
+        // すでに同じ key のポケモンがいる場合、
+        // 「よりフォーム情報が豊富なほう」を優先して差し替える。
+        const idx   = seen.get(key);
+        const prev  = uniqueList[idx];
+        const prevHasForm = !!(prev.form || prev.templateId || prev.pokemonId && String(prev.pokemonId).includes('_'));
+        const currHasForm = !!(r.form   || r.templateId   || r.pokemonId && String(r.pokemonId).includes('_'));
+
+        // すでにフォーム付きが採用されていれば、そのまま。
+        if (prevHasForm && !currHasForm) return;
+
+        // 逆に、今回のほうがフォーム情報が豊富なら差し替える。
+        if (currHasForm && !prevHasForm) {
+          uniqueList[idx] = r;
+          return;
+        }
+     });
 
       const sliced = finalList.slice(0, limit);
 
@@ -1592,26 +1643,21 @@ const typeChecker = {
         console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
       }
 
-      // ★ レーティング用のゲージ補正（1ゲージ〜3ゲージ）
+      // --------------------------------------------------
+      // 以下は「★レーティング＋ゲージ」の処理（既存ロジック）
+      // --------------------------------------------------
+
       const getGaugeFactorForRating = function(m) {
         if (!m) return 1.0;
         const energy = (typeof m.energy === 'number') ? m.energy : null;
         if (energy == null || energy >= 0) return 1.0;
 
         const abs = Math.abs(energy);
-
-        // ここは好みで調整可
-        if (abs >= 75) return 0.9;  // 1ゲージ: 少し不利
-        if (abs >= 45) return 1.0;  // 2ゲージ: 基準
-        return 1.2;                 // 3ゲージ: 結構優遇
+        if (abs >= 75) return 0.9;
+        if (abs >= 45) return 1.0;
+        return 1.2;
       };
 
-      // ===========================================
-      // ★ スペシャル技のグローバル5段階評価
-      //    ＋ ゲージ補正 ＋ 弱点時★下限
-      // ===========================================
-
-      // ★★ ② 正規化範囲の固定（40〜200 にクランプ）
       const SCORE_MIN = 50;
       const SCORE_MAX = 400;
 
@@ -1624,25 +1670,23 @@ const typeChecker = {
       };
 
       const toBaseRating = function (score) {
-        const v = clampScore(score); // ここで ② を適用
+        const v = clampScore(score);
         const norm = (v - SCORE_MIN) / (SCORE_MAX - SCORE_MIN); // 0〜1
-        let bucket = Math.round(norm * 4) + 1;                  // 1〜5 に丸め
+        let bucket = Math.round(norm * 4) + 1;                  // 1〜5
         if (bucket < 1) bucket = 1;
         if (bucket > 5) bucket = 5;
         return bucket;
       };
 
-      // ゲージ本数による補正（A案強め版）
       const gaugeOffset = function (mv) {
         const energy = (typeof mv.energy === 'number') ? mv.energy : null;
         if (energy == null || energy >= 0) return 0;
 
         const abs = Math.abs(energy);
 
-        // 1G: -3 / 2G: 0 / 3G: +1
-        if (abs >= 75) return -2;  // 1ゲージ
-        if (abs >= 45) return 0;   // 2ゲージ
-        return +1;                 // 3ゲージ
+        if (abs >= 75) return -2; // 1ゲージ
+        if (abs >= 45) return 0;  // 2ゲージ
+        return +1;                // 3ゲージ
       };
 
       const resolveGaugeIdFromEnergy = function (mv) {
@@ -1662,51 +1706,41 @@ const typeChecker = {
           ? r.moves.special
           : [];
 
-        // ★ このポケモンの攻撃種族値から、技評価用の係数を作る
-        const atkStat = r.goStats?.attack || 0;
-        // だいたい 0.9〜1.3 くらいに収まるイメージ
+        const atkStat = (r.goStats?.attack || r.baseStats?.attack || 0);
         const statFactorForRating = 0.6 + (atkStat / 500);
 
         let bestScore = -Infinity;
         let bestIndex = -1;
 
         specials.forEach(function (mv, idx) {
-          // ① 種族値込みのベーススコア
           const baseScoreRaw = Number(mv.moveScore || 0);
           if (!Number.isFinite(baseScoreRaw) || baseScoreRaw <= 0) return;
 
           const baseScore = baseScoreRaw * statFactorForRating;
 
-          // ② 0〜1 正規化 → 1〜5 段階（toBaseRating の想定）
-          let rating = toBaseRating(baseScore);   // だいたい 1〜5
+          let rating = toBaseRating(baseScore);
 
-          // ③ ゲージ本数の補正（1G -2 / 2G 0 / 3G +1 など）
           rating += gaugeOffset(mv);
 
-          // ④ タイプ相性・STAB の情報
-          const isSE    = mv.mult != null && mv.mult >= 1.6; // こうかばつぐん
-          const hasStab = mv.stab != null && mv.stab > 1.0;  // タイプ一致
+          const isSE    = mv.mult != null && mv.mult >= 1.6;
+          const hasStab = mv.stab != null && mv.stab > 1.0;
 
-          // ⑤ 弱点＋STAB ボーナス
-          //    ここで「こんげんのはどう」「だんがいのつるぎ」をしっかり持ち上げる
           if (isSE && hasStab) {
-            rating += 1.5;        // 主力技は+1.5段階くらいブースト
+            rating += 1.5;
           } else if (isSE) {
-            rating += 0.5;        // 非STABだけど弱点はちょい盛り
+            rating += 0.5;
           } else if (hasStab) {
-            rating += 0.3;        // STABだけでもほんのり加点
+            rating += 0.3;
           }
 
-          // ⑥ 弱点のときの最低保証
           if (isSE) {
             if (hasStab && rating < 3) {
-              rating = 3;         // STAB＋弱点は★3未満にはしない
+              rating = 3;
             } else if (!hasStab && rating < 2) {
-              rating = 2;         // 非STAB弱点は★2未満にはしない
+              rating = 2;
             }
           }
 
-          // ⑦ 最終クリップ＆丸め
           rating = Math.round(rating);
           if (rating < 1) rating = 1;
           if (rating > 5) rating = 5;
@@ -1714,7 +1748,6 @@ const typeChecker = {
           mv.__globalRating = rating;
           mv.__gaugeSvgId   = resolveGaugeIdFromEnergy(mv);
 
-          // ついでに、そのポケモン内での「最強技」判定にも使う
           if (baseScore > bestScore) {
             bestScore = baseScore;
             bestIndex = idx;

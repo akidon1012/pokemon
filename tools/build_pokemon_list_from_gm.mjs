@@ -57,72 +57,93 @@ function buildPokemonNameDict() {
   const ja = loadTextMap(JA_TEXTS);
   const en = loadTextMap(EN_TEXTS);
 
-  const byNo = {}; // key: national dex no (Number)
-  const byId = {}; // key: pokemonId (e.g. "BULBASAUR")
+  const byNo = {};             // key: national dex no (Number)
+  const byId = {};             // key: pokemonId (e.g. "BULBASAUR")
+  const formLabelByForm = {};  // key: "ZACIAN_CROWNED_SWORD" → "けんのおう"
 
   const ids = new Set([...Object.keys(ja), ...Object.keys(en)]);
 
   ids.forEach(resId => {
-    if (!resId.startsWith('pokemon_name_')) return;
-
-    const body = resId.replace(/^pokemon_name_/, '').trim();
-    if (!body) return;
-
     const jaText = ja[resId] || en[resId] || '';
     const enText = en[resId] || ja[resId] || '';
 
-    // パターンA: 純粋な番号 "0270"
-    const mNum = body.match(/^0*([0-9]+)$/);
-    if (mNum) {
-      const no = Number(mNum[1]);
-      if (no) {
-        byNo[no] = {
-          ja: jaText || enText || String(no),
-          en: enText || jaText || String(no)
-        };
+    // --- 1) 通常のポケモン名 (既存ロジック) ---
+    if (resId.startsWith('pokemon_name_')) {
+      const body = resId.replace(/^pokemon_name_/, '').trim();
+      if (!body) return;
+
+      // パターンA: 純粋な番号 "0270"
+      const mNum = body.match(/^0*([0-9]+)$/);
+      if (mNum) {
+        const no = Number(mNum[1]);
+        if (no) {
+          byNo[no] = {
+            ja: jaText || enText || String(no),
+            en: enText || jaText || String(no)
+          };
+        }
+        return;
+      }
+
+      // パターンB: "V0258_POKEMON_MUDKIP"
+      const mGm = body.match(/^V0*([0-9]+)_POKEMON_([A-Z0-9_]+)$/);
+      if (mGm) {
+        const no        = Number(mGm[1]);
+        const pokemonId = mGm[2]; // "MUDKIP"
+
+        if (no) {
+          byNo[no] = {
+            ja: jaText || enText || String(no),
+            en: enText || jaText || String(no)
+          };
+        }
+        if (pokemonId) {
+          byId[pokemonId] = {
+            ja: jaText || enText || pokemonId,
+            en: enText || jaText || pokemonId
+          };
+        }
+        return;
+      }
+
+      // パターンC: 末尾がそのまま pokemonId のケース
+      //   pokemon_name_MUDKIP
+      //   pokemon_name_CHARIZARD_MEGA_X など
+      const mId = body.match(/([A-Z0-9_]+)$/);
+      if (mId) {
+        const pokemonId = mId[1];
+        if (pokemonId) {
+          byId[pokemonId] = {
+            ja: jaText || enText || pokemonId,
+            en: enText || jaText || pokemonId
+          };
+        }
       }
       return;
     }
 
-    // パターンB: "V0258_POKEMON_MUDKIP" など
-    const mGm = body.match(/^V0*([0-9]+)_POKEMON_([A-Z0-9_]+)$/);
-    if (mGm) {
-      const no        = Number(mGm[1]);
-      const pokemonId = mGm[2]; // "MUDKIP"
-
-      if (no) {
-        byNo[no] = {
-          ja: jaText || enText || String(no),
-          en: enText || jaText || String(no)
-        };
-      }
-      if (pokemonId) {
-        byId[pokemonId] = {
-          ja: jaText || enText || pokemonId,
-          en: enText || jaText || pokemonId
-        };
-      }
+    // --- 2) フォーム名 (form_zacian_crowned_sword 等) ---
+    if (resId.startsWith('form_')) {
+      // form_zacian_crowned_sword → ZACIAN_CROWNED_SWORD
+      const body = resId.replace(/^form_/, '').trim();
+      if (!body) return;
+      const formKey = body.toUpperCase();
+      // 例: "ZACIAN_CROWNED_SWORD": "けんのおう"
+      formLabelByForm[formKey] = jaText || enText || formKey;
       return;
     }
 
-    // パターンC: 末尾がそのまま pokemonId のケース
-    //   pokemon_name_MUDKIP
-    //   pokemon_name_CHARIZARD_MEGA_X など
-    const mId = body.match(/([A-Z0-9_]+)$/);
-    if (mId) {
-      const pokemonId = mId[1];
-      if (pokemonId) {
-        byId[pokemonId] = {
-          ja: jaText || enText || pokemonId,
-          en: enText || jaText || pokemonId
-        };
-      }
-    }
+    // 他のリソースIDは無視
   });
 
-  console.log('[buildPokemonNameDict] byNo =', Object.keys(byNo).length,
-              'byId =', Object.keys(byId).length);
-  return { byNo, byId };
+  console.log(
+    '[buildPokemonNameDict] byNo =', Object.keys(byNo).length,
+    'byId =', Object.keys(byId).length,
+    'formLabelByForm =', Object.keys(formLabelByForm).length
+  );
+
+  // ★ ここだけ戻り値が増える
+  return { byNo, byId, formLabelByForm };
 }
 
 /**
@@ -152,38 +173,48 @@ function parseForm(templateId, pokemonId) {
  *   - コスチューム / サングラス / 季節衣装 / シャドウ / ライト は除外
  *   - メガ / ゲンシ は残す
  */
-function isAllowedForm(form) {
-  if (!form) return true; // 通常
+function isAllowedForm(form, pokemonId) {
+  const f   = String(form || '').toUpperCase();
+  const pid = String(pokemonId || '').toUpperCase();
 
-  const f = String(form).toUpperCase();
+  // この文字列をまとめてチェック対象にする
+  const target = f || pid;
+
+  if (!target) return true; // フォーム情報が何も無いときは一旦許可
 
   // シャドウ / ライト系
-  if (f.includes('SHADOW'))   return false;
-  if (f.includes('PURIFIED')) return false;
+  if (target.includes('SHADOW'))   return false;
+  if (target.includes('PURIFIED')) return false;
 
   // 体格違い
-  if (f.includes('XS'))       return false;
-  if (f.includes('XL'))       return false;
+  if (target.includes('XS'))       return false;
+  if (target.includes('XL'))       return false;
 
   // コスチューム / 季節イベント
-  if (f.includes('COSTUME'))      return false;
-  if (f.includes('HOLIDAY'))      return false;
-  if (f.includes('FALL'))         return false;
-  if (f.includes('SPRING'))       return false;
-  if (f.includes('SUMMER'))       return false;
-  if (f.includes('WINTER'))       return false;
-  if (f.includes('PARTY_HAT'))    return false;
-  if (f.includes('HAT'))          return false;
-  if (f.includes('RIBBON'))       return false;
-  if (f.includes('FLOWER_CROWN')) return false;
-  if (f.includes('SUNGLASSES'))   return false;
-  if (f.includes('SCARF'))        return false;
+  if (target.includes('COSTUME'))      return false;
+  if (target.includes('HOLIDAY'))      return false;
+  if (target.includes('FALL'))         return false;
+  if (target.includes('SPRING'))       return false;
+  if (target.includes('SUMMER'))       return false;
+  if (target.includes('WINTER'))       return false;
+  if (target.includes('PARTY_HAT'))    return false;
+  if (target.includes('HAT'))          return false;
+  if (target.includes('RIBBON'))       return false;
+  if (target.includes('FLOWER_CROWN')) return false;
+  if (target.includes('SUNGLASSES'))   return false;
+  if (target.includes('SCARF'))        return false;
+
+  // ★ 特例: 素の ZACIAN / ZAMAZENTA は使わない
+  //   → HERO / CROWNED_* だけを残す
+  if (target === 'ZACIAN' || target === 'ZAMAZENTA') {
+    return false;
+  }
 
   // メガ / ゲンシは残したい
-  if (f.includes('MEGA'))   return true;
-  if (f.includes('PRIMAL')) return true;
+  if (target.includes('MEGA'))   return true;
+  if (target.includes('PRIMAL')) return true;
 
-  // よく分からないフォームはひとまず残す（気になったら後で個別に除外）
+  // よく分からないフォームはひとまず残す
   return true;
 }
 
@@ -198,6 +229,8 @@ function isAllowedForm(form) {
 function classifyFormForBuild(p) {
   const formRaw = String(p.form || '');
   const f       = formRaw.toUpperCase();
+
+  const pid = String(p.pokemonId || '').toUpperCase();
 
   // 図鑑Noベースのキー
   const no = (p.no != null) ? p.no
@@ -221,8 +254,15 @@ function classifyFormForBuild(p) {
   else if (/GALAR|GALARIAN/.test(f))region = 'galar';
   else if (/PALDEA|PALDEAN/.test(f))region = 'paldea';
 
+  // ★ キュレム / ザシアン / ザマゼンタのフォーム群は
+  //    図鑑Noは同じだが「別ポケモン」として扱いたいので特別扱い
+  const isSpecialForm =
+    /^KYUREM_/.test(pid) ||
+    /^ZACIAN_/.test(pid) ||
+    /^ZAMAZENTA_/.test(pid);
+
   const isBase =
-    !formRaw ||
+    (!formRaw && !isSpecialForm) ||
     /_NORMAL$/.test(f) ||
     f === String(p.pokemonId || '').toUpperCase();
 
@@ -235,11 +275,17 @@ function classifyFormForBuild(p) {
   if (region) {
     return { kind: 'region', key: speciesKey + '|region|' + region, region: region };
   }
+
+  // ★ キュレム黒白／ザシアン＆ザマゼンタの HERO / CROWNED_* 用
+  if (isSpecialForm) {
+    return { kind: 'form', key: speciesKey + '|form|' + pid, region: null };
+  }
+
   if (isBase) {
     return { kind: 'base',   key: speciesKey + '|base',   region: null };
   }
 
-  return { kind: 'other', key: speciesKey + '|other|' + f, region: null };
+  return { kind: 'special', key: speciesKey + '|special|' + f, region: null };
 }
 
 /**
@@ -251,7 +297,7 @@ function mergeMegaAndPrimalFromOverride(list, nameDict) {
   console.log('[mergeMega] GO_META =', GO_META, 'exists?', fs.existsSync(GO_META));
   console.log('[mergeMega] GO_META_OVERRIDE =', GO_META_OVERRIDE, 'exists?', fs.existsSync(GO_META_OVERRIDE));
 
-  let metaList = [];
+  let metaList    = [];
   let overrideMap = {};
 
   // 既存の no + form をキーにして保持
@@ -280,9 +326,7 @@ function mergeMegaAndPrimalFromOverride(list, nameDict) {
     if (!m || !m.pokemonId) return;
 
     const form = String(m.form || '');
-    const isNormal =
-      !form ||
-      /_NORMAL$/i.test(form);
+    const isNormal = !form || /_NORMAL$/i.test(form);
 
     if (!metaBaseById[m.pokemonId]) {
       metaBaseById[m.pokemonId] = m;
@@ -377,14 +421,12 @@ function mergeMegaAndPrimalFromOverride(list, nameDict) {
     const baseTotal = hp + atk + def;
 
     // 名前は辞書からベース名を引き、その上に「メガ／ゲンシ」を付ける
-    const fromNo = nameDict.byNo[no] || {};
-    const fromId = nameDict.byId[basePokemonId] || {};
-
-    const baseJa = fromId.ja || fromNo.ja || basePokemonId;
-    const baseEn = fromId.en || fromNo.en || basePokemonId;
-
-    const nameJa = (isPrimal ? 'ゲンシ' : 'メガ') + baseJa;
-    const nameEn = (isPrimal ? 'Primal ' : 'Mega ') + baseEn;
+    const fromNo  = nameDict.byNo[no] || {};
+    const fromId  = nameDict.byId[basePokemonId] || {};
+    const baseJa  = fromId.ja || fromNo.ja || basePokemonId;
+    const baseEn  = fromId.en || fromNo.en || basePokemonId;
+    const nameJa  = (isPrimal ? 'ゲンシ' : 'メガ') + baseJa;
+    const nameEn  = (isPrimal ? 'Primal ' : 'Mega ') + baseEn;
 
     extras.push({
       id:        no,
@@ -419,12 +461,42 @@ function mergeMegaAndPrimalFromOverride(list, nameDict) {
   }
 }
 
+function hasSameStatsAndTypes(a, b) {
+  if (!a || !b) return false;
+
+  const ta = (a.typesEn || []).join(',');
+  const tb = (b.typesEn || []).join(',');
+  if (ta !== tb) return false;
+
+  const sa = a.baseStats || {};
+  const sb = b.baseStats || {};
+
+  return (
+    Number(sa.hp)      === Number(sb.hp) &&
+    Number(sa.attack)  === Number(sb.attack) &&
+    Number(sa.defence) === Number(sb.defence)
+  );
+}
+
 /**
  * メイン処理
  */
+/**
+ * メイン処理
+ */
+function hasRealBaseForm(no, pokemonId, nameDict) {
+  if (nameDict.byNo && nameDict.byNo[no]) {
+    return true;
+  }
+  if (nameDict.byId && nameDict.byId[pokemonId]) {
+    return true;
+  }
+  return false;
+}
+
 function build() {
   const gm       = loadGameMaster();
-  const nameDict = buildPokemonNameDict(); // { byNo, byId }
+  const nameDict = buildPokemonNameDict(); // { byNo, byId, formById }
 
   const rawList  = [];
 
@@ -457,18 +529,25 @@ function build() {
     const def     = Number(stats.baseDefense ?? 0);
     const baseTotal = hp + atk + def;
 
-    // 名前を辞書から取得（no / pokemonId の両方試す）
-    const fromNo = nameDict.byNo[no] || {};
-    const fromId = nameDict.byId[pokemonId] || {};
+    // 名前
+    const fromNo = nameDict.byNo[no]         || {};
+    const fromId = nameDict.byId[pokemonId]  || {};
 
     const nameJa = fromId.ja || fromNo.ja || pokemonId;
     const nameEn = fromId.en || fromNo.en || pokemonId;
+
+    // ★ ここでフォームラベルを取得
+    const formLabelJa =
+      form && nameDict.formLabelByForm
+        ? (nameDict.formLabelByForm[form.toUpperCase()] || '')
+        : '';
 
     rawList.push({
       id:        no,
       no,
       pokemonId,
       form,
+      formLabelJa,       // ★ 追加
       name:  nameJa,
       nameJa,
       nameEn,
@@ -501,7 +580,6 @@ function build() {
       id:        p.id
     });
 
-    if (c.kind === 'other') return;
     if (seen[c.key]) return;
     seen[c.key] = true;
 
@@ -530,6 +608,76 @@ function build() {
   fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, JSON.stringify({ list }, null, 2), 'utf8');
   console.log('Wrote:', OUTPUT, `(rows=${list.length})`);
+}
+
+/**
+ * 「本当は通常フォームが存在しない種族」（ザシアン/ザマゼンタなど）で、
+ * form: "" のダミー基礎フォームを削除し、
+ * HERO / CROWNED などの実フォームだけを残す。
+ *
+ * 例:
+ *   ZACIAN: ["", "ZACIAN_HERO", "ZACIAN_CROWNED_SWORD"]
+ *   → "" を削除して 2件だけにする
+ *
+ *   KYUREM: ["", "KYUREM_BLACK", "KYUREM_WHITE"]
+ *   → 無印キュレムも実在するので何もしない
+ */
+function normalizeSpecialSpeciesForms(list) {
+  // 「無印フォームが実在しない」種族だけ列挙
+  const FORMLESS_SPECIES = new Set([
+    'ZACIAN',
+    'ZAMAZENTA'
+    // 必要になったらここに追加（DEOXYS など）
+  ]);
+
+  // no + 基本ID（ZACIAN_HERO → ZACIAN）でグルーピング
+  const groups = new Map(); // key: `${no}|${baseId}`
+
+  list.forEach(function (p, idx) {
+    const no     = Number(p.no);
+    const pidRaw = String(p.pokemonId || '');
+    const baseId = pidRaw.split('_')[0].toUpperCase(); // ZACIAN_HERO → ZACIAN
+
+    const key = no + '|' + baseId;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push({ p, idx, baseId });
+  });
+
+  const removeIndexSet = new Set();
+
+  groups.forEach(function (items) {
+    if (!items.length) return;
+
+    const baseId = items[0].baseId;
+    if (!FORMLESS_SPECIES.has(baseId)) {
+      // キュレムなど、ちゃんと無印フォームがいる種族は触らない
+      return;
+    }
+
+    // この種族に form: "" 以外のエントリが存在するか？
+    const hasNonEmptyForm = items.some(function (it) {
+      return !!(it.p.form && String(it.p.form).trim());
+    });
+    if (!hasNonEmptyForm) {
+      // 全部 form: "" なら何もしない（理論上ほぼないケース）
+      return;
+    }
+
+    // form: "" のエントリだけ削除対象にする
+    items.forEach(function (it) {
+      const f = String(it.p.form || '');
+      if (!f) {
+        removeIndexSet.add(it.idx);
+      }
+    });
+  });
+
+  if (!removeIndexSet.size) return list;
+
+  // 指定インデックスを除いた新しい配列を返す
+  return list.filter(function (_, idx) {
+    return !removeIndexSet.has(idx);
+  });
 }
 
 try {

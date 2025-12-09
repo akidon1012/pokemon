@@ -2,6 +2,62 @@ const GO_META_LIST   = window.POKEMON_GO_META || window.POKEMON_GO_META_LOCALIZE
 const MOVES_MASTER   = window.MOVES_MASTER_LOCALIZED || window.MOVES_MASTER || [];
 const MOVE_NAME_DICT = window.MOVE_NAME_DICT || {};
 
+// === フォームごとのタイプ上書きテーブル（手動定義） ===
+const TYPE_OVERRIDE_BY_FORM = {
+  // ガラル三鳥
+  'ARTICUNO_GALARIAN': {
+    typesEn: ['psychic', 'flying'],
+    typesJa: ['エスパー', 'ひこう']
+  },
+  'ZAPDOS_GALARIAN': {
+    typesEn: ['fighting', 'flying'],
+    typesJa: ['かくとう', 'ひこう']
+  },
+  'MOLTRES_GALARIAN': {
+    typesEn: ['dark', 'flying'],
+    typesJa: ['あく', 'ひこう']
+  },
+
+  // アローラナッシー
+  'EXEGGUTOR_ALOLA': {
+    typesEn: ['grass', 'dragon'],
+    typesJa: ['くさ', 'ドラゴン']
+  },
+
+  // 必要に応じてここに追加:
+  // 'RAICHU_ALOLA': { ... },
+  // 'MAROWAK_ALOLA': { ... },
+};
+
+// === フォーム名 → ラベル（リージョンなど） ===
+const FORM_LABEL_MAP = {
+  'ZAPDOS_GALARIAN'   : 'ガラル',
+  'ARTICUNO_GALARIAN' : 'ガラル',
+  'MOLTRES_GALARIAN'  : 'ガラル',
+
+  'EXEGGUTOR_ALOLA'   : 'アローラ',
+  'RAICHU_ALOLA'      : 'アローラ',
+  'MAROWAK_ALOLA'     : 'アローラ',
+
+  // メガ進化
+  'CHARIZARD_MEGA_X'                  : 'メガX',
+  'CHARIZARD_MEGA_Y'                  : 'メガY',
+  'VENUSAUR_TEMP_EVOLUTION_MEGA'      : 'メガ',
+  'BLASTOISE_TEMP_EVOLUTION_MEGA'     : 'メガ',
+
+  // 将来追加:
+  // 'GROUDON_PRIMAL' : 'ゲンシ',
+  // 'KYUREM_BLACK'   : 'ブラック',
+  // 'KYUREM_WHITE'   : 'ホワイト',
+  'KYUREM_BLACK' : { ja: 'ブラックキュレム',  en: 'Black Kyurem' },
+  'KYUREM_WHITE' : { ja: 'ホワイトキュレム',  en: 'White Kyurem' },
+  'ZACIAN_HERO_OF_MANY_BATTLES'   : { ja: 'ザシアン（れきせん）', en: 'Zacian (Hero)' },
+  'ZACIAN_CROWNED_SWORD'          : { ja: 'ザシアン（けんのおう）', en: 'Zacian (Crowned)' },
+  'ZAMAZENTA_HERO_OF_MANY_BATTLES': { ja: 'ザマゼンタ（れきせん）', en: 'Zamazenta (Hero)' },
+  'ZAMAZENTA_CROWNED_SHIELD'      : { ja: 'ザマゼンタ（たてのおう）', en: 'Zamazenta (Crowned)' }
+};
+
+
 const pokemonCard = {
    // -----------------------------
   // 技1行分（ノーマル／スペシャル共通）
@@ -99,7 +155,9 @@ const pokemonCard = {
     const esc  = pokemonUtil.escapeHtml;
     const toEn = pokemonUtil.toEnTypeLower;
 
-    const nameJa  = poke.nameJa || poke.name || '';
+    const nameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
+      ? pokemonUtil.getDisplayNameJa(poke)
+      : (poke.nameJa || poke.name || poke.nameEn || '');
     const typesJa = Array.isArray(poke.typesJa || poke.types)
       ? (poke.typesJa || poke.types)
       : [];
@@ -113,7 +171,7 @@ const pokemonCard = {
     const normalMoves  = Array.isArray(movesObj.normal)  ? movesObj.normal  : [];
     const specialMoves = Array.isArray(movesObj.special) ? movesObj.special : [];
 
-    const h = [];
+    let h = [];
 
     h.push('<div class="pokemon-info-list-item js_toggle-wrapper">');
 
@@ -240,9 +298,9 @@ const pokemonCard = {
       poke.pokemonId || ''
     );
 
-    const nameJa = regionLabel
-      ? `${baseName}（${regionLabel}）`
-      : baseName;
+    const nameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
+      ? pokemonUtil.getDisplayNameJa(poke)
+      : (poke.nameJa || poke.name || poke.nameEn || '');
     const typesJa = Array.isArray(poke.typesJa || poke.types)
       ? (poke.typesJa || poke.types)
       : [];
@@ -420,10 +478,17 @@ const pokemonUtil = {
     get(key)    { return this.state[key]; }
   },
 
+  // 外から直接テーブルに触りたい場合用（任意）
+  TYPE_OVERRIDE_BY_FORM : TYPE_OVERRIDE_BY_FORM,
+  FORM_LABEL_MAP        : FORM_LABEL_MAP,
+
+
   // 図鑑番号ベースで GO ステータス＋ゲンシ／メガ override を当てる版
   attachGoStats : (function(){
-    let _metaById  = null; // pokemonId → meta
-    let _metaByNo  = null; // no        → meta
+    // 変更ポイント:
+    //   _metaById / _metaByNo を「1件」ではなく「配列」で持つ
+    let _metaById  = null; // pokemonId → meta[]
+    let _metaByNo  = null; // no        → meta[]
     let _ovByBase  = null; // basePokemonId → [override,...]
     let _ovByNo    = null; // dex no         → [override,...]
 
@@ -433,14 +498,22 @@ const pokemonUtil = {
       const metaList = pokemonUtil.data.get('GO_META') || [];
       const ovRaw    = pokemonUtil.data.get('GO_META_OVERRIDE') || {};
 
+      // --- ★ meta を配列で持つように修正 ---
       _metaById = {};
       _metaByNo = {};
       metaList.forEach(function(m){
         if (!m) return;
         const pid = m.pokemonId;
         const no  = Number(m.no);
-        if (pid) _metaById[pid] = m;
-        if (Number.isFinite(no)) _metaByNo[no] = m;
+
+        if (pid) {
+          if (!_metaById[pid]) _metaById[pid] = [];
+          _metaById[pid].push(m);
+        }
+        if (Number.isFinite(no)) {
+          if (!_metaByNo[no]) _metaByNo[no] = [];
+          _metaByNo[no].push(m);
+        }
       });
 
       _ovByBase = {};
@@ -455,18 +528,13 @@ const pokemonUtil = {
 
         const tempId = ov.tempId || key.split('_').slice(1).join('_'); // 'TEMP_EVOLUTION_PRIMAL' 等
 
-        // ★ override 側にタイプがあれば保持しておく
-        const typesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : null;
-        const typesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : null;
-        const stats   = ov.stats || {};
-
         const ovEntry = {
           key,
           basePokemonId: baseId,
           tempId,
-          stats,
-          typesEn: ov.typesEn || null,
-          typesJa: ov.typesJa || null,
+          stats   : ov.stats   || {},
+          typesEn : ov.typesEn || null,
+          typesJa : ov.typesJa || null
         };
 
         // basePokemonId → list
@@ -474,7 +542,7 @@ const pokemonUtil = {
         _ovByBase[baseId].push(ovEntry);
 
         // 図鑑番号でも引けるように no を求める
-        const meta = _metaById[baseId];
+        const meta = (_metaById[baseId] && _metaById[baseId][0]) || null;
         const no   = meta ? Number(meta.no) : NaN;
         if (Number.isFinite(no)) {
           if (!_ovByNo[no]) _ovByNo[no] = [];
@@ -483,14 +551,14 @@ const pokemonUtil = {
       });
 
       console.log(
-        '[attachGoStats] metaById=', Object.keys(_metaById).length,
-        'metaByNo=', Object.keys(_metaByNo).length,
+        '[attachGoStats] metaById(pokemonId)=', Object.keys(_metaById).length,
+        'metaByNo(no)=', Object.keys(_metaByNo).length,
         'overrideBases=', Object.keys(_ovByBase).length,
         'overrideNos=', Object.keys(_ovByNo).length
       );
     }
 
-    // ゲンシ／メガっぽい名前かどうか
+    // ゲンシ／メガっぽい名前かどうか（既存）
     function detectFlags(pd) {
       const flags = [];
 
@@ -517,37 +585,61 @@ const pokemonUtil = {
       return { isPrimal, isMega };
     }
 
-    // override リストから、PRIMAL / MEGA を見て 1つ選ぶ
-    // ★ 通常フォームには絶対に適用しないようにする
+    // ★ meta の候補配列の中から「この pd に一番それっぽい meta」を選ぶ
+    function chooseBaseMeta(list, pd) {
+      if (!Array.isArray(list) || !list.length) return null;
+
+      const formKey = (pd && (pd.form || pd.formKey || pd.tempEvoId))
+        ? String(pd.form || pd.formKey || pd.tempEvoId).toUpperCase()
+        : '';
+
+      // 1) form が分かっていれば、まずは form 完全一致を探す
+      if (formKey) {
+        const exact = list.find(function(m){
+          return String(m.form || '').toUpperCase() === formKey;
+        });
+        if (exact) return exact;
+      }
+
+      // 2) フォーム不明の場合は「通常っぽい」ものを優先
+      let candidate = null;
+      list.forEach(function(m){
+        const f = String(m.form || '').toUpperCase();
+        if (!f || /_NORMAL$/.test(f)) {
+          candidate = m;
+        }
+      });
+      if (candidate) return candidate;
+
+      // 3) それでも絞れなければ、とりあえず最初のもの
+      return list[0];
+    }
+
+    // override リストから、PRIMAL / MEGA を見て 1つ選ぶ（既存）
     function chooseOverride(list, flags, pd) {
       if (!list || !list.length) return null;
 
       const { isPrimal, isMega } = flags;
 
-      // フォームキー（メガX/Yやゲンシ用）
       const formKey = (pd && (pd.form || pd.formKey || pd.tempEvoId))
         ? String(pd.form || pd.formKey || pd.tempEvoId).toUpperCase()
         : '';
 
-      // 通常フォーム（メガでもゲンシでもない）は override しない
       if (!isPrimal && !isMega && !formKey) {
         return null;
       }
 
-      // 1) formKey に tempId が含まれているものを優先（X / Y の区別など）
       if (formKey) {
         for (let i = 0; i < list.length; i++) {
           const ov  = list[i];
-          const tid = String(ov.tempId || ov.key || '').toUpperCase(); // 例: 'TEMP_EVOLUTION_MEGA_X'
+          const tid = String(ov.tempId || ov.key || '').toUpperCase();
           if (!tid) continue;
-
           if (formKey.indexOf(tid) >= 0) {
             return ov;
           }
         }
       }
 
-      // 2) それでも見つからなければ、PRIMAL / MEGA フラグでざっくり選ぶ（ゲンシ／メガ共用）
       let candidate = null;
       list.forEach(function (ov) {
         const tid = String(ov.tempId || '').toUpperCase();
@@ -560,11 +652,10 @@ const pokemonUtil = {
         }
       });
 
-      // 3) 通常フォームに誤適用しないため、ここで list[0] にはフォールバックしない
       return candidate;
     }
 
-    // ★ override.types からタイプ配列を組み立てて pd に反映
+    // ★ override.types からタイプ配列を組み立てて pd に反映（既存）
     function applyTypeOverride(pd, ov) {
       let typesJa = Array.isArray(ov.typesJa) ? ov.typesJa.slice() : [];
       let typesEn = Array.isArray(ov.typesEn) ? ov.typesEn.slice() : [];
@@ -609,14 +700,16 @@ const pokemonUtil = {
       // ベースとなる meta（通常フォーム）
       let baseMeta = null;
 
-      if (dexNo != null && _metaByNo[dexNo]) {
-        baseMeta = _metaByNo[dexNo];
-      } else {
-        // no が取れない場合のフォールバック：pokemonId ベース
+      if (dexNo != null && Array.isArray(_metaByNo[dexNo])) {
+        baseMeta = chooseBaseMeta(_metaByNo[dexNo], pd);
+      }
+
+      if (!baseMeta) {
+        // no が取れない / 見つからない場合のフォールバック：pokemonId ベース
         const rawId  = pd.pokemonId || pd.id;
         const baseId = rawId ? String(rawId).split('_')[0] : null;
-        if (baseId && _metaById[baseId]) {
-          baseMeta = _metaById[baseId];
+        if (baseId && Array.isArray(_metaById[baseId])) {
+          baseMeta = chooseBaseMeta(_metaById[baseId], pd);
         }
       }
 
@@ -658,13 +751,8 @@ const pokemonUtil = {
         );
       }
 
-      // ★ タイプの上書き（override に typesEn / typesJa があれば使う）
-      // ★ タイプの上書き（override に typesEn / typesJa があれば使う）
+      // タイプの上書き
       if (ov) {
-        // helper をそのまま使う：
-        //  - En だけ／Ja だけ／両方 どれでもOK
-        //  - 片方しかなければ翻訳して補完
-        //  - 重複除去もしてくれる
         applyTypeOverride(pd, ov);
 
         if (pd.typesEn || pd.typesJa) {
@@ -732,6 +820,47 @@ const pokemonUtil = {
   // 表示名（フォーム付き） ---------------------------------------
   getDisplayName : function(poke) {
     return poke.form ? (poke.name + '（' + poke.form + '）') : poke.name;
+  },
+
+  getDisplayNameJa : function(pd) {
+    if (!pd) return '';
+
+    const baseNameJa =
+      pd.nameJa ||
+      pd.name   ||
+      pd.nameJaLocalized ||
+      pd.nameEn ||
+      '';
+
+    if (!baseNameJa) return '';
+
+    const formKey = (pd.form || '').toString().toUpperCase();
+
+    // ★ 例外: メガリザードンX / Y は「メガリザードンX / Y」表記にしたい
+    if (/^CHARIZARD_MEGA_[XY]$/.test(formKey)) {
+      const suffix = formKey.endsWith('_X') ? 'X' : 'Y';
+      return 'メガ' + baseNameJa + suffix;
+    }
+
+    // ★ pokemon_list.json側に埋めたフォームラベルを優先
+    const labelJa = pd.formLabelJa;
+    if (labelJa) {
+      return baseNameJa + '（' + labelJa + '）';
+    }
+
+    // ★ （既存）ガラル・アローラ等のリージョンラベルがあれば最後の手段で使う
+    if (typeof pokemonUtil.getFormRegionLabel === 'function') {
+      const regionLabel = pokemonUtil.getFormRegionLabel(
+        pd.form || '',
+        pd.templateId || '',
+        pd.pokemonId || ''
+      );
+      if (regionLabel) {
+        return baseNameJa + '（' + regionLabel + '）';
+      }
+    }
+
+    return baseNameJa;
   },
 
   // タイプ翻訳（英⇄和＋カタカナ） --------------------------------
@@ -1224,6 +1353,22 @@ const pokemonUtil = {
     // 例：['くさ','どく'] をそのまま返す。将来英名→和名にも対応可
     const t = p?.types || [];
     return Array.isArray(t) ? t.slice() : [];
+  },
+
+  // === ヘルパー関数 ===
+  getTypeOverrideByForm : function (formKey) {
+    if (!formKey) return null;
+    const k = String(formKey).toUpperCase();
+    return TYPE_OVERRIDE_BY_FORM[k] || null;
+  },
+
+  getFormRegionLabel : function (formKey, templateId, pokemonId) {
+    // すでに実装済みならそちら優先でOK。ここは例として。
+    const key = String(formKey || '').toUpperCase();
+    if (FORM_LABEL_MAP[key]) return FORM_LABEL_MAP[key];
+
+    // 必要なら templateId / pokemonId から推測するロジックもここに入れる
+    return '';
   },
 
   // ========== 追加: GOメタ用のインデックスを一度だけ構築 ==========
