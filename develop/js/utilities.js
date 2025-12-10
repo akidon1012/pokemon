@@ -148,16 +148,38 @@ const pokemonCard = {
   // カード1枚分のHTML（1匹／おすすめ共通）
   // -----------------------------
   buildInfoItemHtml: function (poke, options) {
-    const opt      = options || {};
-    const opened   = !!opt.opened;        // true: 初期展開
-    const showStars = !!opt.showStars;    // true: ★表示
+    const opt       = options || {};
+    const opened    = !!opt.opened;      // true: 初期展開
+    const showStars = !!opt.showStars;   // true: ★表示
 
     const esc  = pokemonUtil.escapeHtml;
     const toEn = pokemonUtil.toEnTypeLower;
 
-    const nameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
-      ? pokemonUtil.getDisplayNameJa(poke)
-      : (poke.nameJa || poke.name || poke.nameEn || '');
+    // ===== 名前の決定ロジック =====
+    // 優先順位:
+    //  1) poke.displayNameJa があればそれをそのまま使う
+    //  2) poke.nameJa と rawNameJa が「違う」なら、
+    //     nameJa にはすでにフォルム付きの完成形が入っているとみなしてそのまま使う
+    //  3) それ以外は共通ユーティリティ getDisplayNameJa に任せる
+    //  4) それでも無理なら素の name / nameEn
+    let nameJa = '';
+
+    if (poke.displayNameJa) {
+      // ① レコメンド側などで明示的に渡されている表示名
+      nameJa = poke.displayNameJa;
+    } else if (poke.nameJa && poke.rawNameJa && poke.nameJa !== poke.rawNameJa) {
+      // ② 「クレベース（ヒスイ）」 vs rawNameJa = 「クレベース」みたいなケース
+      //    → nameJa はすでに完成形なので、そのまま使う（再フォーマットしない）
+      nameJa = poke.nameJa;
+    } else if (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function') {
+      // ③ まだ装飾されていない場合は共通ロジックで
+      nameJa = pokemonUtil.getDisplayNameJa(poke);
+    } else {
+      // ④ 最後の保険
+      nameJa = poke.nameJa || poke.name || poke.nameEn || '';
+    }
+    // ==================================================
+
     const typesJa = Array.isArray(poke.typesJa || poke.types)
       ? (poke.typesJa || poke.types)
       : [];
@@ -178,8 +200,11 @@ const pokemonCard = {
     // ヘッダー
     h.push('<div class="pokemon-info-list-item-header js_pokemon-info-list-item-header">');
     h.push('<div class="pokemon-info-wrapper">');
-    h.push('<a href="javascript:void(0);" class="js_toggle-trigger' +
-      (opened ? ' is_toggle-opened' : '') + '">');
+    h.push(
+      '<a href="javascript:void(0);" class="js_toggle-trigger' +
+      (opened ? ' is_toggle-opened' : '') +
+      '">'
+    );
 
     h.push('<div class="pokemon-info-name">' + esc(nameJa) + '</div>');
 
@@ -187,7 +212,12 @@ const pokemonCard = {
     typesJa.forEach(function (tJa) {
       const tEn = toEn(tJa);
       h.push('<div class="badge">');
-      h.push('<span class="icon-type icon-type-' + tEn + '"></span>' + esc(tJa));
+      h.push(
+        '<span class="icon-type icon-type-' +
+        tEn +
+        '"></span>' +
+        esc(tJa)
+      );
       h.push('</div>');
     });
     h.push('</div>'); // .pokemon-info-type
@@ -197,9 +227,13 @@ const pokemonCard = {
     h.push('</div>'); // .pokemon-info-list-item-header
 
     // トグル本体
-    h.push('<div class="js_toggle-content' +
-      (opened ? ' is_toggle-opened' : '') +
-      '" style="display:' + (opened ? 'block' : 'none') + ';">');
+    h.push(
+      '<div class="js_toggle-content' +
+        (opened ? ' is_toggle-opened' : '') +
+        '" style="display:' +
+        (opened ? 'block' : 'none') +
+        ';">'
+    );
 
     // 種族値
     h.push('<dl class="pokemon-info-score">');
@@ -208,13 +242,25 @@ const pokemonCard = {
     h.push('<ul class="pokemon-info-score-list">');
 
     if (atk) {
-      h.push('<li class="pokemon-info-score-list-item">こうげき <span class="num">' + atk + '</span></li>');
+      h.push(
+        '<li class="pokemon-info-score-list-item">こうげき <span class="num">' +
+          atk +
+          '</span></li>'
+      );
     }
     if (def) {
-      h.push('<li class="pokemon-info-score-list-item">ぼうぎょ <span class="num">' + def + '</span></li>');
+      h.push(
+        '<li class="pokemon-info-score-list-item">ぼうぎょ <span class="num">' +
+          def +
+          '</span></li>'
+      );
     }
     if (sta) {
-      h.push('<li class="pokemon-info-score-list-item">HP <span class="num">' + sta + '</span></li>');
+      h.push(
+        '<li class="pokemon-info-score-list-item">HP <span class="num">' +
+          sta +
+          '</span></li>'
+      );
     }
 
     h.push('</ul>');
@@ -233,11 +279,13 @@ const pokemonCard = {
       h.push('<dt class="pokemon-info-list-item-attack-label">ノーマル</dt>');
 
       normalMoves.forEach(function (mv) {
-        h.push(self.buildMoveRow(mv, {
-          category : 'normal',
-          showStars: false,
-          showGauge: false
-        }));
+        h.push(
+          self.buildMoveRow(mv, {
+            category : 'normal',
+            showStars: false,
+            showGauge: false
+          })
+        );
       });
 
       h.push('</dl>');
@@ -251,12 +299,14 @@ const pokemonCard = {
       h.push('<dt class="pokemon-info-list-item-attack-label">スペシャル</dt>');
 
       specialMoves.forEach(function (mv) {
-        h.push(self.buildMoveRow(mv, {
-          category   : 'special',
-          showStars  : opt.showStars, // ★ ここが true のときだけ星表示
-          showGauge  : true,
-          isStrongest: !!mv.__isStrongest
-        }));
+        h.push(
+          self.buildMoveRow(mv, {
+            category   : 'special',
+            showStars  : opt.showStars, // ★ ここが true のときだけ星表示
+            showGauge  : true,
+            isStrongest: !!mv.__isStrongest
+          })
+        );
       });
 
       h.push('</dl>');

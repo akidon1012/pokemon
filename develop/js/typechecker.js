@@ -1394,6 +1394,31 @@ const typeChecker = {
         return total;
       };
 
+      // ==== ヘルパー：種族値（攻撃寄り）を 1 本のスコアにまとめる ====
+      const baseTotalFromPd = function (pd) {
+        if (!pd) return 0;
+
+        // GO ステータス優先、なければ通常の baseStats
+        const s = pd.goStats || pd.baseStats || {};
+        const hp  = Number(s.stamina || s.hp      || 0);
+        const atk = Number(s.attack  || 0);
+        const def = Number(s.defense || s.defence || 0);
+
+        // 攻撃を少し重めに見る
+        const total = (atk * 1.5) + def + hp;
+
+        if (!Number.isFinite(total) || total <= 0) return 0;
+        return total;
+      };
+
+      // ---- 表示名のリージョン重複「（ヒスイ）（ヒスイ）」を1個に揃える ----
+      const normalizeDisplayNameJa = function(label) {
+        const s = String(label || '');
+        // 末尾の同じ「（〜）」が2回続いていたら1回にする
+        // 例: クレベース（ヒスイ）（ヒスイ） → クレベース（ヒスイ）
+        return s.replace(/(（[^）]+）)\1$/u, '$1');
+      };
+
       // ==== メイン処理 ====
 
       const results = [];
@@ -1496,21 +1521,24 @@ const typeChecker = {
         });
 
         // ===== ポケモン側の総合スコア =====
-        const atkStat = (pd.goStats?.attack  || pd.baseStats?.attack  || 0);
-        const defStat = (pd.goStats?.defense || pd.goStats?.defence || pd.baseStats?.defence || 0);
-        const staStat = (pd.goStats?.stamina || pd.baseStats?.hp      || 0);
+        const atkStat = Number(pd.goStats?.attack  ?? pd.baseStats?.attack  ?? 0);
+        const defStat = Number(pd.goStats?.defense ?? pd.goStats?.defence ?? pd.baseStats?.defence ?? 0);
+        const staStat = Number(pd.goStats?.stamina ?? pd.baseStats?.hp      ?? 0);
 
-        const MAX_ATK    = 300;
-        const MAX_DEFSTA = 600;
+        // ★ 種族値の影響を大きくする
+        //    ・攻撃 > 耐久 で評価
+        //    ・平均的なアタッカーで statWeight ≒ 1.0
+        //    ・トップクラスアタッカーで 1.5〜2.0 程度
+        const OFF_REF  = 180; // 攻撃基準値
+        const BULK_REF = 320; // (防御+HP) 基準値
 
-        // ★ ステータス正規化は 0〜1 にクランプ（上限キャップ）
-        const atkNorm  = Math.min(1.0, atkStat / MAX_ATK);
-        const bulkNorm = Math.min(1.0, (defStat + staStat) / MAX_DEFSTA);
+        const atkFactor  = Math.max(0.5, Math.min(2.0, atkStat / OFF_REF));
+        const bulkFactor = Math.max(0.5, Math.min(1.8, (defStat + staStat) / BULK_REF));
 
-        // ★ 攻撃寄りだけど耐久も見る
-        const statWeight = (atkNorm * 0.8) + (bulkNorm * 0.2);
+        // 攻撃7 : 耐久3 の比率で合成（攻撃寄りに振る）
+        const statWeight = (atkFactor * 0.7) + (bulkFactor * 0.3);
 
-        // ★ ボスからの被ダメ倍率を計算
+        // ★ ボスからの被ダメ倍率を計算（弱点を持つ場合だけ軽くペナルティ）
         const defTypesEnForThisMon = Array.isArray(pd.typesEn)
           ? pd.typesEn.map(function(t){ return (t || '').toString().toLowerCase(); })
           : [];
@@ -1520,39 +1548,48 @@ const typeChecker = {
           bossDamageMult = 1.0;
         }
 
-        // ★ 防御補正
-        //   - 耐性持ち（<1.0）は「1.0扱い」で過剰に優遇しない
-        //   - 弱点持ち（>1.0）のみ、ゆるくペナルティ
-        const DEF_POW  = 0.3; // ← 0.6 から緩めた（弱点ペナルティを軽くする）
-        const adjMult  = Math.max(1.0, bossDamageMult);
+        const DEF_POW   = 0.25;           // ← さらに緩めて、火力＆種族値優先に
+        const adjMult   = Math.max(1.0, bossDamageMult);
         const defPenalty = Math.pow(adjMult, DEF_POW);
 
-        // ★ 最終モンスコア：攻撃 × 種族値 × 防御補正
-        const monScore = (bestMoveScore * (statWeight || 1)) / (defPenalty || 1);
+        // ★ 最終モンスコア：技火力 × 種族値ウェイト ÷ 防御ペナルティ
+        const monScore = (bestMoveScore * statWeight) / (defPenalty || 1);
 
         // 表示用タイプ（日本語）は、上書きがあればそちら優先
         const typesJa = formOverride && Array.isArray(formOverride.typesJa) && formOverride.typesJa.length
           ? formOverride.typesJa.slice()
           : (Array.isArray(pd.typesJa) ? pd.typesJa.slice() : []);
 
-        const typesEnForDef = attackerTypesEn.slice();
+        // ★ 表示名は「ビルド元の p ＋ pd」をマージして getDisplayNameJa に渡す
+        //   pokemon_list 側の formLabelJa も含めて、検索側と同じルールで整形したい
+        const baseForName = Object.assign({}, p, pd);
 
-        // ★ 表示名は共通ユーティリティに任せる
-        //   - メガリザX/Y 特例もここで吸収
-        //   - formLabelJa があれば「○○（△△）」形式になる
-        const displayNameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
-          ? pokemonUtil.getDisplayNameJa(pd)
-          : (pd.nameJa || pd.name || pd.nameJaLocalized || pd.nameEn || '');
+        const rawDisplayNameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
+          ? pokemonUtil.getDisplayNameJa(baseForName)   // ★ baseForName を渡す
+          : (baseForName.nameJa || baseForName.name || baseForName.nameJaLocalized || baseForName.nameEn || '');
+
+        // 「クレベース（ヒスイ）（ヒスイ）」→「クレベース（ヒスイ）」のような二重括弧だけ潰す
+        const displayNameJa = normalizeDisplayNameJa(rawDisplayNameJa);
 
         const rawNameJa =
-          pd.nameJa ||
-          pd.name ||
-          pd.nameJaLocalized ||
-          pd.nameEn ||
+          baseForName.nameJa ||
+          baseForName.name ||
+          baseForName.nameJaLocalized ||
+          baseForName.nameEn ||
           '';
 
+        // ★ ここ追加：図鑑No（種族単位のID）を決めておく
+        const speciesNo = Number(
+          pd.no ??
+          pd.dex ??
+          pd.pokedex_id ??
+          pd.id ??
+          0
+        );
+          
         results.push({
           id:        pd.id,
+          no:        speciesNo,   // ★ 追加：重複判定用の図鑑No
           nameJa:    displayNameJa,
           rawNameJa: rawNameJa,
           nameEn:    pd.nameEn,
@@ -1598,15 +1635,19 @@ const typeChecker = {
         return (b.baseTotal || 0) - (a.baseTotal || 0);
       });
 
+      // ===== ここから下を「重複排除したほう」を使うように修正 =====
+
       const uniqueList = [];
       const seen = new Map(); // key: no|atk|def|sta|typesEn
 
       finalList.forEach(function(r) {
-        const no   = r.no || r.id || 0;
+        // ★ 図鑑Noベースで判定（id ではなく no を優先）
+        const no   = r.no || 0;
         const atk  = r.goStats?.attack  || 0;
         const def  = r.goStats?.defense || 0;
         const sta  = r.goStats?.stamina || 0;
         const tEn  = Array.isArray(r.typesEn) ? r.typesEn.join('/') : '';
+
         const key  = [no, atk, def, sta, tEn].join('|');
 
         if (!seen.has(key)) {
@@ -1620,20 +1661,21 @@ const typeChecker = {
         // 「よりフォーム情報が豊富なほう」を優先して差し替える。
         const idx   = seen.get(key);
         const prev  = uniqueList[idx];
-        const prevHasForm = !!(prev.form || prev.templateId || prev.pokemonId && String(prev.pokemonId).includes('_'));
-        const currHasForm = !!(r.form   || r.templateId   || r.pokemonId && String(r.pokemonId).includes('_'));
+        const prevHasForm = !!(prev.form || prev.templateId || (prev.pokemonId && String(prev.pokemonId).includes('_')));
+        const currHasForm = !!(r.form   || r.templateId   || (r.pokemonId && String(r.pokemonId).includes('_')));
 
         // すでにフォーム付きが採用されていれば、そのまま。
         if (prevHasForm && !currHasForm) return;
 
-        // 逆に、今回のほうがフォーム情報が豊富なら差し替える。
+        // 今回のほうがフォーム情報が豊富なら差し替え。
         if (currHasForm && !prevHasForm) {
           uniqueList[idx] = r;
           return;
         }
-     });
+      });
 
-      const sliced = finalList.slice(0, limit);
+      // ★ ここが一番重要：uniqueList を使う
+      const sliced = uniqueList.slice(0, limit);
 
       console.log(
         '[recommendCounters final]',
@@ -1642,6 +1684,12 @@ const typeChecker = {
       if (sliced[0]) {
         console.log('[recommendCounters] top =', sliced[0].nameJa, sliced[0]);
       }
+
+      // --------------------------------------------------
+      // 以下は「★レーティング＋ゲージ」の処理（既存ロジック）
+      // --------------------------------------------------
+
+      // …この下（getGaugeFactorForRating 以降）はそのままでOK …
 
       // --------------------------------------------------
       // 以下は「★レーティング＋ゲージ」の処理（既存ロジック）
