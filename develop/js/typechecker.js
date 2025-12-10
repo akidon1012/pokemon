@@ -1413,10 +1413,21 @@ const typeChecker = {
 
       // ---- 表示名のリージョン重複「（ヒスイ）（ヒスイ）」を1個に揃える ----
       const normalizeDisplayNameJa = function(label) {
-        const s = String(label || '');
-        // 末尾の同じ「（〜）」が2回続いていたら1回にする
-        // 例: クレベース（ヒスイ）（ヒスイ） → クレベース（ヒスイ）
-        return s.replace(/(（[^）]+）)\1$/u, '$1');
+        let s = String(label || '');
+
+        // ① 同一括弧の重複を潰す
+        s = s.replace(/(（[^）]+）)\1$/u, '$1');
+
+        // ② 「ベース名（ベース名＋何か）」になっている場合、括弧内からベース名を引く
+        // 例:
+        //   キュレム（ブラックキュレム） → キュレム（ブラック）
+        //   キュレム（ホワイトキュレム） → キュレム（ホワイト）
+        s = s.replace(/^(.+?)（(.+?)\1）$/u, function(_, base, inner) {
+          const trimmed = inner.replace(base, '').trim();
+          return trimmed ? `${base}（${trimmed}）` : `${base}`;
+        });
+
+        return s;
       };
 
       // ==== メイン処理 ====
@@ -1638,43 +1649,44 @@ const typeChecker = {
       // ===== ここから下を「重複排除したほう」を使うように修正 =====
 
       const uniqueList = [];
-      const seen = new Map(); // key: no|atk|def|sta|typesEn
+      const seen = new Map(); // key: no|form|atk|def|sta|typesEn
 
       finalList.forEach(function(r) {
-        // ★ 図鑑Noベースで判定（id ではなく no を優先）
-        const no   = r.no || 0;
+        const no   = r.no || r.id || 0;
         const atk  = r.goStats?.attack  || 0;
         const def  = r.goStats?.defense || 0;
         const sta  = r.goStats?.stamina || 0;
         const tEn  = Array.isArray(r.typesEn) ? r.typesEn.join('/') : '';
 
-        const key  = [no, atk, def, sta, tEn].join('|');
+        // ★ 追加：フォームをキーに含める
+        const formKey =
+          r.form ||
+          r.templateId ||
+          r.pokemonId || '';   // どれか入っていれば十分
+
+        const key  = [no, formKey, atk, def, sta, tEn].join('|');
 
         if (!seen.has(key)) {
-          // はじめて見た種 → そのまま採用
           seen.set(key, uniqueList.length);
           uniqueList.push(r);
           return;
         }
 
-        // すでに同じ key のポケモンがいる場合、
-        // 「よりフォーム情報が豊富なほう」を優先して差し替える。
+        // ここから下の「prevHasForm / currHasForm」のロジックは、
+        // そのまま残しておいて大丈夫です（実質ほぼ発火しなくなる）
         const idx   = seen.get(key);
         const prev  = uniqueList[idx];
         const prevHasForm = !!(prev.form || prev.templateId || (prev.pokemonId && String(prev.pokemonId).includes('_')));
         const currHasForm = !!(r.form   || r.templateId   || (r.pokemonId && String(r.pokemonId).includes('_')));
 
-        // すでにフォーム付きが採用されていれば、そのまま。
         if (prevHasForm && !currHasForm) return;
 
-        // 今回のほうがフォーム情報が豊富なら差し替え。
         if (currHasForm && !prevHasForm) {
           uniqueList[idx] = r;
           return;
         }
       });
 
-      // ★ ここが一番重要：uniqueList を使う
       const sliced = uniqueList.slice(0, limit);
 
       console.log(
