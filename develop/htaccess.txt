@@ -1,0 +1,1 @@
+Redirect 301 /tools/typechecker/ https://pokemon.akidon.net/matchup/

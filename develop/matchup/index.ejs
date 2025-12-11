@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Pokémon type checker</title>
+    <link rel="stylesheet" href="../css/style.css?t=20251210" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('common/_header.ejs') %>
+      <div class="contents">
+        <div class="type-checker">
+          <section class="pokemon-select">
+            <div class="pokemon-search-reset">
+              <a href="javascript:void(0);" class="js_reset"><span class="icon icon-close"></span>Reset</a>
+            </div>
+            <div class="pokemon-select-tabs-wrapper">
+              <ul class="pokemon-select-tabs">
+                <li class="pokemon-select-tabs-item js_pokemon-select-tab is_active">
+                  <a href="javascript:void(0);">わざを受ける<br class="show-sp">ポケモン</a>
+                </li>
+                <li class="pokemon-select-tabs-item js_pokemon-select-tab">
+                  <a href="javascript:void(0);">対策おすすめ</a>
+                </li>
+              </ul>
+              <div class="pokemon-select-tab-contents">
+                <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content is_active">
+                  <div class="pokemon-search-and-or">
+                    <ul class="pokemon-search-and-or-list js_and-or">
+                      <li class="pokemon-search-and-or-list-item">
+                        <input type="radio" name="and_or" id="and_or-and" value="and" checked>
+                        <label for="and_or-and">すべて含む</label>
+                      </li>
+                      <li class="pokemon-search-and-or-list-item">
+                        <input type="radio" name="and_or" id="and_or-or" value="or">
+                        <label for="and_or-or">いずれか含む</label>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="pokemon-type">
+                    <ul class="pokemon-type-list js_pokemon-type-list">
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-normal" value="normal"><label for="type-normal"><span class="icon-type icon-type-normal"></span>ノーマル</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-fire" value="fire"><label for="type-fire"><span class="icon-type icon-type-fire"></span>ほのお</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-water" value="water"><label for="type-water" ><span class="icon-type icon-type-water"></span>みず</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-grass" value="grass" ><label for="type-grass" ><span class="icon-type icon-type-grass"></span>くさ</label >
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-electric" value="electric"><label for="type-electric"><span class="icon-type icon-type-electric"></span>でんき</label >
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-ice" value="ice"><label for="type-ice"><span class="icon-type icon-type-ice"></span>こおり</label >
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-fighting" value="fighting"><label for="type-fighting"><span class="icon-type icon-type-fighting"></span>かくとう</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-poison" value="poison"><label for="type-poison"><span class="icon-type icon-type-poison"></span>どく</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-ground" value="ground"><label for="type-ground"><span class="icon-type icon-type-ground"></span>じめん</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-flying" value="flying"><label for="type-flying"><span class="icon-type icon-type-flying"></span>ひこう</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-psychic" value="psychic"><label for="type-psychic"><span class="icon-type icon-type-psychic"></span>エスパー</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-bug" value="bug"><label for="type-bug"><span class="icon-type icon-type-bug"></span>むし</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-rock" value="rock"><label for="type-rock"><span class="icon-type icon-type-rock"></span>いわ</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-ghost" value="ghost"><label for="type-ghost"><span class="icon-type icon-type-ghost"></span>ゴースト</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-dragon" value="dragon"><label for="type-dragon"><span class="icon-type icon-type-dragon"></span>ドラゴン</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-dark" value="dark"><label for="type-dark"><span class="icon-type icon-type-dark"></span>あく</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-steel" value="steel"><label for="type-steel"><span class="icon-type icon-type-steel"></span>はがね</label>
+                      </li>
+                      <li>
+                        <input type="checkbox" name="pokemon-type" id="type-fairy" value="fairy"><label for="type-fairy"><span class="icon-type icon-type-fairy"></span>フェアリー</label>
+                      </li>
+                    </ul>
+                    <div class="pokemon-type-error js_error-msg">
+                      ポケモンのタイプは2つまでです。
+                    </div>
+                  </div>
+                  <div class="pokemon-search-wrapper">
+                    <div class="pokemon-search js_pokemon-search">
+                      <div class="pokemon-search-input-wrapper">
+                        <input type="text" name="pokemon-search-input" class="pokemon-search-input js_pokemon-search-input" placeholder="ポケモンを選択">
+                        <a href="javascript:void(0);" class="pokemon-search-input-clear js_reset js_search-clear" style="display: none;"></a>
+                      </div>
+                      <div class="pokemon-search-list-wrapper">
+                        <ul class="pokemon-search-list js_pokemon-search-list"></ul>
+                      </div>
+                      <div class="pokemon-search-result js_pokemon-search-result">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pokemon-select-tab-contents-item js_pokemon-select-tab-content">
+                  <div class="pokemon-recommend">
+                    <ul class="pokemon-info-list js_pokemon-info-list">
+                      <li class="pokemon-info-list-item js_toggle-wrapper">
+                        <div class="pokemon-info-list-item-header js_pokemon-info-list-item-header">
+                          <div class="pokemon-info-wrapper">
+                            <a href="javascript:void(0);" class="js_toggle-trigger">
+                              <div class="pokemon-info-name">ハスボー</div>
+                              <div class="pokemon-info-type">
+                                <div class="badge"><span class="icon-type icon-type-water"></span>みず</div>
+                                <div class="badge"><span class="icon-type icon-type-grass"></span>くさ</div>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="js_toggle-content">
+                          <dl class="pokemon-info-score">
+                            <dt class="pokemon-info-score-label">種族値</dt>
+                            <dl class="pokemon-info-score-value">
+                              <ul class="pokemon-info-score-list">
+                                <li class="pokemon-info-score-list-item">
+                                  こうげき <span class="num">100</span>
+                                </li>
+                                <li class="pokemon-info-score-list-item">
+                                  ぼうぎょ <span class="num">100</span>
+                                </li>
+                                <li class="pokemon-info-score-list-item">
+                                  HP <span class="num">100</span>
+                                </li>
+                              </ul>
+                            </dl>
+                          </dl>
+                          <div class="pokemon-info-list-item-attack-wrapper">
+                            <dl class="pokemon-info-list-item-attack">
+                              <dt class="pokemon-info-list-item-attack-label">ノーマル</dt>
+                              <dd class="pokemon-info-list-item-attack-info is_water">
+                                <div class="pokemon-info-list-item-attack-name">
+                                  <span class="icon-type icon-type-water"></span>みずでっぽう
+                                </div>
+                                <div class="pokemon-info-list-item-attack-power">20</div>
+                              </dd>
+                            </dl>
+                            <dl class="pokemon-info-list-item-attack">
+                              <dt class="pokemon-info-list-item-attack-label">スペシャル</dt>
+                              <dd class="pokemon-info-list-item-attack-info is_water">
+                                <div class="pokemon-info-list-item-attack-name">
+                                  <span class="icon-type icon-type-water"></span>ハイドロポンプ
+                                </div>
+                                <div class="pokemon-info-list-item-attack-stars">
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                </div>
+                                <div class="pokemon-info-list-item-attack-gauge">
+                                  <svg class="gauge" aria-hidden="true"><use href="#gauge1"></use></svg>
+                                </div>
+                                <div class="pokemon-info-list-item-attack-power">200</div>
+                              </dd>
+                              <dd class="pokemon-info-list-item-attack-info is_ice">
+                                <div class="pokemon-info-list-item-attack-name">
+                                  <span class="icon-type icon-type-ice"></span>ふぶき
+                                </div>
+                                <div class="pokemon-info-list-item-attack-stars">
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                  <span class="icon-star"></span>
+                                </div>
+                                <div class="pokemon-info-list-item-attack-gauge">
+                                  <svg class="gauge" aria-hidden="true"><use href="#gauge2"></use></svg>
+                                </div>
+                                 <div class="pokemon-info-list-item-attack-power">100</div>
+                               </dd>
+                              <dd class="pokemon-info-list-item-attack-info is_grass">
+                                <div class="pokemon-info-list-item-attack-name">
+                                  <span class="icon-type icon-type-grass"></span>ソーラービーム
+                                </div>
+                                <div class="pokemon-info-list-item-attack-stars">
+                                  <span class="icon-star"></span>
+                                </div>
+                                <div class="pokemon-info-list-item-attack-gauge">
+                                  <svg class="gauge" aria-hidden="true"><use href="#gauge3"></use></svg>
+                                </div>
+                                <div class="pokemon-info-list-item-attack-power">50</div>
+                              </dd>
+                            </dl>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="result">
+            <h2 class="section-header">わざのタイプとこうか</h2>
+            <table class="result-table">
+              <tr>
+                <th>ばつぐん<em>×2</em></th>
+                <td>
+                  <ul class="js_effect js_effect5"></ul>
+                </td>
+              </tr>
+              <tr>
+                <th>ばつぐん</th>
+                <td>
+                  <ul class="js_effect js_effect4"></ul>
+                </td>
+              </tr>
+              <tr>
+                <th>ふつう</th>
+                <td>
+                  <ul class="js_effect js_effect3"></ul>
+                </td>
+              </tr>
+              <tr>
+                <th>いまひとつ</th>
+                <td>
+                  <ul class="js_effect js_effect2"></ul>
+                </td>
+              </tr>
+              <tr>
+                <th>いまひとつ<em>×2</em></th>
+                <td>
+                  <ul class="js_effect js_effect1"></ul>
+                </td>
+              </tr>
+            </table>
+            <div class="js_result-data">
+              <input type="hidden" name="effect-normal" value="1">
+              <input type="hidden" name="effect-fire" value="1">
+              <input type="hidden" name="effect-water" value="1">
+              <input type="hidden" name="effect-grass" value="1">
+              <input type="hidden" name="effect-electric" value="1">
+              <input type="hidden" name="effect-ice" value="1">
+              <input type="hidden" name="effect-fighting" value="1">
+              <input type="hidden" name="effect-poison" value="1">
+              <input type="hidden" name="effect-ground" value="1">
+              <input type="hidden" name="effect-flying" value="1">
+              <input type="hidden" name="effect-psychic" value="1">
+              <input type="hidden" name="effect-bug" value="1">
+              <input type="hidden" name="effect-rock" value="1">
+              <input type="hidden" name="effect-ghost" value="1">
+              <input type="hidden" name="effect-dragon" value="1">
+              <input type="hidden" name="effect-dark" value="1">
+              <input type="hidden" name="effect-steel" value="1">
+              <input type="hidden" name="effect-fairy" value="1">
+            </div>
+          </section>
+        </div>
+      </div>
+      <%- include('common/_footer.ejs') %>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../data/pokemon_image_list.js?t=20251210" defer></script>
+    <script src="../js/utilities.js?t=20251210" defer></script>
+    <script src="../js/matchup.js?t=20251210" defer></script>
+  </body>
+</html>
