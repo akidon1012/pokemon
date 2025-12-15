@@ -96,6 +96,73 @@ body {
   justify-content: space-between;
   align-items: baseline;
 }
+.filter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding:0;
+  border: none;
+  background: transparent;
+  transform: translateY(calc(100% - 50px));
+  transition: 0.3s;
+  overflow-y: auto;
+  &-trigger {
+    display: block;
+    width: 100%;
+    height: 50px;
+    transform-origin: center top;
+    transform: scaleY(0.6);
+    background: #999;
+    position: relative;
+    top: 20px;
+    box-shadow: 0 -5px 30px rgba(0,0,0,0.3);
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform-origin: 50% 0;
+      transform: translateX(-50%) rotate(45deg);
+      width: 20px;
+      height: 20px;
+      border-top: 3px solid #FFF;
+      border-left: 3px solid #FFF;
+      pointer-events: none;
+    }
+  }
+  &-inner {
+    background: #FFF;
+    padding: 15px;
+    position: relative;
+  }
+  &-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+  }
+  &.is_opened {
+    transform: translateY(0);
+    .filter-trigger {
+      &::after {
+        transform: translateX(-50%) rotate(225deg);
+      }
+    }
+  }
+}
+.is_filter-opened {
+ .filter-overlay {
+  display: block;
+ }
+}
+
 @include mq() {
   .contents {
     padding-top: 20px;

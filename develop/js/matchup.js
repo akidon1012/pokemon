@@ -64,8 +64,40 @@ const toggle = {
       $target.slideDown().addClass(toggle.isOpenedClassName);
     }
   }
-};
-// ★ フォームごとのタイプ上書きテーブルを GO メタから自動生成
+}
+const filter = {
+  wrapper : '.js_filter',
+  trigger : '.js_filter-trigger',
+  overlay : '.js_filter-overlay',
+  isOpenedClassName : 'is_opened',
+  isFilterOpenedClassName : 'is_filter-opened',
+
+  ini : function() {
+    const wrapper = $(filter.wrapper);
+    wrapper.each(function() {
+      const _this  = $(this);
+      const trigger = _this.find(filter.trigger);
+
+      trigger.on('click', function() {
+        if ( _this.hasClass(filter.isOpenedClassName) ) {
+          _this.removeClass(filter.isOpenedClassName);
+          $('body').removeClass(filter.isFilterOpenedClassName)
+        } else {
+          _this.addClass(filter.isOpenedClassName)
+          $('body').addClass(filter.isFilterOpenedClassName)
+        }
+      });
+    });
+    const overlay = $(filter.overlay);
+    overlay.on('click', function() {
+      wrapper.each(function() {
+        $(this).removeClass(filter.isOpenedClassName);
+      })
+      $('body').removeClass(filter.isFilterOpenedClassName)
+    })
+  },
+}
+
 
 const matchup = {
   MULT : { dbl: 1.6, half: 0.625, zero: 0.39 }, // 単タイプ時の係数
@@ -1928,6 +1960,7 @@ const matchup = {
 $(function() {
   tabs.ini();
   toggle.ini();
+  filter.ini();
 
   pokemonUtil.data.onReady(state => {
     matchup.searchPokemon.ini(state.POKEMON_DATA);
