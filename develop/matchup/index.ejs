@@ -216,61 +216,6 @@
               </div>
             </div>
           </section>
-          <section class="result">
-            <h2 class="section-header">わざのタイプとこうか</h2>
-            <table class="result-table">
-              <tr>
-                <th>ばつぐん<em>×2</em></th>
-                <td>
-                  <ul class="js_effect js_effect5"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>ばつぐん</th>
-                <td>
-                  <ul class="js_effect js_effect4"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>ふつう</th>
-                <td>
-                  <ul class="js_effect js_effect3"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>いまひとつ</th>
-                <td>
-                  <ul class="js_effect js_effect2"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>いまひとつ<em>×2</em></th>
-                <td>
-                  <ul class="js_effect js_effect1"></ul>
-                </td>
-              </tr>
-            </table>
-            <div class="js_result-data">
-              <input type="hidden" name="effect-normal" value="1">
-              <input type="hidden" name="effect-fire" value="1">
-              <input type="hidden" name="effect-water" value="1">
-              <input type="hidden" name="effect-grass" value="1">
-              <input type="hidden" name="effect-electric" value="1">
-              <input type="hidden" name="effect-ice" value="1">
-              <input type="hidden" name="effect-fighting" value="1">
-              <input type="hidden" name="effect-poison" value="1">
-              <input type="hidden" name="effect-ground" value="1">
-              <input type="hidden" name="effect-flying" value="1">
-              <input type="hidden" name="effect-psychic" value="1">
-              <input type="hidden" name="effect-bug" value="1">
-              <input type="hidden" name="effect-rock" value="1">
-              <input type="hidden" name="effect-ghost" value="1">
-              <input type="hidden" name="effect-dragon" value="1">
-              <input type="hidden" name="effect-dark" value="1">
-              <input type="hidden" name="effect-steel" value="1">
-              <input type="hidden" name="effect-fairy" value="1">
-            </div>
-          </section>
 
         </div>
       </div>
@@ -365,6 +310,226 @@
             </div>
             <div class="pokemon-search-result js_pokemon-search-result">
             </div>
+          </div>
+<button class="scribble_btn" type="button">
+  <span class="scribble_btn__label">おすすめを見る</span>
+
+  <svg class="scribble_btn__svg" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+    <defs>
+      <clipPath id="scribble_clip">
+        <rect x="10" y="10" width="300" height="100" rx="12" />
+      </clipPath>
+
+      <filter id="scribble_wobble">
+        <feTurbulence type="fractalNoise" baseFrequency="0.010" numOctaves="1" seed="7" />
+        <feDisplacementMap in="SourceGraphic" scale="1.6" />
+      </filter>
+
+      <filter id="border_wobble">
+        <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="1" seed="5" />
+        <feDisplacementMap in="SourceGraphic" scale="1.3" />
+      </filter>
+    </defs>
+
+    <!-- 下地（薄グレー） -->
+    <rect x="10" y="10" width="300" height="100" rx="12" fill="#dcdcdc" />
+
+    <!-- =========================
+         塗り（ベース）
+         ========================= -->
+    <g clip-path="url(#scribble_clip)"
+       filter="url(#scribble_wobble)"
+       stroke="#c73641"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       fill="none">
+
+      <!-- 主線（中太） -->
+      <path stroke-width="12" d="M-50,45 L150,-35" opacity="0.90" />
+      <path stroke-width="11" d="M-30,75 L180,-25" opacity="0.86" />
+      <path stroke-width="12" d="M0,105  L230,-10" opacity="0.90" />
+      <path stroke-width="11" d="M60,145 L300,20"  opacity="0.88" />
+
+      <path stroke-width="11" d="M-30,35 L130,-20" opacity="0.88" />
+      <path stroke-width="10" d="M-10,55 L160,-20" opacity="0.84" />
+      <path stroke-width="11" d="M10,78  L190,-15" opacity="0.88" />
+      <path stroke-width="9"  d="M35,98  L220,-5"  opacity="0.82" />
+      <path stroke-width="10" d="M70,120 L250,10"  opacity="0.86" />
+      <path stroke-width="11" d="M105,135 L280,25" opacity="0.88" />
+      <path stroke-width="9"  d="M140,140 L320,35" opacity="0.84" />
+      <path stroke-width="10" d="M170,150 L360,45" opacity="0.86" />
+
+      <!-- 追加：主線を少しだけ増やして“面”を作る（太さは増やさない） -->
+      <path stroke-width="10" d="M-60,60 L120,-10" opacity="0.82" />
+      <path stroke-width="10" d="M-20,88 L170,-5"  opacity="0.82" />
+      <path stroke-width="10" d="M40,118  L230,8"  opacity="0.80" />
+      <path stroke-width="10" d="M110,150 L300,38" opacity="0.80" />
+
+      <!-- ★追加：のっぺり回避用の中太（密度を少し足す） -->
+      <path stroke-width="9"  d="M-40,55  L145,-5" opacity="0.72" />
+      <path stroke-width="9"  d="M0,88    L190,10" opacity="0.70" />
+      <path stroke-width="9"  d="M80,118  L270,30" opacity="0.70" />
+      <path stroke-width="9"  d="M150,138 L340,55" opacity="0.68" />
+
+      <!-- 中くらい（ムラ） -->
+      <path stroke-width="7" d="M-40,70 L110,0"  opacity="0.70" />
+      <path stroke-width="6" d="M-25,95 L130,10" opacity="0.66" />
+      <path stroke-width="7" d="M0,20   L170,-10" opacity="0.70" />
+      <path stroke-width="6" d="M25,60  L210,0"   opacity="0.64" />
+      <path stroke-width="7" d="M55,85  L240,10"  opacity="0.68" />
+      <path stroke-width="6" d="M95,110 L280,25"  opacity="0.62" />
+      <path stroke-width="7" d="M125,125 L310,35" opacity="0.68" />
+
+      <!-- 追加：中線を少し増やして隙間埋め -->
+      <path stroke-width="6" d="M-50,40 L80,-5"   opacity="0.58" />
+      <path stroke-width="6" d="M-10,72 L170,2"   opacity="0.56" />
+      <path stroke-width="6" d="M70,98  L260,22"  opacity="0.56" />
+      <path stroke-width="6" d="M140,118 L320,45" opacity="0.56" />
+
+      <!-- 面補強の短線（細ペン寄り） -->
+      <path stroke-width="12" d="M30,60  L90,30"   opacity="0.82" />
+      <path stroke-width="11" d="M120,85 L190,45"  opacity="0.78" />
+      <path stroke-width="12" d="M210,95 L270,55"  opacity="0.80" />
+    </g>
+
+    <!-- =========================
+         塗り（影）
+         ========================= -->
+    <g clip-path="url(#scribble_clip)"
+       filter="url(#scribble_wobble)"
+       stroke="#8d242c"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       fill="none"
+       opacity="0.35">
+
+      <!-- 逆方向（ぐしゃぐしゃ感） -->
+      <path stroke-width="6" d="M-20,100 L70,150"  opacity="0.60" />
+      <path stroke-width="6" d="M30,70   L120,140" opacity="0.58" />
+      <path stroke-width="6" d="M90,55   L180,130" opacity="0.60" />
+      <path stroke-width="6" d="M150,40  L240,120" opacity="0.56" />
+      <path stroke-width="6" d="M210,30  L310,115" opacity="0.60" />
+
+      <!-- 追加：逆方向をもう少し -->
+      <path stroke-width="5" d="M10,108  L95,155"  opacity="0.50" />
+      <path stroke-width="5" d="M120,62 L205,135"  opacity="0.50" />
+      <path stroke-width="5" d="M215,48 L305,120"  opacity="0.50" />
+
+      <!-- 指摘箇所の補強 -->
+      <path stroke-width="10" d="M55,78  L135,62" opacity="0.38" />
+      <path stroke-width="9"  d="M70,86  L150,70" opacity="0.32" />
+      <path stroke-width="11" d="M205,92 L265,58" opacity="0.78" />
+      <path stroke-width="9"  d="M225,104 L285,72" opacity="0.70" />
+
+      <!-- ★追加：影の短線を少し足して締める（少量） -->
+      <path stroke-width="9" d="M210,88 L275,55" opacity="0.55" />
+      <path stroke-width="8" d="M65,90  L155,58" opacity="0.45" />
+    </g>
+
+    <!-- =========================
+         塗り（ハイライト）
+         ========================= -->
+    <g clip-path="url(#scribble_clip)"
+       filter="url(#scribble_wobble)"
+       stroke="#e05a63"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       fill="none"
+       opacity="0.22">
+
+      <!-- 細線（密度キープの決め手） -->
+      <path stroke-width="3" d="M20,60  L140,10" opacity="0.34" />
+      <path stroke-width="3" d="M60,90  L180,30" opacity="0.34" />
+      <path stroke-width="3" d="M120,120 L240,60" opacity="0.34" />
+      <path stroke-width="3" d="M150,110 L290,50" opacity="0.30" />
+      <path stroke-width="3" d="M5,85   L150,25" opacity="0.30" />
+      <path stroke-width="3" d="M90,130 L260,70" opacity="0.30" />
+
+      <path stroke-width="4" d="M30,40  L70,20"  opacity="0.32" />
+      <path stroke-width="4" d="M110,65 L150,45" opacity="0.32" />
+      <path stroke-width="4" d="M190,85 L230,65" opacity="0.32" />
+      <path stroke-width="4" d="M240,78 L290,55" opacity="0.28" />
+      <path stroke-width="4" d="M15,55  L55,35"  opacity="0.28" />
+    </g>
+
+    <!-- 輪郭（かすれ役） -->
+    <rect x="11.5" y="11" width="297" height="98" rx="12"
+          fill="none"
+          stroke="#c73641"
+          stroke-width="4"
+          opacity="0.55"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-dasharray="14 9"
+          stroke-dashoffset="2"
+          filter="url(#border_wobble)" />
+
+    <!-- メイン輪郭：★弱めて馴染ませる -->
+    <rect x="10" y="10" width="300" height="100" rx="12"
+          fill="none"
+          stroke="#b3323d"
+          stroke-width="4"
+          opacity="0.62"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          filter="url(#border_wobble)" />
+  </svg>
+</button>
+
+        </div>
+        <div class="type-table-wrapper">
+          <h2 class="section-header">わざのタイプとこうか</h2>
+          <table class="type-table">
+            <tr>
+              <th>ばつぐん<em>×2</em></th>
+              <td>
+                <ul class="js_effect js_effect5"></ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ばつぐん</th>
+              <td>
+                <ul class="js_effect js_effect4"></ul>
+              </td>
+            </tr>
+            <tr>
+              <th>ふつう</th>
+              <td>
+                <ul class="js_effect js_effect3"></ul>
+              </td>
+            </tr>
+            <tr>
+              <th>いまひとつ</th>
+              <td>
+                <ul class="js_effect js_effect2"></ul>
+              </td>
+            </tr>
+            <tr>
+              <th>いまひとつ<em>×2</em></th>
+              <td>
+                <ul class="js_effect js_effect1"></ul>
+              </td>
+            </tr>
+          </table>
+          <div class="js_type-data">
+            <input type="hidden" name="effect-normal" value="1">
+            <input type="hidden" name="effect-fire" value="1">
+            <input type="hidden" name="effect-water" value="1">
+            <input type="hidden" name="effect-grass" value="1">
+            <input type="hidden" name="effect-electric" value="1">
+            <input type="hidden" name="effect-ice" value="1">
+            <input type="hidden" name="effect-fighting" value="1">
+            <input type="hidden" name="effect-poison" value="1">
+            <input type="hidden" name="effect-ground" value="1">
+            <input type="hidden" name="effect-flying" value="1">
+            <input type="hidden" name="effect-psychic" value="1">
+            <input type="hidden" name="effect-bug" value="1">
+            <input type="hidden" name="effect-rock" value="1">
+            <input type="hidden" name="effect-ghost" value="1">
+            <input type="hidden" name="effect-dragon" value="1">
+            <input type="hidden" name="effect-dark" value="1">
+            <input type="hidden" name="effect-steel" value="1">
+            <input type="hidden" name="effect-fairy" value="1">
           </div>
         </div>
       </section>
