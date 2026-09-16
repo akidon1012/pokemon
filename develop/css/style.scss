@@ -12,84 +12,13 @@
 @import '_footer.scss';
 
 .matchup {
-  width: 960px;
-  max-width: calc(100% - 60px);
-  margin: 0 auto;
+  margin: 0 15px;
   font-weight: 400;
   font-style: normal;
 
-  .pokemon-select {
-    &-tabs {
-      border-bottom: 1px solid #DDD;
-      display: flex;
-      &-item {
-        width: 300px;
-        margin-right: 10px;
-        position :relative;
-        a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: $color-text;
-          text-decoration: none;
-          text-align: center;
-          font-size: 16px;
-          font-weight: 600;
-          line-height: 1.2;
-          padding: 0 10px 10px;
-          height: 40px;
-          color: #7a7a7a;
-        }
-        &.is_active {
-          &::after {
-            content: "";
-            display: block;
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            border-bottom: 4px solid $color-red;
-          }
-          a {
-            color: $color-text;
-          }
-        }
-      }
-    }
-    &-tab {
-      &-contents {
-        padding: 30px 0;
-        &-item {
-          display: none;
-          &.is_active {
-            display: block;
-          }
-        }
-      }
-    }
-  }
   @include mq() {
     width: auto;
     max-width: 100%;
-    .pokemon-select {
-      &-tabs {
-        justify-content: space-between;
-        padding: 0 10px;
-        &-item {
-          width: calc(50% - 5px);
-          margin: 0;
-          a {
-            padding: 10px 0;
-          }
-        }
-      }
-      &-tab {
-        &-contents {
-          padding: 20px 0 30px;
-          margin: 0 10px;
-        }
-      }
-    }
   }
 }
 .pokemon-search {
@@ -747,57 +676,54 @@
     }
   }
   .type-table {
-      margin: 0 10px;
-      th {
-        width: 90px;
-        font-size: 12px;
-        line-height: 24px;
-        padding: 10px 5px;
-        white-space: nowrap;
-        em {
-          font-size: 14px;
+    width: 100%;
+    th {
+      width: 90px;
+      font-size: 12px;
+      line-height: 24px;
+      padding: 10px 5px;
+      white-space: nowrap;
+      em {
+        font-size: 14px;
+      }
+    }
+    td {
+      font-size: 12px;
+    }
+    tr {
+      &:nth-child(1) {
+        th {
+          background: #f9b2b2;
         }
       }
-      td {
-        font-size: 12px;
-      }
-      tr {
-        &:nth-child(1) {
-          th {
-            background: #f9b2b2;
-          }
+    }
+    tr {
+      &:nth-child(2) {
+        th {
+          background: #fcd9d9;
         }
       }
-      tr {
-        &:nth-child(2) {
-          th {
-            background: #fcd9d9;
-          }
+    }
+    tr {
+      &:nth-child(3) {
+        th {
+          background: #f0f0f0;
         }
       }
-      tr {
-        &:nth-child(3) {
-          th {
-            background: #f0f0f0;
-          }
+    }
+    tr {
+      &:nth-child(4) {
+        th {
+          background: #d9eafc;
         }
       }
-      tr {
-        &:nth-child(4) {
-          th {
-            background: #d9eafc;
-          }
+    }
+    tr {
+      &:nth-child(5) {
+        th {
+          background: #b2d5f9;
         }
       }
-      tr {
-        &:nth-child(5) {
-          th {
-            background: #b2d5f9;
-          }
-        }
-      }
-    &-wrapper {
-      margin: 0 10px;
     }
   }
 }
@@ -808,38 +734,3 @@
   }
 }
 
-.scribble_btn{
-  position: relative;
-  width: 100%;
-  padding: 16px 18px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.scribble_btn__svg{
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.scribble_btn__label{
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 800;
-  font-family: "Kaisei Opti", serif;
-  letter-spacing: 0.02em;
-  text-shadow:
-    0 1px 2px rgba(0,0,0,0.3),
-    0 0 6px rgba(0,0,0,0.2);
-}
-
-.scribble_btn:active{
-  transform: translateY(1px);
-  opacity: 0.98;
-}

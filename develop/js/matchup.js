@@ -96,6 +96,11 @@ const filter = {
       $('body').removeClass(filter.isFilterOpenedClassName)
     })
   },
+
+  open : function() {
+    $(filter.wrapper).addClass(filter.isOpenedClassName);
+    $('body').addClass(filter.isFilterOpenedClassName);
+  },
 }
 
 
@@ -880,7 +885,10 @@ const matchup = {
       matchup.searchPokemon.clear(data);          // リスト再構築
       if (matchup.getType?.clear) matchup.getType.clear();
       checkbox.each(function(){ $(this).prop('checked', false); });
-      wrapper.find(matchup.searchPokemon.textbox).val('').trigger('focus');
+      wrapper.find(matchup.searchPokemon.textbox).val('');
+      if (typeof matchup.searchPokemon.closeList === 'function') {
+        matchup.searchPokemon.closeList();
+      }
       matchup.getType._filterListByTypesJa([]);
       clearBtn.hide();
 
@@ -1969,6 +1977,12 @@ $(function() {
 
     console.log('lotad', pokemonUtil.getPokemonData('lotad'));
   });
+});
+
+$(window).on('load', function() {
+  window.setTimeout(function() {
+    filter.open();
+  }, 50);
 });
 
 // $(document).on('pokemon:data-ready', function() {
