@@ -5,15 +5,10 @@ body {
   background: #f9f9f9;
 }
 .show-pc {
-  @include mq() {
-    display: none;
-  }
+  display: none;
 }
 .show-sp {
-  display: none;
-  @include mq {
-    display: block;
-  }
+  display: block;
 }
 .icon {
   &-type {
@@ -78,22 +73,22 @@ body {
   margin: 0 auto;
 }
 .contents {
-  padding-top: 100px;
+  padding-top: 20px;
 }
 .page-header {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 40px;
-  padding-left: 48px;
-  margin-bottom: 60px;
+  line-height: 30px;
+  padding-left: 36px;
+  margin: 0 10px 30px;
   background: url("../images/pokeball.svg") no-repeat;
   background-size: contain;
 }
 
 .section-header {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin: 0 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -200,22 +195,5 @@ body {
  .filter-overlay {
   display: block;
  }
-}
-
-@include mq() {
-  .contents {
-    padding-top: 20px;
-  }
-  .page-header {
-    font-size: 24px;
-    line-height: 30px;
-    padding-left: 36px;
-    margin: 0 10px 30px;
-  }
-
-  .section-header {
-    font-size: 18px;
-    margin: 0 0 10px;
-  }
 }
 

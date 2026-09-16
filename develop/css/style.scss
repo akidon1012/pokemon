@@ -13,21 +13,18 @@
 
 .matchup {
   margin: 0 15px;
+  width: auto;
+  max-width: 100%;
   font-weight: 400;
   font-style: normal;
-
-  @include mq() {
-    width: auto;
-    max-width: 100%;
-  }
 }
 .pokemon-search {
-  width: 300px;
+  width: 100%;
   position: relative;
   &-wrapper {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   &-input {
     width: 100%;
@@ -473,38 +470,43 @@
   &-list {
     display: flex;
     flex-wrap: wrap;
-    margin-right: -15px;
+    margin-right: -10px;
     li {
-      width: 140px;
-      margin: 0 15px 15px 0;
+      width: calc(100% / 6 - 10px);
+      margin: 0 10px 10px 0;
       input[type="checkbox"] {
         display: none;
         & + label {
-          display: block;
-          font-size: 16px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 11px;
           font-weight: 600;
-          line-height: 24px;
-          padding: 3px 3px 3px 12px;
+          line-height: 14px;
+          padding: 3px 0;
           background: #FFF;
           border: 2px solid #DDD;
-          border-radius: 18px;
+          border-radius: 8px;
           text-align: center;
           position: relative;
+          white-space: nowrap;
+          letter-spacing: -0.05em;
           .icon {
-            position: absolute;
-            top: 5px;
-            left: 4px;
-            font-size: 22px;
+            position: relative;
+            top: 0;
+            left: auto;
+            font-size: 28px;
+            margin-bottom: 3px;
           }
         }
         &:checked {
           & + label {
             border: 3px solid $color-red;
-            padding: 2px 2px 2px 11px;
+            padding: 2px 0;
             box-shadow: 0 0 10px rgba($color-red, 0.3);
             .icon {
-              top: 4px;
-              left: 3px;
+              top: 0;
+              left: auto;
             }
           }
         }
@@ -525,22 +527,23 @@
   }
 }
 .type-table {
-    width: calc(100% - 20px);
+    width: 100%;
     border-collapse: collapse;
     th {
-      width: 160px;
+      width: 90px;
       border: 1px solid #DDD;
-      font-size: 14px;
-      line-height: 28px;
-      padding: 10px;
+      font-size: 12px;
+      line-height: 24px;
+      padding: 10px 5px;
       text-align: left;
+      white-space: nowrap;
       em {
-        font-size: 16px;
+        font-size: 14px;
       }
     }
     td {
       border: 1px solid #DDD;
-      font-size: 14px;
+      font-size: 12px;
       padding: 10px;
       ul {
         display: flex;
@@ -615,116 +618,6 @@
     }
   &-wrapper {
     margin-bottom: 60px;
-  }
-}
-@include mq() {
-  .pokemon-search {
-    width: 100%;
-    &-wrapper {
-      margin-bottom: 20px;
-    }
-    &-list {
-      li {
-        a {
-          font-size: 16px;
-          line-height: 24px;
-          padding: 5px;
-        }
-      }
-    }
-  }
-  .pokemon-type {
-    &-title {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    &-list {
-      margin-right: -10px;
-      li {
-        width: calc(100% / 6 - 10px);
-        margin: 0 10px 10px 0;
-        input[type="checkbox"] {
-          & + label {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 11px;
-            line-height: 14px;
-            padding: 3px 0;
-            border-radius: 8px;
-            white-space: nowrap;
-            letter-spacing: -0.05em;
-            .icon {
-              position: relative;
-              top: 0;
-              left: auto;
-              font-size: 28px;
-              margin-bottom: 3px;
-            }
-          }
-          &:checked {
-            & + label {
-              padding: 2px 0;
-              .icon {
-                top: 0;
-                left: auto;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  .type-table {
-    width: 100%;
-    th {
-      width: 90px;
-      font-size: 12px;
-      line-height: 24px;
-      padding: 10px 5px;
-      white-space: nowrap;
-      em {
-        font-size: 14px;
-      }
-    }
-    td {
-      font-size: 12px;
-    }
-    tr {
-      &:nth-child(1) {
-        th {
-          background: #f9b2b2;
-        }
-      }
-    }
-    tr {
-      &:nth-child(2) {
-        th {
-          background: #fcd9d9;
-        }
-      }
-    }
-    tr {
-      &:nth-child(3) {
-        th {
-          background: #f0f0f0;
-        }
-      }
-    }
-    tr {
-      &:nth-child(4) {
-        th {
-          background: #d9eafc;
-        }
-      }
-    }
-    tr {
-      &:nth-child(5) {
-        th {
-          background: #b2d5f9;
-        }
-      }
-    }
   }
 }
 

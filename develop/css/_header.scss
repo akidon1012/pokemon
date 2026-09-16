@@ -1,18 +1,20 @@
 .header {
   border-bottom: 2px solid #4A3F3A;
-  background: 
+  background:
     url("../images/header/monster1.png") no-repeat bottom -2px left 0 / 50px auto,
     url("../images/header/ball.png") no-repeat bottom 5px right 0 / 50px auto;
 
   &-inner {
-    width: 1200px;
-    max-width: calc(100% - 60px);
+    width: auto;
+    max-width: calc(100% - 20px);
     margin: 0 auto;
     position: relative;
-    background: url("../images/header/monster2.png") no-repeat top center / 100px auto,
+    padding: 5px 0 0;
+    background: url("../images/header/monster2.png") no-repeat top center / 100px auto;
   }
   &-title {
     text-align: center;
+    padding: 16px 0 5px;
     .en {
       font-size: 24px;
       font-family: "Itim", cursive;
@@ -23,32 +25,23 @@
     .ja {
       font-size: 14px;
     }
+    img {
+      width: 60vw;
+      max-width: 240px;
+    }
   }
-  @include mq() {
-    &-inner {
-      width: auto;
-      max-width: calc(100% - 20px);
-      padding: 5px 0 0;
+  &-left {
+    bottom: -24px;
+    left: 0;
+    img {
+      width: 10vw;
     }
-    &-title {
-      padding: 16px 0 5px;
-      img {
-        width: 60vw;
-      }
-    }
-    &-left {
-      bottom: -24px;
-      left: 0;
-      img {
-        width: 10vw;
-      }
-    }
-    &-right {
-      bottom: -16px;
-      right: -10px;
-      img {
-        width: 16vw;
-      }
+  }
+  &-right {
+    bottom: -16px;
+    right: -10px;
+    img {
+      width: 16vw;
     }
   }
   @include mq(sm) {
