@@ -265,7 +265,7 @@ const icon_compile_svg2font = () => {
       gulp.src( 'develop/icons/templates/iconfont.css' )
         .pipe( consolidate( 'lodash', options ) )
         .pipe( rename( { basename: '_'+'iconfont' , extname: '.scss' } ) )
-        .pipe( gulp.dest('develop/css'))
+        .pipe( gulp.dest('develop/matchup/css'))
 
       console.log('icon_compile CSS');
 
@@ -276,7 +276,7 @@ const icon_compile_svg2font = () => {
 
       console.log('icon_compile フォント一覧 HTML');
     })
-    .pipe( gulp.dest('develop/iconfont') )
+    .pipe( gulp.dest('develop/matchup/iconfont') )
 }
 const icon_compile_html = () => {
   return gulp.src([config.dir.dev+'iconfont.html'])
