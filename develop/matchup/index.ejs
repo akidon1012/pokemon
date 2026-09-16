@@ -9,78 +9,81 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Pokémon type checker</title>
+    <title>Pokémon Matchup Helper</title>
     <link rel="stylesheet" href="css/style.css?t=20260916" />
   </head>
-  <body>
+  <body class="is_empty">
     <div class="container">
       <%- include('common/_header.ejs') %>
       <div class="contents">
+        <div class="matchup-empty">
+          <p>
+            <a href="javascript:void(0);" class="js_filter-trigger">相手のタイプまたは<br>ポケモンを選択してください</a>
+          </p>
+        </div>
         <div class="matchup">
-          <section class="pokemon-type">
+          <section class="pokemon-type js_pokemon-type-effect">
             <h2 class="section-header">わざのタイプとこうか</h2>
-            <table class="type-table">
-              <tr>
-                <th>ばつぐん<em>×2</em></th>
-                <td>
-                  <ul class="js_effect js_effect5"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>ばつぐん</th>
-                <td>
-                  <ul class="js_effect js_effect4"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>ふつう</th>
-                <td>
-                  <ul class="js_effect js_effect3"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>いまひとつ</th>
-                <td>
-                  <ul class="js_effect js_effect2"></ul>
-                </td>
-              </tr>
-              <tr>
-                <th>いまひとつ<em>×2</em></th>
-                <td>
-                  <ul class="js_effect js_effect1"></ul>
-                </td>
-              </tr>
-            </table>
-            <div class="js_type-data">
-              <input type="hidden" name="effect-normal" value="1">
-              <input type="hidden" name="effect-fire" value="1">
-              <input type="hidden" name="effect-water" value="1">
-              <input type="hidden" name="effect-grass" value="1">
-              <input type="hidden" name="effect-electric" value="1">
-              <input type="hidden" name="effect-ice" value="1">
-              <input type="hidden" name="effect-fighting" value="1">
-              <input type="hidden" name="effect-poison" value="1">
-              <input type="hidden" name="effect-ground" value="1">
-              <input type="hidden" name="effect-flying" value="1">
-              <input type="hidden" name="effect-psychic" value="1">
-              <input type="hidden" name="effect-bug" value="1">
-              <input type="hidden" name="effect-rock" value="1">
-              <input type="hidden" name="effect-ghost" value="1">
-              <input type="hidden" name="effect-dragon" value="1">
-              <input type="hidden" name="effect-dark" value="1">
-              <input type="hidden" name="effect-steel" value="1">
-              <input type="hidden" name="effect-fairy" value="1">
-            </div>
-          </section>
-          <section class="pokemon-select">
-            <div class="type-table-wrapper">
-            </div>
-            <div class="pokemon-recommend">
-              <div class="pokemon-info-list js_pokemon-info-list">
+            <div class="pokemon-type-summery-wrapper js_pokemon-summery-wrapper">
+              <div class="pokemon-type-summery">
+                <dl class="pokemon-type-summery-list">
+                  <dt class="pokemon-type-summery-list-label">ばつぐん<span class="multiplier">2.56</span></dt>
+                  <dd class="pokemon-type-summery-list-value">
+                    <ul class="js_effect js_effect5"></ul>
+                  </dd>
+                </dl>
+                <dl class="pokemon-type-summery-list">
+                  <dt class="pokemon-type-summery-list-label">ばつぐん<span class="multiplier">1.6</span></dt>
+                  <dd class="pokemon-type-summery-list-value">
+                    <ul class="js_effect js_effect4"></ul>
+                  </dd>
+                </dl>
               </div>
             </div>
+            <div class="pokemon-type-table-wrapper js_pokemon-table-wrapper">
+              <table class="type-table">
+                <tr>
+                  <th>ばつぐん<span class="multiplier">2.56</span></th>
+                  <td>
+                    <ul class="js_effect js_effect5"></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>ばつぐん<span class="multiplier">1.6</span></th>
+                  <td>
+                    <ul class="js_effect js_effect4"></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>ふつう<span class="multiplier">1.0</span></th>
+                  <td>
+                    <ul class="js_effect js_effect3"></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>いまひとつ<span class="multiplier">0.63</span></th>
+                  <td>
+                    <ul class="js_effect js_effect2"></ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th>いまひとつ<span class="multiplier">0.39</span></th>
+                  <td>
+                    <ul class="js_effect js_effect1"></ul>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="pokemon-type-toggle-trigger">
+              <a href="javascript:void(0);" class="pokemon-type-toggle-open js_toggle-trigger">もっとみる</a>
+              <a href="javascript:void(0);" class="pokemon-type-toggle-close js_toggle-trigger">閉じる</a>
+            </div>
           </section>
-
+          <section class="pokemon-recommend">
+            <h2 class="section-header">対策おすすめ</h2>
+            <div class="pokemon-info-list js_pokemon-info-list">
+            </div>
+          </section>
         </div>
       </div>
       <%- include('common/_footer.ejs') %>
@@ -88,9 +91,9 @@
     <div class="filter-overlay js_filter-overlay"></div>
     <section class="filter js_filter filter-pokemon-search">
       <h2 class="section-header">
-        <a href="javascript:void(0);" class="js_filter-trigger">わざを受けるポケモン</a>
+        <a href="javascript:void(0);" class="js_filter-trigger">相手をえらぶ</a>
       </h2>
-      <div class="filter-inner js_filter-inner">
+      <div class="filter-inner">
         <div class="pokemon-search-and-or">
           <ul class="pokemon-search-and-or-list js_and-or">
             <li class="pokemon-search-and-or-list-item">
@@ -184,8 +187,8 @@
       </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="../data/pokemon_image_list.js?t=20251210" defer></script>
-    <script src="js/utilities.js?t=20251210" defer></script>
-    <script src="js/matchup.js?t=20251210" defer></script>
+    <script src="../data/pokemon_image_list.js?t=20260916" defer></script>
+    <script src="js/utilities.js?t=20260916" defer></script>
+    <script src="js/matchup.js?t=20260916" defer></script>
   </body>
 </html>

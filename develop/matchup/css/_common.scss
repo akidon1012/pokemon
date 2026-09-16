@@ -7,12 +7,6 @@ body {
   font-weight: 500;
   background: #f9f9f9;
 }
-.show-pc {
-  display: none;
-}
-.show-sp {
-  display: block;
-}
 .icon {
   &-type {
     @include type-icons(32px);
@@ -74,19 +68,14 @@ body {
 }
 .container {
   max-width: 750px;
+  min-height: 100dvh;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .contents {
   padding-top: 20px;
-}
-.page-header {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 30px;
-  padding-left: 36px;
-  margin: 0 10px 30px;
-  background: url("../images/pokeball.svg") no-repeat;
-  background-size: contain;
+  flex: 1;
 }
 
 .section-header {

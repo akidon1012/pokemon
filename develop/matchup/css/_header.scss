@@ -30,30 +30,4 @@
       max-width: 240px;
     }
   }
-  &-left {
-    bottom: -24px;
-    left: 0;
-    img {
-      width: 10vw;
-    }
-  }
-  &-right {
-    bottom: -16px;
-    right: -10px;
-    img {
-      width: 16vw;
-    }
-  }
-  @include mq(sm) {
-    &-left {
-      img {
-        width: 14vw;
-      }
-    }
-    &-right {
-      img {
-        width: 20vw;
-      }
-    }
-  }
 }

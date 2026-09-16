@@ -53,11 +53,3 @@ $poke-types: (
     }
   }
 }
-
-@mixin line-clamp($lines) {
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lines;
-  overflow: hidden;
-}

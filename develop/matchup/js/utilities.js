@@ -333,10 +333,6 @@ const pokemonCard = {
     });
 
     $area.empty().html(html);
-
-    if (window.userlib && userlib.ui && typeof userlib.ui.toggle === 'function') {
-      userlib.ui.toggle('.js_pokemon-info-list-item-header');
-    }
   },
 
   // 1匹表示用カード
@@ -600,12 +596,6 @@ const pokemonUtil = {
         }
       });
 
-      console.log(
-        '[attachGoStats] metaById(pokemonId)=', Object.keys(_metaById).length,
-        'metaByNo(no)=', Object.keys(_metaByNo).length,
-        'overrideBases=', Object.keys(_ovByBase).length,
-        'overrideNos=', Object.keys(_ovByNo).length
-      );
     }
 
     // ゲンシ／メガっぽい名前かどうか（既存）
@@ -792,13 +782,6 @@ const pokemonUtil = {
         if (s.attack  != null) pd.goStats.attack  = s.attack;
         if (s.defence != null) pd.goStats.defense = s.defence;
         if (s.stamina != null) pd.goStats.stamina = s.stamina;
-        console.log(
-          '[attachGoStats] override applied:',
-          dexNo,
-          pd.nameJa || pd.nameEn,
-          ov.key,
-          pd.goStats
-        );
       }
 
       // タイプの上書き
@@ -806,15 +789,6 @@ const pokemonUtil = {
         applyTypeOverride(pd, ov);
 
         if (pd.typesEn || pd.typesJa) {
-          console.log(
-            '[attachGoStats] type override applied:',
-            dexNo,
-            pd.nameJa || pd.nameEn,
-            'typesEn=',
-            pd.typesEn,
-            'typesJa=',
-            pd.typesJa
-          );
         }
       }
 
@@ -1672,14 +1646,8 @@ const pokemonUtil = {
       }
 
       const arr = Array.isArray(list) ? list : [];
-
-      console.log('[getPokemonData vRegion1] getAllGoMeta len=', arr.length);
-
       return arr;
     };
-
-    // ★ どの版が動いているか確認用
-    console.log('[getPokemonData vRegion1] called, len=', arr.length);
 
     return arr.map(key => {
       const p = resolveFromBase(key);
@@ -1696,12 +1664,6 @@ const pokemonUtil = {
       // 1) ベースデータ側からリージョン判定
       const regionKeyFromBase = detectRegionKey(p); // ALOLA / GALAR / ... / null
 
-      console.log(
-        '[getPokemonData vRegion1] region detect',
-        p.nameJa || p.name || '(no name)',
-        '→',
-        regionKeyFromBase
-      );
 
       // 2) まずは従来どおり meta を拾う（通常フォームでもOK）
       let meta = pokemonUtil._resolveGoMeta
@@ -1743,20 +1705,6 @@ const pokemonUtil = {
 
         const baseSpeciesKey = makeSpeciesKey(p);
 
-        console.log(
-          '[getPokemonData vRegion1] getAllGoMeta len=',
-          allMeta.length
-        );
-        console.log(
-          '[getPokemonData vRegion1] region detect',
-          p.nameJa || p.name || '(no name)',
-          '→',
-          regionKeyFromBase,
-          'dexFromP=',
-          dexFromP,
-          'baseSpeciesKey=',
-          baseSpeciesKey
-        );
 
         const candidate = allMeta.find(function (m) {
           const mdex =
@@ -1809,24 +1757,8 @@ const pokemonUtil = {
         });
 
         if (candidate) {
-          console.log(
-            '[getPokemonData vRegion1] region meta applied',
-            p.nameJa || p.name || '(no name)',
-            regionKeyFromBase,
-            '→',
-            candidate.templateId || candidate.pokemonId || '(no id)'
-          );
           meta = candidate; // ★ ここでリージョン用 meta に差し替え
         } else {
-          console.log(
-            '[getPokemonData vRegion1] regionKey but no region meta found for',
-            p.nameJa || p.name || '(no name)',
-            regionKeyFromBase,
-            'dexFromP=',
-            dexFromP,
-            'baseSpeciesKey=',
-            baseSpeciesKey
-          );
         }
       })();
 
@@ -1892,12 +1824,6 @@ const pokemonUtil = {
       };
 
       // ★ 最後に1件ずつ確認ログ
-      console.log(
-        '[getPokemonData vRegion1] result',
-        result.nameJa,
-        'typesEn=', result.typesEn,
-        'typesJa=', result.typesJa
-      );
 
       return result;
     });
@@ -1908,12 +1834,6 @@ const pokemonUtil = {
     if (!metaList.length || !p) return null;
 
     const normalizeKey = pokemonUtil.normalizeKey || (v => String(v || '').toLowerCase());
-
-    // ★ ちゃんとこの版が動いているか確認用
-    console.log(
-      '[getMetaForPokemon vRegion1] called for',
-      p.nameJa || p.name || p.pokemonId || p.pokemon_id || '(no name)'
-    );
 
     // ★ リージョン判定ヘルパー（name も見る）
     const detectRegionKey = function(src) {
@@ -1984,16 +1904,9 @@ const pokemonUtil = {
       });
 
       if (candidate) {
-        console.log(
-          '[getMetaForPokemon vRegion1] region match',
-          regionKey,
-          '→',
-          candidate.pokemonId || candidate.templateId || '(no id)'
-        );
         return candidate;
       }
 
-      console.log('[getMetaForPokemon vRegion1] regionKey detected but no candidate', regionKey);
     }
 
     // ------------------------------------------------
@@ -2004,8 +1917,6 @@ const pokemonUtil = {
         m.dex === dex || m.pokedex === dex || m.pokedex_id === dex || m.num === dex
       );
       if (byDex) {
-        console.log('[getMetaForPokemon vRegion1] dex match', dex,
-          '→', byDex.pokemonId || byDex.templateId || '(no id)');
         return byDex;
       }
     }
@@ -2017,13 +1928,10 @@ const pokemonUtil = {
         return keys.some(k => normalizeKey(k) === ln);
       });
       if (byName) {
-        console.log('[getMetaForPokemon vRegion1] name match', name,
-          '→', byName.pokemonId || byName.templateId || '(no id)');
         return byName;
       }
     }
 
-    console.log('[getMetaForPokemon vRegion1] no meta found for', name || dex);
     return null;
   },
 
