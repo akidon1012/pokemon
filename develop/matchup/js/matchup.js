@@ -66,8 +66,10 @@ const filter = {
   },
 
   close : function() {
-    $(filter.wrapper).removeClass(filter.isOpenedClassName);
+    const $sheet = $(filter.wrapper);
+    $sheet.removeClass(filter.isOpenedClassName);
     $('body').removeClass(filter.isFilterOpenedClassName);
+    $sheet.scrollTop(0);
   },
 }
 
