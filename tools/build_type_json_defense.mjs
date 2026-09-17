@@ -8,13 +8,11 @@ import fs from 'fs';
 import path from 'path';
 import url from 'url';
 
-// === 入出力パス ===
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const INPUT  = path.resolve(__dirname, '../develop/data/raw/game_master.json');
 const OUTPUT = path.resolve(__dirname, '../develop/data/type_defense.json');
 
-// === 対応する18タイプ（GO準拠・和名表） ===
-// ※ GOの倍率: 1.6(ばつぐん) / 1.0(等倍) / 0.625(いまひとつ) / 0(効果なし)
+// 出力順（画面・既存 type_defense.json と同じ）
 const TYPES = [
   ['NORMAL','ノーマル'],
   ['FIRE','ほのお'],
@@ -36,77 +34,87 @@ const TYPES = [
   ['FAIRY','フェアリー']
 ];
 
-// GAME_MASTER のキー文字列
-const toGM = t => `POKEMON_TYPE_${t}`;
+// Game Master の attackScalar インデックス順
+const GM_TYPE_ORDER = [
+  'NORMAL','FIGHTING','FLYING','POISON','GROUND','ROCK','BUG','GHOST','STEEL',
+  'FIRE','WATER','GRASS','ELECTRIC','PSYCHIC','ICE','DRAGON','DARK','FAIRY'
+];
 
-// 和名辞書
-const jaByEn = Object.fromEntries(TYPES.map(([en,ja]) => [en.toLowerCase(), ja]));
-
-// 初期化（防御→攻撃の表: Map<defJa, Map<atkJa, multiplier>>）
-const table = new Map();
-TYPES.forEach(([defEn, defJa]) => {
-  table.set(defJa, new Map(TYPES.map(([atkEn, atkJa]) => [jaByEn[atkEn.toLowerCase()], 1.0])));
-});
+const jaByEn = Object.fromEntries(TYPES.map(([en, ja]) => [en.toLowerCase(), ja]));
 
 function loadGM(file) {
-  const txt = fs.readFileSync(file, 'utf8');
-  return JSON.parse(txt);
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
+}
+
+function toValue(mul) {
+  if (Math.abs(mul - 1.6) < 1e-9) return 1;
+  if (Math.abs(mul - 0.625) < 1e-9) return -1;
+  if (Math.abs(mul - 0.390625) < 1e-9) return -2;
+  return 0;
 }
 
 function build() {
   console.log('Reading:', INPUT);
   const gm = loadGM(INPUT);
 
-  // COMBAT_TYPE_EFFECTIVENESS の配列を抽出
-  // 形はだいたい:
-  // { templateId: 'COMBAT_TYPE_EFFECTIVENESS', data: { combatTypeEffectiveness: { attackType:'POKEMON_TYPE_FIRE', defenseType:'POKEMON_TYPE_GRASS', multiplier:1.6 } } }
-  const nodes = [];
-  for (const entry of gm || []) {
-    const eff = entry?.data?.combatTypeEffectiveness;
-    if (!eff) continue;
-    nodes.push(eff);
-  }
-  if (nodes.length === 0) {
-    console.warn('No COMBAT_TYPE_EFFECTIVENESS entries found.');
-  }
-
-  // 表に流し込み（防御視点）
-  nodes.forEach(eff => {
-    const atkEn = String(eff.attackType || '').replace('POKEMON_TYPE_', '');
-    const defEn = String(eff.defenseType || '').replace('POKEMON_TYPE_', '');
-    const mul   = Number(eff.multiplier ?? 1);
-
-    // 18タイプ以外（SHADOW, STELLAR, UNKNOWN 等）は無視
-    if (!jaByEn[atkEn.toLowerCase()] || !jaByEn[defEn.toLowerCase()]) return;
-
-    const atkJa = jaByEn[atkEn.toLowerCase()];
-    const defJa = jaByEn[defEn.toLowerCase()];
-
-    const row = table.get(defJa);
-    if (row) row.set(atkJa, mul);
+  const byDef = {};
+  TYPES.forEach(([en]) => {
+    byDef[en.toLowerCase()] = {};
   });
-  console.log('SAMPLE eff:', nodes[0]);
 
-  // JSON 形に整形
+  let rows = 0;
+  for (const entry of gm || []) {
+    const te = entry?.data?.typeEffective;
+    if (!te) continue;
+
+    const atkEn = String(te.attackType || '')
+      .replace(/^POKEMON_TYPE_/, '')
+      .toLowerCase();
+    if (!jaByEn[atkEn]) continue;
+
+    const scalars = te.attackScalar;
+    if (!Array.isArray(scalars) || !scalars.length) continue;
+    if (scalars.length !== GM_TYPE_ORDER.length) {
+      console.warn(
+        `[type_defense] ${te.attackType} attackScalar length=${scalars.length}, expected ${GM_TYPE_ORDER.length}`
+      );
+    }
+
+    GM_TYPE_ORDER.forEach((defUpper, i) => {
+      if (i >= scalars.length) return;
+      const defEn = defUpper.toLowerCase();
+      if (!jaByEn[defEn]) return;
+      const mul = Number(scalars[i]);
+      if (!Number.isFinite(mul)) return;
+      byDef[defEn][atkEn] = mul;
+    });
+    rows += 1;
+  }
+
+  console.log('[type_defense] typeEffective rows =', rows);
+  if (rows === 0) {
+    throw new Error('typeEffective が見つかりません');
+  }
+
   const out = TYPES.map(([defEn, defJa]) => {
-    const row = table.get(jaByEn[defEn.toLowerCase()]);
-    const effects = TYPES.map(([atkEn, atkJa]) => {
-      const atkJaName = jaByEn[atkEn.toLowerCase()];
-      const mul = Number(row?.get(atkJaName) ?? 1);
+    const defKey = defEn.toLowerCase();
+    const effects = TYPES.map(([atkEn]) => {
+      const atkKey = atkEn.toLowerCase();
+      const mul = Number(byDef[defKey][atkKey] ?? 1);
       return {
-        type: atkEn.toLowerCase(),
-        typeJa: atkJaName,
-        multiplier: mul
+        type: atkKey,
+        typeJa: jaByEn[atkKey],
+        multiplier: mul,
+        value: toValue(mul)
       };
     });
     return {
-      type: defEn.toLowerCase(),
+      type: defKey,
       typeJa: defJa,
       effect: effects
     };
   });
 
-  // 出力
   fs.mkdirSync(path.dirname(OUTPUT), { recursive: true });
   fs.writeFileSync(OUTPUT, JSON.stringify(out, null, 2), 'utf8');
   console.log('Wrote:', OUTPUT, `(rows=${out.length})`);

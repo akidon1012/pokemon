@@ -1793,5 +1793,10 @@
     "resourceId": "move_name_0487",
     "en": "Aqua Step",
     "ja": "アクアステップ"
+  },
+  "CHILLING_WATER": {
+    "resourceId": "move_name_0488",
+    "en": "Chilling Water",
+    "ja": "ひやみず"
   }
 }

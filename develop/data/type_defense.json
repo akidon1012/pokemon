@@ -1,113 +1,113 @@
 [
   {
     "type": "normal",
-    "typeJa": "????",
+    "typeJa": "ノーマル",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
-        "multiplier": 0.39,
+        "typeJa": "ゴースト",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -115,113 +115,113 @@
   },
   {
     "type": "fire",
-    "typeJa": "???",
+    "typeJa": "ほのお",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 0.625,
         "value": -1
       }
@@ -229,113 +229,113 @@
   },
   {
     "type": "water",
-    "typeJa": "??",
+    "typeJa": "みず",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -343,113 +343,113 @@
   },
   {
     "type": "grass",
-    "typeJa": "??",
+    "typeJa": "くさ",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -457,113 +457,113 @@
   },
   {
     "type": "electric",
-    "typeJa": "???",
+    "typeJa": "でんき",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -571,113 +571,113 @@
   },
   {
     "type": "ice",
-    "typeJa": "???",
+    "typeJa": "こおり",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -685,113 +685,113 @@
   },
   {
     "type": "fighting",
-    "typeJa": "????",
+    "typeJa": "かくとう",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1.6,
         "value": 1
       }
@@ -799,113 +799,113 @@
   },
   {
     "type": "poison",
-    "typeJa": "??",
+    "typeJa": "どく",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 0.625,
         "value": -1
       }
@@ -913,113 +913,113 @@
   },
   {
     "type": "ground",
-    "typeJa": "???",
+    "typeJa": "じめん",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "electric",
-        "typeJa": "???",
-        "multiplier": 0.39,
+        "typeJa": "でんき",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1027,113 +1027,113 @@
   },
   {
     "type": "flying",
-    "typeJa": "???",
+    "typeJa": "ひこう",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
-        "multiplier": 0.39,
+        "typeJa": "じめん",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1141,113 +1141,113 @@
   },
   {
     "type": "psychic",
-    "typeJa": "????",
+    "typeJa": "エスパー",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1255,113 +1255,113 @@
   },
   {
     "type": "bug",
-    "typeJa": "??",
+    "typeJa": "むし",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1369,113 +1369,113 @@
   },
   {
     "type": "rock",
-    "typeJa": "??",
+    "typeJa": "いわ",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1483,113 +1483,113 @@
   },
   {
     "type": "ghost",
-    "typeJa": "????",
+    "typeJa": "ゴースト",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
-        "multiplier": 0.39,
+        "typeJa": "ノーマル",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
-        "multiplier": 0.39,
+        "typeJa": "かくとう",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }
@@ -1597,113 +1597,113 @@
   },
   {
     "type": "dragon",
-    "typeJa": "????",
+    "typeJa": "ドラゴン",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1.6,
         "value": 1
       }
@@ -1711,113 +1711,113 @@
   },
   {
     "type": "dark",
-    "typeJa": "??",
+    "typeJa": "あく",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
-        "multiplier": 0.39,
+        "typeJa": "エスパー",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1.6,
         "value": 1
       }
@@ -1825,113 +1825,113 @@
   },
   {
     "type": "steel",
-    "typeJa": "???",
+    "typeJa": "はがね",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "poison",
-        "typeJa": "??",
-        "multiplier": 0.39,
+        "typeJa": "どく",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
+        "typeJa": "ドラゴン",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 0.625,
         "value": -1
       }
@@ -1939,113 +1939,113 @@
   },
   {
     "type": "fairy",
-    "typeJa": "?????",
+    "typeJa": "フェアリー",
     "effect": [
       {
         "type": "normal",
-        "typeJa": "????",
+        "typeJa": "ノーマル",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fire",
-        "typeJa": "???",
+        "typeJa": "ほのお",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "water",
-        "typeJa": "??",
+        "typeJa": "みず",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "grass",
-        "typeJa": "??",
+        "typeJa": "くさ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "electric",
-        "typeJa": "???",
+        "typeJa": "でんき",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ice",
-        "typeJa": "???",
+        "typeJa": "こおり",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "fighting",
-        "typeJa": "????",
+        "typeJa": "かくとう",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "poison",
-        "typeJa": "??",
+        "typeJa": "どく",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "ground",
-        "typeJa": "???",
+        "typeJa": "じめん",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "flying",
-        "typeJa": "???",
+        "typeJa": "ひこう",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "psychic",
-        "typeJa": "????",
+        "typeJa": "エスパー",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "bug",
-        "typeJa": "??",
+        "typeJa": "むし",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "rock",
-        "typeJa": "??",
+        "typeJa": "いわ",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "ghost",
-        "typeJa": "????",
+        "typeJa": "ゴースト",
         "multiplier": 1,
         "value": 0
       },
       {
         "type": "dragon",
-        "typeJa": "????",
-        "multiplier": 0.39,
+        "typeJa": "ドラゴン",
+        "multiplier": 0.390625,
         "value": -2
       },
       {
         "type": "dark",
-        "typeJa": "??",
+        "typeJa": "あく",
         "multiplier": 0.625,
         "value": -1
       },
       {
         "type": "steel",
-        "typeJa": "???",
+        "typeJa": "はがね",
         "multiplier": 1.6,
         "value": 1
       },
       {
         "type": "fairy",
-        "typeJa": "?????",
+        "typeJa": "フェアリー",
         "multiplier": 1,
         "value": 0
       }

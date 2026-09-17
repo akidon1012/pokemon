@@ -76,6 +76,30 @@
       "flying"
     ]
   },
+  "RAICHU_TEMP_EVOLUTION_MEGA_X": {
+    "basePokemonId": "RAICHU",
+    "tempId": "TEMP_EVOLUTION_MEGA_X",
+    "stats": {
+      "stamina": 155,
+      "attack": 277,
+      "defence": 203
+    },
+    "typesEn": [
+      "electric"
+    ]
+  },
+  "RAICHU_TEMP_EVOLUTION_MEGA_Y": {
+    "basePokemonId": "RAICHU",
+    "tempId": "TEMP_EVOLUTION_MEGA_Y",
+    "stats": {
+      "stamina": 155,
+      "attack": 339,
+      "defence": 157
+    },
+    "typesEn": [
+      "electric"
+    ]
+  },
   "ALAKAZAM_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "ALAKAZAM",
     "tempId": "TEMP_EVOLUTION_MEGA",
@@ -86,6 +110,19 @@
     },
     "typesEn": [
       "psychic"
+    ]
+  },
+  "VICTREEBEL_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "VICTREEBEL",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 190,
+      "attack": 265,
+      "defence": 181
+    },
+    "typesEn": [
+      "grass",
+      "poison"
     ]
   },
   "SLOWBRO_TEMP_EVOLUTION_MEGA": {
@@ -126,6 +163,19 @@
       "normal"
     ]
   },
+  "STARMIE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "STARMIE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 155,
+      "attack": 276,
+      "defence": 229
+    },
+    "typesEn": [
+      "water",
+      "psychic"
+    ]
+  },
   "PINSIR_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "PINSIR",
     "tempId": "TEMP_EVOLUTION_MEGA",
@@ -163,6 +213,44 @@
     "typesEn": [
       "rock",
       "flying"
+    ]
+  },
+  "DRAGONITE_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "DRAGONITE",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 209,
+      "attack": 299,
+      "defence": 255
+    },
+    "typesEn": [
+      "dragon",
+      "flying"
+    ]
+  },
+  "MEWTWO_TEMP_EVOLUTION_MEGA_X": {
+    "basePokemonId": "MEWTWO",
+    "tempId": "TEMP_EVOLUTION_MEGA_X",
+    "stats": {
+      "stamina": 228,
+      "attack": 399,
+      "defence": 215
+    },
+    "typesEn": [
+      "psychic",
+      "fighting"
+    ]
+  },
+  "MEWTWO_TEMP_EVOLUTION_MEGA_Y": {
+    "basePokemonId": "MEWTWO",
+    "tempId": "TEMP_EVOLUTION_MEGA_Y",
+    "stats": {
+      "stamina": 228,
+      "attack": 413,
+      "defence": 223
+    },
+    "typesEn": [
+      "psychic"
     ]
   },
   "AMPHAROS_TEMP_EVOLUTION_MEGA": {
@@ -215,6 +303,19 @@
     "typesEn": [
       "bug",
       "fighting"
+    ]
+  },
+  "SKARMORY_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "SKARMORY",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 273,
+      "defence": 228
+    },
+    "typesEn": [
+      "steel",
+      "flying"
     ]
   },
   "HOUNDOOM_TEMP_EVOLUTION_MEGA": {
@@ -601,6 +702,58 @@
       "fairy"
     ]
   },
+  "CHESNAUGHT_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "CHESNAUGHT",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 204,
+      "attack": 242,
+      "defence": 282
+    },
+    "typesEn": [
+      "grass",
+      "fighting"
+    ]
+  },
+  "DELPHOX_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "DELPHOX",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 181,
+      "attack": 331,
+      "defence": 235
+    },
+    "typesEn": [
+      "fire",
+      "psychic"
+    ]
+  },
+  "GRENINJA_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "GRENINJA",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 176,
+      "attack": 299,
+      "defence": 180
+    },
+    "typesEn": [
+      "water",
+      "dark"
+    ]
+  },
+  "MALAMAR_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "MALAMAR",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 200,
+      "attack": 208,
+      "defence": 222
+    },
+    "typesEn": [
+      "dark",
+      "psychic"
+    ]
+  },
   "DIANCIE_TEMP_EVOLUTION_MEGA": {
     "basePokemonId": "DIANCIE",
     "tempId": "TEMP_EVOLUTION_MEGA",
@@ -612,6 +765,18 @@
     "typesEn": [
       "rock",
       "fairy"
+    ]
+  },
+  "FALINKS_TEMP_EVOLUTION_MEGA": {
+    "basePokemonId": "FALINKS",
+    "tempId": "TEMP_EVOLUTION_MEGA",
+    "stats": {
+      "stamina": 163,
+      "attack": 267,
+      "defence": 229
+    },
+    "typesEn": [
+      "fighting"
     ]
   }
 }

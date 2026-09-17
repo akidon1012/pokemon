@@ -6,7 +6,7 @@
     "type": "normal",
     "typeJa": "ノーマル",
     "category": "special",
-    "power": 60,
+    "power": 70,
     "energy": -45,
     "durationTurns": 0
   },
@@ -50,7 +50,7 @@
     "type": "normal",
     "typeJa": "ノーマル",
     "category": "special",
-    "power": 40,
+    "power": 70,
     "energy": -40,
     "durationTurns": 0
   },
@@ -127,7 +127,7 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "special",
-    "power": 110,
+    "power": 120,
     "energy": -65,
     "durationTurns": 0
   },
@@ -183,7 +183,7 @@
     "typeJa": "はがね",
     "category": "special",
     "power": 110,
-    "energy": -70,
+    "energy": -65,
     "durationTurns": 0
   },
   {
@@ -226,8 +226,8 @@
     "type": "fire",
     "typeJa": "ほのお",
     "category": "special",
-    "power": 95,
-    "energy": -75,
+    "power": 75,
+    "energy": -45,
     "durationTurns": 0
   },
   {
@@ -248,8 +248,8 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "special",
-    "power": 80,
-    "energy": -45,
+    "power": 70,
+    "energy": -40,
     "durationTurns": 0
   },
   {
@@ -402,7 +402,7 @@
     "type": "rock",
     "typeJa": "いわ",
     "category": "special",
-    "power": 80,
+    "power": 75,
     "energy": -50,
     "durationTurns": 0
   },
@@ -435,8 +435,8 @@
     "type": "ghost",
     "typeJa": "ゴースト",
     "category": "special",
-    "power": 50,
-    "energy": -45,
+    "power": 75,
+    "energy": -50,
     "durationTurns": 0
   },
   {
@@ -469,7 +469,7 @@
     "typeJa": "ゴースト",
     "category": "special",
     "power": 100,
-    "energy": -55,
+    "energy": -50,
     "durationTurns": 0
   },
   {
@@ -502,7 +502,7 @@
     "typeJa": "でんき",
     "category": "special",
     "power": 70,
-    "energy": -45,
+    "energy": -50,
     "durationTurns": 0
   },
   {
@@ -545,8 +545,8 @@
     "type": "dragon",
     "typeJa": "ドラゴン",
     "category": "special",
-    "power": 45,
-    "energy": -45,
+    "power": 70,
+    "energy": -40,
     "durationTurns": 0
   },
   {
@@ -699,8 +699,8 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "special",
-    "power": 60,
-    "energy": -40,
+    "power": 65,
+    "energy": -45,
     "durationTurns": 0
   },
   {
@@ -909,7 +909,7 @@
     "typeJa": "ひこう",
     "category": "special",
     "power": 110,
-    "energy": -65,
+    "energy": -60,
     "durationTurns": 0
   },
   {
@@ -919,7 +919,7 @@
     "type": "fighting",
     "typeJa": "かくとう",
     "category": "special",
-    "power": 40,
+    "power": 50,
     "energy": -40,
     "durationTurns": 0
   },
@@ -1128,8 +1128,8 @@
     "type": "fighting",
     "typeJa": "かくとう",
     "category": "normal",
-    "power": 4,
-    "energy": 5,
+    "power": 5,
+    "energy": 8,
     "durationTurns": 1
   },
   {
@@ -1162,7 +1162,7 @@
     "typeJa": "ひこう",
     "category": "normal",
     "power": 5,
-    "energy": 7,
+    "energy": 8,
     "durationTurns": 1
   },
   {
@@ -1227,8 +1227,8 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "normal",
-    "power": 4,
-    "energy": 8,
+    "power": 3,
+    "energy": 9,
     "durationTurns": 1
   },
   {
@@ -1337,7 +1337,7 @@
     "type": "psychic",
     "typeJa": "エスパー",
     "category": "normal",
-    "power": 3,
+    "power": 4,
     "energy": 9,
     "durationTurns": 1
   },
@@ -1370,7 +1370,7 @@
     "type": "steel",
     "typeJa": "はがね",
     "category": "normal",
-    "power": 8,
+    "power": 7,
     "energy": 7,
     "durationTurns": 1
   },
@@ -1414,7 +1414,7 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "normal",
-    "power": 12,
+    "power": 11,
     "energy": 10,
     "durationTurns": 2
   },
@@ -1535,7 +1535,7 @@
     "type": "ice",
     "typeJa": "こおり",
     "category": "normal",
-    "power": 5,
+    "power": 6,
     "energy": 8,
     "durationTurns": 1
   },
@@ -1689,7 +1689,7 @@
     "type": "ground",
     "typeJa": "じめん",
     "category": "special",
-    "power": 25,
+    "power": 40,
     "energy": -40,
     "durationTurns": 0
   },
@@ -1733,7 +1733,7 @@
     "type": "bug",
     "typeJa": "むし",
     "category": "special",
-    "power": 60,
+    "power": 75,
     "energy": -45,
     "durationTurns": 0
   },
@@ -1854,8 +1854,8 @@
     "type": "grass",
     "typeJa": "くさ",
     "category": "special",
-    "power": 90,
-    "energy": -55,
+    "power": 80,
+    "energy": -45,
     "durationTurns": 0
   },
   {
@@ -1931,7 +1931,7 @@
     "type": "dark",
     "typeJa": "あく",
     "category": "special",
-    "power": 60,
+    "power": 65,
     "energy": -40,
     "durationTurns": 0
   },
@@ -1964,8 +1964,8 @@
     "type": "water",
     "typeJa": "みず",
     "category": "normal",
-    "power": 12,
-    "energy": 8,
+    "power": 11,
+    "energy": 10,
     "durationTurns": 2
   },
   {
@@ -2118,7 +2118,7 @@
     "type": "rock",
     "typeJa": "いわ",
     "category": "normal",
-    "power": 12,
+    "power": 11,
     "energy": 8,
     "durationTurns": 2
   },
@@ -2163,7 +2163,7 @@
     "typeJa": "はがね",
     "category": "special",
     "power": 100,
-    "energy": -50,
+    "energy": -45,
     "durationTurns": 0
   },
   {
@@ -2196,7 +2196,7 @@
     "typeJa": "じめん",
     "category": "special",
     "power": 90,
-    "energy": -55,
+    "energy": -50,
     "durationTurns": 0
   },
   {
@@ -2283,7 +2283,7 @@
     "type": "fighting",
     "typeJa": "かくとう",
     "category": "special",
-    "power": 20,
+    "power": 40,
     "energy": -40,
     "durationTurns": 0
   },
@@ -2349,7 +2349,7 @@
     "type": "fairy",
     "typeJa": "フェアリー",
     "category": "normal",
-    "power": 13,
+    "power": 12,
     "energy": 8,
     "durationTurns": 2
   },
@@ -2603,7 +2603,7 @@
     "typeJa": "ひこう",
     "category": "normal",
     "power": 16,
-    "energy": 12,
+    "energy": 14,
     "durationTurns": 3
   },
   {
@@ -2701,7 +2701,7 @@
     "type": "ice",
     "typeJa": "こおり",
     "category": "special",
-    "power": 65,
+    "power": 70,
     "energy": -40,
     "durationTurns": 0
   },
@@ -2976,8 +2976,8 @@
     "type": "flying",
     "typeJa": "ひこう",
     "category": "special",
-    "power": 150,
-    "energy": -70,
+    "power": 110,
+    "energy": -45,
     "durationTurns": 0
   },
   {
@@ -3009,7 +3009,7 @@
     "type": "fairy",
     "typeJa": "フェアリー",
     "category": "normal",
-    "power": 4,
+    "power": 8,
     "energy": 13,
     "durationTurns": 2
   },
@@ -3021,7 +3021,7 @@
     "typeJa": "ドラゴン",
     "category": "special",
     "power": 95,
-    "energy": -50,
+    "energy": -55,
     "durationTurns": 0
   },
   {
@@ -3142,7 +3142,7 @@
     "typeJa": "でんき",
     "category": "special",
     "power": 90,
-    "energy": -50,
+    "energy": -40,
     "durationTurns": 0
   },
   {
@@ -3405,14 +3405,14 @@
     "type": "dragon",
     "typeJa": "ドラゴン",
     "category": "special",
-    "power": 100,
+    "power": 90,
     "energy": -45,
     "durationTurns": 0
   },
   {
-    "id": 487,
-    "nameEn": 487,
-    "nameJa": 487,
+    "id": "AQUA_STEP",
+    "nameEn": "AQUA_STEP",
+    "nameJa": "AQUA_STEP",
     "type": "water",
     "typeJa": "みず",
     "category": "special",
@@ -3421,9 +3421,9 @@
     "durationTurns": 0
   },
   {
-    "id": 488,
-    "nameEn": 488,
-    "nameJa": 488,
+    "id": "CHILLING_WATER",
+    "nameEn": "CHILLING_WATER",
+    "nameJa": "CHILLING_WATER",
     "type": "water",
     "typeJa": "みず",
     "category": "special",
@@ -3432,14 +3432,278 @@
     "durationTurns": 0
   },
   {
-    "id": 489,
-    "nameEn": 489,
-    "nameJa": 489,
+    "id": "SECRET_SWORD",
+    "nameEn": "SECRET_SWORD",
+    "nameJa": "SECRET_SWORD",
     "type": "fighting",
     "typeJa": "かくとう",
     "category": "special",
     "power": 70,
     "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": "BEAK_BLAST",
+    "nameEn": "BEAK_BLAST",
+    "nameJa": "BEAK_BLAST",
+    "type": "flying",
+    "typeJa": "ひこう",
+    "category": "special",
+    "power": 110,
+    "energy": -55,
+    "durationTurns": 0
+  },
+  {
+    "id": "MIND_BLOWN",
+    "nameEn": "MIND_BLOWN",
+    "nameJa": "MIND_BLOWN",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 90,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": "DRUM_BEATING",
+    "nameEn": "DRUM_BEATING",
+    "nameJa": "DRUM_BEATING",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 60,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": "PYROBALL",
+    "nameEn": "PYROBALL",
+    "nameJa": "PYROBALL",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 75,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": "GIGATON_HAMMER",
+    "nameEn": "GIGATON_HAMMER",
+    "nameJa": "GIGATON_HAMMER",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 130,
+    "energy": -60,
+    "durationTurns": 0
+  },
+  {
+    "id": 497,
+    "nameEn": 497,
+    "nameJa": 497,
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 60,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 590,
+    "nameEn": 590,
+    "nameJa": 590,
+    "type": "dragon",
+    "typeJa": "ドラゴン",
+    "category": "special",
+    "power": 90,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 592,
+    "nameEn": 592,
+    "nameJa": 592,
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 65,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 593,
+    "nameEn": 593,
+    "nameJa": 593,
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 50,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 594,
+    "nameEn": 594,
+    "nameJa": 594,
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0
+  },
+  {
+    "id": 595,
+    "nameEn": 595,
+    "nameJa": 595,
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0
+  },
+  {
+    "id": 508,
+    "nameEn": 508,
+    "nameJa": 508,
+    "type": "poison",
+    "typeJa": "どく",
+    "category": "special",
+    "power": 20,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 512,
+    "nameEn": 512,
+    "nameJa": 512,
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 55,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 515,
+    "nameEn": 515,
+    "nameJa": 515,
+    "type": "dragon",
+    "typeJa": "ドラゴン",
+    "category": "special",
+    "power": 80,
+    "energy": -50,
+    "durationTurns": 0
+  },
+  {
+    "id": 522,
+    "nameEn": 522,
+    "nameJa": 522,
+    "type": "flying",
+    "typeJa": "ひこう",
+    "category": "special",
+    "power": 60,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 566,
+    "nameEn": 566,
+    "nameJa": 566,
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 60,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 567,
+    "nameEn": 567,
+    "nameJa": 567,
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 50,
+    "energy": -40,
+    "durationTurns": 0
+  },
+  {
+    "id": 568,
+    "nameEn": 568,
+    "nameJa": 568,
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 55,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 572,
+    "nameEn": 572,
+    "nameJa": 572,
+    "type": "psychic",
+    "typeJa": "エスパー",
+    "category": "special",
+    "power": 60,
+    "energy": -45,
+    "durationTurns": 0
+  },
+  {
+    "id": 583,
+    "nameEn": 583,
+    "nameJa": 583,
+    "type": "fighting",
+    "typeJa": "かくとう",
+    "category": "special",
+    "power": 40,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 504,
+    "nameEn": 504,
+    "nameJa": 504,
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 65,
+    "energy": -35,
+    "durationTurns": 0
+  },
+  {
+    "id": 495,
+    "nameEn": 495,
+    "nameJa": 495,
+    "type": "fighting",
+    "typeJa": "かくとう",
+    "category": "special",
+    "power": 130,
+    "energy": -80,
+    "durationTurns": 0
+  },
+  {
+    "id": 505,
+    "nameEn": 505,
+    "nameJa": 505,
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 70,
+    "energy": -45,
+    "durationTurns": 0
+  },
+  {
+    "id": 496,
+    "nameEn": 496,
+    "nameJa": 496,
+    "type": "psychic",
+    "typeJa": "エスパー",
+    "category": "special",
+    "power": 130,
+    "energy": -80,
     "durationTurns": 0
   }
 ]

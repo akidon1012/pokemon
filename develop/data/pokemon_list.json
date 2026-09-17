@@ -457,6 +457,32 @@
       }
     },
     {
+      "id": 10,
+      "no": 10,
+      "pokemonId": "CATERPIE",
+      "form": "CATERPIE_GOFEST_2026",
+      "formLabelJa": "",
+      "name": "キャタピー",
+      "nameJa": "キャタピー",
+      "nameEn": "Caterpie",
+      "typesJa": [
+        "むし"
+      ],
+      "typesEn": [
+        "bug"
+      ],
+      "baseStats": {
+        "hp": 128,
+        "attack": 55,
+        "defence": 55
+      },
+      "baseTotal": 238,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 11,
       "no": 11,
       "pokemonId": "METAPOD",
@@ -978,6 +1004,162 @@
       "id": 25,
       "no": 25,
       "pokemonId": "PIKACHU",
+      "form": "PIKACHU_ANNIVERSARY_2026",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_ANNIVERSARY_2026_MALAYSIA_01",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_ANNIVERSARY_2026_PHILIPPINE_01",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_ANNIVERSARY_2026_SINGAPORE_01",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_ANNIVERSARY_2026_TAIWAN_01",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_BB_2026",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
       "form": "PIKACHU_COPY_2019",
       "formLabelJa": "",
       "name": "ピカチュウ",
@@ -1187,6 +1369,32 @@
       "no": 25,
       "pokemonId": "PIKACHU",
       "form": "PIKACHU_FLYING_OKINAWA",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_FOSSIL_2026",
       "formLabelJa": "",
       "name": "ピカチュウ",
       "nameJa": "ピカチュウ",
@@ -1446,6 +1654,84 @@
       "id": 25,
       "no": 25,
       "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOFEST_2026_CAP_BLUE",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOFEST_2026_CAP_RED",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOFEST_2026_CAP_YELLOW",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
       "form": "PIKACHU_GOTOUR_2024_A",
       "formLabelJa": "",
       "name": "ピカチュウ",
@@ -1654,6 +1940,162 @@
       "id": 25,
       "no": 25,
       "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_A",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_A_02",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_B",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_B_02",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_C",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_GOTOUR_2026_C_02",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
       "form": "PIKACHU_HORIZONS",
       "formLabelJa": "",
       "name": "ピカチュウ",
@@ -1784,6 +2226,32 @@
       "id": 25,
       "no": 25,
       "pokemonId": "PIKACHU",
+      "form": "PIKACHU_PXP_2026",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
       "form": "PIKACHU_ROCK_STAR",
       "formLabelJa": "",
       "name": "ピカチュウ",
@@ -1863,6 +2331,32 @@
       "no": 25,
       "pokemonId": "PIKACHU",
       "form": "PIKACHU_TSHIRT_03",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_VISOR_2026",
       "formLabelJa": "",
       "name": "ピカチュウ",
       "nameJa": "ピカチュウ",
@@ -2015,6 +2509,32 @@
       }
     },
     {
+      "id": 25,
+      "no": 25,
+      "pokemonId": "PIKACHU",
+      "form": "PIKACHU_WCS_2026",
+      "formLabelJa": "",
+      "name": "ピカチュウ",
+      "nameJa": "ピカチュウ",
+      "nameEn": "Pikachu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 111,
+        "attack": 112,
+        "defence": 96
+      },
+      "baseTotal": 319,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 26,
       "no": 26,
       "pokemonId": "RAICHU",
@@ -2063,6 +2583,56 @@
         "defence": 154
       },
       "baseTotal": 510,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 26,
+      "no": 26,
+      "pokemonId": "RAICHU_TEMP_EVOLUTION_MEGA_X",
+      "form": "RAICHU_TEMP_EVOLUTION_MEGA_X",
+      "name": "メガライチュウ",
+      "nameJa": "メガライチュウ",
+      "nameEn": "Mega Raichu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 155,
+        "attack": 277,
+        "defence": 203
+      },
+      "baseTotal": 635,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 26,
+      "no": 26,
+      "pokemonId": "RAICHU_TEMP_EVOLUTION_MEGA_Y",
+      "form": "RAICHU_TEMP_EVOLUTION_MEGA_Y",
+      "name": "メガライチュウ",
+      "nameJa": "メガライチュウ",
+      "nameEn": "Mega Raichu",
+      "typesJa": [
+        "でんき"
+      ],
+      "typesEn": [
+        "electric"
+      ],
+      "baseStats": {
+        "hp": 155,
+        "attack": 339,
+        "defence": 157
+      },
+      "baseTotal": 651,
       "moves": {
         "normal": [],
         "special": []
@@ -3670,6 +4240,33 @@
         "defence": 135
       },
       "baseTotal": 532,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 71,
+      "no": 71,
+      "pokemonId": "VICTREEBEL_TEMP_EVOLUTION_MEGA",
+      "form": "VICTREEBEL_TEMP_EVOLUTION_MEGA",
+      "name": "メガウツボット",
+      "nameJa": "メガウツボット",
+      "nameEn": "Mega Victreebel",
+      "typesJa": [
+        "くさ",
+        "どく"
+      ],
+      "typesEn": [
+        "grass",
+        "poison"
+      ],
+      "baseStats": {
+        "hp": 190,
+        "attack": 265,
+        "defence": 181
+      },
+      "baseTotal": 636,
       "moves": {
         "normal": [],
         "special": []
@@ -5571,6 +6168,33 @@
       }
     },
     {
+      "id": 121,
+      "no": 121,
+      "pokemonId": "STARMIE_TEMP_EVOLUTION_MEGA",
+      "form": "STARMIE_TEMP_EVOLUTION_MEGA",
+      "name": "メガスターミー",
+      "nameJa": "メガスターミー",
+      "nameEn": "Mega Starmie",
+      "typesJa": [
+        "みず",
+        "エスパー"
+      ],
+      "typesEn": [
+        "water",
+        "psychic"
+      ],
+      "baseStats": {
+        "hp": 155,
+        "attack": 276,
+        "defence": 229
+      },
+      "baseTotal": 660,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 122,
       "no": 122,
       "pokemonId": "MR_MIME",
@@ -6624,6 +7248,33 @@
       }
     },
     {
+      "id": 149,
+      "no": 149,
+      "pokemonId": "DRAGONITE_TEMP_EVOLUTION_MEGA",
+      "form": "DRAGONITE_TEMP_EVOLUTION_MEGA",
+      "name": "メガカイリュー",
+      "nameJa": "メガカイリュー",
+      "nameEn": "Mega Dragonite",
+      "typesJa": [
+        "ドラゴン",
+        "ひこう"
+      ],
+      "typesEn": [
+        "dragon",
+        "flying"
+      ],
+      "baseStats": {
+        "hp": 209,
+        "attack": 299,
+        "defence": 255
+      },
+      "baseTotal": 763,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 150,
       "no": 150,
       "pokemonId": "MEWTWO",
@@ -6670,6 +7321,56 @@
         "defence": 278
       },
       "baseTotal": 674,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 150,
+      "no": 150,
+      "pokemonId": "MEWTWO_TEMP_EVOLUTION_MEGA_X",
+      "form": "MEWTWO_TEMP_EVOLUTION_MEGA_X",
+      "name": "メガミュウツー",
+      "nameJa": "メガミュウツー",
+      "nameEn": "Mega Mewtwo",
+      "typesJa": [
+        "エスパー"
+      ],
+      "typesEn": [
+        "psychic"
+      ],
+      "baseStats": {
+        "hp": 228,
+        "attack": 399,
+        "defence": 215
+      },
+      "baseTotal": 842,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 150,
+      "no": 150,
+      "pokemonId": "MEWTWO_TEMP_EVOLUTION_MEGA_Y",
+      "form": "MEWTWO_TEMP_EVOLUTION_MEGA_Y",
+      "name": "メガミュウツー",
+      "nameJa": "メガミュウツー",
+      "nameEn": "Mega Mewtwo",
+      "typesJa": [
+        "エスパー"
+      ],
+      "typesEn": [
+        "psychic"
+      ],
+      "baseStats": {
+        "hp": 228,
+        "attack": 413,
+        "defence": 223
+      },
+      "baseTotal": 864,
       "moves": {
         "normal": [],
         "special": []
@@ -9778,6 +10479,33 @@
         "defence": 226
       },
       "baseTotal": 537,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 227,
+      "no": 227,
+      "pokemonId": "SKARMORY_TEMP_EVOLUTION_MEGA",
+      "form": "SKARMORY_TEMP_EVOLUTION_MEGA",
+      "name": "メガエアームド",
+      "nameJa": "メガエアームド",
+      "nameEn": "Mega Skarmory",
+      "typesJa": [
+        "はがね",
+        "ひこう"
+      ],
+      "typesEn": [
+        "steel",
+        "flying"
+      ],
+      "baseStats": {
+        "hp": 163,
+        "attack": 273,
+        "defence": 228
+      },
+      "baseTotal": 664,
       "moves": {
         "normal": [],
         "special": []
@@ -24962,6 +25690,33 @@
       }
     },
     {
+      "id": 652,
+      "no": 652,
+      "pokemonId": "CHESNAUGHT_TEMP_EVOLUTION_MEGA",
+      "form": "CHESNAUGHT_TEMP_EVOLUTION_MEGA",
+      "name": "メガブリガロン",
+      "nameJa": "メガブリガロン",
+      "nameEn": "Mega Chesnaught",
+      "typesJa": [
+        "くさ",
+        "かくとう"
+      ],
+      "typesEn": [
+        "grass",
+        "fighting"
+      ],
+      "baseStats": {
+        "hp": 204,
+        "attack": 242,
+        "defence": 282
+      },
+      "baseTotal": 728,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 653,
       "no": 653,
       "pokemonId": "FENNEKIN",
@@ -25042,6 +25797,33 @@
       }
     },
     {
+      "id": 655,
+      "no": 655,
+      "pokemonId": "DELPHOX_TEMP_EVOLUTION_MEGA",
+      "form": "DELPHOX_TEMP_EVOLUTION_MEGA",
+      "name": "メガマフォクシー",
+      "nameJa": "メガマフォクシー",
+      "nameEn": "Mega Delphox",
+      "typesJa": [
+        "ほのお",
+        "エスパー"
+      ],
+      "typesEn": [
+        "fire",
+        "psychic"
+      ],
+      "baseStats": {
+        "hp": 181,
+        "attack": 331,
+        "defence": 235
+      },
+      "baseTotal": 747,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 656,
       "no": 656,
       "pokemonId": "FROAKIE",
@@ -25116,6 +25898,33 @@
         "defence": 152
       },
       "baseTotal": 551,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 658,
+      "no": 658,
+      "pokemonId": "GRENINJA_TEMP_EVOLUTION_MEGA",
+      "form": "GRENINJA_TEMP_EVOLUTION_MEGA",
+      "name": "メガゲッコウガ",
+      "nameJa": "メガゲッコウガ",
+      "nameEn": "Mega Greninja",
+      "typesJa": [
+        "みず",
+        "あく"
+      ],
+      "typesEn": [
+        "water",
+        "dark"
+      ],
+      "baseStats": {
+        "hp": 176,
+        "attack": 299,
+        "defence": 180
+      },
+      "baseTotal": 655,
       "moves": {
         "normal": [],
         "special": []
@@ -28256,6 +29065,33 @@
         "defence": 165
       },
       "baseTotal": 542,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 687,
+      "no": 687,
+      "pokemonId": "MALAMAR_TEMP_EVOLUTION_MEGA",
+      "form": "MALAMAR_TEMP_EVOLUTION_MEGA",
+      "name": "メガカラマネロ",
+      "nameJa": "メガカラマネロ",
+      "nameEn": "Mega Malamar",
+      "typesJa": [
+        "あく",
+        "エスパー"
+      ],
+      "typesEn": [
+        "dark",
+        "psychic"
+      ],
+      "baseStats": {
+        "hp": 200,
+        "attack": 208,
+        "defence": 222
+      },
+      "baseTotal": 630,
       "moves": {
         "normal": [],
         "special": []
@@ -34155,6 +34991,62 @@
       }
     },
     {
+      "id": 845,
+      "no": 845,
+      "pokemonId": "CRAMORANT",
+      "form": "CRAMORANT_GORGING",
+      "formLabelJa": "",
+      "name": "ウッウ",
+      "nameJa": "ウッウ",
+      "nameEn": "Cramorant",
+      "typesJa": [
+        "ひこう",
+        "みず"
+      ],
+      "typesEn": [
+        "flying",
+        "water"
+      ],
+      "baseStats": {
+        "hp": 172,
+        "attack": 173,
+        "defence": 163
+      },
+      "baseTotal": 508,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 845,
+      "no": 845,
+      "pokemonId": "CRAMORANT",
+      "form": "CRAMORANT_GULPING",
+      "formLabelJa": "",
+      "name": "ウッウ",
+      "nameJa": "ウッウ",
+      "nameEn": "Cramorant",
+      "typesJa": [
+        "ひこう",
+        "みず"
+      ],
+      "typesEn": [
+        "flying",
+        "water"
+      ],
+      "baseStats": {
+        "hp": 172,
+        "attack": 173,
+        "defence": 163
+      },
+      "baseTotal": 508,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 846,
       "no": 846,
       "pokemonId": "ARROKUDA",
@@ -35007,6 +35899,31 @@
         "defence": 170
       },
       "baseTotal": 526,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
+      "id": 870,
+      "no": 870,
+      "pokemonId": "FALINKS_TEMP_EVOLUTION_MEGA",
+      "form": "FALINKS_TEMP_EVOLUTION_MEGA",
+      "name": "メガタイレーツ",
+      "nameJa": "メガタイレーツ",
+      "nameEn": "Mega Falinks",
+      "typesJa": [
+        "かくとう"
+      ],
+      "typesEn": [
+        "fighting"
+      ],
+      "baseStats": {
+        "hp": 163,
+        "attack": 267,
+        "defence": 229
+      },
+      "baseTotal": 659,
       "moves": {
         "normal": [],
         "special": []
@@ -39337,6 +40254,32 @@
       }
     },
     {
+      "id": 999,
+      "no": 999,
+      "pokemonId": "GIMMIGHOUL",
+      "form": "GIMMIGHOUL_COIN_A2_2026",
+      "formLabelJa": "",
+      "name": "コレクレー",
+      "nameJa": "コレクレー",
+      "nameEn": "Gimmighoul",
+      "typesJa": [
+        "ゴースト"
+      ],
+      "typesEn": [
+        "ghost"
+      ],
+      "baseStats": {
+        "hp": 128,
+        "attack": 140,
+        "defence": 76
+      },
+      "baseTotal": 344,
+      "moves": {
+        "normal": [],
+        "special": []
+      }
+    },
+    {
       "id": 1000,
       "no": 1000,
       "pokemonId": "GHOLDENGO",
@@ -39647,12 +40590,12 @@
     {
       "id": 1009,
       "no": 1009,
-      "pokemonId": "1009",
-      "form": "WALKINGWAKE",
+      "pokemonId": "WALKINGWAKE",
+      "form": "",
       "formLabelJa": "",
-      "name": "1009",
-      "nameJa": "1009",
-      "nameEn": "1009",
+      "name": "WALKINGWAKE",
+      "nameJa": "WALKINGWAKE",
+      "nameEn": "WALKINGWAKE",
       "typesJa": [
         "みず",
         "ドラゴン"
@@ -39675,12 +40618,12 @@
     {
       "id": 1010,
       "no": 1010,
-      "pokemonId": "1010",
-      "form": "IRONLEAVES",
+      "pokemonId": "IRONLEAVES",
+      "form": "",
       "formLabelJa": "",
-      "name": "1010",
-      "nameJa": "1010",
-      "nameEn": "1010",
+      "name": "IRONLEAVES",
+      "nameJa": "IRONLEAVES",
+      "nameEn": "IRONLEAVES",
       "typesJa": [
         "くさ",
         "エスパー"
@@ -39703,12 +40646,12 @@
     {
       "id": 1011,
       "no": 1011,
-      "pokemonId": "1011",
-      "form": "DIPPLIN",
+      "pokemonId": "DIPPLIN",
+      "form": "",
       "formLabelJa": "",
-      "name": "1011",
-      "nameJa": "1011",
-      "nameEn": "1011",
+      "name": "DIPPLIN",
+      "nameJa": "DIPPLIN",
+      "nameEn": "DIPPLIN",
       "typesJa": [
         "くさ",
         "ドラゴン"
@@ -39731,12 +40674,12 @@
     {
       "id": 1012,
       "no": 1012,
-      "pokemonId": "1012",
-      "form": "POLTCHAGEIST",
+      "pokemonId": "POLTCHAGEIST",
+      "form": "",
       "formLabelJa": "",
-      "name": "1012",
-      "nameJa": "1012",
-      "nameEn": "1012",
+      "name": "POLTCHAGEIST",
+      "nameJa": "POLTCHAGEIST",
+      "nameEn": "POLTCHAGEIST",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39759,12 +40702,12 @@
     {
       "id": 1012,
       "no": 1012,
-      "pokemonId": "1012",
+      "pokemonId": "POLTCHAGEIST",
       "form": "POLTCHAGEIST_ARTISAN",
       "formLabelJa": "",
-      "name": "1012",
-      "nameJa": "1012",
-      "nameEn": "1012",
+      "name": "POLTCHAGEIST",
+      "nameJa": "POLTCHAGEIST",
+      "nameEn": "POLTCHAGEIST",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39787,12 +40730,12 @@
     {
       "id": 1012,
       "no": 1012,
-      "pokemonId": "1012",
+      "pokemonId": "POLTCHAGEIST",
       "form": "POLTCHAGEIST_COUNTERFEIT",
       "formLabelJa": "",
-      "name": "1012",
-      "nameJa": "1012",
-      "nameEn": "1012",
+      "name": "POLTCHAGEIST",
+      "nameJa": "POLTCHAGEIST",
+      "nameEn": "POLTCHAGEIST",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39815,12 +40758,12 @@
     {
       "id": 1013,
       "no": 1013,
-      "pokemonId": "1013",
-      "form": "SINISTCHA",
+      "pokemonId": "SINISTCHA",
+      "form": "",
       "formLabelJa": "",
-      "name": "1013",
-      "nameJa": "1013",
-      "nameEn": "1013",
+      "name": "SINISTCHA",
+      "nameJa": "SINISTCHA",
+      "nameEn": "SINISTCHA",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39843,12 +40786,12 @@
     {
       "id": 1013,
       "no": 1013,
-      "pokemonId": "1013",
+      "pokemonId": "SINISTCHA",
       "form": "SINISTCHA_MASTERPIECE",
       "formLabelJa": "",
-      "name": "1013",
-      "nameJa": "1013",
-      "nameEn": "1013",
+      "name": "SINISTCHA",
+      "nameJa": "SINISTCHA",
+      "nameEn": "SINISTCHA",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39871,12 +40814,12 @@
     {
       "id": 1013,
       "no": 1013,
-      "pokemonId": "1013",
+      "pokemonId": "SINISTCHA",
       "form": "SINISTCHA_UNREMARKABLE",
       "formLabelJa": "",
-      "name": "1013",
-      "nameJa": "1013",
-      "nameEn": "1013",
+      "name": "SINISTCHA",
+      "nameJa": "SINISTCHA",
+      "nameEn": "SINISTCHA",
       "typesJa": [
         "くさ",
         "ゴースト"
@@ -39899,12 +40842,12 @@
     {
       "id": 1014,
       "no": 1014,
-      "pokemonId": "1014",
-      "form": "OKIDOGI",
+      "pokemonId": "OKIDOGI",
+      "form": "",
       "formLabelJa": "",
-      "name": "1014",
-      "nameJa": "1014",
-      "nameEn": "1014",
+      "name": "OKIDOGI",
+      "nameJa": "OKIDOGI",
+      "nameEn": "OKIDOGI",
       "typesJa": [
         "どく",
         "かくとう"
@@ -39927,12 +40870,12 @@
     {
       "id": 1015,
       "no": 1015,
-      "pokemonId": "1015",
-      "form": "MUNKIDORI",
+      "pokemonId": "MUNKIDORI",
+      "form": "",
       "formLabelJa": "",
-      "name": "1015",
-      "nameJa": "1015",
-      "nameEn": "1015",
+      "name": "MUNKIDORI",
+      "nameJa": "MUNKIDORI",
+      "nameEn": "MUNKIDORI",
       "typesJa": [
         "どく",
         "エスパー"
@@ -39955,12 +40898,12 @@
     {
       "id": 1016,
       "no": 1016,
-      "pokemonId": "1016",
-      "form": "FEZANDIPITI",
+      "pokemonId": "FEZANDIPITI",
+      "form": "",
       "formLabelJa": "",
-      "name": "1016",
-      "nameJa": "1016",
-      "nameEn": "1016",
+      "name": "FEZANDIPITI",
+      "nameJa": "FEZANDIPITI",
+      "nameEn": "FEZANDIPITI",
       "typesJa": [
         "どく",
         "フェアリー"
@@ -39983,12 +40926,12 @@
     {
       "id": 1017,
       "no": 1017,
-      "pokemonId": "1017",
-      "form": "OGERPON",
+      "pokemonId": "OGERPON",
+      "form": "",
       "formLabelJa": "",
-      "name": "1017",
-      "nameJa": "1017",
-      "nameEn": "1017",
+      "name": "OGERPON",
+      "nameJa": "OGERPON",
+      "nameEn": "OGERPON",
       "typesJa": [
         "くさ"
       ],
@@ -40009,12 +40952,12 @@
     {
       "id": 1018,
       "no": 1018,
-      "pokemonId": "1018",
-      "form": "ARCHALUDON",
+      "pokemonId": "ARCHALUDON",
+      "form": "",
       "formLabelJa": "",
-      "name": "1018",
-      "nameJa": "1018",
-      "nameEn": "1018",
+      "name": "ARCHALUDON",
+      "nameJa": "ARCHALUDON",
+      "nameEn": "ARCHALUDON",
       "typesJa": [
         "はがね",
         "ドラゴン"
@@ -40037,12 +40980,12 @@
     {
       "id": 1019,
       "no": 1019,
-      "pokemonId": "1019",
-      "form": "HYDRAPPLE",
+      "pokemonId": "HYDRAPPLE",
+      "form": "",
       "formLabelJa": "",
-      "name": "1019",
-      "nameJa": "1019",
-      "nameEn": "1019",
+      "name": "HYDRAPPLE",
+      "nameJa": "HYDRAPPLE",
+      "nameEn": "HYDRAPPLE",
       "typesJa": [
         "くさ",
         "ドラゴン"
@@ -40065,12 +41008,12 @@
     {
       "id": 1020,
       "no": 1020,
-      "pokemonId": "1020",
-      "form": "GOUGINGFIRE",
+      "pokemonId": "GOUGINGFIRE",
+      "form": "",
       "formLabelJa": "",
-      "name": "1020",
-      "nameJa": "1020",
-      "nameEn": "1020",
+      "name": "GOUGINGFIRE",
+      "nameJa": "GOUGINGFIRE",
+      "nameEn": "GOUGINGFIRE",
       "typesJa": [
         "ほのお",
         "ドラゴン"
@@ -40093,12 +41036,12 @@
     {
       "id": 1021,
       "no": 1021,
-      "pokemonId": "1021",
-      "form": "RAGINGBOLT",
+      "pokemonId": "RAGINGBOLT",
+      "form": "",
       "formLabelJa": "",
-      "name": "1021",
-      "nameJa": "1021",
-      "nameEn": "1021",
+      "name": "RAGINGBOLT",
+      "nameJa": "RAGINGBOLT",
+      "nameEn": "RAGINGBOLT",
       "typesJa": [
         "でんき",
         "ドラゴン"
@@ -40121,12 +41064,12 @@
     {
       "id": 1022,
       "no": 1022,
-      "pokemonId": "1022",
-      "form": "IRONBOULDER",
+      "pokemonId": "IRONBOULDER",
+      "form": "",
       "formLabelJa": "",
-      "name": "1022",
-      "nameJa": "1022",
-      "nameEn": "1022",
+      "name": "IRONBOULDER",
+      "nameJa": "IRONBOULDER",
+      "nameEn": "IRONBOULDER",
       "typesJa": [
         "いわ",
         "エスパー"
@@ -40149,12 +41092,12 @@
     {
       "id": 1023,
       "no": 1023,
-      "pokemonId": "1023",
-      "form": "IRONCROWN",
+      "pokemonId": "IRONCROWN",
+      "form": "",
       "formLabelJa": "",
-      "name": "1023",
-      "nameJa": "1023",
-      "nameEn": "1023",
+      "name": "IRONCROWN",
+      "nameJa": "IRONCROWN",
+      "nameEn": "IRONCROWN",
       "typesJa": [
         "はがね",
         "エスパー"
@@ -40177,12 +41120,12 @@
     {
       "id": 1024,
       "no": 1024,
-      "pokemonId": "1024",
-      "form": "TERAPAGOS",
+      "pokemonId": "TERAPAGOS",
+      "form": "",
       "formLabelJa": "",
-      "name": "1024",
-      "nameJa": "1024",
-      "nameEn": "1024",
+      "name": "TERAPAGOS",
+      "nameJa": "TERAPAGOS",
+      "nameEn": "TERAPAGOS",
       "typesJa": [
         "ノーマル"
       ],
@@ -40203,12 +41146,12 @@
     {
       "id": 1025,
       "no": 1025,
-      "pokemonId": "1025",
-      "form": "PECHARUNT",
+      "pokemonId": "PECHARUNT",
+      "form": "",
       "formLabelJa": "",
-      "name": "1025",
-      "nameJa": "1025",
-      "nameEn": "1025",
+      "name": "PECHARUNT",
+      "nameJa": "PECHARUNT",
+      "nameEn": "PECHARUNT",
       "typesJa": [
         "どく",
         "ゴースト"
