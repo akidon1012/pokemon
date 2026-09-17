@@ -1,6 +1,5 @@
 const GO_META_LIST   = window.POKEMON_GO_META || window.POKEMON_GO_META_LOCALIZED || [];
 const MOVES_MASTER   = window.MOVES_MASTER_LOCALIZED || window.MOVES_MASTER || [];
-const MOVE_NAME_DICT = window.MOVE_NAME_DICT || {};
 
 // === フォームごとのタイプ上書きテーブル（手動定義） ===
 const TYPE_OVERRIDE_BY_FORM = {
@@ -335,145 +334,6 @@ const pokemonCard = {
     $area.empty().html(html);
   },
 
-  // 1匹表示用カード
-  build: function (poke) {
-    const baseName = poke.nameJa || poke.name || poke.nameEn || '';
-    const regionLabel = pokemonUtil.getFormRegionLabel(
-      poke.form || '',
-      poke.templateId || '',
-      poke.pokemonId || ''
-    );
-
-    const nameJa = (pokemonUtil && typeof pokemonUtil.getDisplayNameJa === 'function')
-      ? pokemonUtil.getDisplayNameJa(poke)
-      : (poke.nameJa || poke.name || poke.nameEn || '');
-    const typesJa = Array.isArray(poke.typesJa || poke.types)
-      ? (poke.typesJa || poke.types)
-      : [];
-
-    const statsSrc = poke.stats || poke.baseStats || {};
-    const atk = statsSrc.attack  || statsSrc.atk     || 0;
-    const def = statsSrc.defence || statsSrc.def     || 0;
-    const sta = statsSrc.stamina || statsSrc.hp      || statsSrc.sta || 0;
-
-    const movesObj     = poke.moves || {};
-    const normalMoves  = Array.isArray(movesObj.normal)  ? movesObj.normal  : [];
-    const specialMoves = Array.isArray(movesObj.special) ? movesObj.special : [];
-
-    const h    = [];
-    const esc  = pokemonUtil.escapeHtml;
-    const toEn = pokemonUtil.toEnTypeLower;
-
-    // =========================
-    // 外枠
-    // =========================
-    h.push('<div class="pokemon-search-result js_pokemon-search-result">');
-
-    // -------------------------
-    // ヘッダー（名前＋タイプ）
-    // -------------------------
-    h.push('<div class="pokemon-info-list-item-header js_pokemon-info-list-item-header">');
-    h.push('<div class="pokemon-info-wrapper">');
-    h.push('<a href="javascript:void(0);" class="js_toggle-trigger is_toggle-opened">');
-
-    // 名前
-    h.push('<div class="pokemon-info-name">' + esc(nameJa) + '</div>');
-
-    // タイプ（badge）
-    h.push('<div class="pokemon-info-type">');
-    typesJa.forEach(function (tJa) {
-      const tEn = toEn(tJa);
-      h.push('<div class="badge">');
-      h.push('<span class="icon-type icon-type-' + tEn + '"></span>' + esc(tJa));
-      h.push('</div>');
-    });
-    h.push('</div>'); // .pokemon-info-type
-
-    h.push('</a>');
-    h.push('</div>'); // .pokemon-info-wrapper
-    h.push('</div>'); // .pokemon-info-list-item-header
-
-    // -------------------------
-    // 本体（toggleコンテンツ）
-    // -------------------------
-    h.push('<div class="js_toggle-content is_toggle-opened" style="display: block;">');
-
-    // 種族値(GO)
-    h.push('<dl class="pokemon-info-score">');
-    h.push('<dt class="pokemon-info-score-label">種族値(GO)</dt>');
-    h.push('<dl class="pokemon-info-score-value">');
-    h.push('<ul class="pokemon-info-score-list">');
-
-    if (atk) {
-      h.push('<li class="pokemon-info-score-list-item">');
-      h.push('こうげき <span class="num">' + atk + '</span>');
-      h.push('</li>');
-    }
-    if (def) {
-      h.push('<li class="pokemon-info-score-list-item">');
-      h.push('ぼうぎょ <span class="num">' + def + '</span>');
-      h.push('</li>');
-    }
-    if (sta) {
-      h.push('<li class="pokemon-info-score-list-item">');
-      h.push('HP <span class="num">' + sta + '</span>');
-      h.push('</li>');
-    }
-
-    h.push('</ul>');
-    h.push('</dl>');
-    h.push('</dl>');
-
-    // -------------------------
-    // わざラッパー
-    // -------------------------
-    h.push('<div class="pokemon-info-list-item-attack-wrapper">');
-
-    // ===== ノーマルわざ（ゲージなし想定のまま）=====
-    if (normalMoves.length) {
-      h.push('<div class="pokemon-info-list-item-attack-wrapper">');
-      h.push('<dl class="pokemon-info-list-item-attack">');
-      h.push('<dt class="pokemon-info-list-item-attack-label">ノーマル</dt>');
-
-      normalMoves.forEach(function (mv) {
-        // 1匹表示ではノーマルはゲージなし・星なし
-        h.push(pokemonCard.buildMoveRow(mv, {
-          gaugeId: '',      // 必要なら resolveGaugeId(mv) にしてもOK
-          rating: 0
-        }));
-      });
-
-      h.push('</dl>');
-      h.push('</div>');
-    }
-
-    // ===== スペシャルわざ（ゲージあり・★なし）=====
-    if (specialMoves.length) {
-      h.push('<div class="pokemon-info-list-item-attack-wrapper">');
-      h.push('<dl class="pokemon-info-list-item-attack">');
-      h.push('<dt class="pokemon-info-list-item-attack-label">スペシャル</dt>');
-
-      specialMoves.forEach(function (mv) {
-        const gaugeId = pokemonCard.resolveGaugeId(mv);
-
-        h.push(pokemonCard.buildMoveRow(mv, {
-          gaugeId: gaugeId, // ゲージは欲しい
-          rating: 0         // 1匹表示では星なし
-          // isStrongest: など必要あればここで
-        }));
-      });
-
-      h.push('</dl>');
-      h.push('</div>');
-    }
-
-    h.push('</div>'); // .pokemon-info-list-item-attack-wrapper（外側）
-    h.push('</div>'); // .js_toggle-content
-    h.push('</div>'); // .pokemon-search-result
-
-    return h.join('');
-  },
-
 };
 window.pokemonCard = pokemonCard;
 
@@ -787,9 +647,6 @@ const pokemonUtil = {
       // タイプの上書き
       if (ov) {
         applyTypeOverride(pd, ov);
-
-        if (pd.typesEn || pd.typesJa) {
-        }
       }
 
       return pd;
@@ -797,10 +654,6 @@ const pokemonUtil = {
   })(),
 
   // 表示名（フォーム付き） ---------------------------------------
-  getDisplayName : function(poke) {
-    return poke.form ? (poke.name + '（' + poke.form + '）') : poke.name;
-  },
-
   getDisplayNameJa : function(pd) {
     if (!pd) return '';
 
@@ -2110,11 +1963,7 @@ const pokemonUtil = {
     const hit = MOVES_MASTER.find(function(m) {
       return String(m.id).toUpperCase() === id;
     });
-    if (hit) return hit;
-
-    // もし move_name_dict 経由で補完したければここで
-    // （今はそのまま返さないで null にしておく）
-    return null;
+    return hit || null;
   },
 
   // pokemon_list の1件＋GOメタをマージして moves を付ける
