@@ -796,51 +796,6 @@ const pokemonUtil = {
     };
   })(),
 
-  // =====================
-  // suffix_map から suffix を拾う新規ヘルパー
-  // =====================
-  resolveSpriteSuffixFromMap : function(p) {
-    const map = window.POKEMON_SPRITE_SUFFIX_MAP || {};
-    if (!p || !Object.keys(map).length) return null;
-
-    const keys = [];
-
-    if (p.pokemonId) keys.push(String(p.pokemonId).toUpperCase());
-    if (p.basePokemonId && p.tempId) {
-      keys.push(`${p.basePokemonId.toUpperCase()}_${p.tempId.toUpperCase()}`);
-    }
-    if (p.formKey) keys.push(String(p.formKey).toUpperCase());
-    if (p.formId && p.basePokemonId) keys.push(`${p.basePokemonId.toUpperCase()}_${p.formId.toUpperCase()}`);
-    if (p.tempEvoId && p.basePokemonId) keys.push(`${p.basePokemonId.toUpperCase()}_${p.tempEvoId.toUpperCase()}`);
-
-    for (const k of keys) {
-      const entry = map[k];
-      if (entry && entry.suffix) return String(entry.suffix);
-    }
-    return null;
-  },
-
-  listAvailableFormSuffix : function(no) {
-    if (!no && no !== 0) return [];
-
-    const n3    = String(no).padStart(3, '0'); // 001, 154, 865
-
-    const prefix = 'pokemon_icon_' + n3 + '_';
-    const suffixes = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const f = files[i];
-      if (!f.startsWith(prefix)) continue;
-      // pokemon_icon_001_00.png → 00
-      const m = f.match(/^pokemon_icon_\d+_(\d+)\.png$/i);
-      if (m && m[1]) {
-        suffixes.push(m[1]);
-      }
-    }
-
-    return suffixes;
-  },
-
   // 表示名（フォーム付き） ---------------------------------------
   getDisplayName : function(poke) {
     return poke.form ? (poke.name + '（' + poke.form + '）') : poke.name;

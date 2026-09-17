@@ -599,7 +599,7 @@ const matchup = {
       const tempId   = $a.attr('data-tempid')   || $a.attr('data-tempevoid') || null;
       const form     = $a.attr('data-form')     || null;
 
-      // 画像決定用の内部オブジェクト
+      // フォーム識別用の内部オブジェクト
       const pd = {
         no,
         id: no,
@@ -921,7 +921,7 @@ const matchup = {
           $a.attr('data-types-ja', p.typesJa.join(','));
         }
 
-        // 画像決定に必要な情報も埋めておく
+        // フォーム識別に必要な情報も埋めておく
         if (p.pokemonId) {
           $a.attr('data-pid', p.pokemonId);
         }
