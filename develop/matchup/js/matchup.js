@@ -123,6 +123,9 @@ const matchup = {
     syncEmptyClass : function() {
       const empty = $(matchup.getType.checkbox).filter(':checked').length === 0;
       $('body').toggleClass(matchup.getType.emptyClassName, empty);
+      if (typeof matchup.searchPokemon.renderSelectedOpponent === 'function') {
+        matchup.searchPokemon.renderSelectedOpponent();
+      }
     },
     ini : function(typeData) {
       $(document).off('change.pokemonType');
@@ -131,6 +134,9 @@ const matchup = {
         matchup.getType.checkbox,
         function() {
           const _this = $(this);
+          if (!matchup.searchPokemon._applyingPokemonTypes) {
+            matchup.searchPokemon._selectedPokemon = null;
+          }
           matchup.getType.check(typeData, _this);
           if (typeof matchup.searchPokemon.openList === 'function') {
             matchup.searchPokemon.openList();
@@ -160,6 +166,7 @@ const matchup = {
 
       // 0個 → 全クリア（相性表示・リスト・おすすめ）
       if (checked.length === 0) {
+        matchup.searchPokemon._selectedPokemon = null;
         matchup.getType.clear(); // ★ ここでおすすめリストも空にしている想定
         matchup.getType.syncEmptyClass();
         return;
@@ -578,8 +585,12 @@ const matchup = {
     },
 
     clearSelected : function(){
+      matchup.searchPokemon._selectedPokemon = null;
       $(this.selectedArea).empty();
       $(matchup.searchPokemon.recommendList).empty();
+      if (typeof matchup.searchPokemon.renderSelectedOpponent === 'function') {
+        matchup.searchPokemon.renderSelectedOpponent();
+      }
     },
 
     // ========== リスト項目 → pokeオブジェクトの正規化 ==========
@@ -698,15 +709,30 @@ const matchup = {
       const $resultArea = $('.js_pokemon-search-result');
       pokemonCard.render(poke, $resultArea);
 
+      const displayNameRaw = (typeof pokemonUtil.getDisplayNameJa === 'function')
+        ? pokemonUtil.getDisplayNameJa(poke)
+        : (poke.nameJa || poke.name || '');
+      const displayName = String(displayNameRaw).trim();
+
       // 7) タイプ選択チェックボックス反映（元の処理を維持）
       const typesJaSrc = poke.typesJa || poke.types;
       const typesJa = Array.isArray(typesJaSrc) ? typesJaSrc : [];
 
       if (typesJa.length) {
+        matchup.searchPokemon._applyingPokemonTypes = true;
+        matchup.searchPokemon._selectedPokemon = {
+          name: displayName,
+          typesJa: typesJa
+        };
         if (typeof matchup.searchPokemon.select === 'function') {
           matchup.searchPokemon.select(typesJa);
         }
+        matchup.searchPokemon._applyingPokemonTypes = false;
       } else {
+        matchup.searchPokemon._selectedPokemon = {
+          name: displayName,
+          typesJa: []
+        };
         if (matchup.getType && typeof matchup.getType.clear === 'function') {
           matchup.getType.clear();
         }
@@ -718,12 +744,9 @@ const matchup = {
         matchup.getType.syncEmptyClass();
       }
 
-      // 8) 検索テキストボックス更新（表示名は getDisplayNameJa 優先＋trim）
-      const displayNameRaw = (typeof pokemonUtil.getDisplayNameJa === 'function')
-        ? pokemonUtil.getDisplayNameJa(poke)
-        : (poke.nameJa || poke.name || '');
-      const displayName = String(displayNameRaw).trim();
+      matchup.searchPokemon.renderSelectedOpponent();
 
+      // 8) 検索テキストボックス更新
       const $input = $(matchup.searchPokemon.textbox);
       if ($input.length) {
         $input.val(displayName);
@@ -893,6 +916,48 @@ const matchup = {
     getAndOrMode : function() {
       const v = $('input[name="and_or"]:checked').val();
       return (v === 'or') ? 'or' : 'and'; // ← デフォルトはAND
+    },
+
+    renderSelectedOpponent : function() {
+      const $box = $('.js_pokemon-selected');
+      if (!$box.length) return;
+
+      const esc = (pokemonUtil && typeof pokemonUtil.escapeHtml === 'function')
+        ? pokemonUtil.escapeHtml
+        : function(s) { return String(s || ''); };
+
+      const typeBadges = function(typesJa) {
+        return (typesJa || []).map(function(ja) {
+          const enRaw = (pokemonUtil && pokemonUtil.translate && pokemonUtil.translate.JtoE)
+            ? pokemonUtil.translate.JtoE(ja)
+            : ja;
+          const en = String(enRaw || '').toLowerCase();
+          return '<div class="badge"><span class="icon-type icon-type-' + esc(en) + '"></span>' + esc(ja) + '</div>';
+        }).join('');
+      };
+
+      const picked = matchup.searchPokemon._selectedPokemon;
+      const selectedTypesJa = (typeof matchup.searchPokemon.getSelectedTypesJa === 'function')
+        ? matchup.searchPokemon.getSelectedTypesJa()
+        : [];
+      const typesJa = (picked && picked.typesJa && picked.typesJa.length)
+        ? picked.typesJa
+        : selectedTypesJa;
+      const badgesHtml = typesJa.length
+        ? '<div class="pokemon-selected-types">' + typeBadges(typesJa) + '</div>'
+        : '';
+
+      if (picked && picked.name) {
+        $box.html('<div class="pokemon-selected-name">' + esc(picked.name) + '</div>' + badgesHtml);
+        return;
+      }
+
+      if (typesJa.length) {
+        $box.html('<div class="pokemon-selected-label">相手のタイプ</div>' + badgesHtml);
+        return;
+      }
+
+      $box.empty();
     },
 
     clear : function(list) {
@@ -1187,61 +1252,62 @@ const matchup = {
 
         const seNormal  = [];
         const seSpecial = [];
-        let bestMoveScore = 0;
+        const cycleNormals = [];
+        const cycleSpecials = [];
+        const seenMoveIds = new Set();
 
-        const getGaugeFactor = function(m) {
-          if (!m) return 1.0;
-          const energy = (typeof m.energy === 'number') ? m.energy : null;
-          if (energy == null || energy >= 0) return 1.0;
-
-          const abs = Math.abs(energy);
-
-          if (abs >= 75) return 1.0;   // 1ゲージ
-          if (abs >= 45) return 1.05;  // 2ゲージ
-          return 1.15;                 // 3ゲージ
-        };
-
-        const pushMove = function(m, category) {
+        const considerMove = function(m) {
           if (!m) return;
-          const typeEn = (m.typeEn || '').toString().toLowerCase();
+          if (pokemonUtil.isExcludedPveOhkoMove(m)) return;
+
+          const id = String(m.id || m.moveId || '');
+          if (!id || seenMoveIds.has(id)) return;
+          seenMoveIds.add(id);
+
+          const typeEn = (m.typeEn || m.type || '').toString().toLowerCase();
           if (!typeEn) return;
 
+          const cat = pokemonUtil.getMoveCategory(m);
           const mult = getMultVsDefenders(typeEn);
-          if (!isSE(mult)) return; // こうかばつぐん以外は候補外
-
-          const power = Number(m.power || 0);
-          if (!power) return;
-
-          // STAB 判定
-          const hasStab = attackerTypesEn.includes(typeEn);
-          const stab    = hasStab ? 1.2 : 1.0;
-
-          // ここではゲージ補正は入れず、純粋な火力だけを見る
-          const moveScore = power * mult * stab;
-
-          const move = $.extend({}, m, {
-            mult      : mult,
-            stab      : stab,
-            moveScore : moveScore,
-            category  : category
+          const hasStab = attackerTypesEn.indexOf(typeEn) >= 0;
+          const stab = hasStab ? 1.2 : 1.0;
+          const power = pokemonUtil.getPvePower(m);
+          const moveScore = (power && isSE(mult)) ? (power * mult * stab) : 0;
+          const tagged = $.extend({}, m, {
+            mult: mult,
+            stab: stab,
+            moveScore: moveScore,
+            category: cat
           });
 
-          if (category === 'normal') {
-            seNormal.push(move);
-          } else {
-            seSpecial.push(move);
-          }
+          if (cat === 'normal') cycleNormals.push(tagged);
+          else cycleSpecials.push(tagged);
 
-          if (moveScore > bestMoveScore) bestMoveScore = moveScore;
+          if (isSE(mult) && power) {
+            if (cat === 'normal') seNormal.push(tagged);
+            else seSpecial.push(tagged);
+          }
         };
 
-        normalMoves.forEach(function(m){ pushMove(m, 'normal'); });
-        specialMoves.forEach(function(m){ pushMove(m, 'special'); });
+        normalMoves.forEach(considerMove);
+        specialMoves.forEach(considerMove);
 
-        // SE 技が1つもなければ候補外
+        // SE 技が1つもなければ候補外（通常技／スペシャルどちらか一方で可）
         if (!seNormal.length && !seSpecial.length) return;
 
-        // 技一覧は威力順にソート（降順）
+        const cycleRank = pokemonUtil.buildPveMoveCycleRanking({
+          normals: cycleNormals,
+          specials: cycleSpecials,
+          attackerTypesEn: attackerTypesEn,
+          getMultVsDefenders: getMultVsDefenders,
+          limit: 3
+        });
+
+        // ばつぐん技はあるが、PvEサイクルを組めない場合は順位付けしない
+        if (!cycleRank || !cycleRank.bestCycleDps) return;
+
+        const bestCycleDps = cycleRank.bestCycleDps;
+
         seNormal.sort(function(a, b) {
           return (b.moveScore || 0) - (a.moveScore || 0);
         });
@@ -1281,8 +1347,8 @@ const matchup = {
         const adjMult   = Math.max(1.0, bossDamageMult);
         const defPenalty = Math.pow(adjMult, DEF_POW);
 
-        // ★ 最終モンスコア：技火力 × 種族値ウェイト ÷ 防御ペナルティ
-        const monScore = (bestMoveScore * statWeight) / (defPenalty || 1);
+        // ★ 最終モンスコア：技構成DPS × 種族値ウェイト ÷ 防御ペナルティ
+        const monScore = (bestCycleDps * statWeight) / (defPenalty || 1);
 
         // 表示用タイプ（日本語）は、上書きがあればそちら優先
         const typesJa = formOverride && Array.isArray(formOverride.typesJa) && formOverride.typesJa.length
@@ -1333,10 +1399,12 @@ const matchup = {
             normal:  seNormal,
             special: seSpecial
           },
+          moveSets:     cycleRank.moveSets,
+          bestCycleDps: bestCycleDps,
           goStats:      pd.goStats || {},
           baseTotal:    pd.baseTotal || 0,
           score:        monScore,
-          maxMoveScore: bestMoveScore
+          maxMoveScore: bestCycleDps
         });
       });
 
@@ -1418,14 +1486,11 @@ const matchup = {
       // --------------------------------------------------
 
       const getGaugeFactorForRating = function(m) {
-        if (!m) return 1.0;
-        const energy = (typeof m.energy === 'number') ? m.energy : null;
-        if (energy == null || energy >= 0) return 1.0;
-
-        const abs = Math.abs(energy);
-        if (abs >= 75) return 0.9;
-        if (abs >= 45) return 1.0;
-        return 1.2;
+        const bars = pokemonUtil.pveGaugeBars(pokemonUtil.getPveEnergyDelta(m));
+        if (bars === 1) return 0.9;
+        if (bars === 2) return 1.0;
+        if (bars === 3) return 1.2;
+        return 1.0;
       };
 
       const SCORE_MIN = 50;
@@ -1449,25 +1514,16 @@ const matchup = {
       };
 
       const gaugeOffset = function (mv) {
-        const energy = (typeof mv.energy === 'number') ? mv.energy : null;
-        if (energy == null || energy >= 0) return 0;
-
-        const abs = Math.abs(energy);
-
-        if (abs >= 75) return -2; // 1ゲージ
-        if (abs >= 45) return 0;  // 2ゲージ
-        return +1;                // 3ゲージ
+        const bars = pokemonUtil.pveGaugeBars(pokemonUtil.getPveEnergyDelta(mv));
+        if (bars === 1) return -2;
+        if (bars === 2) return 0;
+        if (bars === 3) return +1;
+        return 0;
       };
 
       const resolveGaugeIdFromEnergy = function (mv) {
         if (mv.__gaugeSvgId) return mv.__gaugeSvgId;
-        const energy = mv.energy;
-        if (energy == null || energy >= 0) return '';
-
-        const abs = Math.abs(energy);
-        if (abs >= 75) return 'gauge1';
-        if (abs >= 45) return 'gauge2';
-        return 'gauge3';
+        return pokemonUtil.pveGaugeSvgId(pokemonUtil.getPveEnergyDelta(mv));
       };
 
       // 各ポケモンのスペシャル技に評価を付与
@@ -1483,6 +1539,7 @@ const matchup = {
         let bestIndex = -1;
 
         specials.forEach(function (mv, idx) {
+          if (pokemonUtil.isExcludedPveOhkoMove(mv)) return;
           const baseScoreRaw = Number(mv.moveScore || 0);
           if (!Number.isFinite(baseScoreRaw) || baseScoreRaw <= 0) return;
 

@@ -10,7 +10,7 @@ Pokémon Matchup Helper の「対策おすすめ」で、候補ポケモンを�
 おすすめ順位は、単純なタイプ相性だけではなく、次の要素を組み合わせて決定する。
 
 1. 相手に「ばつぐん」を取れる技を持っているか
-2. その技の威力・タイプ相性・STAB
+2. 通常技＋スペシャル技の簡易攻撃サイクル（cycleDps）
 3. ポケモン自身の GO 種族値（攻撃をやや重視）
 4. 相手タイプから受けるダメージ倍率
 
@@ -21,11 +21,11 @@ Pokémon Matchup Helper の「対策おすすめ」で、候補ポケモンを�
     ↓
 各攻撃タイプの相性倍率を計算
     ↓
-各ポケモンの技を評価
+通常技 × スペシャル技の技構成を評価
     ↓
 「ばつぐん」を取れる技がないポケモンを除外
     ↓
-最も高い技スコアを取得
+最も高い cycleDps を取得
     ↓
 GO種族値によるウェイトを計算
     ↓
@@ -49,7 +49,7 @@ GO種族値によるウェイトを計算
 
 相性データは `type_defense.json` を使用する。
 
-おすすめ候補に使う技は、最終倍率が **1.6 以上**のものだけ。
+おすすめ候補に含める条件は、通常技かスペシャル技の**どちらか一方でも**最終倍率が **1.6 以上**であること。
 
 ```js
 const isSE = function(mult) {
@@ -59,19 +59,50 @@ const isSE = function(mult) {
 
 つまり「ふつう」「いまひとつ」の技しか持たないポケモンは、おすすめ候補から除外する。
 
-## 2. 技スコア
+技構成の cycleDps 自体は、ばつぐんでない技との組み合わせも含めて計算する。
+片方だけばつぐん（例: チャージビーム＋クロスサンダー、りゅうのいぶき＋クロスサンダー）でも構成として残す。
+両方しばつぐん必須にすると、ゼクロムのようなケースで構成数が極端に減るため。
 
-通常技・スペシャル技の両方について、相手に「ばつぐん」を取れる技を評価する。
+## 2. 技構成スコア（cycleDps）
 
-技スコアは次の式。
+各ポケモンが覚える通常技 × スペシャル技の全組み合わせを評価する。
+
+通常技・スペシャル技の判定は `pve.energyDelta` の符号（正＝通常、負＝スペシャル）。両方ない場合のみ id の `/_FAST(?:_|$)/` にフォールバックする。
+
+各技のダメージ評価は次の式。
 
 ```text
-moveScore = power × typeMultiplier × STAB
+moveDamage = power × typeMultiplier × STAB
 ```
 
-### power
+技構成は簡易サイクルで評価する（余剰エネルギーの持ち越しはしない）。
 
-技の威力。
+```text
+normalCount = ceil( abs(special.energyDelta) / normal.energyDelta )
+cycleDamage = normalDamage × normalCount + specialDamage
+cycleTime   = normal.durationMs × normalCount + special.durationMs
+cycleDps    = cycleDamage / cycleTime × 1000
+```
+
+### power / energyDelta / durationMs
+
+レイド／ジム向けおすすめでは Game Master の PvE 値を使う。
+
+- `pve.power`
+- `pve.energyDelta`
+- `pve.durationMs`
+
+`HORN_DRILL` / `FISSURE` は通常のおすすめ評価対象から除外する。
+
+PvE 値が欠けてサイクルを組めない組み合わせはスキップする。
+
+ゲージ本数はおすすめ順位の計算には使わない。★評価とゲージ表示では次の対応を使う。
+
+```text
+-100 → 1ゲージ
+-50  → 2ゲージ
+-33  → 3ゲージ
+```
 
 ### typeMultiplier
 
@@ -98,15 +129,16 @@ moveScore = power × typeMultiplier × STAB
 
 実装上はフォームによるタイプ上書きも考慮して STAB を判定する。
 
-### bestMoveScore
+### bestCycleDps
 
-候補となった通常技・スペシャル技の中で、最も高い `moveScore` をそのポケモンの `bestMoveScore` とする。
+候補ポケモンの技構成のうち、最も高い `cycleDps` を `bestCycleDps` とする。
 
 ```text
-bestMoveScore = max(moveScore)
+bestCycleDps = max(cycleDps)
 ```
 
-おすすめ順位の計算ではゲージ数による補正は行わず、ここでは純粋な技火力を評価する。
+各ポケモンは cycleDps 上位3構成を `moveSets` として保持する。
+各構成には `relativePerformance = cycleDps / bestCycleDps` を付ける（そのポケモン内での相対値）。
 
 ## 3. GO種族値によるウェイト
 
@@ -181,13 +213,13 @@ defPenalty = adjMult ^ 0.25
 ポケモンごとのおすすめ順位に使用する最終スコアは次の式。
 
 ```text
-monScore = bestMoveScore × statWeight / defPenalty
+monScore = bestCycleDps × statWeight / defPenalty
 ```
 
 つまり、基本思想は次の通り。
 
 ```text
-技火力
+技構成の簡易DPS
   ×
 ポケモン自身の攻撃・耐久性能
   ÷
@@ -201,7 +233,7 @@ monScore = bestMoveScore × statWeight / defPenalty
 候補は次の優先順位で降順ソートする。
 
 1. `score`（最終総合スコア）
-2. `maxMoveScore`（最大技スコア）
+2. `bestCycleDps`（最大技構成DPS。互換のため `maxMoveScore` にも同じ値を入れる）
 3. GO の Attack
 4. `baseTotal`
 
@@ -226,10 +258,12 @@ baseScore = moveScore × statFactorForRating
 
 ### ゲージ補正
 
+PvE の `energyDelta` からゲージ本数を決め、次の補正を加える。
+
 ```text
-1ゲージ  -2
-2ゲージ   0
-3ゲージ  +1
+-100（1ゲージ）  -2
+-50（2ゲージ）    0
+-33（3ゲージ）   +1
 ```
 
 ### 相性・STAB補正
@@ -253,9 +287,9 @@ STABのみ            +0.3
 
 ## 8. おすすめ順位と★評価を分けている理由
 
-おすすめ順位では「どのポケモンを対策候補として選ぶか」を評価するため、最も強い有効技・種族値・防御上の不利を組み合わせる。
+おすすめ順位では「どのポケモンを対策候補として選ぶか」を評価するため、通常技＋スペシャル技の簡易サイクルDPS・種族値・防御上の不利を組み合わせる。
 
-一方、★評価は「そのポケモンが持つスペシャル技の中で、どの技が使いやすく有力か」を見せるための表示指標で、ゲージ数も考慮する。
+一方、★評価は「そのポケモンが持つスペシャル技の中で、どの技が使いやすく有力か」を見せるための表示指標で、ゲージ数も考慮する。現状のカードUIはまだこの★評価を使っている。
 
 この2つは目的が異なるため、同じスコア式にはしていない。
 
@@ -282,6 +316,10 @@ STABのみ            +0.3
 ```text
 develop/matchup/js/matchup.js
 └─ matchup.recommend.recommendCounters()
+
+develop/matchup/js/utilities.js
+└─ pokemonUtil.evaluatePveMoveCycle()
+└─ pokemonUtil.buildPveMoveCycleRanking()
 ```
 
 関連データ：

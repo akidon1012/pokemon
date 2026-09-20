@@ -9,6 +9,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2150,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "WRAP",
     "resourceId": "move_name_0137"
   },
@@ -22,6 +34,18 @@
     "power": 150,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3500,
+      "damageWindowEndMs": 3800
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "HYPER_BEAM",
     "resourceId": "move_name_0014"
   },
@@ -35,6 +59,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "DARK_PULSE",
     "resourceId": "move_name_0016"
   },
@@ -48,6 +84,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1450
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "SLUDGE",
     "resourceId": "move_name_0018"
   },
@@ -61,6 +109,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 35,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "VICE_GRIP",
     "resourceId": null
   },
@@ -74,6 +134,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "FLAME_WHEEL",
     "resourceId": "move_name_0021"
   },
@@ -87,6 +159,18 @@
     "power": 110,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "MEGAHORN",
     "resourceId": "move_name_0022"
   },
@@ -100,6 +184,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "FLAMETHROWER",
     "resourceId": "move_name_0024"
   },
@@ -113,6 +209,18 @@
     "power": 70,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 4500,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 4300
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "DIG",
     "resourceId": "move_name_0026"
   },
@@ -126,6 +234,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -50,
+      "durationMs": 1500,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1200
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "CROSS_CHOP",
     "resourceId": "move_name_0028"
   },
@@ -139,6 +259,18 @@
     "power": 70,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "PSYBEAM",
     "resourceId": "move_name_0030"
   },
@@ -152,6 +284,18 @@
     "power": 120,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "EARTHQUAKE",
     "resourceId": "move_name_0031"
   },
@@ -165,6 +309,18 @@
     "power": 100,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "STONE_EDGE",
     "resourceId": "move_name_0032"
   },
@@ -178,6 +334,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "ICE_PUNCH",
     "resourceId": "move_name_0033"
   },
@@ -191,6 +359,18 @@
     "power": 40,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "HEART_STAMP",
     "resourceId": "move_name_0034"
   },
@@ -204,6 +384,18 @@
     "power": 55,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2100
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "DISCHARGE",
     "resourceId": "move_name_0035"
   },
@@ -217,6 +409,18 @@
     "power": 110,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "FLASH_CANNON",
     "resourceId": "move_name_0036"
   },
@@ -230,6 +434,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "DRILL_PECK",
     "resourceId": "move_name_0038"
   },
@@ -243,6 +459,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "ICE_BEAM",
     "resourceId": "move_name_0039"
   },
@@ -256,6 +484,18 @@
     "power": 140,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 140,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "BLIZZARD",
     "resourceId": "move_name_0040"
   },
@@ -269,6 +509,18 @@
     "power": 75,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "HEAT_WAVE",
     "resourceId": "move_name_0042"
   },
@@ -282,6 +534,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "AERIAL_ACE",
     "resourceId": "move_name_0045"
   },
@@ -295,6 +559,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "DRILL_RUN",
     "resourceId": "move_name_0046"
   },
@@ -308,6 +584,18 @@
     "power": 110,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 110,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "PETAL_BLIZZARD",
     "resourceId": "move_name_0047"
   },
@@ -321,6 +609,18 @@
     "power": 25,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 25,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 25,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "MEGA_DRAIN",
     "resourceId": "move_name_0048"
   },
@@ -334,6 +634,18 @@
     "power": 100,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2900
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "BUG_BUZZ",
     "resourceId": "move_name_0049"
   },
@@ -347,6 +659,18 @@
     "power": 45,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 30,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1200
+    },
+    "pvp": {
+      "power": 45,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "POISON_FANG",
     "resourceId": "move_name_0050"
   },
@@ -360,6 +684,18 @@
     "power": 50,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "NIGHT_SLASH",
     "resourceId": "move_name_0051"
   },
@@ -373,6 +709,18 @@
     "power": 25,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1550,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 25,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "BUBBLE_BEAM",
     "resourceId": "move_name_0053"
   },
@@ -386,6 +734,18 @@
     "power": 60,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SUBMISSION",
     "resourceId": "move_name_0054"
   },
@@ -399,6 +759,18 @@
     "power": 40,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1750
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "LOW_SWEEP",
     "resourceId": "move_name_0056"
   },
@@ -412,6 +784,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "AQUA_JET",
     "resourceId": "move_name_0057"
   },
@@ -425,6 +809,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1750
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "AQUA_TAIL",
     "resourceId": "move_name_0058"
   },
@@ -438,6 +834,18 @@
     "power": 55,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "SEED_BOMB",
     "resourceId": "move_name_0059"
   },
@@ -451,6 +859,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "PSYSHOCK",
     "resourceId": "move_name_0060"
   },
@@ -464,6 +884,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2850,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "ANCIENT_POWER",
     "resourceId": "move_name_0062"
   },
@@ -477,6 +909,18 @@
     "power": 75,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "ROCK_TOMB",
     "resourceId": "move_name_0063"
   },
@@ -490,6 +934,18 @@
     "power": 75,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "ROCK_SLIDE",
     "resourceId": "move_name_0064"
   },
@@ -503,6 +959,18 @@
     "power": 85,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "POWER_GEM",
     "resourceId": "move_name_0065"
   },
@@ -516,6 +984,18 @@
     "power": 75,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SHADOW_SNEAK",
     "resourceId": "move_name_0066"
   },
@@ -529,6 +1009,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 35,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "SHADOW_PUNCH",
     "resourceId": "move_name_0067"
   },
@@ -542,6 +1034,18 @@
     "power": 45,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 45,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "OMINOUS_WIND",
     "resourceId": "move_name_0069"
   },
@@ -555,6 +1059,18 @@
     "power": 100,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2400,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SHADOW_BALL",
     "resourceId": "move_name_0070"
   },
@@ -568,6 +1084,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2400,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "MAGNET_BOMB",
     "resourceId": "move_name_0072"
   },
@@ -581,6 +1109,18 @@
     "power": 70,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "IRON_HEAD",
     "resourceId": "move_name_0074"
   },
@@ -594,6 +1134,18 @@
     "power": 70,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2600
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "PARABOLIC_CHARGE",
     "resourceId": "move_name_0075"
   },
@@ -607,6 +1159,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 1750
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "THUNDER_PUNCH",
     "resourceId": "move_name_0077"
   },
@@ -620,6 +1184,18 @@
     "power": 100,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "THUNDER",
     "resourceId": "move_name_0078"
   },
@@ -633,6 +1209,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "THUNDERBOLT",
     "resourceId": "move_name_0079"
   },
@@ -646,6 +1234,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1150,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "TWISTER",
     "resourceId": "move_name_0080"
   },
@@ -659,6 +1259,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "DRAGON_PULSE",
     "resourceId": "move_name_0082"
   },
@@ -672,6 +1284,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1100
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "DRAGON_CLAW",
     "resourceId": "move_name_0083"
   },
@@ -685,6 +1309,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3600
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "DISARMING_VOICE",
     "resourceId": "move_name_0084"
   },
@@ -698,6 +1334,18 @@
     "power": 60,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1200
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "DRAINING_KISS",
     "resourceId": "move_name_0085"
   },
@@ -711,6 +1359,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 3300
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "DAZZLING_GLEAM",
     "resourceId": "move_name_0086"
   },
@@ -724,6 +1384,18 @@
     "power": 110,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 3800
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "MOONBLAST",
     "resourceId": "move_name_0087"
   },
@@ -737,6 +1409,18 @@
     "power": 90,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "PLAY_ROUGH",
     "resourceId": "move_name_0088"
   },
@@ -750,6 +1434,18 @@
     "power": 50,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "CROSS_POISON",
     "resourceId": "move_name_0089"
   },
@@ -763,6 +1459,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SLUDGE_BOMB",
     "resourceId": "move_name_0090"
   },
@@ -776,6 +1484,18 @@
     "power": 110,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "SLUDGE_WAVE",
     "resourceId": "move_name_0091"
   },
@@ -789,6 +1509,18 @@
     "power": 130,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2600
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "GUNK_SHOT",
     "resourceId": "move_name_0092"
   },
@@ -802,6 +1534,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "BONE_CLUB",
     "resourceId": "move_name_0094"
   },
@@ -815,6 +1559,18 @@
     "power": 45,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 45,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "BULLDOZE",
     "resourceId": "move_name_0095"
   },
@@ -828,6 +1584,18 @@
     "power": 65,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "MUD_BOMB",
     "resourceId": "move_name_0096"
   },
@@ -841,6 +1609,18 @@
     "power": 75,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "SIGNAL_BEAM",
     "resourceId": "move_name_0099"
   },
@@ -854,6 +1634,18 @@
     "power": 65,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "X_SCISSOR",
     "resourceId": "move_name_0100"
   },
@@ -867,6 +1659,18 @@
     "power": 65,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3100,
+      "damageWindowEndMs": 3650
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "FLAME_CHARGE",
     "resourceId": "move_name_0101"
   },
@@ -880,6 +1684,18 @@
     "power": 70,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "FLAME_BURST",
     "resourceId": "move_name_0102"
   },
@@ -893,6 +1709,18 @@
     "power": 140,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 2900,
+      "damageWindowEndMs": 3700
+    },
+    "pvp": {
+      "power": 140,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "FIRE_BLAST",
     "resourceId": "move_name_0103"
   },
@@ -906,6 +1734,18 @@
     "power": 60,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "BRINE",
     "resourceId": "move_name_0104"
   },
@@ -919,6 +1759,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "WATER_PULSE",
     "resourceId": "move_name_0105"
   },
@@ -932,6 +1784,18 @@
     "power": 85,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SCALD",
     "resourceId": "move_name_0134"
   },
@@ -945,6 +1809,18 @@
     "power": 130,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 135,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "HYDRO_PUMP",
     "resourceId": "move_name_0135"
   },
@@ -958,6 +1834,18 @@
     "power": 75,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "PSYCHIC",
     "resourceId": "move_name_0108"
   },
@@ -971,6 +1859,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "PSYSTRIKE",
     "resourceId": "move_name_0109"
   },
@@ -984,6 +1884,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "ICY_WIND",
     "resourceId": "move_name_0111"
   },
@@ -997,6 +1909,18 @@
     "power": 50,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "GIGA_DRAIN",
     "resourceId": "move_name_0114"
   },
@@ -1010,6 +1934,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "FIRE_PUNCH",
     "resourceId": "move_name_0115"
   },
@@ -1023,6 +1959,18 @@
     "power": 150,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 180,
+      "energyDelta": -100,
+      "durationMs": 5000,
+      "damageWindowStartMs": 2800,
+      "damageWindowEndMs": 4800
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "SOLAR_BEAM",
     "resourceId": "move_name_0116"
   },
@@ -1036,6 +1984,18 @@
     "power": 70,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1350,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "LEAF_BLADE",
     "resourceId": "move_name_0117"
   },
@@ -1049,6 +2009,18 @@
     "power": 90,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1150,
+      "damageWindowEndMs": 2250
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "POWER_WHIP",
     "resourceId": "move_name_0118"
   },
@@ -1062,6 +2034,18 @@
     "power": 45,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 45,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "AIR_CUTTER",
     "resourceId": "move_name_0121"
   },
@@ -1075,6 +2059,18 @@
     "power": 110,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "HURRICANE",
     "resourceId": "move_name_0122"
   },
@@ -1088,6 +2084,18 @@
     "power": 50,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "BRICK_BREAK",
     "resourceId": "move_name_0123"
   },
@@ -1101,6 +2109,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "SWIFT",
     "resourceId": "move_name_0125"
   },
@@ -1114,6 +2134,18 @@
     "power": 40,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 950,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "HORN_ATTACK",
     "resourceId": "move_name_0126"
   },
@@ -1127,6 +2159,18 @@
     "power": 55,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -50,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "STOMP",
     "resourceId": "move_name_0127"
   },
@@ -1140,6 +2184,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "HYPER_FANG",
     "resourceId": "move_name_0129"
   },
@@ -1153,6 +2209,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "BODY_SLAM",
     "resourceId": "move_name_0131"
   },
@@ -1166,6 +2234,18 @@
     "power": 50,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "REST",
     "resourceId": "move_name_0132"
   },
@@ -1179,6 +2259,18 @@
     "power": 35,
     "energy": -100,
     "durationTurns": 0,
+    "pve": {
+      "power": 35,
+      "energyDelta": null,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 35,
+      "energyDelta": -100,
+      "durationTurns": null
+    },
     "moveKey": "STRUGGLE",
     "resourceId": "move_name_0133"
   },
@@ -1192,6 +2284,18 @@
     "power": 50,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -100,
+      "durationMs": 4500,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 4400
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "SCALD_BLASTOISE",
     "resourceId": null
   },
@@ -1205,6 +2309,18 @@
     "power": 90,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -100,
+      "durationMs": 4500,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 4300
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "HYDRO_PUMP_BLASTOISE",
     "resourceId": null
   },
@@ -1218,6 +2334,18 @@
     "power": 25,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 25,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2150,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 25,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "WRAP_GREEN",
     "resourceId": null
   },
@@ -1231,6 +2359,18 @@
     "power": 25,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 25,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2150,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 25,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "WRAP_PINK",
     "resourceId": null
   },
@@ -1244,6 +2384,18 @@
     "power": 3,
     "energy": 4,
     "durationTurns": 0,
+    "pve": {
+      "power": 4,
+      "energyDelta": 8,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 4,
+      "durationTurns": null
+    },
     "moveKey": "FURY_CUTTER",
     "resourceId": "move_name_0200"
   },
@@ -1257,6 +2409,18 @@
     "power": 4,
     "energy": 3,
     "durationTurns": 0,
+    "pve": {
+      "power": 5,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 450
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 3,
+      "durationTurns": null
+    },
     "moveKey": "BUG_BITE",
     "resourceId": "move_name_0201"
   },
@@ -1270,6 +2434,18 @@
     "power": 4,
     "energy": 2,
     "durationTurns": 0,
+    "pve": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 2,
+      "durationTurns": null
+    },
     "moveKey": "BITE",
     "resourceId": "move_name_0202"
   },
@@ -1283,6 +2459,18 @@
     "power": 8,
     "energy": 7,
     "durationTurns": 1,
+    "pve": {
+      "power": 5,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 100,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 7,
+      "durationTurns": 1
+    },
     "moveKey": "SUCKER_PUNCH",
     "resourceId": "move_name_0203"
   },
@@ -1296,6 +2484,18 @@
     "power": 3,
     "energy": 4,
     "durationTurns": 0,
+    "pve": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 4,
+      "durationTurns": null
+    },
     "moveKey": "DRAGON_BREATH",
     "resourceId": "move_name_0204"
   },
@@ -1309,6 +2509,18 @@
     "power": 4,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 7,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "THUNDER_SHOCK",
     "resourceId": "move_name_0205"
   },
@@ -1322,6 +2534,18 @@
     "power": 5,
     "energy": 7,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 100,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 7,
+      "durationTurns": 1
+    },
     "moveKey": "SPARK",
     "resourceId": "move_name_0206"
   },
@@ -1335,6 +2559,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 5,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "LOW_KICK",
     "resourceId": "move_name_0207"
   },
@@ -1348,6 +2584,18 @@
     "power": 5,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "KARATE_CHOP",
     "resourceId": "move_name_0208"
   },
@@ -1361,6 +2609,18 @@
     "power": 4,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 10,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "EMBER",
     "resourceId": "move_name_0209"
   },
@@ -1374,6 +2634,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 11,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "WING_ATTACK",
     "resourceId": "move_name_0210"
   },
@@ -1387,6 +2659,18 @@
     "power": 6,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 10,
+      "durationMs": 1000,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "PECK",
     "resourceId": "move_name_0211"
   },
@@ -1400,6 +2684,18 @@
     "power": 3,
     "energy": 3,
     "durationTurns": 0,
+    "pve": {
+      "power": 5,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 3,
+      "durationTurns": null
+    },
     "moveKey": "LICK",
     "resourceId": "move_name_0212"
   },
@@ -1413,6 +2709,18 @@
     "power": 6,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationMs": 500,
+      "damageWindowStartMs": 50,
+      "damageWindowEndMs": 300
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "SHADOW_CLAW",
     "resourceId": "move_name_0213"
   },
@@ -1426,6 +2734,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "VINE_WHIP",
     "resourceId": "move_name_0214"
   },
@@ -1439,6 +2759,18 @@
     "power": 9,
     "energy": 4,
     "durationTurns": 1,
+    "pve": {
+      "power": 13,
+      "energyDelta": 7,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 850
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 4,
+      "durationTurns": 1
+    },
     "moveKey": "RAZOR_LEAF",
     "resourceId": "move_name_0215"
   },
@@ -1452,6 +2784,18 @@
     "power": 3,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 450
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "MUD_SHOT",
     "resourceId": "move_name_0216"
   },
@@ -1465,6 +2809,18 @@
     "power": 9,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 10,
+      "energyDelta": 10,
+      "durationMs": 1000,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 700
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "ICE_SHARD",
     "resourceId": "move_name_0217"
   },
@@ -1478,6 +2834,18 @@
     "power": 7,
     "energy": 5,
     "durationTurns": 1,
+    "pve": {
+      "power": 11,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 550,
+      "damageWindowEndMs": 850
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 5,
+      "durationTurns": 1
+    },
     "moveKey": "FROST_BREATH",
     "resourceId": "move_name_0218"
   },
@@ -1491,6 +2859,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 750
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "QUICK_ATTACK",
     "resourceId": "move_name_0219"
   },
@@ -1504,6 +2884,18 @@
     "power": 4,
     "energy": 2,
     "durationTurns": 0,
+    "pve": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 2,
+      "durationTurns": null
+    },
     "moveKey": "SCRATCH",
     "resourceId": "move_name_0220"
   },
@@ -1517,6 +2909,18 @@
     "power": 3,
     "energy": 3,
     "durationTurns": 0,
+    "pve": {
+      "power": 5,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 3,
+      "durationTurns": null
+    },
     "moveKey": "TACKLE",
     "resourceId": "move_name_0221"
   },
@@ -1530,6 +2934,18 @@
     "power": 4,
     "energy": 4,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 240,
+      "damageWindowEndMs": 440
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 4,
+      "durationTurns": 1
+    },
     "moveKey": "POUND",
     "resourceId": "move_name_0222"
   },
@@ -1543,6 +2959,18 @@
     "power": 3,
     "energy": 2,
     "durationTurns": 0,
+    "pve": {
+      "power": 5,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 2,
+      "durationTurns": null
+    },
     "moveKey": "CUT",
     "resourceId": "move_name_0223"
   },
@@ -1556,6 +2984,18 @@
     "power": 7,
     "energy": 7,
     "durationTurns": 1,
+    "pve": {
+      "power": 13,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 7,
+      "durationTurns": 1
+    },
     "moveKey": "POISON_JAB",
     "resourceId": "move_name_0224"
   },
@@ -1569,6 +3009,18 @@
     "power": 6,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 11,
+      "energyDelta": 10,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "ACID",
     "resourceId": "move_name_0225"
   },
@@ -1582,6 +3034,18 @@
     "power": 4,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 7,
+      "durationMs": 500,
+      "damageWindowStartMs": 270,
+      "damageWindowEndMs": 470
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "PSYCHO_CUT",
     "resourceId": "move_name_0226"
   },
@@ -1595,6 +3059,18 @@
     "power": 8,
     "energy": 5,
     "durationTurns": 1,
+    "pve": {
+      "power": 13,
+      "energyDelta": 8,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 5,
+      "durationTurns": 1
+    },
     "moveKey": "ROCK_THROW",
     "resourceId": "move_name_0227"
   },
@@ -1608,6 +3084,18 @@
     "power": 5,
     "energy": 7,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 230,
+      "damageWindowEndMs": 430
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 7,
+      "durationTurns": 1
+    },
     "moveKey": "METAL_CLAW",
     "resourceId": "move_name_0228"
   },
@@ -1621,6 +3109,18 @@
     "power": 7,
     "energy": 7,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 11,
+      "durationMs": 1000,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 7,
+      "durationTurns": 1
+    },
     "moveKey": "BULLET_PUNCH",
     "resourceId": "move_name_0229"
   },
@@ -1634,6 +3134,18 @@
     "power": 3,
     "energy": 3,
     "durationTurns": 0,
+    "pve": {
+      "power": 5,
+      "energyDelta": 5,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 3,
+      "durationTurns": null
+    },
     "moveKey": "WATER_GUN",
     "resourceId": "move_name_0232"
   },
@@ -1647,6 +3159,18 @@
     "power": 0,
     "energy": 12,
     "durationTurns": 3,
+    "pve": {
+      "power": null,
+      "energyDelta": 17,
+      "durationMs": 1500,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": null,
+      "energyDelta": 12,
+      "durationTurns": 3
+    },
     "moveKey": "SPLASH",
     "resourceId": "move_name_0231"
   },
@@ -1656,10 +3180,22 @@
     "nameJa": "WATER_GUN_FAST_BLASTOISE",
     "type": "water",
     "typeJa": "みず",
-    "category": "special",
+    "category": "normal",
     "power": 6,
     "energy": 4,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 6,
+      "durationMs": 1000,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationTurns": 1
+    },
     "moveKey": "WATER_GUN_FAST_BLASTOISE",
     "resourceId": null
   },
@@ -1673,6 +3209,18 @@
     "power": 11,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 19,
+      "energyDelta": 13,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1450
+    },
+    "pvp": {
+      "power": 11,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "MUD_SLAP",
     "resourceId": "move_name_0233"
   },
@@ -1686,6 +3234,18 @@
     "power": 8,
     "energy": 6,
     "durationTurns": 2,
+    "pve": {
+      "power": 11,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 6,
+      "durationTurns": 2
+    },
     "moveKey": "ZEN_HEADBUTT",
     "resourceId": "move_name_0234"
   },
@@ -1699,6 +3259,18 @@
     "power": 16,
     "energy": 14,
     "durationTurns": 3,
+    "pve": {
+      "power": 19,
+      "energyDelta": 14,
+      "durationMs": 1500,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 16,
+      "energyDelta": 14,
+      "durationTurns": 3
+    },
     "moveKey": "CONFUSION",
     "resourceId": "move_name_0235"
   },
@@ -1712,6 +3284,18 @@
     "power": 4,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 275,
+      "damageWindowEndMs": 475
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "POISON_STING",
     "resourceId": "move_name_0236"
   },
@@ -1725,6 +3309,18 @@
     "power": 8,
     "energy": 11,
     "durationTurns": 2,
+    "pve": {
+      "power": 10,
+      "energyDelta": 12,
+      "durationMs": 1000,
+      "damageWindowStartMs": 550,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 11,
+      "durationTurns": 2
+    },
     "moveKey": "BUBBLE",
     "resourceId": "move_name_0237"
   },
@@ -1738,6 +3334,18 @@
     "power": 6,
     "energy": 6,
     "durationTurns": 1,
+    "pve": {
+      "power": 11,
+      "energyDelta": 10,
+      "durationMs": 1000,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 6,
+      "durationTurns": 1
+    },
     "moveKey": "FEINT_ATTACK",
     "resourceId": "move_name_0238"
   },
@@ -1751,6 +3359,18 @@
     "power": 7,
     "energy": 5,
     "durationTurns": 1,
+    "pve": {
+      "power": 14,
+      "energyDelta": 8,
+      "durationMs": 1000,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 5,
+      "durationTurns": 1
+    },
     "moveKey": "STEEL_WING",
     "resourceId": "move_name_0239"
   },
@@ -1764,6 +3384,18 @@
     "power": 8,
     "energy": 6,
     "durationTurns": 1,
+    "pve": {
+      "power": 13,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 740,
+      "damageWindowEndMs": 940
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 6,
+      "durationTurns": 1
+    },
     "moveKey": "FIRE_FANG",
     "resourceId": "move_name_0240"
   },
@@ -1777,6 +3409,18 @@
     "power": 9,
     "energy": 7,
     "durationTurns": 2,
+    "pve": {
+      "power": 17,
+      "energyDelta": 12,
+      "durationMs": 1500,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 7,
+      "durationTurns": 2
+    },
     "moveKey": "ROCK_SMASH",
     "resourceId": "move_name_0241"
   },
@@ -1790,6 +3434,18 @@
     "power": 0,
     "energy": 0,
     "durationTurns": 2,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2000,
+      "damageWindowStartMs": 70,
+      "damageWindowEndMs": 470
+    },
+    "pvp": {
+      "power": null,
+      "energyDelta": null,
+      "durationTurns": 2
+    },
     "moveKey": "TRANSFORM",
     "resourceId": "move_name_0242"
   },
@@ -1803,6 +3459,18 @@
     "power": 8,
     "energy": 6,
     "durationTurns": 1,
+    "pve": {
+      "power": 13,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 6,
+      "durationTurns": 1
+    },
     "moveKey": "COUNTER",
     "resourceId": "move_name_0243"
   },
@@ -1816,6 +3484,18 @@
     "power": 6,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 15,
+      "durationMs": 1000,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "POWDER_SNOW",
     "resourceId": "move_name_0244"
   },
@@ -1829,6 +3509,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "CLOSE_COMBAT",
     "resourceId": "move_name_0245"
   },
@@ -1842,6 +3534,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "DYNAMIC_PUNCH",
     "resourceId": "move_name_0246"
   },
@@ -1855,6 +3559,18 @@
     "power": 150,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "FOCUS_BLAST",
     "resourceId": "move_name_0247"
   },
@@ -1868,6 +3584,18 @@
     "power": 80,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "AURORA_BEAM",
     "resourceId": "move_name_0248"
   },
@@ -1881,6 +3609,18 @@
     "power": 5,
     "energy": 11,
     "durationTurns": 2,
+    "pve": {
+      "power": 7,
+      "energyDelta": 14,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 11,
+      "durationTurns": 2
+    },
     "moveKey": "CHARGE_BEAM",
     "resourceId": "move_name_0249"
   },
@@ -1894,6 +3634,18 @@
     "power": 14,
     "energy": 16,
     "durationTurns": 3,
+    "pve": {
+      "power": 13,
+      "energyDelta": 20,
+      "durationMs": 1500,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 14,
+      "energyDelta": 16,
+      "durationTurns": 3
+    },
     "moveKey": "VOLT_SWITCH",
     "resourceId": "move_name_0250"
   },
@@ -1907,6 +3659,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "WILD_CHARGE",
     "resourceId": "move_name_0251"
   },
@@ -1920,6 +3684,18 @@
     "power": 150,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2800,
+      "damageWindowEndMs": 3300
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "ZAP_CANNON",
     "resourceId": "move_name_0252"
   },
@@ -1933,6 +3709,18 @@
     "power": 9,
     "energy": 12,
     "durationTurns": 2,
+    "pve": {
+      "power": 14,
+      "energyDelta": 8,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 12,
+      "durationTurns": 2
+    },
     "moveKey": "DRAGON_TAIL",
     "resourceId": "move_name_0253"
   },
@@ -1946,6 +3734,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "AVALANCHE",
     "resourceId": "move_name_0254"
   },
@@ -1959,6 +3759,18 @@
     "power": 9,
     "energy": 9,
     "durationTurns": 2,
+    "pve": {
+      "power": 12,
+      "energyDelta": 8,
+      "durationMs": 1000,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 9,
+      "durationTurns": 2
+    },
     "moveKey": "AIR_SLASH",
     "resourceId": "move_name_0255"
   },
@@ -1972,6 +3784,18 @@
     "power": 130,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "BRAVE_BIRD",
     "resourceId": "move_name_0256"
   },
@@ -1985,6 +3809,18 @@
     "power": 75,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SKY_ATTACK",
     "resourceId": "move_name_0257"
   },
@@ -1998,6 +3834,18 @@
     "power": 40,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 4000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 4000
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "SAND_TOMB",
     "resourceId": "move_name_0258"
   },
@@ -2011,6 +3859,18 @@
     "power": 50,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "ROCK_BLAST",
     "resourceId": "move_name_0259"
   },
@@ -2024,6 +3884,18 @@
     "power": 6,
     "energy": 12,
     "durationTurns": 2,
+    "pve": {
+      "power": 9,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 12,
+      "durationTurns": 2
+    },
     "moveKey": "INFESTATION",
     "resourceId": "move_name_0260"
   },
@@ -2037,6 +3909,18 @@
     "power": 9,
     "energy": 8,
     "durationTurns": 2,
+    "pve": {
+      "power": 15,
+      "energyDelta": 15,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 8,
+      "durationTurns": 2
+    },
     "moveKey": "STRUGGLE_BUG",
     "resourceId": "move_name_0261"
   },
@@ -2050,6 +3934,18 @@
     "power": 75,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 3300
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "SILVER_WIND",
     "resourceId": "move_name_0262"
   },
@@ -2063,6 +3959,18 @@
     "power": 12,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 7,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 12,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "ASTONISH",
     "resourceId": "move_name_0263"
   },
@@ -2076,6 +3984,18 @@
     "power": 7,
     "energy": 13,
     "durationTurns": 2,
+    "pve": {
+      "power": 8,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 13,
+      "durationTurns": 2
+    },
     "moveKey": "HEX",
     "resourceId": "move_name_0264"
   },
@@ -2089,6 +4009,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "NIGHT_SHADE",
     "resourceId": "move_name_0265"
   },
@@ -2102,6 +4034,18 @@
     "power": 10,
     "energy": 7,
     "durationTurns": 2,
+    "pve": {
+      "power": 14,
+      "energyDelta": 6,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 10,
+      "energyDelta": 7,
+      "durationTurns": 2
+    },
     "moveKey": "IRON_TAIL",
     "resourceId": "move_name_0266"
   },
@@ -2115,6 +4059,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3200,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "GYRO_BALL",
     "resourceId": "move_name_0267"
   },
@@ -2128,6 +4084,18 @@
     "power": 70,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "HEAVY_SLAM",
     "resourceId": "move_name_0268"
   },
@@ -2141,6 +4109,18 @@
     "power": 11,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 13,
+      "energyDelta": 9,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 11,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "FIRE_SPIN",
     "resourceId": "move_name_0269"
   },
@@ -2154,6 +4134,18 @@
     "power": 130,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3800
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "OVERHEAT",
     "resourceId": "move_name_0270"
   },
@@ -2167,6 +4159,18 @@
     "power": 5,
     "energy": 13,
     "durationTurns": 2,
+    "pve": {
+      "power": 7,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 13,
+      "durationTurns": 2
+    },
     "moveKey": "BULLET_SEED",
     "resourceId": "move_name_0271"
   },
@@ -2180,6 +4184,18 @@
     "power": 90,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "GRASS_KNOT",
     "resourceId": "move_name_0272"
   },
@@ -2193,6 +4209,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3100,
+      "damageWindowEndMs": 3900
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "ENERGY_BALL",
     "resourceId": "move_name_0273"
   },
@@ -2206,6 +4234,18 @@
     "power": 8,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 11,
+      "energyDelta": 11,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "EXTRASENSORY",
     "resourceId": "move_name_0274"
   },
@@ -2219,6 +4259,18 @@
     "power": 110,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 115,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "FUTURESIGHT",
     "resourceId": null
   },
@@ -2232,6 +4284,18 @@
     "power": 60,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "MIRROR_COAT",
     "resourceId": "move_name_0276"
   },
@@ -2245,6 +4309,18 @@
     "power": 110,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 110,
+      "energyDelta": -50,
+      "durationMs": 4000,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3800
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "OUTRAGE",
     "resourceId": "move_name_0277"
   },
@@ -2258,6 +4334,18 @@
     "power": 5,
     "energy": 13,
     "durationTurns": 2,
+    "pve": {
+      "power": 11,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 950
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 13,
+      "durationTurns": 2
+    },
     "moveKey": "SNARL",
     "resourceId": "move_name_0278"
   },
@@ -2271,6 +4359,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "CRUNCH",
     "resourceId": "move_name_0279"
   },
@@ -2284,6 +4384,18 @@
     "power": 65,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "FOUL_PLAY",
     "resourceId": "move_name_0280"
   },
@@ -2297,6 +4409,18 @@
     "power": 9,
     "energy": 8,
     "durationTurns": 2,
+    "pve": {
+      "power": 15,
+      "energyDelta": 15,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 9,
+      "energyDelta": 8,
+      "durationTurns": 2
+    },
     "moveKey": "HIDDEN_POWER",
     "resourceId": "move_name_0281"
   },
@@ -2310,6 +4434,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 2,
+    "pve": {
+      "power": 7,
+      "energyDelta": 8,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 2
+    },
     "moveKey": "TAKE_DOWN",
     "resourceId": "move_name_0282"
   },
@@ -2323,6 +4459,18 @@
     "power": 11,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 13,
+      "energyDelta": 7,
+      "durationMs": 1000,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 11,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "WATERFALL",
     "resourceId": "move_name_0283"
   },
@@ -2336,6 +4484,18 @@
     "power": 75,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -50,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "SURF",
     "resourceId": "move_name_0284"
   },
@@ -2349,6 +4509,18 @@
     "power": 150,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2900,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "DRACO_METEOR",
     "resourceId": "move_name_0285"
   },
@@ -2362,6 +4534,18 @@
     "power": 80,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "DOOM_DESIRE",
     "resourceId": "move_name_0286"
   },
@@ -2375,6 +4559,18 @@
     "power": 0,
     "energy": 12,
     "durationTurns": 3,
+    "pve": {
+      "power": null,
+      "energyDelta": 13,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": null,
+      "energyDelta": 12,
+      "durationTurns": 3
+    },
     "moveKey": "YAWN",
     "resourceId": "move_name_0287"
   },
@@ -2388,6 +4584,18 @@
     "power": 70,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -50,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3500,
+      "damageWindowEndMs": 4000
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "PSYCHO_BOOST",
     "resourceId": "move_name_0288"
   },
@@ -2401,6 +4609,18 @@
     "power": 130,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "ORIGIN_PULSE",
     "resourceId": "move_name_0289"
   },
@@ -2414,6 +4634,18 @@
     "power": 130,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "PRECIPICE_BLADES",
     "resourceId": "move_name_0290"
   },
@@ -2427,6 +4659,18 @@
     "power": 3,
     "energy": 12,
     "durationTurns": 2,
+    "pve": {
+      "power": 6,
+      "energyDelta": 23,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 12,
+      "durationTurns": 2
+    },
     "moveKey": "PRESENT",
     "resourceId": "move_name_0291"
   },
@@ -2440,6 +4684,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "WEATHER_BALL_FIRE",
     "resourceId": null
   },
@@ -2453,6 +4709,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "WEATHER_BALL_ICE",
     "resourceId": null
   },
@@ -2466,6 +4734,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "WEATHER_BALL_ROCK",
     "resourceId": null
   },
@@ -2479,6 +4759,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "WEATHER_BALL_WATER",
     "resourceId": null
   },
@@ -2492,6 +4784,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2045,
+      "damageWindowEndMs": 2450
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "FRENZY_PLANT",
     "resourceId": "move_name_0296"
   },
@@ -2505,6 +4809,18 @@
     "power": 11,
     "energy": 8,
     "durationTurns": 2,
+    "pve": {
+      "power": 13,
+      "energyDelta": 7,
+      "durationMs": 1000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 11,
+      "energyDelta": 8,
+      "durationTurns": 2
+    },
     "moveKey": "SMACK_DOWN",
     "resourceId": "move_name_0297"
   },
@@ -2518,6 +4834,18 @@
     "power": 110,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2950,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "BLAST_BURN",
     "resourceId": "move_name_0298"
   },
@@ -2531,6 +4859,18 @@
     "power": 80,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "HYDRO_CANNON",
     "resourceId": "move_name_0299"
   },
@@ -2544,6 +4884,18 @@
     "power": 90,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2800,
+      "damageWindowEndMs": 2950
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "LAST_RESORT",
     "resourceId": "move_name_0300"
   },
@@ -2557,6 +4909,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "METEOR_MASH",
     "resourceId": "move_name_0301"
   },
@@ -2570,6 +4934,18 @@
     "power": 130,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "SKULL_BASH",
     "resourceId": "move_name_0302"
   },
@@ -2583,6 +4959,18 @@
     "power": 20,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 20,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 20,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "ACID_SPRAY",
     "resourceId": "move_name_0303"
   },
@@ -2596,6 +4984,18 @@
     "power": 90,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3300
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "EARTH_POWER",
     "resourceId": "move_name_0304"
   },
@@ -2609,6 +5009,18 @@
     "power": 85,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 1850
+    },
+    "pvp": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "CRABHAMMER",
     "resourceId": "move_name_0305"
   },
@@ -2622,6 +5034,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "LUNGE",
     "resourceId": "move_name_0306"
   },
@@ -2635,6 +5059,18 @@
     "power": 50,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "OCTAZOOKA",
     "resourceId": "move_name_0308"
   },
@@ -2648,6 +5084,18 @@
     "power": 35,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 35,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "MIRROR_SHOT",
     "resourceId": "move_name_0309"
   },
@@ -2661,6 +5109,18 @@
     "power": 85,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 85,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "SUPER_POWER",
     "resourceId": null
   },
@@ -2674,6 +5134,18 @@
     "power": 20,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 20,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "FELL_STINGER",
     "resourceId": "move_name_0311"
   },
@@ -2687,6 +5159,18 @@
     "power": 45,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 45,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "LEAF_TORNADO",
     "resourceId": "move_name_0312"
   },
@@ -2700,6 +5184,18 @@
     "power": 40,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "DRAIN_PUNCH",
     "resourceId": "move_name_0314"
   },
@@ -2713,6 +5209,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2450,
+      "damageWindowEndMs": 2900
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "SHADOW_BONE",
     "resourceId": "move_name_0315"
   },
@@ -2726,6 +5234,18 @@
     "power": 35,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 35,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "MUDDY_WATER",
     "resourceId": "move_name_0316"
   },
@@ -2739,6 +5259,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 40,
+      "energyDelta": -33,
+      "durationMs": 1000,
+      "damageWindowStartMs": 250,
+      "damageWindowEndMs": 600
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "BLAZE_KICK",
     "resourceId": "move_name_0317"
   },
@@ -2752,6 +5284,18 @@
     "power": 35,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1200
+    },
+    "pvp": {
+      "power": 35,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "RAZOR_SHELL",
     "resourceId": "move_name_0318"
   },
@@ -2765,6 +5309,18 @@
     "power": 20,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 20,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "POWER_UP_PUNCH",
     "resourceId": "move_name_0319"
   },
@@ -2778,6 +5334,18 @@
     "power": 12,
     "energy": 8,
     "durationTurns": 2,
+    "pve": {
+      "power": 20,
+      "energyDelta": 11,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1200
+    },
+    "pvp": {
+      "power": 12,
+      "energyDelta": 8,
+      "durationTurns": 2
+    },
     "moveKey": "CHARM",
     "resourceId": "move_name_0320"
   },
@@ -2791,6 +5359,18 @@
     "power": 150,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 200,
+      "energyDelta": -100,
+      "durationMs": 4500,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "GIGA_IMPACT",
     "resourceId": "move_name_0321"
   },
@@ -2804,6 +5384,18 @@
     "power": 10,
     "energy": -70,
     "durationTurns": 0,
+    "pve": {
+      "power": 10,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 10,
+      "energyDelta": -70,
+      "durationTurns": null
+    },
     "moveKey": "FRUSTRATION",
     "resourceId": "move_name_0322"
   },
@@ -2817,6 +5409,18 @@
     "power": 130,
     "energy": -70,
     "durationTurns": 0,
+    "pve": {
+      "power": 25,
+      "energyDelta": -33,
+      "durationMs": 500,
+      "damageWindowStartMs": null,
+      "damageWindowEndMs": 150
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -70,
+      "durationTurns": null
+    },
     "moveKey": "RETURN",
     "resourceId": "move_name_0323"
   },
@@ -2830,6 +5434,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 750,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SYNCHRONOISE",
     "resourceId": "move_name_0324"
   },
@@ -2843,6 +5459,18 @@
     "power": 1,
     "energy": 5,
     "durationTurns": 0,
+    "pve": {
+      "power": 2,
+      "energyDelta": 10,
+      "durationMs": 500,
+      "damageWindowStartMs": 370,
+      "damageWindowEndMs": 500
+    },
+    "pvp": {
+      "power": 1,
+      "energyDelta": 5,
+      "durationTurns": null
+    },
     "moveKey": "LOCK_ON",
     "resourceId": "move_name_0325"
   },
@@ -2856,6 +5484,18 @@
     "power": 8,
     "energy": 6,
     "durationTurns": 1,
+    "pve": {
+      "power": 10,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 700
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 6,
+      "durationTurns": 1
+    },
     "moveKey": "THUNDER_FANG",
     "resourceId": "move_name_0326"
   },
@@ -2869,6 +5509,18 @@
     "power": 8,
     "energy": 6,
     "durationTurns": 1,
+    "pve": {
+      "power": 12,
+      "energyDelta": 20,
+      "durationMs": 1500,
+      "damageWindowStartMs": 400,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 6,
+      "durationTurns": 1
+    },
     "moveKey": "ICE_FANG",
     "resourceId": "move_name_0327"
   },
@@ -2882,6 +5534,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 1000,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "SACRED_SWORD",
     "resourceId": "move_name_0330"
   },
@@ -2895,6 +5559,18 @@
     "power": 90,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 115,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "FLYING_PRESS",
     "resourceId": "move_name_0331"
   },
@@ -2908,6 +5584,18 @@
     "power": 80,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "AURA_SPHERE",
     "resourceId": "move_name_0332"
   },
@@ -2921,6 +5609,18 @@
     "power": 110,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 95,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "PAYBACK",
     "resourceId": "move_name_0333"
   },
@@ -2934,6 +5634,18 @@
     "power": 110,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 110,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2600
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "ROCK_WRECKER",
     "resourceId": "move_name_0334"
   },
@@ -2947,6 +5659,18 @@
     "power": 170,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 180,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 170,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "AEROBLAST",
     "resourceId": "move_name_0361"
   },
@@ -2960,6 +5684,18 @@
     "power": 120,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "TECHNO_BLAST_NORMAL",
     "resourceId": null
   },
@@ -2973,6 +5709,18 @@
     "power": 120,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "TECHNO_BLAST_BURN",
     "resourceId": null
   },
@@ -2986,6 +5734,18 @@
     "power": 120,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "TECHNO_BLAST_CHILL",
     "resourceId": null
   },
@@ -2999,6 +5759,18 @@
     "power": 120,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "TECHNO_BLAST_WATER",
     "resourceId": null
   },
@@ -3012,6 +5784,18 @@
     "power": 120,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1600,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "TECHNO_BLAST_SHOCK",
     "resourceId": null
   },
@@ -3025,6 +5809,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "FLY",
     "resourceId": "move_name_0341"
   },
@@ -3038,6 +5834,18 @@
     "power": 95,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 95,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "V_CREATE",
     "resourceId": "move_name_0342"
   },
@@ -3051,6 +5859,18 @@
     "power": 130,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1250
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "LEAF_STORM",
     "resourceId": "move_name_0343"
   },
@@ -3064,6 +5884,18 @@
     "power": 65,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "TRI_ATTACK",
     "resourceId": "move_name_0344"
   },
@@ -3077,6 +5909,18 @@
     "power": 16,
     "energy": 14,
     "durationTurns": 3,
+    "pve": {
+      "power": 25,
+      "energyDelta": 20,
+      "durationMs": 2000,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 16,
+      "energyDelta": 14,
+      "durationTurns": 3
+    },
     "moveKey": "GUST",
     "resourceId": "move_name_0345"
   },
@@ -3090,6 +5934,18 @@
     "power": 20,
     "energy": 20,
     "durationTurns": 4,
+    "pve": {
+      "power": 32,
+      "energyDelta": 22,
+      "durationMs": 2500,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 20,
+      "energyDelta": 20,
+      "durationTurns": 4
+    },
     "moveKey": "INCINERATE",
     "resourceId": "move_name_0346"
   },
@@ -3103,6 +5959,18 @@
     "power": 35,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 35,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 35,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "FEATHER_DANCE",
     "resourceId": "move_name_0348"
   },
@@ -3116,6 +5984,18 @@
     "power": 4,
     "energy": 9,
     "durationTurns": 1,
+    "pve": {
+      "power": 9,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 630,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 4,
+      "energyDelta": 9,
+      "durationTurns": 1
+    },
     "moveKey": "FAIRY_WIND",
     "resourceId": "move_name_0350"
   },
@@ -3129,6 +6009,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "WEATHER_BALL_NORMAL",
     "resourceId": null
   },
@@ -3142,6 +6034,18 @@
     "power": 40,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 25,
+      "energyDelta": -33,
+      "durationMs": 1000,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "PSYCHIC_FANGS",
     "resourceId": "move_name_0353"
   },
@@ -3155,6 +6059,18 @@
     "power": 8,
     "energy": 12,
     "durationTurns": 2,
+    "pve": {
+      "power": 10,
+      "energyDelta": 13,
+      "durationMs": 1000,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 12,
+      "durationTurns": 2
+    },
     "moveKey": "DOUBLE_KICK",
     "resourceId": "move_name_0356"
   },
@@ -3168,6 +6084,18 @@
     "power": 10,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 17,
+      "energyDelta": 17,
+      "durationMs": 1500,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 10,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "MAGICAL_LEAF",
     "resourceId": "move_name_0357"
   },
@@ -3181,6 +6109,18 @@
     "power": 130,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "SACRED_FIRE",
     "resourceId": "move_name_0363"
   },
@@ -3194,6 +6134,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "ICICLE_SPEAR",
     "resourceId": "move_name_0359"
   },
@@ -3207,6 +6159,18 @@
     "power": 170,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 200,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 170,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "AEROBLAST_PLUS",
     "resourceId": null
   },
@@ -3220,6 +6184,18 @@
     "power": 170,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 225,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3300,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 170,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "AEROBLAST_PLUS_PLUS",
     "resourceId": null
   },
@@ -3233,6 +6209,18 @@
     "power": 130,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 135,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "SACRED_FIRE_PLUS",
     "resourceId": null
   },
@@ -3246,6 +6234,18 @@
     "power": 130,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 155,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "SACRED_FIRE_PLUS_PLUS",
     "resourceId": null
   },
@@ -3259,6 +6259,18 @@
     "power": 110,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "ACROBATICS",
     "resourceId": "move_name_0364"
   },
@@ -3272,6 +6284,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 500,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "LUSTER_PURGE",
     "resourceId": "move_name_0365"
   },
@@ -3285,6 +6309,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "MIST_BALL",
     "resourceId": "move_name_0366"
   },
@@ -3298,6 +6334,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "BRUTAL_SWING",
     "resourceId": "move_name_0367"
   },
@@ -3311,6 +6359,18 @@
     "power": 7,
     "energy": 13,
     "durationTurns": 2,
+    "pve": {
+      "power": 15,
+      "energyDelta": 19,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1060,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 7,
+      "energyDelta": 13,
+      "durationTurns": 2
+    },
     "moveKey": "ROLLOUT",
     "resourceId": "move_name_0368"
   },
@@ -3324,6 +6384,18 @@
     "power": 130,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 115,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 2400
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "SEED_FLARE",
     "resourceId": "move_name_0369"
   },
@@ -3337,6 +6409,18 @@
     "power": 15,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 20,
+      "energyDelta": -33,
+      "durationMs": 1500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 15,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "OBSTRUCT",
     "resourceId": "move_name_0370"
   },
@@ -3350,6 +6434,18 @@
     "power": 120,
     "energy": -90,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -90,
+      "durationTurns": null
+    },
     "moveKey": "SHADOW_FORCE",
     "resourceId": "move_name_0371"
   },
@@ -3363,6 +6459,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "METEOR_BEAM",
     "resourceId": "move_name_0372"
   },
@@ -3376,6 +6484,18 @@
     "power": 6,
     "energy": 14,
     "durationTurns": 2,
+    "pve": {
+      "power": 9,
+      "energyDelta": 14,
+      "durationMs": 1000,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 14,
+      "durationTurns": 2
+    },
     "moveKey": "WATER_SHURIKEN",
     "resourceId": "move_name_0373"
   },
@@ -3389,6 +6509,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1250,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "FUSION_BOLT",
     "resourceId": "move_name_0374"
   },
@@ -3402,6 +6534,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "FUSION_FLARE",
     "resourceId": "move_name_0375"
   },
@@ -3415,6 +6559,18 @@
     "power": 150,
     "energy": -75,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2700,
+      "damageWindowEndMs": 2900
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -75,
+      "durationTurns": null
+    },
     "moveKey": "POLTERGEIST",
     "resourceId": "move_name_0376"
   },
@@ -3428,6 +6584,18 @@
     "power": 100,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1100
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "HIGH_HORSEPOWER",
     "resourceId": "move_name_0377"
   },
@@ -3441,6 +6609,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "GLACIATE",
     "resourceId": "move_name_0378"
   },
@@ -3454,6 +6634,18 @@
     "power": 50,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 45,
+      "energyDelta": -33,
+      "durationMs": 1000,
+      "damageWindowStartMs": 470,
+      "damageWindowEndMs": 900
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "BREAKING_SWIPE",
     "resourceId": "move_name_0379"
   },
@@ -3467,6 +6659,18 @@
     "power": 150,
     "energy": -70,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -70,
+      "durationTurns": null
+    },
     "moveKey": "BOOMBURST",
     "resourceId": "move_name_0380"
   },
@@ -3480,6 +6684,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "DOUBLE_IRON_BASH",
     "resourceId": "move_name_0381"
   },
@@ -3493,6 +6709,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "MYSTICAL_FIRE",
     "resourceId": "move_name_0382"
   },
@@ -3506,6 +6734,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "LIQUIDATION",
     "resourceId": "move_name_0383"
   },
@@ -3519,6 +6759,18 @@
     "power": 110,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 3250,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "DRAGON_ASCENT",
     "resourceId": "move_name_0384"
   },
@@ -3532,6 +6784,18 @@
     "power": 6,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 6,
+      "energyDelta": 4,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 700
+    },
+    "pvp": {
+      "power": 6,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "LEAFAGE",
     "resourceId": "move_name_0385"
   },
@@ -3545,6 +6809,18 @@
     "power": 65,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "MAGMA_STORM",
     "resourceId": "move_name_0386"
   },
@@ -3558,6 +6834,18 @@
     "power": 8,
     "energy": 13,
     "durationTurns": 2,
+    "pve": {
+      "power": 20,
+      "energyDelta": 14,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 1500
+    },
+    "pvp": {
+      "power": 8,
+      "energyDelta": 13,
+      "durationTurns": 2
+    },
     "moveKey": "GEOMANCY",
     "resourceId": "move_name_0387"
   },
@@ -3571,6 +6859,18 @@
     "power": 95,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1370,
+      "damageWindowEndMs": 2950
+    },
+    "pvp": {
+      "power": 95,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "SPACIAL_REND",
     "resourceId": "move_name_0388"
   },
@@ -3584,6 +6884,18 @@
     "power": 85,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 85,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "OBLIVION_WING",
     "resourceId": "move_name_0389"
   },
@@ -3597,6 +6909,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "NATURES_MADNESS",
     "resourceId": null
   },
@@ -3610,6 +6934,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 60,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "TRIPLE_AXEL",
     "resourceId": "move_name_0391"
   },
@@ -3623,6 +6959,18 @@
     "power": 65,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "TRAILBLAZE",
     "resourceId": "move_name_0392"
   },
@@ -3636,6 +6984,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1400,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "SCORCHING_SANDS",
     "resourceId": "move_name_0393"
   },
@@ -3649,6 +7009,18 @@
     "power": 150,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 850,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 150,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "ROAR_OF_TIME",
     "resourceId": "move_name_0394"
   },
@@ -3662,6 +7034,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "BLEAKWIND_STORM",
     "resourceId": "move_name_0395"
   },
@@ -3675,6 +7059,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "SANDSEAR_STORM",
     "resourceId": "move_name_0396"
   },
@@ -3688,6 +7084,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "WILDBOLT_STORM",
     "resourceId": "move_name_0397"
   },
@@ -3701,6 +7109,18 @@
     "power": 50,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "SPIRIT_SHACKLE",
     "resourceId": "move_name_0398"
   },
@@ -3714,6 +7134,18 @@
     "power": 90,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2600
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "VOLT_TACKLE",
     "resourceId": "move_name_0399"
   },
@@ -3727,6 +7159,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "DARKEST_LARIAT",
     "resourceId": "move_name_0400"
   },
@@ -3740,6 +7184,18 @@
     "power": 3,
     "energy": 4,
     "durationTurns": 0,
+    "pve": {
+      "power": 4,
+      "energyDelta": 7,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 600
+    },
+    "pvp": {
+      "power": 3,
+      "energyDelta": 4,
+      "durationTurns": null
+    },
     "moveKey": "PSYWAVE",
     "resourceId": "move_name_0401"
   },
@@ -3753,6 +7209,18 @@
     "power": 5,
     "energy": 8,
     "durationTurns": 1,
+    "pve": {
+      "power": 4,
+      "energyDelta": 6,
+      "durationMs": 500,
+      "damageWindowStartMs": 200,
+      "damageWindowEndMs": 700
+    },
+    "pvp": {
+      "power": 5,
+      "energyDelta": 8,
+      "durationTurns": 1
+    },
     "moveKey": "METAL_SOUND",
     "resourceId": "move_name_0402"
   },
@@ -3766,6 +7234,18 @@
     "power": 2,
     "energy": 4,
     "durationTurns": 0,
+    "pve": {
+      "power": 4,
+      "energyDelta": 7,
+      "durationMs": 500,
+      "damageWindowStartMs": 300,
+      "damageWindowEndMs": 600
+    },
+    "pvp": {
+      "power": 2,
+      "energyDelta": 4,
+      "durationTurns": null
+    },
     "moveKey": "SAND_ATTACK",
     "resourceId": "move_name_0403"
   },
@@ -3779,6 +7259,18 @@
     "power": 135,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 230,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 135,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "SUNSTEEL_STRIKE",
     "resourceId": "move_name_0404"
   },
@@ -3792,6 +7284,18 @@
     "power": 135,
     "energy": -65,
     "durationTurns": 0,
+    "pve": {
+      "power": 230,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2200,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 135,
+      "energyDelta": -65,
+      "durationTurns": null
+    },
     "moveKey": "MOONGEIST_BEAM",
     "resourceId": "move_name_0405"
   },
@@ -3805,6 +7309,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "406",
     "resourceId": null
   },
@@ -3818,6 +7334,18 @@
     "power": 100,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "407",
     "resourceId": null
   },
@@ -3831,6 +7359,18 @@
     "power": 110,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 450,
+      "damageWindowEndMs": 800
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "HIGH_JUMP_KICK",
     "resourceId": "move_name_0408"
   },
@@ -3844,6 +7384,18 @@
     "power": 13,
     "energy": 10,
     "durationTurns": 2,
+    "pve": {
+      "power": 10,
+      "energyDelta": 16,
+      "durationMs": 1000,
+      "damageWindowStartMs": 800,
+      "damageWindowEndMs": 1000
+    },
+    "pvp": {
+      "power": 13,
+      "energyDelta": 10,
+      "durationTurns": 2
+    },
     "moveKey": "FORCE_PALM",
     "resourceId": "move_name_0462"
   },
@@ -3857,6 +7409,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 85,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 2900
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "SPARKLING_ARIA",
     "resourceId": "move_name_0463"
   },
@@ -3870,6 +7434,18 @@
     "power": 50,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2750,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "RAGE_FIST",
     "resourceId": "move_name_0464"
   },
@@ -3883,6 +7459,18 @@
     "power": 30,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 75,
+      "energyDelta": -33,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 30,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "FLOWER_TRICK",
     "resourceId": "move_name_0465"
   },
@@ -3896,6 +7484,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "FREEZE_SHOCK",
     "resourceId": "move_name_0466"
   },
@@ -3909,6 +7509,18 @@
     "power": 120,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 90,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1800,
+      "damageWindowEndMs": 2200
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "ICE_BURN",
     "resourceId": "move_name_0467"
   },
@@ -3922,6 +7534,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "TORCH_SONG",
     "resourceId": "move_name_0468"
   },
@@ -3935,6 +7559,18 @@
     "power": 100,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 200,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 3500
+    },
+    "pvp": {
+      "power": 100,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "BEHEMOTH_BLADE",
     "resourceId": "move_name_0479"
   },
@@ -3948,6 +7584,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 125,
+      "energyDelta": -50,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "BEHEMOTH_BASH",
     "resourceId": "move_name_0480"
   },
@@ -3961,6 +7609,18 @@
     "power": 70,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 50,
+      "energyDelta": -33,
+      "durationMs": 2000,
+      "damageWindowStartMs": 2300,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "UPPER_HAND",
     "resourceId": "move_name_0471"
   },
@@ -3974,6 +7634,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 220,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1880,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "THUNDER_CAGE",
     "resourceId": "move_name_0472"
   },
@@ -3987,6 +7659,18 @@
     "power": 80,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 215,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "482",
     "resourceId": null
   },
@@ -4000,6 +7684,18 @@
     "power": 120,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1880,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 120,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "CLANGING_SCALES",
     "resourceId": "move_name_0484"
   },
@@ -4013,6 +7709,18 @@
     "power": 110,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 210,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1700
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "CRUSH_GRIP",
     "resourceId": "move_name_0485"
   },
@@ -4026,6 +7734,18 @@
     "power": 90,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 155,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 1880,
+      "damageWindowEndMs": 3200
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "DRAGON_ENERGY",
     "resourceId": "move_name_0486"
   },
@@ -4039,6 +7759,18 @@
     "power": 55,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 55,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "AQUA_STEP",
     "resourceId": "move_name_0487"
   },
@@ -4052,6 +7784,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 65,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2050,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "CHILLING_WATER",
     "resourceId": "move_name_0488"
   },
@@ -4065,6 +7809,18 @@
     "power": 70,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 120,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "SECRET_SWORD",
     "resourceId": null
   },
@@ -4078,6 +7834,18 @@
     "power": 110,
     "energy": -55,
     "durationTurns": 0,
+    "pve": {
+      "power": 125,
+      "energyDelta": -50,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1500,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 110,
+      "energyDelta": -55,
+      "durationTurns": null
+    },
     "moveKey": "BEAK_BLAST",
     "resourceId": null
   },
@@ -4091,6 +7859,18 @@
     "power": 90,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -33,
+      "durationMs": 4000,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 4000
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "MIND_BLOWN",
     "resourceId": null
   },
@@ -4104,6 +7884,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 115,
+      "energyDelta": -33,
+      "durationMs": 4500,
+      "damageWindowStartMs": 3000,
+      "damageWindowEndMs": 4000
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "DRUM_BEATING",
     "resourceId": null
   },
@@ -4117,6 +7909,18 @@
     "power": 75,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 900,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": {
+      "power": 75,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "PYROBALL",
     "resourceId": null
   },
@@ -4130,6 +7934,18 @@
     "power": 130,
     "energy": -60,
     "durationTurns": 0,
+    "pve": {
+      "power": 300,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3100
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -60,
+      "durationTurns": null
+    },
     "moveKey": "GIGATON_HAMMER",
     "resourceId": null
   },
@@ -4143,6 +7959,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 135,
+      "energyDelta": -50,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2500,
+      "damageWindowEndMs": 3000
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "497",
     "resourceId": null
   },
@@ -4156,6 +7984,18 @@
     "power": 90,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 105,
+      "energyDelta": -50,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1700,
+      "damageWindowEndMs": 1900
+    },
+    "pvp": {
+      "power": 90,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "590",
     "resourceId": null
   },
@@ -4169,6 +8009,18 @@
     "power": 65,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 100,
+      "energyDelta": -33,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2900
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "592",
     "resourceId": null
   },
@@ -4182,6 +8034,18 @@
     "power": 50,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 70,
+      "energyDelta": -33,
+      "durationMs": 3300,
+      "damageWindowStartMs": null,
+      "damageWindowEndMs": null
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "593",
     "resourceId": null
   },
@@ -4195,6 +8059,18 @@
     "power": 0,
     "energy": 0,
     "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": null,
+      "damageWindowEndMs": null
+    },
+    "pvp": {
+      "power": null,
+      "energyDelta": null,
+      "durationTurns": null
+    },
     "moveKey": "594",
     "resourceId": null
   },
@@ -4208,6 +8084,18 @@
     "power": 0,
     "energy": 0,
     "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": null,
+      "damageWindowEndMs": null
+    },
+    "pvp": {
+      "power": null,
+      "energyDelta": null,
+      "durationTurns": null
+    },
     "moveKey": "595",
     "resourceId": null
   },
@@ -4221,6 +8109,18 @@
     "power": 20,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2800
+    },
+    "pvp": {
+      "power": 20,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "508",
     "resourceId": null
   },
@@ -4234,6 +8134,18 @@
     "power": 55,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 180,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 2700
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "512",
     "resourceId": null
   },
@@ -4247,6 +8159,18 @@
     "power": 80,
     "energy": -50,
     "durationTurns": 0,
+    "pve": {
+      "power": 185,
+      "energyDelta": -100,
+      "durationMs": 4000,
+      "damageWindowStartMs": 2600,
+      "damageWindowEndMs": 3800
+    },
+    "pvp": {
+      "power": 80,
+      "energyDelta": -50,
+      "durationTurns": null
+    },
     "moveKey": "515",
     "resourceId": null
   },
@@ -4260,6 +8184,18 @@
     "power": 60,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 170,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1900,
+      "damageWindowEndMs": 2300
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "522",
     "resourceId": null
   },
@@ -4273,6 +8209,18 @@
     "power": 60,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "566",
     "resourceId": null
   },
@@ -4286,6 +8234,18 @@
     "power": 50,
     "energy": -40,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 2000
+    },
+    "pvp": {
+      "power": 50,
+      "energyDelta": -40,
+      "durationTurns": null
+    },
     "moveKey": "567",
     "resourceId": null
   },
@@ -4299,6 +8259,18 @@
     "power": 55,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": {
+      "power": 55,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "568",
     "resourceId": null
   },
@@ -4312,6 +8284,18 @@
     "power": 60,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 170,
+      "energyDelta": -100,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1100,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 60,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "572",
     "resourceId": null
   },
@@ -4325,6 +8309,18 @@
     "power": 40,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 150,
+      "energyDelta": -100,
+      "durationMs": 1500,
+      "damageWindowStartMs": 700,
+      "damageWindowEndMs": 1300
+    },
+    "pvp": {
+      "power": 40,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "583",
     "resourceId": null
   },
@@ -4338,6 +8334,18 @@
     "power": 65,
     "energy": -35,
     "durationTurns": 0,
+    "pve": {
+      "power": 170,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2100,
+      "damageWindowEndMs": 2600
+    },
+    "pvp": {
+      "power": 65,
+      "energyDelta": -35,
+      "durationTurns": null
+    },
     "moveKey": "504",
     "resourceId": null
   },
@@ -4351,6 +8359,18 @@
     "power": 130,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 130,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1000,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "495",
     "resourceId": null
   },
@@ -4364,6 +8384,18 @@
     "power": 70,
     "energy": -45,
     "durationTurns": 0,
+    "pve": {
+      "power": 160,
+      "energyDelta": -100,
+      "durationMs": 3500,
+      "damageWindowStartMs": 2800,
+      "damageWindowEndMs": 3300
+    },
+    "pvp": {
+      "power": 70,
+      "energyDelta": -45,
+      "durationTurns": null
+    },
     "moveKey": "505",
     "resourceId": null
   },
@@ -4377,7 +8409,1405 @@
     "power": 130,
     "energy": -80,
     "durationTurns": 0,
+    "pve": {
+      "power": 140,
+      "energyDelta": -100,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": {
+      "power": 130,
+      "energyDelta": -80,
+      "durationTurns": null
+    },
     "moveKey": "496",
+    "resourceId": null
+  },
+  {
+    "id": "CRUSH_CLAW",
+    "nameEn": "Crush Claw",
+    "nameJa": "ブレイククロー",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2000,
+      "damageWindowStartMs": 1300,
+      "damageWindowEndMs": 1800
+    },
+    "pvp": null,
+    "moveKey": "CRUSH_CLAW",
+    "resourceId": "move_name_0307"
+  },
+  {
+    "id": "LEECH_LIFE",
+    "nameEn": "Leech Life",
+    "nameJa": "きゅうけつ",
+    "type": "bug",
+    "typeJa": "むし",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 1150,
+      "damageWindowEndMs": 1400
+    },
+    "pvp": null,
+    "moveKey": "LEECH_LIFE",
+    "resourceId": "move_name_0313"
+  },
+  {
+    "id": "HORN_DRILL",
+    "nameEn": "Horn Drill",
+    "nameJa": "つのドリル",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": 9000,
+      "energyDelta": -25,
+      "durationMs": 2000,
+      "damageWindowStartMs": 600,
+      "damageWindowEndMs": 1600
+    },
+    "pvp": null,
+    "moveKey": "HORN_DRILL",
+    "resourceId": "move_name_0328"
+  },
+  {
+    "id": "FISSURE",
+    "nameEn": "Fissure",
+    "nameJa": "じわれ",
+    "type": "ground",
+    "typeJa": "じめん",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": 9001,
+      "energyDelta": -25,
+      "durationMs": 3000,
+      "damageWindowStartMs": 1200,
+      "damageWindowEndMs": 2500
+    },
+    "pvp": null,
+    "moveKey": "FISSURE",
+    "resourceId": "move_name_0329"
+  },
+  {
+    "id": "VN_BM_001",
+    "nameEn": "VN_BM_001",
+    "nameJa": "VN_BM_001",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_001",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_002",
+    "nameEn": "VN_BM_002",
+    "nameJa": "VN_BM_002",
+    "type": "bug",
+    "typeJa": "むし",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_002",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_003",
+    "nameEn": "VN_BM_003",
+    "nameJa": "VN_BM_003",
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_003",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_004",
+    "nameEn": "VN_BM_004",
+    "nameJa": "VN_BM_004",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_004",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_005",
+    "nameEn": "VN_BM_005",
+    "nameJa": "VN_BM_005",
+    "type": "fighting",
+    "typeJa": "かくとう",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_005",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_006",
+    "nameEn": "VN_BM_006",
+    "nameJa": "VN_BM_006",
+    "type": "ghost",
+    "typeJa": "ゴースト",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_006",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_007",
+    "nameEn": "VN_BM_007",
+    "nameJa": "VN_BM_007",
+    "type": "ice",
+    "typeJa": "こおり",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_007",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_008",
+    "nameEn": "VN_BM_008",
+    "nameJa": "VN_BM_008",
+    "type": "poison",
+    "typeJa": "どく",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_008",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_009",
+    "nameEn": "VN_BM_009",
+    "nameJa": "VN_BM_009",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_009",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_010",
+    "nameEn": "VN_BM_010",
+    "nameJa": "VN_BM_010",
+    "type": "flying",
+    "typeJa": "ひこう",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_010",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_011",
+    "nameEn": "VN_BM_011",
+    "nameJa": "VN_BM_011",
+    "type": "fairy",
+    "typeJa": "フェアリー",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_011",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_012",
+    "nameEn": "VN_BM_012",
+    "nameJa": "VN_BM_012",
+    "type": "dragon",
+    "typeJa": "ドラゴン",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_012",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_013",
+    "nameEn": "VN_BM_013",
+    "nameJa": "VN_BM_013",
+    "type": "psychic",
+    "typeJa": "エスパー",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_013",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_014",
+    "nameEn": "VN_BM_014",
+    "nameJa": "VN_BM_014",
+    "type": "rock",
+    "typeJa": "いわ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_014",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_015",
+    "nameEn": "VN_BM_015",
+    "nameJa": "VN_BM_015",
+    "type": "ground",
+    "typeJa": "じめん",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_015",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_016",
+    "nameEn": "VN_BM_016",
+    "nameJa": "VN_BM_016",
+    "type": "dark",
+    "typeJa": "あく",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_016",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_017",
+    "nameEn": "VN_BM_017",
+    "nameJa": "VN_BM_017",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_017",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_018",
+    "nameEn": "VN_BM_018",
+    "nameJa": "VN_BM_018",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_018",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_019",
+    "nameEn": "VN_BM_019",
+    "nameJa": "VN_BM_019",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_019",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_020",
+    "nameEn": "VN_BM_020",
+    "nameJa": "VN_BM_020",
+    "type": "bug",
+    "typeJa": "むし",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_020",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_021",
+    "nameEn": "VN_BM_021",
+    "nameJa": "VN_BM_021",
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_021",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_022",
+    "nameEn": "VN_BM_022",
+    "nameJa": "VN_BM_022",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_022",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_023",
+    "nameEn": "VN_BM_023",
+    "nameJa": "VN_BM_023",
+    "type": "fighting",
+    "typeJa": "かくとう",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_023",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_024",
+    "nameEn": "VN_BM_024",
+    "nameJa": "VN_BM_024",
+    "type": "ghost",
+    "typeJa": "ゴースト",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_024",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_025",
+    "nameEn": "VN_BM_025",
+    "nameJa": "VN_BM_025",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_025",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_026",
+    "nameEn": "VN_BM_026",
+    "nameJa": "VN_BM_026",
+    "type": "ice",
+    "typeJa": "こおり",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_026",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_027",
+    "nameEn": "VN_BM_027",
+    "nameJa": "VN_BM_027",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_027",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_028",
+    "nameEn": "VN_BM_028",
+    "nameJa": "VN_BM_028",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_028",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_029",
+    "nameEn": "VN_BM_029",
+    "nameJa": "VN_BM_029",
+    "type": "poison",
+    "typeJa": "どく",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_029",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_030",
+    "nameEn": "VN_BM_030",
+    "nameJa": "VN_BM_030",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_030",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_031",
+    "nameEn": "VN_BM_031",
+    "nameJa": "VN_BM_031",
+    "type": "flying",
+    "typeJa": "ひこう",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_031",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_032",
+    "nameEn": "VN_BM_032",
+    "nameJa": "VN_BM_032",
+    "type": "psychic",
+    "typeJa": "エスパー",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_032",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_033",
+    "nameEn": "VN_BM_033",
+    "nameJa": "VN_BM_033",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_033",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_034",
+    "nameEn": "VN_BM_034",
+    "nameJa": "VN_BM_034",
+    "type": "rock",
+    "typeJa": "いわ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_034",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_035",
+    "nameEn": "VN_BM_035",
+    "nameJa": "VN_BM_035",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_035",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_036",
+    "nameEn": "VN_BM_036",
+    "nameJa": "VN_BM_036",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_036",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_037",
+    "nameEn": "VN_BM_037",
+    "nameJa": "VN_BM_037",
+    "type": "ground",
+    "typeJa": "じめん",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_037",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_038",
+    "nameEn": "VN_BM_038",
+    "nameJa": "VN_BM_038",
+    "type": "electric",
+    "typeJa": "でんき",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_038",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_039",
+    "nameEn": "VN_BM_039",
+    "nameJa": "VN_BM_039",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_039",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_040",
+    "nameEn": "VN_BM_040",
+    "nameJa": "VN_BM_040",
+    "type": "fairy",
+    "typeJa": "フェアリー",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_040",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_041",
+    "nameEn": "VN_BM_041",
+    "nameJa": "VN_BM_041",
+    "type": "dark",
+    "typeJa": "あく",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_041",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_042",
+    "nameEn": "VN_BM_042",
+    "nameJa": "VN_BM_042",
+    "type": "fairy",
+    "typeJa": "フェアリー",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_042",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_043",
+    "nameEn": "VN_BM_043",
+    "nameJa": "VN_BM_043",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_043",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_044",
+    "nameEn": "VN_BM_044",
+    "nameJa": "VN_BM_044",
+    "type": "dragon",
+    "typeJa": "ドラゴン",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_044",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_045",
+    "nameEn": "VN_BM_045",
+    "nameJa": "VN_BM_045",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_045",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_046",
+    "nameEn": "VN_BM_046",
+    "nameJa": "VN_BM_046",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_046",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_047",
+    "nameEn": "VN_BM_047",
+    "nameJa": "VN_BM_047",
+    "type": "grass",
+    "typeJa": "くさ",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_047",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_048",
+    "nameEn": "VN_BM_048",
+    "nameJa": "VN_BM_048",
+    "type": "fire",
+    "typeJa": "ほのお",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_048",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_049",
+    "nameEn": "VN_BM_049",
+    "nameJa": "VN_BM_049",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_049",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_050",
+    "nameEn": "VN_BM_050",
+    "nameJa": "VN_BM_050",
+    "type": "dark",
+    "typeJa": "あく",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_050",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_051",
+    "nameEn": "VN_BM_051",
+    "nameJa": "VN_BM_051",
+    "type": "water",
+    "typeJa": "みず",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_051",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_052",
+    "nameEn": "VN_BM_052",
+    "nameJa": "VN_BM_052",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_052",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_053",
+    "nameEn": "VN_BM_053",
+    "nameJa": "VN_BM_053",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_053",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_054",
+    "nameEn": "VN_BM_054",
+    "nameJa": "VN_BM_054",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_054",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_055",
+    "nameEn": "VN_BM_055",
+    "nameJa": "VN_BM_055",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_055",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_056",
+    "nameEn": "VN_BM_056",
+    "nameJa": "VN_BM_056",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_056",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_057",
+    "nameEn": "VN_BM_057",
+    "nameJa": "VN_BM_057",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_057",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_058",
+    "nameEn": "VN_BM_058",
+    "nameJa": "VN_BM_058",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_058",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_059",
+    "nameEn": "VN_BM_059",
+    "nameJa": "VN_BM_059",
+    "type": "normal",
+    "typeJa": "ノーマル",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_059",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_060",
+    "nameEn": "VN_BM_060",
+    "nameJa": "VN_BM_060",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_060",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_061",
+    "nameEn": "VN_BM_061",
+    "nameJa": "VN_BM_061",
+    "type": "steel",
+    "typeJa": "はがね",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_061",
+    "resourceId": null
+  },
+  {
+    "id": "VN_BM_062",
+    "nameEn": "VN_BM_062",
+    "nameJa": "VN_BM_062",
+    "type": "dragon",
+    "typeJa": "ドラゴン",
+    "category": "special",
+    "power": 0,
+    "energy": 0,
+    "durationTurns": 0,
+    "pve": {
+      "power": null,
+      "energyDelta": null,
+      "durationMs": 2500,
+      "damageWindowStartMs": 2000,
+      "damageWindowEndMs": 3400
+    },
+    "pvp": null,
+    "moveKey": "VN_BM_062",
     "resourceId": null
   }
 ]

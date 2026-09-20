@@ -276,121 +276,78 @@
             border-bottom: none;
           }
         }
-        &-label {
+        &-header {
+          display: flex;
+          align-items: baseline;
           font-size: 12px;
           font-weight: 600;
           margin-bottom: 5px;
-        }
-        &-info {
-          display: flex;
-          align-items: baseline;
-          margin-bottom: 5px;
-          &.is_normal {
-            --color-type: #{$color-type-normal};
+          &-normal {
+            width: 40%;
+            margin-left: 30px;
           }
-          &.is_fire {
-            --color-type: #{$color-type-fire};
+          &-special {
+            width: 40%;
           }
-          &.is_water {
-            --color-type: #{$color-type-water};
-          }
-          &.is_grass {
-            --color-type: #{$color-type-grass};
-          }
-          &.is_electric {
-            --color-type:  #{$color-type-electric};
-          }
-          &.is_ice {
-            --color-type: #{$color-type-ice};
-          }
-          &.is_fighting {
-            --color-type: #{$color-type-fighting};
-          }
-          &.is_poison {
-            --color-type: #{$color-type-poison};
-          }
-          &.is_ground {
-            --color-type: #{$color-type-ground};
-          }
-          &.is_flying {
-            --color-type: #{$color-type-flying};
-          }
-          &.is_psychic {
-            --color-type: #{$color-type-psychic};
-          }
-          &.is_bug {
-            --color-type: #{$color-type-bug};
-          }
-          &.is_rock {
-            --color-type: #{$color-type-rock};
-          }
-          &.is_ghost {
-            --color-type: #{$color-type-ghost};
-          }
-          &.is_dragon {
-            --color-type: #{$color-type-dragon};
-          }
-          &.is_dark {
-            --color-type: #{$color-type-dark};
-          }
-          &.is_steel {
-            --color-type: #{$color-type-steel};
-          }
-          &.is_fairy {
-            --color-type: #{$color-type-fairy};
+          &-score {
+            margin-left: auto;
           }
         }
-        &-name {
+        &-list {
+          &-item {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 5px;
+            &:first-child {
+              .pokemon-info-list-item-attack-rank {
+                background: #9A7300;
+              }
+            }
+            &:nth-child(2) {
+              .pokemon-info-list-item-attack-rank {
+                background: #666B70;
+              }
+            }
+            &:nth-child(3) {
+              .pokemon-info-list-item-attack-rank {
+                background: #8A4F28;
+              }
+            }
+            .icon-type {
+              display: inline-block;
+              position: relative;
+              top: 5px;
+              @include type-icons(18px);
+            }
+          }
+        }
+        &-rank {
           display: flex;
+          justify-content: center;
           align-items: center;
-          font-size: 16px;
-          font-weight: 500;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          color: #FFF;
+          background: #f0f0f0;
+          font-size: 12px;
+          font-weight: 600;
+          line-height: 1;
+          margin-right: 2px;
+        }
+        &-normal, &-special {
+          font-size: 14px;
           letter-spacing: -0.1em;
-          margin-right: 5px;
-          width: 140px;
-          flex-shrink: 0;
-          @include line-clamp(1);
-          .icon-type {
-            display: inline-block;
-            position: relative;
-            top: 5px;
-            @include type-icons(22px);
+        }
+        &-special {
+          &::before {
+            content: "+";
+            margin: 0 10px;
           }
         }
-        &-stars {
-          display: flex;
-          align-items: center;
-          .icon-star {
-            display: block;
-            width: 12px;
-            height: 12px;
-            background: url("../images/icon_star.png") no-repeat;
-            background-size: contain;
-            margin-right: 2px;
-          }
-        }
-        &-gauge {
-          margin-left: auto;
-          .gauge {
-            width: 70px;
-            height: 7px;
-            fill: var(--color-type);
-            position: relative;
-            top: -2px;
-          }
-          & + .pokemon-info-list-item-attack-power {
-            margin-left: 10px;
-          }
-        }
-        &-power {
-          width: 30px;
+        &-score {
           margin-left: auto;
           text-align: right;
-          font-size: 18px;
-          font-family: "Josefin Sans", sans-serif;
-          font-optical-sizing: auto;
-          font-weight: 600;
-          font-style: normal;
         }
       }
       .js_toggle-content {
@@ -622,6 +579,47 @@
             transform: translateY(-50%) rotate(225deg);
           }
         }
+      }
+    }
+  }
+}
+.pokemon-selected {
+  display: flex;
+  align-items: baseline;
+  border: 1px solid #DDD;
+  background: #FFF;
+  padding: 10px;
+  &-wrapper {
+    margin-bottom: 20px;
+  }
+  &-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  &-label {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &-types {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 10px;
+    display: flex;
+    margin-left: auto;
+    .badge {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+    .icon {
+      &-type {
+        @include type-icons(28px);
       }
     }
   }

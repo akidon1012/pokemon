@@ -68,7 +68,7 @@ const pokemonCard = {
 
     const name   = mv.nameJa || mv.name || '';
     const typeEn = toEn(mv.typeJa || mv.type);
-    const power  = mv.power;
+    const power  = pokemonUtil.getPvePower(mv);
 
     const category  = opt.category || 'normal'; // 'normal' or 'special'
     const showStars = !!opt.showStars;         // true: ★を描画
@@ -134,13 +134,9 @@ const pokemonCard = {
   resolveGaugeId: function (mv) {
     if (mv.__gaugeSvgId) return mv.__gaugeSvgId;
 
-    const energy = mv.energy;
+    const energy = pokemonUtil.getPveEnergyDelta(mv);
     if (energy == null || energy >= 0) return '';
-
-    const abs = Math.abs(energy);
-    if (abs >= 75) return 'gauge1'; // 1ゲージ
-    if (abs >= 45) return 'gauge2'; // 2ゲージ
-    return 'gauge3';                // それ以外は3ゲージとみなす
+    return pokemonUtil.pveGaugeSvgId(energy);
   },
 
   // -----------------------------
@@ -188,9 +184,27 @@ const pokemonCard = {
     const def = statsSrc.defense || statsSrc.defence || statsSrc.def || 0;
     const sta = statsSrc.stamina || statsSrc.hp      || statsSrc.sta || 0;
 
-    const movesObj     = poke.moves || {};
-    const normalMoves  = Array.isArray(movesObj.normal)  ? movesObj.normal  : [];
-    const specialMoves = Array.isArray(movesObj.special) ? movesObj.special : [];
+    const movesObj = poke.moves || {};
+
+    const attackerTypesEn = (Array.isArray(poke.typesEn) ? poke.typesEn : typesJa)
+      .map(function (t) { return toEn(t); })
+      .filter(Boolean);
+
+    let moveSets = Array.isArray(poke.moveSets) ? poke.moveSets.slice(0, 3) : [];
+    if (!moveSets.length && typeof pokemonUtil.buildPveMoveCycleRanking === 'function') {
+      const normals  = Array.isArray(movesObj.normal)  ? movesObj.normal  : [];
+      const specials = Array.isArray(movesObj.special) ? movesObj.special : [];
+      if (normals.length && specials.length) {
+        const ranked = pokemonUtil.buildPveMoveCycleRanking({
+          normals: normals,
+          specials: specials,
+          attackerTypesEn: attackerTypesEn,
+          getMultVsDefenders: function () { return 1.0; },
+          limit: 3
+        });
+        moveSets = (ranked && Array.isArray(ranked.moveSets)) ? ranked.moveSets : [];
+      }
+    }
 
     let h = [];
 
@@ -268,51 +282,40 @@ const pokemonCard = {
 
     // わざラッパー
     h.push('<div class="pokemon-info-list-item-attack-wrapper">');
+    h.push('<div class="pokemon-info-list-item-attack">');
+    h.push('<div class="pokemon-info-list-item-attack-header">');
+    h.push('<div class="pokemon-info-list-item-attack-header-normal">ノーマル</div>');
+    h.push('<div class="pokemon-info-list-item-attack-header-special">スペシャル</div>');
+    h.push('<div class="pokemon-info-list-item-attack-header-score">スコア</div>');
+    h.push('</div>');
+    h.push('<ul class="pokemon-info-list-item-attack-list">');
 
-    const self = this;
+    const moveCell = function (className, mv) {
+      const typeEn = toEn((mv && (mv.typeEn || mv.typeJa || mv.type)) || '');
+      const name = (mv && (mv.nameJa || mv.name)) || '';
+      let cell = '<div class="' + className + '">';
+      if (typeEn) {
+        cell += '<span class="icon-type icon-type-' + esc(typeEn) + '"></span>';
+      }
+      cell += esc(name);
+      cell += '</div>';
+      return cell;
+    };
 
-    // ノーマル
-    if (normalMoves.length) {
-      h.push('<div class="pokemon-info-list-item-attack-wrapper">');
-      h.push('<dl class="pokemon-info-list-item-attack">');
-      h.push('<dt class="pokemon-info-list-item-attack-label">ノーマル</dt>');
+    moveSets.forEach(function (set, i) {
+      const rank = set.rank || (i + 1);
+      const scorePct = Math.round((Number(set.relativePerformance) || 0) * 100);
+      h.push('<li class="pokemon-info-list-item-attack-list-item">');
+      h.push('<div class="pokemon-info-list-item-attack-rank">' + esc(rank) + '</div>');
+      h.push(moveCell('pokemon-info-list-item-attack-normal', set.normal));
+      h.push(moveCell('pokemon-info-list-item-attack-special', set.special));
+      h.push('<div class="pokemon-info-list-item-attack-score">' + esc(scorePct) + '</div>');
+      h.push('</li>');
+    });
 
-      normalMoves.forEach(function (mv) {
-        h.push(
-          self.buildMoveRow(mv, {
-            category : 'normal',
-            showStars: false,
-            showGauge: false
-          })
-        );
-      });
-
-      h.push('</dl>');
-      h.push('</div>');
-    }
-
-    // スペシャル
-    if (specialMoves.length) {
-      h.push('<div class="pokemon-info-list-item-attack-wrapper">');
-      h.push('<dl class="pokemon-info-list-item-attack">');
-      h.push('<dt class="pokemon-info-list-item-attack-label">スペシャル</dt>');
-
-      specialMoves.forEach(function (mv) {
-        h.push(
-          self.buildMoveRow(mv, {
-            category   : 'special',
-            showStars  : opt.showStars, // ★ ここが true のときだけ星表示
-            showGauge  : true,
-            isStrongest: !!mv.__isStrongest
-          })
-        );
-      });
-
-      h.push('</dl>');
-      h.push('</div>');
-    }
-
-    h.push('</div>');  // .pokemon-info-list-item-attack-wrapper
+    h.push('</ul>');
+    h.push('</div>'); // .pokemon-info-list-item-attack
+    h.push('</div>'); // .pokemon-info-list-item-attack-wrapper
     h.push('</div>');  // .js_toggle-content
     h.push('</div>');  // .pokemon-info-list-item
 
@@ -964,7 +967,8 @@ const pokemonUtil = {
   scoreMove: function(move, defenderTypesJa, attackerTypesEn, typeDefenseTable) {
     if (!move) return 0;
     const atkTypeEn = move.type;                    // 'water' など
-    const power = Number(move.power || 0);
+    const power = pokemonUtil.getPvePower(move);
+    if (!power) return 0;
 
     const eff  = pokemonUtil.effectMultiplierForTypes(atkTypeEn, defenderTypesJa, typeDefenseTable);
     const stab = pokemonUtil.isStab(atkTypeEn, attackerTypesEn) ? 1.2 : 1.0; // STAB係数（ざっくり1.2）
@@ -991,6 +995,198 @@ const pokemonUtil = {
   getMoveById : function(id) {
     if (!pokemonUtil._moveIndex) return null;
     return pokemonUtil._moveIndex.get(String(id)) || null;
+  },
+
+  getPvePower : function(m) {
+    if (!m || !m.pve || m.pve.power == null) return null;
+    const n = Number(m.pve.power);
+    return Number.isFinite(n) ? n : null;
+  },
+
+  getPveEnergyDelta : function(m) {
+    if (!m || !m.pve || m.pve.energyDelta == null) return null;
+    const n = Number(m.pve.energyDelta);
+    return Number.isFinite(n) ? n : null;
+  },
+
+  applyPveMoveStats : function(out, master) {
+    const src = master || out || {};
+    out.pve = src.pve || null;
+    out.pvp = src.pvp || null;
+    out.power = pokemonUtil.getPvePower(src);
+    out.energy = pokemonUtil.getPveEnergyDelta(src);
+    return out;
+  },
+
+  isExcludedPveOhkoMove : function(m) {
+    const id = String((m && (m.id || m.moveId)) || '').toUpperCase();
+    return id === 'HORN_DRILL' || id === 'FISSURE';
+  },
+
+  pveGaugeBars : function(energy) {
+    if (energy === -100) return 1;
+    if (energy === -50) return 2;
+    if (energy === -33) return 3;
+    return null;
+  },
+
+  pveGaugeSvgId : function(energy) {
+    const bars = pokemonUtil.pveGaugeBars(energy);
+    if (bars === 1) return 'gauge1';
+    if (bars === 2) return 'gauge2';
+    if (bars === 3) return 'gauge3';
+    return '';
+  },
+
+  getPveDurationMs : function(m) {
+    if (!m || !m.pve || m.pve.durationMs == null) return null;
+    const n = Number(m.pve.durationMs);
+    return Number.isFinite(n) ? n : null;
+  },
+
+  getMoveCategory : function(m) {
+    const ePve = pokemonUtil.getPveEnergyDelta(m);
+    const ePvp = (m && m.pvp && m.pvp.energyDelta != null)
+      ? Number(m.pvp.energyDelta)
+      : null;
+    const e = (ePve != null && ePve !== 0)
+      ? ePve
+      : ((Number.isFinite(ePvp) && ePvp !== 0) ? ePvp : ePve);
+
+    if (e != null && e > 0) return 'normal';
+    if (e != null && e < 0) return 'special';
+    return /_FAST(?:_|$)/.test(String((m && (m.id || m.moveId)) || '').toUpperCase())
+      ? 'normal'
+      : 'special';
+  },
+
+  summarizePveCycleMove : function(m, info) {
+    return {
+      id: m.id || m.moveId,
+      nameJa: m.nameJa || m.name || '',
+      nameEn: m.nameEn || '',
+      typeEn: info.typeEn,
+      typeJa: m.typeJa || '',
+      power: info.power,
+      energyDelta: info.energyDelta,
+      durationMs: info.durationMs,
+      damage: info.damage,
+      mult: info.mult,
+      stab: info.stab
+    };
+  },
+
+  evaluatePveMoveCycle : function(normal, special, attackerTypesEn, getMultVsDefenders) {
+    if (!normal || !special) return null;
+    if (pokemonUtil.isExcludedPveOhkoMove(normal) || pokemonUtil.isExcludedPveOhkoMove(special)) {
+      return null;
+    }
+
+    const nPower = pokemonUtil.getPvePower(normal);
+    const sPower = pokemonUtil.getPvePower(special);
+    const nEnergy = pokemonUtil.getPveEnergyDelta(normal);
+    const sEnergy = pokemonUtil.getPveEnergyDelta(special);
+    const nDur = pokemonUtil.getPveDurationMs(normal);
+    const sDur = pokemonUtil.getPveDurationMs(special);
+
+    if (nPower == null || sPower == null) return null;
+    if (nEnergy == null || nEnergy <= 0) return null;
+    if (sEnergy == null || sEnergy >= 0) return null;
+    if (nDur == null || nDur <= 0 || sDur == null || sDur <= 0) return null;
+
+    const nType = (normal.typeEn || normal.type || '').toString().toLowerCase();
+    const sType = (special.typeEn || special.type || '').toString().toLowerCase();
+    if (!nType || !sType) return null;
+
+    const nMult = getMultVsDefenders(nType);
+    const sMult = getMultVsDefenders(sType);
+    const types = Array.isArray(attackerTypesEn) ? attackerTypesEn : [];
+    const nStab = types.indexOf(nType) >= 0 ? 1.2 : 1.0;
+    const sStab = types.indexOf(sType) >= 0 ? 1.2 : 1.0;
+
+    const normalDamage = nPower * nMult * nStab;
+    const specialDamage = sPower * sMult * sStab;
+    const normalCount = Math.ceil(Math.abs(sEnergy) / nEnergy);
+    if (!Number.isFinite(normalCount) || normalCount <= 0) return null;
+
+    const cycleDamage = normalDamage * normalCount + specialDamage;
+    const cycleTime = nDur * normalCount + sDur;
+    if (!cycleTime) return null;
+
+    return {
+      cycleDps: cycleDamage / cycleTime * 1000,
+      cycleDamage: cycleDamage,
+      cycleTime: cycleTime,
+      normalCount: normalCount,
+      normal: pokemonUtil.summarizePveCycleMove(normal, {
+        typeEn: nType,
+        power: nPower,
+        energyDelta: nEnergy,
+        durationMs: nDur,
+        damage: normalDamage,
+        mult: nMult,
+        stab: nStab
+      }),
+      special: pokemonUtil.summarizePveCycleMove(special, {
+        typeEn: sType,
+        power: sPower,
+        energyDelta: sEnergy,
+        durationMs: sDur,
+        damage: specialDamage,
+        mult: sMult,
+        stab: sStab
+      })
+    };
+  },
+
+  buildPveMoveCycleRanking : function(options) {
+    const opt = options || {};
+    const normals = Array.isArray(opt.normals) ? opt.normals : [];
+    const specials = Array.isArray(opt.specials) ? opt.specials : [];
+    const attackerTypesEn = opt.attackerTypesEn || [];
+    const getMultVsDefenders = opt.getMultVsDefenders;
+    const limit = Number(opt.limit || 3);
+    const combos = [];
+
+    if (typeof getMultVsDefenders !== 'function') {
+      return { bestCycleDps: 0, moveSets: [], comboCount: 0 };
+    }
+
+    normals.forEach(function(normal) {
+      specials.forEach(function(special) {
+        const row = pokemonUtil.evaluatePveMoveCycle(
+          normal,
+          special,
+          attackerTypesEn,
+          getMultVsDefenders
+        );
+        if (row) combos.push(row);
+      });
+    });
+
+    combos.sort(function(a, b) {
+      return (b.cycleDps || 0) - (a.cycleDps || 0);
+    });
+
+    const bestCycleDps = combos.length ? combos[0].cycleDps : 0;
+    const moveSets = combos.slice(0, limit).map(function(row, i) {
+      return {
+        rank: i + 1,
+        cycleDps: row.cycleDps,
+        relativePerformance: bestCycleDps > 0 ? row.cycleDps / bestCycleDps : 0,
+        cycleDamage: row.cycleDamage,
+        cycleTime: row.cycleTime,
+        normalCount: row.normalCount,
+        normal: row.normal,
+        special: row.special
+      };
+    });
+
+    return {
+      bestCycleDps: bestCycleDps,
+      moveSets: moveSets,
+      comboCount: combos.length
+    };
   },
 
   getMovesForPokemon : function(pokemon) {
@@ -1044,7 +1240,7 @@ const pokemonUtil = {
         nameJa: move.nameJa || move.nameEn,
         typeEn: move.type,
         typeJa: move.typeJa || pokemonUtil.translate.EtoJ(move.type),
-        power: move.power || 0,
+        power: pokemonUtil.getPvePower(move) || 0,
         category: move.category,
         score: score
       };
@@ -1145,18 +1341,16 @@ const pokemonUtil = {
       const typeEn = m.type || m.pokemonType;
       const typeJa = pokemonUtil.translateTypes.toJaType(typeEn);
 
-      return {
+      return pokemonUtil.applyPveMoveStats({
         id         : moveId,
         category   : category,        // 'fast' or 'charged'
         nameJa     : m.nameJa || m.name || '', // ローカライズ済みがあれば優先
         nameEn     : m.nameEn || '',
         type       : typeEn || '',
         typeJa     : typeJa || '',
-        power      : m.power ?? m.powerPvP ?? null,
-        energy     : m.energyDelta ?? m.energy ?? null,
         turns      : m.turns ?? null,
         raw        : m                 // 必要なら生データも持たせておく
-      };
+      }, m);
     };
 
     const fastMoves = Array.isArray(fastIds)
@@ -1370,17 +1564,15 @@ const pokemonUtil = {
     const normMove = (mid, cat) => {
       const m = getMoveMaster(mid) || {};
       const typeEn = m.type || m.pokemonType || '';
-      return {
+      return pokemonUtil.applyPveMoveStats({
         id: mid,
         nameJa: m.nameJa || m.name || '',
         nameEn: m.nameEn || '',
         typeJa: pokemonUtil.translateTypes?.toJaType?.(typeEn) || '',
         typeEn: typeEn || '',
-        power:  m.power ?? m.powerPvP ?? null,
-        energy: m.energyDelta ?? m.energy ?? null,
         turns:  m.turns ?? null,
         category: cat
-      };
+      }, m);
     };
 
     // ---- リージョン判定ヘルパー（強化版） ----
@@ -1928,17 +2120,10 @@ const pokemonUtil = {
   getBarsForGlobal : function(m) {
     let bars = m && m.gaugeBars;
     if (!bars) {
-      const e = Math.abs(Number(m && m.energy) || 0);
-      if (e > 0) {
-        if (e <= 35)      bars = 3;
-        else if (e <=55)  bars = 2;
-        else              bars = 1;
-      } else {
-        bars = 1;
-      }
+      bars = pokemonUtil.pveGaugeBars(pokemonUtil.getPveEnergyDelta(m));
     }
-    bars = Math.max(1, Math.min(3, bars));
-    return bars;
+    if (!bars) return 1;
+    return Math.max(1, Math.min(3, bars));
   },
 
   // 任意のスペシャル技に 1〜5 のレーティングを付ける
@@ -1963,7 +2148,8 @@ const pokemonUtil = {
     const hit = MOVES_MASTER.find(function(m) {
       return String(m.id).toUpperCase() === id;
     });
-    return hit || null;
+    if (!hit) return null;
+    return pokemonUtil.applyPveMoveStats(Object.assign({}, hit), hit);
   },
 
   // pokemon_list の1件＋GOメタをマージして moves を付ける
