@@ -719,6 +719,17 @@
 }
 .pokemon-recommend {
   margin-top: 40px;
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    position: relative;
+    .section-header {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+  }
 }
 
 .filter {

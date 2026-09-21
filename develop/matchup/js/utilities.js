@@ -304,7 +304,9 @@ const pokemonCard = {
 
     moveSets.forEach(function (set, i) {
       const rank = set.rank || (i + 1);
-      const scorePct = Math.round((Number(set.relativePerformance) || 0) * 100);
+      const scorePct = (set.displayScore != null)
+        ? Math.round(Number(set.displayScore) || 0)
+        : Math.round((Number(set.relativePerformance) || 0) * 100);
       h.push('<li class="pokemon-info-list-item-attack-list-item">');
       h.push('<div class="pokemon-info-list-item-attack-rank">' + esc(rank) + '</div>');
       h.push(moveCell('pokemon-info-list-item-attack-normal', set.normal));

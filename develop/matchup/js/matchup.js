@@ -1,3 +1,36 @@
+const q = {
+  wrapper : '.js_q',
+  trigger : '.js_q-trigger',
+  content : '.js_q-content',
+  isOpenedClassName : 'is_opened',
+
+  ini : function() {
+    $(q.content).each(function() {
+      const $content = $(this);
+      if ($content.children('.q-close').length) return;
+      $content.prepend('<a class="q-close js_q-trigger">×</a>');
+    });
+
+    $(document).off('click.q').on('click.q', q.trigger, function(e) {
+      e.preventDefault();
+      const $wrapper = $(this).closest(q.wrapper);
+      if (!$wrapper.length) return;
+      q.toggle($wrapper);
+    });
+  },
+
+  toggle : function($wrapper) {
+    const $content = $wrapper.find(q.content);
+    if ($wrapper.hasClass(q.isOpenedClassName)) {
+      $wrapper.removeClass(q.isOpenedClassName);
+      $content.stop(true, true).fadeOut();
+    } else {
+      $wrapper.addClass(q.isOpenedClassName);
+      $content.stop(true, true).fadeIn();
+    }
+  }
+};
+
 const toggle = {
   wrapper : '.js_toggle-wrapper',
   trigger : '.js_toggle-trigger',
@@ -1399,7 +1432,12 @@ const matchup = {
             normal:  seNormal,
             special: seSpecial
           },
-          moveSets:     cycleRank.moveSets,
+          moveSets:     (cycleRank.moveSets || []).map(function(set) {
+            const cycleDps = Number(set.cycleDps) || 0;
+            return Object.assign({}, set, {
+              counterScore: (cycleDps * statWeight) / (defPenalty || 1)
+            });
+          }),
           bestCycleDps: bestCycleDps,
           goStats:      pd.goStats || {},
           baseTotal:    pd.baseTotal || 0,
@@ -1474,6 +1512,21 @@ const matchup = {
       });
 
       const sliced = uniqueList.slice(0, limit);
+
+      let maxCounterScore = 0;
+      sliced.forEach(function (r) {
+        (r.moveSets || []).forEach(function (set) {
+          const s = Number(set.counterScore) || 0;
+          if (s > maxCounterScore) maxCounterScore = s;
+        });
+      });
+      sliced.forEach(function (r) {
+        (r.moveSets || []).forEach(function (set) {
+          set.displayScore = maxCounterScore > 0
+            ? Math.round((Number(set.counterScore) || 0) / maxCounterScore * 100)
+            : 0;
+        });
+      });
 
       // --------------------------------------------------
       // 以下は「★レーティング＋ゲージ」の処理（既存ロジック）
@@ -1658,6 +1711,7 @@ const toggleEffects = {
 
 $(function() {
   toggle.ini();
+  q.ini();
   filter.ini();
   toggleEffects.ini();
   pokemonUtil.data.onReady(state => {
