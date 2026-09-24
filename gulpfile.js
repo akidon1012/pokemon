@@ -204,8 +204,8 @@ gulp.task('copy', function (done) {
   gulp
     .src( [
     config.dir.dev+'**/*.*',
-    config.dir.dev+'**/*.*',
-    '!'+config.dir.dev+'/**/*.{ejs,xhtml,scss,png,jpg,gif,svg}'
+    '!'+config.dir.dev+'/**/*.{ejs,xhtml,scss,png,jpg,gif,svg}',
+    '!'+config.dir.dev+'data/raw/**'
     ] )
     .pipe( gulp.dest( config.dir.dist ) );
     done();
