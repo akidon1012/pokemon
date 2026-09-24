@@ -351,20 +351,21 @@ const pokemonUtil = {
       if (this._dfd) return this._dfd.promise();
       const dfd = $.Deferred();
 
+      const DATA_VERSION = '20260924';
       const jobs = [
-        $.getJSON('../../data/type_defense.json').done(d => {
+        $.getJSON('../../data/type_defense.json?v=${DATA_VERSION}').done(d => {
           this.state.TYPE_DEFENSE = Array.isArray(d) ? d : (d.table || []);
         }),
-        $.getJSON('../../data/pokemon_list.json').done(d => {
+        $.getJSON('../../data/pokemon_list.json?v=${DATA_VERSION}').done(d => {
           this.state.POKEMON_DATA = Array.isArray(d) ? d : (d.list || []);
         }),
-        $.getJSON('../../data/moves_master_localized.json').done(d => {
+        $.getJSON('../../data/moves_master_localized.json?v=${DATA_VERSION}').done(d => {
           this.state.MOVES = d || [];
         }),
-        $.getJSON('../../data/pokemon_go_meta.json').done(d => {
+        $.getJSON('../../data/pokemon_go_meta.json?v=${DATA_VERSION}').done(d => {
           this.state.GO_META = d || [];
         }),
-        $.getJSON('../../data/pokemon_go_meta_override.json').done(d => {
+        $.getJSON('../../data/pokemon_go_meta_override.json?v=${DATA_VERSION}').done(d => {
           this.state.GO_META_OVERRIDE = d || {};
         })
       ];
